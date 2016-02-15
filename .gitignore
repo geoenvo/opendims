@@ -1,3 +1,4 @@
 *.pyc
 .vagrant/*
 Vagrantfile
+*.DS_Store
