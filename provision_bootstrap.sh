@@ -28,7 +28,11 @@ echo "Installing dependencies"
 echo "---------------------------------------------"
 apt-get install -y build-essential python-pip python-dev libpq-dev python-software-properties git-core
 
-apt-get install -y postgresql-9.3 postgresql-contrib-9.3
+# Install PostgreSQL with PostGIS
+apt-get install -y postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis-2.1
+
+# Install GeoDjango dependencies (GDAL, GEOS, PROJ.4)
+apt-get install -y binutils libgeoip1 libproj-dev gdal-bin python-gdal
 
 pip install virtualenv virtualenvwrapper
 

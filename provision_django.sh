@@ -7,12 +7,13 @@ DB_USERNAME='vagrant'
 DB_PASSWORD='password'
 
 echo "---------------------------------------------"
-echo "Creating database"
+echo "Creating PostGIS database"
 echo "---------------------------------------------"
 sudo su - postgres << START
 createdb $DB_NAME
 psql -c "CREATE ROLE $DB_USERNAME WITH LOGIN ENCRYPTED PASSWORD '$DB_PASSWORD';"
 psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USERNAME;"
+psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" $DB_NAME
 START
 
 echo "---------------------------------------------"
@@ -47,7 +48,7 @@ echo "---------------------------------------------"
 printf "Use the following database connection settings in settings.py:
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': '$DB_NAME',
         'USER': '$DB_USERNAME',
         'PASSWORD': '$DB_PASSWORD',
