@@ -26,7 +26,7 @@ apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 echo "---------------------------------------------"
 echo "Installing dependencies"
 echo "---------------------------------------------"
-apt-get install -y build-essential python-pip python-dev python-software-properties git-core
+apt-get install -y build-essential python-pip python-dev libpq-dev python-software-properties git-core
 
 apt-get install -y postgresql-9.3 postgresql-contrib-9.3
 

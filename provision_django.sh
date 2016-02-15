@@ -39,4 +39,20 @@ cd src
 echo "---------------------------------------------"
 echo "Setting up Django"
 echo "---------------------------------------------"
+pip install -r requirements.txt
 
+echo "---------------------------------------------"
+echo "Provisioning complete"
+echo "---------------------------------------------"
+printf "Use the following database connection settings in settings.py:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '$DB_NAME',
+        'USER': '$DB_USERNAME',
+        'PASSWORD': '$DB_PASSWORD',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+"
