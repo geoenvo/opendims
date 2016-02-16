@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'opendims',
         'USER': 'vagrant',
         'PASSWORD': 'password',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
