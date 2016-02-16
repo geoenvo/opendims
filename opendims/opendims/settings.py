@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'ckeditor',
+    'ckeditor_uploader'
+    'reports',
 ]
 
 MIDDLEWARE_CLASSES = [
