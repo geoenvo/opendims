@@ -15,8 +15,10 @@ apt-get install -y python-bs4
 echo "---------------------------------------------"
 echo "Adding PostgreSQL repo"
 echo "---------------------------------------------"
-echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+if [ ! -f /etc/apt/sources.list.d/pgdg.list ]; then
+    echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+fi
 
 echo "---------------------------------------------"
 echo "Upgrading packages"
@@ -24,7 +26,7 @@ echo "---------------------------------------------"
 apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 
 echo "---------------------------------------------"
-echo "Installing dependencies"
+echo "Installing dependencies (build libs, Git, PostgreSQL, PostGIS)"
 echo "---------------------------------------------"
 apt-get install -y build-essential python-pip python-dev libpq-dev python-software-properties git-core
 
@@ -34,7 +36,12 @@ apt-get install -y postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis-
 # Install GeoDjango dependencies (GDAL, GEOS, PROJ.4)
 apt-get install -y binutils libgeoip1 libproj-dev gdal-bin python-gdal
 
+echo "---------------------------------------------"
+echo "Installing virtualenv"
+echo "---------------------------------------------"
 pip install virtualenv virtualenvwrapper
 
-echo 'export WORKON_HOME=$HOME/.virtualenvs' >> /home/vagrant/.bashrc
-echo 'source /usr/local/bin/virtualenvwrapper.sh' >> /home/vagrant/.bashrc
+if ! grep -Fq "WORKON_HOME" /home/vagrant/.bashrc; then
+    echo 'export WORKON_HOME=$HOME/.virtualenvs' >> /home/vagrant/.bashrc
+    echo 'source /usr/local/bin/virtualenvwrapper.sh' >> /home/vagrant/.bashrc
+fi
