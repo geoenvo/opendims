@@ -5,11 +5,13 @@
 DB_NAME='opendims'
 DB_USERNAME='vagrant'
 DB_PASSWORD='password'
+POSTGRES_PASSWORD='postgres'
 
 echo "---------------------------------------------"
 echo "Creating PostGIS database"
 echo "---------------------------------------------"
 sudo su - postgres << START
+psql -c "ALTER USER postgres WITH PASSWORD '$POSTGRES_PASSWORD';"
 createdb $DB_NAME
 psql -c "CREATE ROLE $DB_USERNAME WITH LOGIN ENCRYPTED PASSWORD '$DB_PASSWORD';"
 psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USERNAME;"
