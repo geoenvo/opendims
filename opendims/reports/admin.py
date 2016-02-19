@@ -1,8 +1,19 @@
 from django.contrib import admin
 from django.contrib.gis import admin
-from .models import Disaster, Event, Source, Report
+from .models import Disaster, Event, Source
+from .models import Report
 # Register your models here.
 
-myModels=[Event,Disaster,Source,Report]
+myModels=[Event,Disaster,Source]
 
-admin.site.register(myModels, admin.OSMGeoAdmin)
+
+
+
+class ReportAdmin(admin.ModelAdmin):
+	list_display=["event", 'source', 'status']
+	ordering=['event']
+	
+
+
+admin.site.register(myModels,admin.OSMGeoAdmin)
+admin.site.register(Report,ReportAdmin)
