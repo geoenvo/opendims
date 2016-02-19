@@ -1,8 +1,10 @@
+
+#django
+
 from django.contrib import admin
 from django.contrib.gis import admin
 from .models import Disaster, Event, Source
 from .models import Report
-
 
 myModels=[Event,Disaster,Source]
 
@@ -12,10 +14,8 @@ for myModel in myModels:
 
 	make_updated.short_description="Mark Event as updated"
 
-
-
 	class ReportAdmin(admin.ModelAdmin):
-		list_display=["event", 'source', 'status', 'note']
+		list_display=["event", 'source', 'note', 'status']
 		ordering=['event']
 		actions=[make_updated]
 	
