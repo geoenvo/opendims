@@ -9,15 +9,15 @@ from .models import Report
 myModels=[Event,Disaster,Source]
 
 for myModel in myModels:
-	def make_updated(modeladmin, request, queryset):
-		queryset.update(status='u')
+	def make_verified(modeladmin, request, queryset):
+		queryset.update(status='Ver')
 
-	make_updated.short_description="Mark Event as updated"
+	make_verified.short_description="Mark Event as Verified"
 
 	class ReportAdmin(admin.ModelAdmin):
-		list_display=["event", 'source', 'note', 'status']
+		list_display=["event", "source",'created', 'note', 'status']
 		ordering=['event']
-		actions=[make_updated]
+		actions=[make_verified]
 	
 admin.site.register(myModels,admin.OSMGeoAdmin)
 admin.site.register(Report,ReportAdmin)
