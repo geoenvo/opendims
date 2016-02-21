@@ -12,12 +12,14 @@ for myModel in myModels:
 	def make_verified(modeladmin, request, queryset):
 		queryset.update(status='Ver')
 
-	make_verified.short_description="Mark Event as Verified"
+	make_verified.short_description="Verified"
 
 	class ReportAdmin(admin.ModelAdmin):
-		list_display=["event", "source",'created', 'note', 'status']
+		list_display=["event", "source",'time', 'note', 'status']
 		ordering=['event']
 		actions=[make_verified]
 	
 admin.site.register(myModels,admin.OSMGeoAdmin)
 admin.site.register(Report,ReportAdmin)
+
+
