@@ -28,7 +28,7 @@ for myModel in myModels:
 
 	class ReportAdmin(admin.ModelAdmin):
 		list_display = ['event', "source",'created', 'note', 'status']
-		ordering = ['created']
+		ordering = ['-created']
 		actions = [make_verified, make_unverified]
 	
 admin.site.register(myModels,admin.OSMGeoAdmin)
