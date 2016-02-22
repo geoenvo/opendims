@@ -62,4 +62,4 @@ class Report(models.Model):
 
 	def __unicode__(self):
 		return u'(%s) %s %s' %(self.event, self.created, self.status)
-# Create your models here.
+
