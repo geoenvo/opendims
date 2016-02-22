@@ -52,10 +52,10 @@ class Report(models.Model):
 
 	source=models.ForeignKey(Source, on_delete=models.CASCADE)
 	event=models.ForeignKey(Event)
-	created=models.DateTimeField()
+	time=models.DateTimeField()
 	status =models.CharField(max_length=50, choices=STATUS_CHOICES, default='TBD')
 	note=models.TextField()
 
 	def __str__(self):
-		return '(%s) %s %s' %(self.event, self.created, self.status)
+		return '(%s) %s %s' %(self.event, self.time, self.status)
 # Create your models here.
