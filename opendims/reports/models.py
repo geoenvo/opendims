@@ -1,56 +1,65 @@
 #Future
-
 from __future__ import unicode_literals
 
-# Django
-from django.db import models
-#from django.db.utils import six
-from django.contrib.gis.db import  models
-from django.contrib.gis import admin
-from django.contrib.gis.geos import *
-#Third Party
-
+#Standard Library
 from decimal import Decimal
 
-class Disaster(models.Model):
-	code =models.CharField(max_length=50, unique=True)
-	note =models.TextField()
+# Core Django
+from django.utils import timezone
+from django.contrib.gis.db import  models
+from django.contrib.gis import admin
 
-	def __str__(self):
-		return "%s" %(self.code)
+
+#Third Party
+
+
+class Source(models.Model):
+	code = models.CharField(max_length=50)
+	note = models.TextField(null=True)
+
+
+	def __unicode__(self):
+		return u'%s' %self.code
+
+
+class Disaster(models.Model):
+	code = models.CharField(max_length=50, unique=True)
+	note = models.TextField()
+
 
 	def __unicode__(self):
 		return u'%s' % (self.code)
 
 
-
 class Event(models.Model):
-	code=models.ForeignKey(Disaster, on_delete=models.CASCADE)
-	point=models.PointField(null=True, blank=True)
-	created=models.DateTimeField()
-	height=models.PositiveIntegerField(default=0)
-	magnitude=models.DecimalField(max_digits=50, decimal_places=4, default=Decimal('0.0000'))
-
-	def __str__(self):
-		return '%s' %self.code 
+	disaster = models.ForeignKey(Disaster)
+	point = models.PointField(null=True, blank=True)
+	created = models.DateTimeField()
+	note = models.TextField()
+	height = models.PositiveIntegerField(default=0)
+	magnitude = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal('0.00'))
 
 
-	
-class Source(models.Model):
-	code =models.CharField(max_length=50)
-	note =models.TextField()
-
-	def __str__(self):
-		return '%s' %self.code
+	def __unicode__(self):
+		return u'%s' %(self.disaster)
 
 
 class Report(models.Model):
-	source=models.ForeignKey(Source, on_delete=models.CASCADE)
-	event=models.ForeignKey(Event)
-	tanggal=models.DateTimeField()
-	status =models.CharField(max_length=50, choices=((u'Un',u'Unverified'),(u'V',u'Verified'),(u'Tbd',u'To be Determined')))
-	note=models.TextField()
 
-	def __str__(self):
-		return '(%s) %s' %(self.event, self.tanggal)
-# Create your models here.
+	STATUS_CHOICES = (
+
+		('Ver', 'Verified'),
+		('UN', 'Unverified'),
+		('TBD', 'To be Determined'),
+	)
+	
+	event = models.ForeignKey(Event)
+	source = models.ForeignKey(Source)
+	created = models.DateTimeField()
+	status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TBD')
+	note = models.TextField()
+
+
+	def __unicode__(self):
+		return u'(%s) %s %s' %(self.event, self.created, self.status)
+
