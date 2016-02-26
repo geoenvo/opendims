@@ -31,18 +31,18 @@ fi
 
 if [ ! -d /home/vagrant/.virtualenvs/opendims ]; then
     mkvirtualenv --no-site-packages opendims
-    cdvirtualenv
-    ln -s /vagrant/ src
 fi
 
 workon opendims
-cdvirtualenv
-cd src
+cd opendims
 
 echo "---------------------------------------------"
 echo "Setting up Django"
 echo "---------------------------------------------"
 pip install -r requirements.txt
+nodeenv -p --prebuilt
+workon opendims
+npm install -g bower
 
 echo "---------------------------------------------"
 echo "Provisioning complete"
