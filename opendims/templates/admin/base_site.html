@@ -1,0 +1,11 @@
+{% extends "admin/base.html" %}
+{% load admin_reorder %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Open-DiMS site admin') }}{% endblock %}
+
+{% block branding %}
+{% admin_reorder %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Open-DiMS administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

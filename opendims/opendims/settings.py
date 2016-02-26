@@ -148,3 +148,9 @@ BOWER_INSTALLED_APPS = (
     'jquery',
     'bootstrap',
 )
+
+# App model reordering in /admin page
+ADMIN_REORDER = (
+    ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
+    ('reports', ('Event', 'Report', 'Source', 'Disaster')),
+)
