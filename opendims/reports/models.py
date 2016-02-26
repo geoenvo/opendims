@@ -33,8 +33,8 @@ class Event(models.Model):
     city = models.ForeignKey(City, null=True, blank=True)
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True)
     village = models.ForeignKey(Village, null=True, blank=True)
-    RW = models.ForeignKey(RW, null=True, blank=True)
-    RT = models.ForeignKey(RT, null=True, blank=True)
+    rw = models.ForeignKey(RW, null=True, blank=True)
+    rt = models.ForeignKey(RT, null=True, blank=True)
     
     def __unicode__(self):
         return self.disaster
