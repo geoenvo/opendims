@@ -1,4 +1,8 @@
 *.pyc
-.vagrant/*
+*.log
+*.pid
 Vagrantfile
 *.DS_Store
+.vagrant/*
+opendims/static/*
+opendims/components/*
