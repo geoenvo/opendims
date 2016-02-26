@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'reports',
     'geolevels',
+    'import_export',
 ]
 
 MIDDLEWARE_CLASSES = [
