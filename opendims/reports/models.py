@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 from django.utils import timezone
 from django.contrib.gis.db import  models
-from django.contrib.gis import admin
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
