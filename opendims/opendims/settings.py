@@ -65,6 +65,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'opendims.context_processors.resource_urls',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -154,3 +155,7 @@ ADMIN_REORDER = (
     ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
     ('reports', ('Event', 'Report', 'Source', 'Disaster')),
 )
+
+SITE_NAME = 'Open-DiMS'
+
+LOGIN_REDIRECT_URL = '/'
