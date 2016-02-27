@@ -145,8 +145,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
-    'bootstrap',
+    'jquery#2.2.1',
+    'bootstrap#3.3.6',
 )
 
 # App model reordering in /admin page
