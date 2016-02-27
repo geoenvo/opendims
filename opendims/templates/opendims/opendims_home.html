@@ -1,13 +1,13 @@
 {% extends "opendims/opendims_page.html" %}
 
-{% load staticfiles %}
+{% load staticfiles active_url %}
 
 {% block opendims_title %} - Home{% endblock %}
 
 {% block opendims_nav %}
 {{ block.super }}
 <ul class="nav navbar-nav">
-    <li class="active"><a href="{% url 'home' %}">Home</a></li>
+    <li class="{% active_url request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
 </ul>
 {% endblock %}
 
