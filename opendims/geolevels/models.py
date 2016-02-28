@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Province(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
     note = models.TextField(blank=True)
@@ -14,6 +15,7 @@ class Province(models.Model):
 
 
 class City(models.Model):
+    id = models.IntegerField(primary_key=True)
     province = models.ForeignKey(Province)
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
@@ -27,6 +29,7 @@ class City(models.Model):
 
 
 class Subdistrict(models.Model):
+    id = models.IntegerField(primary_key=True)
     city = models.ForeignKey(City)
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
