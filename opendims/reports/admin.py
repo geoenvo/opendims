@@ -17,21 +17,26 @@ def make_verified(modeladmin, request, queryset):
 make_verified.short_description = 'Mark Event as Verified'
 
 
+class ReportInline(admin.TabularInline):
+    model = Report
+    extra = 3
+
+
 class SourceAdmin(admin.ModelAdmin):
     list_display = ['code', 'note']
+    ordering = ['code']
 
 
 class DisasterAdmin(admin.ModelAdmin):
     list_display = ['code', 'note']
-
-
-class ReportAdmin(admin.ModelAdmin):
-    list_display = ['created', 'source', 'event', 'status', 'note']
-    ordering = ['-created']
-    actions = [make_verified, make_unverified]
+    ordering = ['code']
 
 
 class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdmin):
+    fieldsets = [
+        ('Event details', {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
+        ('Affected area', {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point'], 'classes': ['collapse']}),
+    ]
     list_display = [
         'created',
         'disaster',
@@ -46,6 +51,20 @@ class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdm
         'note'
     ]
     ordering = ['-created']
+    list_filter = ['created', 'disaster']
+    search_fields = ['province__name', 'city__name', 'subdistrict__name', 'village__name', 'note']
+    inlines = [ReportInline]
+
+
+class ReportAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Report details', {'fields': ['created', 'event', 'source', 'status', 'note']})
+    ]
+    list_display = ['created', 'event', 'source', 'status', 'note']
+    ordering = ['-created']
+    list_filter = ['created', 'source', 'status']
+    search_fields = ['note']
+    actions = [make_verified, make_unverified]
 
 
 admin.site.register(Source, SourceAdmin)

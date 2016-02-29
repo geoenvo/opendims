@@ -15,7 +15,7 @@ class Source(models.Model):
 
 
 class Disaster(models.Model):
-    code = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=50, unique=True) # TODO: make PK
     note = models.TextField(blank=True)
     
     def __unicode__(self):
@@ -28,7 +28,7 @@ class Event(models.Model):
     created = models.DateTimeField(default=timezone.now)
     note = models.TextField(blank=True)
     height = models.PositiveIntegerField(null=True, blank=True)
-    magnitude = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2)
+    magnitude = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2) # TODO: positive only
     province = models.ForeignKey(Province, null=True, blank=True)
     city = models.ForeignKey(City, null=True, blank=True)
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True)
@@ -37,7 +37,7 @@ class Event(models.Model):
     rt = models.ForeignKey(RT, null=True, blank=True)
     
     def __unicode__(self):
-        return '%s' % self.disaster
+        return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
 
 class Report(models.Model):
@@ -54,4 +54,4 @@ class Report(models.Model):
     note = models.TextField(blank=True)
     
     def __unicode__(self):
-        return '(%s) %s %s' % (self.event, self.created, self.status)
+        return '[%s] - %s - %s' % (self.event, self.source, self.status)
