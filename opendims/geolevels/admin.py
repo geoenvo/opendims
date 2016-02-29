@@ -63,11 +63,11 @@ class RelatedFieldAdmin(admin.OSMGeoAdmin):
         return qs.select_related(*select_related)
 
 
-class ProvinceAdmin(admin.OSMGeoAdmin):
+class ProvinceAdmin(RelatedFieldAdmin):
     list_display = ('id', 'name', 'note')
 
 
-class CityAdmin(admin.OSMGeoAdmin):
+class CityAdmin(RelatedFieldAdmin):
     list_display = ('id', 'province', 'name', 'note')
 
 
