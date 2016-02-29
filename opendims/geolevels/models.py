@@ -1,9 +1,11 @@
 from __future__ import unicode_literals
 
 from django.contrib.gis.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Province(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
     note = models.TextField(blank=True)
@@ -13,16 +15,21 @@ class Province(models.Model):
 
 
 class City(models.Model):
+    id = models.IntegerField(primary_key=True)
     province = models.ForeignKey(Province)
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
     note = models.TextField(blank=True)
+    
+    class Meta:
+        verbose_name_plural = _('Cities')
     
     def __unicode__(self):
         return self.name
 
 
 class Subdistrict(models.Model):
+    id = models.IntegerField(primary_key=True)
     city = models.ForeignKey(City)
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
@@ -51,6 +58,9 @@ class RW(models.Model):
     polygon = models.MultiPolygonField(null=True, blank=True)
     note = models.TextField(blank=True)
     
+    class Meta:
+        verbose_name = _('RW')
+    
     def __unicode__(self):
         return self.name
 
@@ -61,6 +71,9 @@ class RT(models.Model):
     name = models.CharField(max_length=50)
     polygon = models.MultiPolygonField(null=True, blank=True)
     note = models.TextField(blank=True)
+    
+    class Meta:
+        verbose_name = _('RT')
     
     def __unicode__(self):
         return self.name

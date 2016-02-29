@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -65,6 +65,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'opendims.context_processors.resource_urls',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -82,12 +83,8 @@ WSGI_APPLICATION = 'opendims.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'opendims',
-        'USER': 'vagrant',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -145,6 +142,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
-    'bootstrap',
+    'jquery#2.2.1',
+    'bootstrap#3.3.6',
 )
+
+# App model reordering in /admin page
+ADMIN_REORDER = (
+    ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
+    ('reports', ('Event', 'Report', 'Source', 'Disaster')),
+)
+
+SITE_NAME = 'Open-DiMS'
+
+LOGIN_REDIRECT_URL = '/'
