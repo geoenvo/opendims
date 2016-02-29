@@ -2,18 +2,18 @@ from defaults import *
 
 # Production environment settings overriding defaults
 
-SECRET_KEY = 'NEW_SECRET_KEY'
+SECRET_KEY = 'b^v8b0^!b-3_1jxk2s96#9_v8^=!75n_56kq#%j0y406x*e30-'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'db_name',
-        'USER': 'db_user',
-        'PASSWORD': 'db_password',
+        'NAME': 'opendims',
+        'USER': 'opendims',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '',
     }
