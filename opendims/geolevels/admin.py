@@ -72,42 +72,86 @@ class CityAdmin(admin.OSMGeoAdmin):
 
 
 class SubdistrictAdmin(RelatedFieldAdmin):
-    list_display = ('id', 'city__province', 'city', 'name', 'note')
+    list_display = ('id', 'sort_province_by_name', 'city', 'name', 'note')
+    
+    sort_province_by_name = getter_for_related_field(
+        'city__province',
+        admin_order_field='city__province__name'
+    )
 
 
 class VillageAdmin(RelatedFieldAdmin):
     list_display = (
         'id',
-        'subdistrict__city__province',
-        'subdistrict__city',
+        'sort_province_by_name',
+        'sort_city_by_name',
         'subdistrict',
         'name',
         'note'
+    )
+    
+    sort_province_by_name = getter_for_related_field(
+        'subdistrict__city__province',
+        admin_order_field='subdistrict__city__province__name'
+    )
+    sort_city_by_name = getter_for_related_field(
+        'subdistrict__city',
+        admin_order_field='subdistrict__city__name'
     )
 
 
 class RWAdmin(RelatedFieldAdmin):
     list_display = (
         'id',
-        'village__subdistrict__city__province',
-        'village__subdistrict__city',
-        'village__subdistrict',
+        'sort_province_by_name',
+        'sort_city_by_name',
+        'sort_subdistrict_by_name',
         'village',
         'name',
         'note'
+    )
+    
+    sort_province_by_name = getter_for_related_field(
+        'village__subdistrict__city__province',
+        admin_order_field='village__subdistrict__city__province__name'
+    )
+    sort_city_by_name = getter_for_related_field(
+        'village__subdistrict__city',
+        admin_order_field='village__subdistrict__city__name'
+    )
+    sort_subdistrict_by_name = getter_for_related_field(
+        'village__subdistrict',
+        admin_order_field='village__subdistrict__name'
     )
 
 
 class RTAdmin(RelatedFieldAdmin):
     list_display = (
         'id',
-        'rw__village__subdistrict__province',
-        'rw__village__subdistrict__city',
-        'rw__village__subdistrict',
-        'rw__village',
+        'sort_province_by_name',
+        'sort_city_by_name',
+        'sort_subdistrict_by_name',
+        'sort_village_by_name',
         'rw',
         'name',
         'note'
+    )
+    
+    sort_province_by_name = getter_for_related_field(
+        'rw__village__subdistrict__province',
+        admin_order_field='rw__village__subdistrict__province__name'
+    )
+    sort_city_by_name = getter_for_related_field(
+        'rw__village__subdistrict__city',
+        admin_order_field='rw__village__subdistrict__city__name'
+    )
+    sort_subdistrict_by_name = getter_for_related_field(
+        'rw__village__subdistrict',
+        admin_order_field='rw__village__subdistrict__name'
+    )
+    sort_village_by_name = getter_for_related_field(
+        'rw__village',
+        admin_order_field='rw__village__name'
     )
 
 
