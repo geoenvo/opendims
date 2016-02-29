@@ -11,7 +11,7 @@ class Source(models.Model):
     note = models.TextField(blank=True)
     
     def __unicode__(self):
-        return '%s' %self.code
+        return '%s' % self.code
 
 
 class Disaster(models.Model):
@@ -19,7 +19,7 @@ class Disaster(models.Model):
     note = models.TextField(blank=True)
     
     def __unicode__(self):
-        return '%s' %self.code
+        return '%s' % self.code
 
 
 class Event(models.Model):
@@ -37,7 +37,7 @@ class Event(models.Model):
     rt = models.ForeignKey(RT, null=True, blank=True)
     
     def __unicode__(self):
-        return '%s' %self.disaster
+        return '%s' % self.disaster
 
 
 class Report(models.Model):
