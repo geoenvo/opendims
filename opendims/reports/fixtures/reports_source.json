@@ -1,0 +1,98 @@
+[
+    {
+        "pk": 1,
+        "model": "reports.Source",
+        "fields": {
+            "code": "CMC",
+            "note": "Command Center"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "reports.Source",
+        "fields": {
+            "code": "TLP",
+            "note": "Telepon"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "reports.Source",
+        "fields": {
+            "code": "FAX",
+            "note": "Faks"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "reports.Source",
+        "fields": {
+            "code": "KPB",
+            "note": "KPBK Wilayah"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "reports.Source",
+        "fields": {
+            "code": "KEL",
+            "note": "Staf/Relawan Kelurahan"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "reports.Source",
+        "fields": {
+            "code": "REL",
+            "note": "Relawan"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "reports.Source",
+        "fields": {
+            "code": "TWT",
+            "note": "Twitter"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "reports.Source",
+        "fields": {
+            "code": "QLU",
+            "note": "Qlue"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "reports.Source",
+        "fields": {
+            "code": "MOL",
+            "note": "Media Online"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "reports.Source",
+        "fields": {
+            "code": "MED",
+            "note": "Media Cetak"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "reports.Source",
+        "fields": {
+            "code": "MER",
+            "note": "Media Radio"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "reports.Source",
+        "fields": {
+            "code": "RAD",
+            "note": "Radio Pemancar"
+        }
+    }
+]

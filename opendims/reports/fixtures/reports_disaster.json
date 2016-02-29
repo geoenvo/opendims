@@ -1,0 +1,90 @@
+[
+    {
+        "pk": 1,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "BJR",
+            "note": "Banjir"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "KBK",
+            "note": "Kebakaran"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "LSR",
+            "note": "Longsor"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "GMP",
+            "note": "Gempa Bumi"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "CEK",
+            "note": "Cuaca Ekstrem/Angin Kencang/Hujan Disertai Angin Kencang"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "ROB",
+            "note": "Banjir Rob"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "ABR",
+            "note": "Abrasi"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "TSU",
+            "note": "Tsunami"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "SOS",
+            "note": "Konflik Sosial/Tawuran Warga/Kerusuhan"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "TER",
+            "note": "Terorisme"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "reports.Disaster",
+        "fields": {
+            "code": "LAI",
+            "note": "Lain-lain"
+        }
+    }
+]
