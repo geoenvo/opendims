@@ -1,49 +1,54 @@
-#Core Django
-from django.contrib import admin
 from django.contrib.gis import admin
 
-#Reports APP
-from .models import Disaster, Source
-from .models import Event
-from .models import Report
-
-##For import export CSV
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
-
-myModels = [Disaster,Source]
-
-
-for myModel in myModels:
-	def make_unverified(modeladmin, request,queryset):
-		queryset.update(status = 'UN')
+from .models import Source, Disaster, Event, Report
 
 
-	make_unverified.short_description = ("Mark Event as Unverified")
+def make_unverified(modeladmin, request, queryset):
+    queryset.update(status='UNV')
+
+make_unverified.short_description = 'Mark Event as Unverified'
+
+def make_verified(modeladmin, request, queryset):
+    queryset.update(status='VER')
+
+make_verified.short_description = 'Mark Event as Verified'
 
 
-	def make_verified(modeladmin, request, queryset):
-		queryset.update(status = 'Ver')
-
-	make_verified.short_description = "Mark Even as Verified"
+class SourceAdmin(admin.ModelAdmin):
+    list_display = ['code', 'note']
 
 
-        class ReportAdmin(admin.ModelAdmin):
-                list_display = ['event', "source",'created', 'note', 'status']
-		ordering = ['-created']
-		actions = [make_verified, make_unverified]
+class DisasterAdmin(admin.ModelAdmin):
+    list_display = ['code', 'note']
 
 
-	class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.ModelAdmin):
-                actions = [make_verified, make_unverified]
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ['created', 'source', 'event', 'status', 'note']
+    ordering = ['-created']
+    actions = [make_verified, make_unverified]
 
 
-	
-admin.site.register(myModels,admin.OSMGeoAdmin)
-admin.site.register(Report,ReportAdmin)
-admin.site.register(Event,EventAdmin)
+class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdmin):
+    list_display = [
+        'created',
+        'disaster',
+        'province',
+        'city',
+        'subdistrict',
+        'village',
+        'rw',
+        'rt',
+        'height',
+        'magnitude',
+        'note'
+    ]
+    ordering = ['-created']
 
 
-
-
+admin.site.register(Source, SourceAdmin)
+admin.site.register(Disaster, DisasterAdmin)
+admin.site.register(Report, ReportAdmin)
+admin.site.register(Event, EventAdmin)
