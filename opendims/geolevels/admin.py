@@ -65,14 +65,17 @@ class RelatedFieldAdmin(admin.OSMGeoAdmin):
 
 class ProvinceAdmin(RelatedFieldAdmin):
     list_display = ('id', 'name', 'note')
+    search_fields = ['name']
 
 
 class CityAdmin(RelatedFieldAdmin):
     list_display = ('id', 'province', 'name', 'note')
+    search_fields = ['province__name', 'name']
 
 
 class SubdistrictAdmin(RelatedFieldAdmin):
     list_display = ('id', 'sort_province_by_name', 'city', 'name', 'note')
+    search_fields = ['city__province__name', 'city__name', 'name']
     
     sort_province_by_name = getter_for_related_field(
         'city__province',
@@ -89,6 +92,11 @@ class VillageAdmin(RelatedFieldAdmin):
         'name',
         'note'
     )
+    search_fields = [
+        'subdistrict__city__province__name',
+        'subdistrict__city__name',
+        'subdistrict__name'
+    ]
     
     sort_province_by_name = getter_for_related_field(
         'subdistrict__city__province',
@@ -110,6 +118,12 @@ class RWAdmin(RelatedFieldAdmin):
         'name',
         'note'
     )
+    search_fields = [
+        'village__subdistrict__city__province__name',
+        'village__subdistrict__city__name',
+        'village__subdistrict__name',
+        'village__name'
+    ]
     
     sort_province_by_name = getter_for_related_field(
         'village__subdistrict__city__province',
@@ -136,6 +150,12 @@ class RTAdmin(RelatedFieldAdmin):
         'name',
         'note'
     )
+    search_fields = [
+        'rw__village__subdistrict__province__name',
+        'rw__village__subdistrict__city__name',
+        'rw__village__subdistrict__name',
+        'rw__village__name'
+    ] # No use searching RW by name
     
     sort_province_by_name = getter_for_related_field(
         'rw__village__subdistrict__province',
