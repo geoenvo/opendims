@@ -4,4 +4,3 @@ from django.template.defaultfilters import filesizeformat
 from django.conf import settings
 
 
-class

@@ -30,6 +30,8 @@ urlpatterns = [
         name='logout'
     ),
     url(r'^admin/', admin.site.urls),
+    url(r'^reports/', include('reports.urls', namespace='reports')),
+
 ]
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))
