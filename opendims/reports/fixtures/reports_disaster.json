@@ -1,89 +1,78 @@
 [
     {
-        "pk": 1,
+        "pk": "BJR",
         "model": "reports.Disaster",
         "fields": {
-            "code": "BJR",
             "note": "Banjir"
         }
     },
     {
-        "pk": 2,
+        "pk": "KBK",
         "model": "reports.Disaster",
         "fields": {
-            "code": "KBK",
             "note": "Kebakaran"
         }
     },
     {
-        "pk": 3,
+        "pk": "LSR",
         "model": "reports.Disaster",
         "fields": {
-            "code": "LSR",
             "note": "Longsor"
         }
     },
     {
-        "pk": 4,
+        "pk": "GMP",
         "model": "reports.Disaster",
         "fields": {
-            "code": "GMP",
             "note": "Gempa Bumi"
         }
     },
     {
-        "pk": 5,
+        "pk": "CEK",
         "model": "reports.Disaster",
         "fields": {
-            "code": "CEK",
             "note": "Cuaca Ekstrem/Angin Kencang/Hujan Disertai Angin Kencang"
         }
     },
     {
-        "pk": 6,
+        "pk": "ROB",
         "model": "reports.Disaster",
         "fields": {
-            "code": "ROB",
             "note": "Banjir Rob"
         }
     },
     {
-        "pk": 7,
+        "pk": "ABR",
         "model": "reports.Disaster",
         "fields": {
-            "code": "ABR",
             "note": "Abrasi"
         }
     },
     {
-        "pk": 8,
+        "pk": "TSU",
         "model": "reports.Disaster",
         "fields": {
-            "code": "TSU",
             "note": "Tsunami"
         }
     },
     {
-        "pk": 9,
+        "pk": "SOS",
         "model": "reports.Disaster",
         "fields": {
-            "code": "SOS",
             "note": "Konflik Sosial/Tawuran Warga/Kerusuhan"
         }
     },
     {
-        "pk": 10,
+        "pk": "TER",
         "model": "reports.Disaster",
         "fields": {
-            "code": "TER",
             "note": "Terorisme"
         }
     },
     {
-        "pk": 9,
+        "pk": "LAI",
         "model": "reports.Disaster",
         "fields": {
-            "code": "LAI",
             "note": "Lain-lain"
         }
     }

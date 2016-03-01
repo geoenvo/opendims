@@ -1,97 +1,85 @@
 [
     {
-        "pk": 1,
+        "pk": "CMC",
         "model": "reports.Source",
         "fields": {
-            "code": "CMC",
             "note": "Command Center"
         }
     },
     {
-        "pk": 2,
+        "pk": "TLP",
         "model": "reports.Source",
         "fields": {
-            "code": "TLP",
             "note": "Telepon"
         }
     },
     {
-        "pk": 3,
+        "pk": "FAX",
         "model": "reports.Source",
         "fields": {
-            "code": "FAX",
             "note": "Faks"
         }
     },
     {
-        "pk": 4,
+        "pk": "KPB",
         "model": "reports.Source",
         "fields": {
-            "code": "KPB",
             "note": "KPBK Wilayah"
         }
     },
     {
-        "pk": 5,
+        "pk": "KEL",
         "model": "reports.Source",
         "fields": {
-            "code": "KEL",
             "note": "Staf/Relawan Kelurahan"
         }
     },
     {
-        "pk": 6,
+        "pk": "REL",
         "model": "reports.Source",
         "fields": {
-            "code": "REL",
             "note": "Relawan"
         }
     },
     {
-        "pk": 7,
+        "pk": "TWT",
         "model": "reports.Source",
         "fields": {
-            "code": "TWT",
             "note": "Twitter"
         }
     },
     {
-        "pk": 8,
+        "pk": "QLU",
         "model": "reports.Source",
         "fields": {
-            "code": "QLU",
             "note": "Qlue"
         }
     },
     {
-        "pk": 9,
+        "pk": "MOL",
         "model": "reports.Source",
         "fields": {
-            "code": "MOL",
             "note": "Media Online"
         }
     },
     {
-        "pk": 10,
+        "pk": "MED",
         "model": "reports.Source",
         "fields": {
-            "code": "MED",
             "note": "Media Cetak"
         }
     },
     {
-        "pk": 11,
+        "pk": "MER",
         "model": "reports.Source",
         "fields": {
-            "code": "MER",
             "note": "Media Radio"
         }
     },
     {
-        "pk": 12,
+        "pk": "RAD",
         "model": "reports.Source",
         "fields": {
-            "code": "RAD",
             "note": "Radio Pemancar"
         }
     }

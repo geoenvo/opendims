@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
 
+from decimal import Decimal
+
 from django.utils import timezone
 from django.contrib.gis.db import  models
+from django.core.validators import MinValueValidator
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
 
 class Source(models.Model):
-    code = models.CharField(max_length=50, unique=True)
+    code = models.CharField(primary_key=True, max_length=50)
     note = models.TextField(blank=True)
     
     def __unicode__(self):
@@ -15,7 +18,7 @@ class Source(models.Model):
 
 
 class Disaster(models.Model):
-    code = models.CharField(max_length=50, unique=True) # TODO: make PK
+    code = models.CharField(primary_key=True, max_length=50)
     note = models.TextField(blank=True)
     
     def __unicode__(self):
@@ -28,7 +31,15 @@ class Event(models.Model):
     created = models.DateTimeField(default=timezone.now)
     note = models.TextField(blank=True)
     height = models.PositiveIntegerField(null=True, blank=True)
-    magnitude = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2) # TODO: positive only
+    magnitude = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[
+            MinValueValidator(Decimal('0.01'))
+        ]
+    )
     province = models.ForeignKey(Province, null=True, blank=True)
     city = models.ForeignKey(City, null=True, blank=True)
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True)
