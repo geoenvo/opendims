@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.contrib.gis import admin
 from django.db import models
 
