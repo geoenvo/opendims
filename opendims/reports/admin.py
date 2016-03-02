@@ -23,13 +23,13 @@ class ReportInline(admin.TabularInline):
 
 
 class SourceAdmin(admin.ModelAdmin):
-    list_display = ['PK', 'note']
-    ordering = ['PK']
+    list_display = ['code', 'note']
+    ordering = ['code']
 
 
 class DisasterAdmin(admin.ModelAdmin):
-    list_display = ['PK', 'note']
-    ordering = ['PK']
+    list_display = ['code', 'note']
+    ordering = ['code']
 
 
 class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdmin):

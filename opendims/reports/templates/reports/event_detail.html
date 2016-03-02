@@ -2,24 +2,30 @@
 
 {% load staticfiles leaflet_tags %}
 
-{% block title %}{{ event }}{% endblock %}
+{% block title %}{{ event.province }}{% endblock %}
 
 {% block extra_css %}
 {% leaflet_css %}
 <style>
 .leaflet-container {  /* all maps */
-    width:  800px;
-    height: 600px;
+    width:  600px;
+    height: 400px;
 }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-{{ event.disaster }}
-
-{% leaflet_map "country_map" callback="window.country_map_init" %}
+{{ event }}
+{{ event.province }}
+{{ event.city }}
+{{ event.subdistrict }}
+{{ event.village }}
+{{ event.rw }}
+{{ event.rt }}
+{% leaflet_map "country_map" callback="window.event_map_init" %}
 </div><!-- /.container -->
+
 {% endblock %}
 
 
@@ -27,12 +33,12 @@
 {% leaflet_js %}
 
 <script type="text/javascript">
-function country_map_init(map, options) {
-  var markerArray=[];
-  markerArray.push(L.marker([-6.2115, 106.8452]).addTo(map));
-  var group = L.featureGroup(markerArray).addTo(map);
-  map.fitBounds(group.getBounds())
-    L.geoJson({{ event.province.geojson|safe }})
+function event_map_init(map, options) {
+
+   L.geoJson({{ province.polygon.geojson|safe }}).addTo(map);
+
+   L.geoJson({{ event.point.geojson|safe }}).addTo(map); /* showing poinfield in leafleat map */
+   
 }
 </script>
 
