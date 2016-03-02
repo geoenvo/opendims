@@ -15,17 +15,26 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
-from django.contrib import admin, auth
+from django.contrib import admin
+from django.contrib.auth.views import login, logout
 from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='opendims/opendims_page_home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='opendims/opendims_page_about.html'), name='page_about'),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(
+        r'^$',
+        TemplateView.as_view(template_name='opendims/opendims_page_home.html'),
+        name='home'
+    ),
+    url(
+        r'^about/$',
+        TemplateView.as_view(template_name='opendims/opendims_page_about.html'),
+        name='page_about'
+    ),
+    url(r'^login/$', login, name='login'),
     url(
         r'^logout/$',
-        auth.views.logout,
+        logout,
         {'next_page': reverse_lazy('home')},
         name='logout'
     ),
