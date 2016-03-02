@@ -23,8 +23,8 @@ from django.core.urlresolvers import reverse_lazy
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/opendims_page_home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='opendims/opendims_page_about.html'), name='page_about'),
-    url(r'^accounts/login/$', auth_views.login, name='accounts_login'),
-    url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='accounts_logout'),
+    url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^reports/', include('reports.urls', namespace='reports')),
 
