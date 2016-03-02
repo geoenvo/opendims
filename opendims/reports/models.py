@@ -10,26 +10,19 @@ from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
 
 class Source(models.Model):
-<<<<<<< HEAD
-    PK = models.CharField(max_length=50, unique=True)
-=======
     code = models.CharField(primary_key=True, max_length=50)
->>>>>>> eac7a9cd6df0cca96060f09ca9ac9771ca9e9dd1
     note = models.TextField(blank=True)
     
     def __unicode__(self):
-        return '%s' % self.PK
+        return '%s' % self.code
 
 
 class Disaster(models.Model):
-<<<<<<< HEAD
-    PK = models.CharField(max_length=50, unique=True) # TODO: make PK
-=======
     code = models.CharField(primary_key=True, max_length=50)
     note = models.TextField(blank=True)
     
     def __unicode__(self):
-        return '%s' % self.PK
+        return '%s' % self.code
 
 
 class Event(models.Model):
@@ -53,7 +46,7 @@ class Event(models.Model):
     village = models.ForeignKey(Village, null=True, blank=True)
     rw = models.ForeignKey(RW, null=True, blank=True)
     rt = models.ForeignKey(RT, null=True, blank=True)
-    objects = models.GeoManager()
+    
     def __unicode__(self):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
