@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^accounts/login/$', auth_views.login, name='accounts_login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='accounts_logout'),
     url(r'^admin/', admin.site.urls),
+    url(r'^reports/', include('reports.urls', namespace='reports')),
+
 ]
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))

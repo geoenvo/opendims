@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'reports',
     'geolevels',
     'import_export',
+    'djgeojson',
+    'leaflet',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -88,7 +90,9 @@ DATABASES = {
     }
 }
 
-
+SERIALIZATION_MODULES = {
+    'geojson': 'djgeojson.serializers'
+    }
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
