@@ -4,11 +4,22 @@ from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+verbose_note = _('Note')
+verbose_name = _('Name')
+verbose_polygon = _('Polygon')
+verbose_province = _('Province')
+verbose_city = _('City')
+verbose_subdistrict = _('Subdistrict')
+verbose_village = _('Village')
+verbose_rw = _('RW')
+verbose_rt = _('RT')
+
+
 class Province(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
-    polygon = models.MultiPolygonField(null=True, blank=True)
-    note = models.TextField(blank=True)
+    name = models.CharField(max_length=50, verbose_name=verbose_name)
+    polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
     
     def __unicode__(self):
         return self.name
@@ -16,10 +27,10 @@ class Province(models.Model):
 
 class City(models.Model):
     id = models.IntegerField(primary_key=True)
-    province = models.ForeignKey(Province)
-    name = models.CharField(max_length=50)
-    polygon = models.MultiPolygonField(null=True, blank=True)
-    note = models.TextField(blank=True)
+    province = models.ForeignKey(Province, verbose_name=verbose_province)
+    name = models.CharField(max_length=50, verbose_name=verbose_name)
+    polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
     
     class Meta:
         verbose_name_plural = _('Cities')
@@ -30,10 +41,10 @@ class City(models.Model):
 
 class Subdistrict(models.Model):
     id = models.IntegerField(primary_key=True)
-    city = models.ForeignKey(City)
-    name = models.CharField(max_length=50)
-    polygon = models.MultiPolygonField(null=True, blank=True)
-    note = models.TextField(blank=True)
+    city = models.ForeignKey(City, verbose_name=verbose_city)
+    name = models.CharField(max_length=50, verbose_name=verbose_name)
+    polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
     
     def __unicode__(self):
         return self.name
@@ -41,10 +52,10 @@ class Subdistrict(models.Model):
 
 class Village(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    subdistrict = models.ForeignKey(Subdistrict)
-    name = models.CharField(max_length=50)
-    polygon = models.MultiPolygonField(null=True, blank=True)
-    note = models.TextField(blank=True)
+    subdistrict = models.ForeignKey(Subdistrict, verbose_name=verbose_subdistrict)
+    name = models.CharField(max_length=50, verbose_name=verbose_name)
+    polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
     
     def __unicode__(self):
         return self.name
@@ -52,14 +63,13 @@ class Village(models.Model):
 
 class RW(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    village = models.ForeignKey(Village)
-    name = models.CharField(max_length=50)
-    area = models.DecimalField(max_digits=50, decimal_places=10)
-    polygon = models.MultiPolygonField(null=True, blank=True)
-    note = models.TextField(blank=True)
+    village = models.ForeignKey(Village, verbose_name=verbose_village)
+    name = models.CharField(max_length=50, verbose_name=verbose_name)
+    polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
     
     class Meta:
-        verbose_name = _('RW')
+        verbose_name = verbose_rw
     
     def __unicode__(self):
         return self.name
@@ -67,13 +77,13 @@ class RW(models.Model):
 
 class RT(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    rw = models.ForeignKey(RW)
-    name = models.CharField(max_length=50)
-    polygon = models.MultiPolygonField(null=True, blank=True)
-    note = models.TextField(blank=True)
+    rw = models.ForeignKey(RW, verbose_name=verbose_rw)
+    name = models.CharField(max_length=50, verbose_name=verbose_name)
+    polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
     
     class Meta:
-        verbose_name = _('RT')
+        verbose_name = verbose_rt
     
     def __unicode__(self):
         return self.name
