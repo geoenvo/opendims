@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}{{ SITE_NAME }}{% block opendims_title %}{% endblock %}{% endblock %}
+
+{% block content %}
+
+{% include "opendims/includes/nav.html" %}
+
+<div class="container">
+{% block opendims_content %}{% endblock %}
+</div><!-- /.container -->
+
+{% endblock %}
