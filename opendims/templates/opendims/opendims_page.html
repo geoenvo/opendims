@@ -9,9 +9,9 @@
 </ul>
 <ul class="nav navbar-nav navbar-right">
     {% if user.is_authenticated %}
-    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</a></li>
+    <li><a href="{% url 'accounts_logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</a></li>
     {% else %}
-    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Login</a></a></li>
+    <li><a href="{% url 'accounts_login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Login</a></a></li>
     {% endif %}
 </ul>
 {% endblock %}
