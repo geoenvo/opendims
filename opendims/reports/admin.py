@@ -35,7 +35,18 @@ class DisasterAdmin(admin.ModelAdmin):
     ordering = ['code']
 
 
+class EventResource(resources.ModelResource):
+
+    class Meta:
+        model = Event
+##        import_id_fields = ('id',)
+        fields = ('id', 'disaster', 'province__name', 'city__name', 'rw__name')
+        export_order = ('id', 'disaster', 'province__name', 'city__name', 'rw__name')
+
+
 class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdmin):
+    resource_class = EventResource
+    
     fieldsets = [
         (_('Event details'), {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
         (_('Affected area'), {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point'], 'classes': ['collapse']}),
@@ -58,6 +69,9 @@ class ReportAdmin(admin.ModelAdmin):
     list_filter = ['created', 'updated', 'source', 'status']
     search_fields = ['note']
     actions = [make_verified, make_unverified]
+
+
+    
 
 
 admin.site.register(Source, SourceAdmin)
