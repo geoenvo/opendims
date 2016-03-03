@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.gis import admin
+from leaflet.admin import LeafletGeoAdmin
 from django.db import models
 
 from .models import Province, City, Subdistrict, Village, RW, RT
@@ -36,7 +37,7 @@ class RelatedFieldAdminMetaclass(type(admin.ModelAdmin)):
         return new_class
 
 
-class RelatedFieldAdmin(admin.OSMGeoAdmin):
+class RelatedFieldAdmin(LeafletGeoAdmin):
     """
         Version of ModelAdmin that can use related fields in list_display, e.g.:
         list_display = ('address__city', 'address__country__country_code')
