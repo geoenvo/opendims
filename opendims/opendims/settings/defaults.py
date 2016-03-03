@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'djangobower',
     'import_export',
     'leaflet',
+    'crispy_forms',
     'reports',
     'geolevels',
 ]
@@ -155,3 +156,5 @@ ADMIN_REORDER = (
 SITE_NAME = 'Open-DiMS'
 
 LOGIN_REDIRECT_URL = '/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
