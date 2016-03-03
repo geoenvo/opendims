@@ -3,9 +3,10 @@ from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
 
-from import_export import resources
+from import_export import resources, fields, widgets
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
+from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 from .models import Source, Disaster, Event, Report
 
 
@@ -36,12 +37,13 @@ class DisasterAdmin(admin.ModelAdmin):
 
 
 class EventResource(resources.ModelResource):
-
+    province = fields.Field(column_name='province', attribute='province', widget=widgets.ForeignKeyWidget(Province, 'name'))
+    city = fields.Field(column_name='city', attribute='city', widget=widgets.ForeignKeyWidget(City, 'name'))
+    
     class Meta:
         model = Event
-##        import_id_fields = ('id',)
-        fields = ('id', 'disaster', 'province__name', 'city__name', 'rw__name')
-        export_order = ('id', 'disaster', 'province__name', 'city__name', 'rw__name')
+        fields = ('id', 'disaster', 'province', 'city')
+        export_order = fields
 
 
 class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdmin):
@@ -69,9 +71,6 @@ class ReportAdmin(admin.ModelAdmin):
     list_filter = ['created', 'updated', 'source', 'status']
     search_fields = ['note']
     actions = [make_verified, make_unverified]
-
-
-    
 
 
 admin.site.register(Source, SourceAdmin)
