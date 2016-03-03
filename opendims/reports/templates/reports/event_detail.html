@@ -1,45 +1,93 @@
-{% extends "opendims/opendims_base.html" %}
+{% extends "opendims/base.html" %}
 
 {% load staticfiles leaflet_tags %}
 
-{% block title %}{{ event.province }}{% endblock %}
+{% block opendims_title %} - {{ event }}{% endblock %}
 
 {% block extra_css %}
+
 {% leaflet_css %}
+
 <style>
-.leaflet-container {  /* all maps */
-    width:  600px;
+.leaflet-container {
     height: 400px;
 }
 </style>
+
 {% endblock %}
 
-{% block content %}
-<div class="container">
-{{ event }}
+{% block opendims_content %}
+
+<div class="page-header">
+    <h1>{{ event }}</h1>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Created</th>
+            <th>Disaster</th>
+            <th>Height</th>
+            <th>Magnitude</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ event.created }}</td>
+            <td>{{ event.disaster }}</td>
+            <td>{{ event.height }}</td>
+            <td>{{ event.magnitude }}</td>
+            <td>{{ event.note }}</td>
+        </tr>
+    </tbody>
+</table>
+
 {{ event.province }}
 {{ event.city }}
 {{ event.subdistrict }}
 {{ event.village }}
 {{ event.rw }}
 {{ event.rt }}
+
 {% leaflet_map "country_map" callback="window.event_map_init" %}
-</div><!-- /.container -->
 
 {% endblock %}
 
-
 {% block extra_js %}
+
 {% leaflet_js %}
 
 <script type="text/javascript">
-function event_map_init(map, options) {
+    function event_map_init(map, options) {
+      {% if event.province %}
+      L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
+      {% endif %}
 
-   L.geoJson({{ province.polygon.geojson|safe }}).addTo(map);
+      {% if event.city %}
+      L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
+      {% endif %}
 
-   L.geoJson({{ event.point.geojson|safe }}).addTo(map); /* showing poinfield in leafleat map */
-   
-}
+      {% if event.subdistrict %}
+      L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
+      {% endif %}
+
+      {% if event.village %}
+      L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
+      {% endif %}
+
+      {% if event.rw %}
+      L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
+      {% endif %}
+
+      {% if event.rt %}
+      L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
+      {% endif %}
+
+      {% if event.point %}
+      L.geoJson({{ event.point.geojson|safe }}).addTo(map);
+      {% endif %}
+    }
 </script>
 
 {% endblock %}
