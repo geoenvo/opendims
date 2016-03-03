@@ -7,3 +7,4 @@ nodeenv==0.13.6
 django-import-export==0.4.2
 django-leaflet==0.18.0
 django-crispy-forms==1.6.0
+django-registration-redux==1.4

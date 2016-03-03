@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'import_export',
     'leaflet',
     'crispy_forms',
+    'registration',
     'reports',
     'geolevels',
 ]
@@ -195,3 +196,5 @@ LEAFLET_CONFIG = {
         ),
     ],
 }
+
+ACCOUNT_ACTIVATION_DAYS = 7

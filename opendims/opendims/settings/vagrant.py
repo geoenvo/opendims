@@ -1,6 +1,6 @@
 from defaults import *
 
-# Development environment settings
+# Vagrant development environment settings
 
 DEBUG = True
 
@@ -15,7 +15,16 @@ DATABASES = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Try looking for local settings...
 try:
     from local_settings import *
+except ImportError:
+    pass
+
+# Then look for production settings
+try:
+    from production import *
 except ImportError:
     pass
