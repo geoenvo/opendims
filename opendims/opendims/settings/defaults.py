@@ -145,6 +145,7 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 BOWER_INSTALLED_APPS = (
     'jquery#2.2.1',
     'bootstrap#3.3.6',
+    'font-awesome#4.5.0',
 )
 
 # App model reordering in /admin page
