@@ -1,0 +1,10 @@
+{% extends "opendims/base.html" %}
+
+{% block content %}
+    <ul>
+        {% for province in provinces %}
+            <li><a href="{% url 'geolevels:province_detail' province.pk  %}">{{ province }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

@@ -8,4 +8,6 @@ from . import views
 urlpatterns = [
     url(r'^event/$', views.event_list, name='event_list'),
     url(r'^event/(?P<pk>\d+)/$', views.event_detail, name='event_detail'),
+    url(r'^report/$', views.report_list, name='report_list'),
+    url(r'^report/(?P<pk>\d+)/$', views.report_detail, name='report_detail'),
 ]
