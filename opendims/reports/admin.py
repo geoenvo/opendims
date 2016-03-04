@@ -36,15 +36,18 @@ class DisasterAdmin(admin.ModelAdmin):
     list_display = ['code', 'note']
     ordering = ['code']
 
-
 class EventResource(resources.ModelResource):
     province = fields.Field(column_name='province', attribute='province', widget=widgets.ForeignKeyWidget(Province, 'name'))
     city = fields.Field(column_name='city', attribute='city', widget=widgets.ForeignKeyWidget(City, 'name'))
+    subdistrict = fields.Field(column_name='subdistrict', attribute='subdistrict', widget=widgets.ForeignKeyWidget(Subdistrict, 'name'))
+    village = fields.Field(column_name='village', attribute='village', widget=widgets.ForeignKeyWidget(Village, 'name'))
+    rw = fields.Field(column_name='RW', attribute='rw', widget=widgets.ForeignKeyWidget(RW))
+    rt = fields.Field(column_name='RT', attribute='rt', widget=widgets.ForeignKeyWidget(RT, 'name'))
     
     class Meta:
         model = Event
-        fields = ('id', 'disaster', 'province', 'city')
-        export_order = fields
+        fields = ('id', 'disaster', 'province', 'city', 'subdistrict', 'village', 'rw', 'rt')
+        export_order = (fields)
 
 
 class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin):
@@ -64,8 +67,8 @@ class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin
     list_filter = ['created', 'updated', 'status', 'disaster']
     search_fields = ['province__name', 'city__name', 'subdistrict__name', 'village__name', 'note']
     inlines = [ReportInline]
-
-
+    
+        
 class ReportAdmin(admin.ModelAdmin):
     fieldsets = [
         (_('Report details'), {'fields': ['created', 'updated', 'event', 'source', 'status', 'note']})
