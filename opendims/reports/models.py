@@ -64,7 +64,7 @@ class Event(models.Model):
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True, verbose_name=verbose_subdistrict)
     village = models.ForeignKey(Village, null=True, blank=True, verbose_name=verbose_village)
     rw = models.ForeignKey(RW, null=True, blank=True, verbose_name=verbose_rw)
-    rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rw)
+    rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
     
     def __unicode__(self):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
