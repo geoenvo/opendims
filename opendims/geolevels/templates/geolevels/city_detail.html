@@ -1,0 +1,53 @@
+{% extends "opendims/base.html" %}
+
+{% load staticfiles leaflet_tags %}
+
+{% block opendims_title %} - {{ city }}{% endblock %}
+
+{% block extra_css %}
+
+{% leaflet_css %}
+
+<style>
+.leaflet-container {
+    height: 400px;
+}
+</style>
+
+{% endblock %}
+
+{% block opendims_content %}
+
+<div class="page-header">
+    <h1>{{ city }}</h1>
+</div>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tbody>
+        <tr>
+          <th>Note</th>
+            <td>{{ city.note }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% leaflet_map "country_map" callback="window.event_map_init" %}
+
+{% endblock %}
+
+{% block extra_js %}
+
+{% leaflet_js %}
+
+<script type="text/javascript">
+    function event_map_init(map, options) {
+      L.geoJson({{city.polygon.geojson|safe }}).addTo(map);
+    }
+</script>
+
+<div class="page-header"><h1>CITY</h1></div>
+        {% for province in provinces %}
+            <li><a href="{% url 'geolevels:city_detail' city.pk  %}">{{ city }}</a></li>
+        {% endfor %}
+
+{% endblock %}

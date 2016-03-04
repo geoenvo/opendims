@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^reports/', include('reports.urls', namespace='reports')),
-
+    url(r'^geolevels/', include('geolevels.urls', namespace='geolevels')),
 ]
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))

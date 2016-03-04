@@ -1,0 +1,9 @@
+{% extends "opendims/base.html" %}
+
+{% block content %}
+    <ul>
+        {% for report in reports %}
+            <li><a href="{% url 'reports:report_detail' report.pk  %}">{{ report }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
