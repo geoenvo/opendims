@@ -1,0 +1,18 @@
+{% extends "opendims/base.html" %}
+
+{% load i18n staticfiles %}
+
+{% block opendims_title %} - {% trans "Logged Out" %}{% endblock %}
+
+{% block opendims_content %}
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">{% trans "Logged Out" %}</div>
+        <div class="panel-body">
+            <p>{% trans "Successfully logged out" %}.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

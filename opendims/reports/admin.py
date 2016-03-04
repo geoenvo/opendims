@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
+from leaflet.admin import LeafletGeoAdmin
 
 from import_export import resources, fields, widgets
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
@@ -49,12 +50,16 @@ class EventResource(resources.ModelResource):
         export_order = (fields)
 
 
-class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, admin.OSMGeoAdmin):
+class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin):
     resource_class = EventResource
+    
+    settings_overrides = {
+       'DEFAULT_ZOOM': 11,
+    }
     
     fieldsets = [
         (_('Event details'), {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
-        (_('Affected area'), {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point'], 'classes': ['collapse']}),
+        (_('Affected area'), {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point']}),
     ]
     list_display = ['created', 'updated', 'status', 'disaster', 'province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'height', 'magnitude', 'note']
     readonly_fields = ['updated']

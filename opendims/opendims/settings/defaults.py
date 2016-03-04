@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'import_export',
     'leaflet',
     'crispy_forms',
+    'registration',
     'reports',
     'geolevels',
 ]
@@ -159,3 +160,41 @@ SITE_NAME = 'Open-DiMS'
 LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+MAPBOX_ACCESSTOKEN = 'pk.eyJ1IjoiZ2VvZW52byIsImEiOiJjaWxjNDBseWQyN29udHlseHJueGFjNTcxIn0.UHG-jg9OS12rmSwIHIyscg'
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (-6.181956, 106.829067), # PUSDALOPS BPBD
+    'TILES': [
+        (
+            'OpenStreetMap',
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                'maxZoom': 19,
+                'attribution': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }
+        ),
+        (
+            'MapBox Satellite',
+            'http://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+            {
+                'id': 'mapbox.satellite',
+                'accessToken': MAPBOX_ACCESSTOKEN,
+                'subdomains': 'abcd',
+                'attribution': 'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }
+        ),
+        (
+            'Aerial Imagery',
+            'http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}',
+            {
+                'type': 'sat',
+                'ext': 'jpg',
+                'subdomains': '1234',
+                'attribution': 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
+            }
+        ),
+    ],
+}
+
+ACCOUNT_ACTIVATION_DAYS = 7

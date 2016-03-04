@@ -60,7 +60,7 @@ if __name__ == '__main__':
                     sql_rw = "SELECT * FROM boundary WHERE id_kel= '%s'" % village.id
                     cur5.execute(sql_rw)
                     rows_rw = cur5.fetchall()
-                    list_rw = [RW(id=row_rw[7], name=row_rw[5], polygon=row_rw[1], area=row_rw[4], village=village) for row_rw in rows_rw]
+                    list_rw = [RW(id=row_rw[7], name=row_rw[5], polygon=row_rw[1], village=village) for row_rw in rows_rw]
                     
                     for rw in list_rw:
                         if rw.name == None:

@@ -1,0 +1,18 @@
+{% extends "opendims/base.html" %}
+
+{% load i18n staticfiles %}
+
+{% block opendims_title %} - {% trans "Registration Complete" %}{% endblock %}
+
+{% block opendims_content %}
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">{% trans "Registration Complete" %}</div>
+        <div class="panel-body">
+            <p>{% trans "Please check your email to complete the registration process." %}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
