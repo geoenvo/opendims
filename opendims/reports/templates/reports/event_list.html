@@ -1,8 +1,6 @@
 {% extends "opendims/base.html" %}
 
-{% block opendims_title %} - Events{% endblock %}
-
-{% block opendims_content %}
+{% block content %}
     <ul>
         {% for event in events %}
             <li><a href="{% url 'reports:event_detail' event.pk  %}">{{ event }}</a></li>
