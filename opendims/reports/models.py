@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import  models
 from django.core.validators import MinValueValidator
+from django.core import urlresolvers
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
@@ -29,7 +30,15 @@ verbose_event = _('Event')
 verbose_source = _('Source')
 
 
-class Source(models.Model):
+class ReportsAbstractModel(models.Model):
+    class Meta:
+        abstract = True
+    
+    def get_admin_url(self):
+        return urlresolvers.reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+
+
+class Source(ReportsAbstractModel):
     code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     
@@ -37,7 +46,7 @@ class Source(models.Model):
         return '%s' % self.code
 
 
-class Disaster(models.Model):
+class Disaster(ReportsAbstractModel):
     code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     
@@ -45,7 +54,7 @@ class Disaster(models.Model):
         return '%s' % self.code
 
 
-class Event(models.Model):
+class Event(ReportsAbstractModel):
     STATUS_CHOICES = (
         ('ACTIVE', _('Active')),
         ('INACTIVE', _('Inactive')),
@@ -70,7 +79,7 @@ class Event(models.Model):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
 
-class Report(models.Model):
+class Report(ReportsAbstractModel):
     STATUS_CHOICES = (
         ('VERIFIED', _('Verified')),
         ('UNVERIFIED', _('Unverified')),
