@@ -19,7 +19,7 @@
 {% block opendims_content %}
 
 <div class="page-header">
-    <h1>{{ rw }}</h1>
+    <h2>{{ rw.name }} - {{ rw.village }}</h2>
 </div>
 <table class="table table-striped table-bordered table-hover table-condensed">
     <tbody>
@@ -32,12 +32,17 @@
 
 {% leaflet_map "country_map" callback="window.event_map_init" %}
 
-<div><h1>RWS</h1></div>
+<div><h1>RTS</h1></div>
 <table class="table table-striped table-bordered table-hover table-condensed">
     <thead>
         <tr>
         {% for rt in rts|slice:'1' %}
             <th>{% get_verbose_field_name rt 'name' %}</th>
+            <th>{% get_verbose_field_name rt 'province' %}</th>
+            <th>{% get_verbose_field_name rt 'city' %}</th>
+            <th>{% get_verbose_field_name rt 'subdistrict' %}</th>
+            <th>{% get_verbose_field_name rt 'village' %}</th>
+            <th>{% get_verbose_field_name rt 'rw' %}</th>
             <th>{% get_verbose_field_name rt 'note' %}</th>
         {% endfor %}
         </tr>
@@ -46,6 +51,11 @@
         {% for rt in rts %}
         <tr>
             <td><a href="{% url 'geolevels:rt_detail' rt.pk  %}">{{ rt.name }}</a></td>
+            <td>{{ rt.province }}</td>
+            <td>{{ rt.city }}</td>
+            <td>{{ rt.subdistrict }}</td>
+            <td>{{ rt.village }}</td>
+            <td>{{ rt.rw }}</td>
             <td>{{ rt.note }}</td>
         </tr>
         {% endfor %}
