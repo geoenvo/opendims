@@ -10,12 +10,15 @@ class GeolevelsAbstractModel(models.Model):
         abstract = True
     
     def get_admin_url(self):
-        return urlresolvers.reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+        return urlresolvers.reverse(
+            'admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,)
+        )
 
 
 verbose_note = _('Note')
 verbose_name = _('Name')
 verbose_polygon = _('Polygon')
+
 
 class Province(GeolevelsAbstractModel):
     id = models.IntegerField(primary_key=True)
@@ -28,6 +31,7 @@ class Province(GeolevelsAbstractModel):
 
 
 verbose_province = _('Province')
+
 
 class City(GeolevelsAbstractModel):
     id = models.IntegerField(primary_key=True)
@@ -45,6 +49,7 @@ class City(GeolevelsAbstractModel):
 
 verbose_city = _('City')
 
+
 class Subdistrict(GeolevelsAbstractModel):
     id = models.IntegerField(primary_key=True)
     city = models.ForeignKey(City, verbose_name=verbose_city)
@@ -57,6 +62,7 @@ class Subdistrict(GeolevelsAbstractModel):
 
 
 verbose_subdistrict = _('Subdistrict')
+
 
 class Village(GeolevelsAbstractModel):
     id = models.BigIntegerField(primary_key=True)
@@ -71,6 +77,7 @@ class Village(GeolevelsAbstractModel):
 
 verbose_village = _('Village')
 verbose_rw = _('RW')
+
 
 class RW(GeolevelsAbstractModel):
     id = models.BigIntegerField(primary_key=True)
@@ -87,6 +94,7 @@ class RW(GeolevelsAbstractModel):
 
 
 verbose_rt = _('RT')
+
 
 class RT(GeolevelsAbstractModel):
     id = models.BigIntegerField(primary_key=True)

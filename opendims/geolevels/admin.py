@@ -18,7 +18,7 @@ def getter_for_related_field(name, admin_order_field=None, short_description=Non
             obj = getattr(obj, related_name)
         return obj
     getter.admin_order_field = admin_order_field or name
-    getter.short_description = short_description or related_names[-1].title().replace('_',' ')
+    getter.short_description = short_description or related_names[-1].title().replace('_', ' ')
     return getter
 
 
@@ -48,7 +48,7 @@ class RelatedFieldAdmin(LeafletGeoAdmin):
         qs = super(RelatedFieldAdmin, self).get_queryset(request)
 
         # include all related fields in queryset
-        select_related = [field.rsplit('__',1)[0] for field in self.list_display if '__' in field]
+        select_related = [field.rsplit('__', 1)[0] for field in self.list_display if '__' in field]
 
         # Include all foreign key fields in queryset.
         # This is based on ChangeList.get_query_set().
@@ -181,7 +181,7 @@ class RTAdmin(RelatedFieldAdmin):
         'rw__village__subdistrict__city__name',
         'rw__village__subdistrict__name',
         'rw__village__name'
-    ] # No use searching RW by name
+    ]  # No use searching RW by name
     
     sort_province_by_name = getter_for_related_field(
         'rw__village__subdistrict__province',

@@ -3,6 +3,7 @@
 *.pid
 Vagrantfile
 *.DS_Store
-.vagrant/*
+.idea
+.vagrant
 opendims/static/*
 opendims/components/*

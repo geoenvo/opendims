@@ -16,11 +16,14 @@ class ReportsAbstractModel(models.Model):
         abstract = True
     
     def get_admin_url(self):
-        return urlresolvers.reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+        return urlresolvers.reverse(
+            'admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,)
+        )
 
 
 verbose_code = _('Code')
 verbose_note = _('Note')
+
 
 class Source(ReportsAbstractModel):
     code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
@@ -52,6 +55,7 @@ verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
 
+
 class Event(ReportsAbstractModel):
     STATUS_CHOICES = (
         ('ACTIVE', _('Active')),
@@ -65,7 +69,14 @@ class Event(ReportsAbstractModel):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='ACTIVE', verbose_name=verbose_status)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     height = models.PositiveIntegerField(null=True, blank=True, verbose_name=verbose_height)
-    magnitude = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], verbose_name=verbose_magnitude)
+    magnitude = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))],
+        verbose_name=verbose_magnitude
+    )
     province = models.ForeignKey(Province, null=True, blank=True, verbose_name=verbose_province)
     city = models.ForeignKey(City, null=True, blank=True, verbose_name=verbose_city)
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True, verbose_name=verbose_subdistrict)
@@ -83,6 +94,7 @@ class Event(ReportsAbstractModel):
 
 verbose_event = _('Event')
 verbose_source = _('Source')
+
 
 class Report(ReportsAbstractModel):
     STATUS_CHOICES = (
