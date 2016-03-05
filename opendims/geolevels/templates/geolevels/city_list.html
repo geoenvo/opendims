@@ -1,9 +1,0 @@
-{% extends "opendims/base.html" %}
-
-{% block content %}
-    <ul>
-        {% for city in citys %}
-            <li><a href="{% url 'geolevels:city_detail' city.pk  %}">{{ city }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}

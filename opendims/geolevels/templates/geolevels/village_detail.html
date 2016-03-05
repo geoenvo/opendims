@@ -2,7 +2,7 @@
 
 {% load staticfiles leaflet_tags verbose_names %}
 
-{% block opendims_title %} - {{ event }}{% endblock %}
+{% block opendims_title %} - {{ city }}{% endblock %}
 
 {% block extra_css %}
 
@@ -19,35 +19,34 @@
 {% block opendims_content %}
 
 <div class="page-header">
-    <h1>{{ province }}</h1>
+    <h1>{{ village }}</h1>
 </div>
 
 <table class="table table-striped table-bordered table-hover table-condensed">
     <tbody>
         <tr>
-          <th><h1>{% get_verbose_field_name province 'note' %}</h1></th>
-            <td>{{ province.note }}</td>
+          <th>{% get_verbose_field_name village 'note' %}</th>
+            <td>{{ village.note }}</td>
         </tr>
     </tbody>
 </table>
 
 {% leaflet_map "country_map" callback="window.event_map_init" %}
 
-<div><h1>CITIES</h1></div>
+<div><h1>RWS</h1></div>
 <table class="table table-striped table-bordered table-hover table-condensed">
     <thead>
         <tr>
-        {% for city in cities|slice:'1' %}
-            <th>{% get_verbose_field_name city 'name' %}</th>
-            <th>{% get_verbose_field_name city 'note' %}</th>
+        {% for rw in rws|slice:'1' %}
+            <th>{% get_verbose_field_name rw 'name' %}</th>
+            <th>{% get_verbose_field_name rw 'note' %}</th>
         {% endfor %}
         </tr>
     </thead>
-    <tbody>
-        {% for city in cities %}
+        {% for rw in rws %}
         <tr>
-            <td><a href="{% url 'geolevels:city_detail' city.pk  %}">{{ city.name }}</a></td>
-            <td>{{ city.note }}</td>
+            <td><a href="{% url 'geolevels:rw_detail' rw.pk  %}">{{ rw.name }}</a></td>
+            <td>{{ rw.note }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -61,9 +60,7 @@
 
 <script type="text/javascript">
     function event_map_init(map, options) {
-      
-      L.geoJson({{province.polygon.geojson|safe }}).addTo(map);
-    
+      L.geoJson({{village.polygon.geojson|safe }}).addTo(map);
     }
 </script>
 
