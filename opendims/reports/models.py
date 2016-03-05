@@ -11,25 +11,6 @@ from django.core import urlresolvers
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
 
-verbose_code = _('Code')
-verbose_note = _('Note')
-verbose_disaster = _('Disaster')
-verbose_point = _('Point')
-verbose_created = _('Created')
-verbose_updated = _('Updated')
-verbose_status = _('Status')
-verbose_height = _('Height')
-verbose_magnitude = _('Magnitude')
-verbose_province = _('Province')
-verbose_city = _('City')
-verbose_subdistrict = _('Subdistrict')
-verbose_village = _('Village')
-verbose_rw = _('RW')
-verbose_rt = _('RT')
-verbose_event = _('Event')
-verbose_source = _('Source')
-
-
 class ReportsAbstractModel(models.Model):
     class Meta:
         abstract = True
@@ -37,6 +18,9 @@ class ReportsAbstractModel(models.Model):
     def get_admin_url(self):
         return urlresolvers.reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+
+verbose_code = _('Code')
+verbose_note = _('Note')
 
 class Source(ReportsAbstractModel):
     code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
@@ -53,6 +37,20 @@ class Disaster(ReportsAbstractModel):
     def __unicode__(self):
         return '%s' % self.code
 
+
+verbose_disaster = _('Disaster')
+verbose_point = _('Point')
+verbose_created = _('Created')
+verbose_updated = _('Updated')
+verbose_status = _('Status')
+verbose_height = _('Height')
+verbose_magnitude = _('Magnitude')
+verbose_province = _('Province')
+verbose_city = _('City')
+verbose_subdistrict = _('Subdistrict')
+verbose_village = _('Village')
+verbose_rw = _('RW')
+verbose_rt = _('RT')
 
 class Event(ReportsAbstractModel):
     STATUS_CHOICES = (
@@ -75,9 +73,16 @@ class Event(ReportsAbstractModel):
     rw = models.ForeignKey(RW, null=True, blank=True, verbose_name=verbose_rw)
     rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
     
+    class Meta:
+        ordering = ['-updated', '-created']
+        get_latest_by = 'updated'
+    
     def __unicode__(self):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
+
+verbose_event = _('Event')
+verbose_source = _('Source')
 
 class Report(ReportsAbstractModel):
     STATUS_CHOICES = (
@@ -92,6 +97,10 @@ class Report(ReportsAbstractModel):
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TBD', verbose_name=verbose_status)
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    
+    class Meta:
+        ordering = ['-updated', '-created']
+        get_latest_by = 'updated'
     
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.event, self.source, self.status)

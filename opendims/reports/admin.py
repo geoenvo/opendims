@@ -12,23 +12,18 @@ from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 from .models import Source, Disaster, Event, Report
 
 
-verbose_province = _('Province')
-verbose_city = _('City')
-verbose_subdistrict = _('Subdistrict')
-verbose_village = _('Village')
-verbose_rw = _('RW')
-verbose_rt = _('RT')
-
+verbose_mark_unverified = _('Mark Event as Unverified')
+verbose_mark_verified = _('Mark Event as Verified')
 
 def make_unverified(modeladmin, request, queryset):
     queryset.update(status='UNVERIFIED')
 
-make_unverified.short_description = _('Mark Event as Unverified')
+make_unverified.short_description = verbose_mark_unverified
 
 def make_verified(modeladmin, request, queryset):
     queryset.update(status='VERIFIED')
 
-make_verified.short_description = _('Mark Event as Verified')
+make_verified.short_description = verbose_mark_verified
 
 
 class ReportInline(admin.TabularInline):
@@ -60,6 +55,15 @@ class EventResource(resources.ModelResource):
         export_order = (fields)
 
 
+verbose_event_details = _('Event details')
+verbose_affected_area = _('Affected area')
+verbose_province = _('Province')
+verbose_city = _('City')
+verbose_subdistrict = _('Subdistrict')
+verbose_village = _('Village')
+verbose_rw = _('RW')
+verbose_rt = _('RT')
+
 class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin):
     resource_class = EventResource
     
@@ -69,8 +73,8 @@ class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin
     }
     
     fieldsets = [
-        (_('Event details'), {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
-        (_('Affected area'), {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point']}),
+        (verbose_event_details, {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
+        (verbose_affected_area, {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point']}),
     ]
     list_display = ['created', 'updated', 'status', 'disaster', 'province_admin_url', 'city_admin_url', 'subdistrict_admin_url', 'village_admin_url', 'rw', 'rt', 'height', 'magnitude', 'note']
     readonly_fields = ['updated']
@@ -120,11 +124,14 @@ class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin
         return format_html("<a href='{url}'>{rt}</a>", url=obj.rt.get_admin_url(), rt=obj.rt)
     
     rt_admin_url.short_description = verbose_rt
-    
-        
+
+
+verbose_report_details = _('Report details')
+verbose_event = _('Event')
+
 class ReportAdmin(admin.ModelAdmin):
     fieldsets = [
-        (_('Report details'), {'fields': ['created', 'updated', 'event', 'source', 'status', 'note']})
+        (verbose_report_details, {'fields': ['created', 'updated', 'event', 'source', 'status', 'note']})
     ]
     list_display = ['created', 'updated', 'event_admin_url', 'source', 'status', 'note']
     readonly_fields = ['updated']
@@ -138,7 +145,7 @@ class ReportAdmin(admin.ModelAdmin):
             return '-'
         return format_html("<a href='{url}'>{event}</a>", url=obj.event.get_admin_url(), event=obj.event)
     
-    event_admin_url.short_description = _('Event')
+    event_admin_url.short_description = verbose_event
 
 
 admin.site.register(Source, SourceAdmin)

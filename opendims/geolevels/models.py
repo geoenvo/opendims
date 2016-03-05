@@ -5,17 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from django.core import urlresolvers
 
 
-verbose_note = _('Note')
-verbose_name = _('Name')
-verbose_polygon = _('Polygon')
-verbose_province = _('Province')
-verbose_city = _('City')
-verbose_subdistrict = _('Subdistrict')
-verbose_village = _('Village')
-verbose_rw = _('RW')
-verbose_rt = _('RT')
-
-
 class GeolevelsAbstractModel(models.Model):
     class Meta:
         abstract = True
@@ -23,6 +12,10 @@ class GeolevelsAbstractModel(models.Model):
     def get_admin_url(self):
         return urlresolvers.reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+
+verbose_note = _('Note')
+verbose_name = _('Name')
+verbose_polygon = _('Polygon')
 
 class Province(GeolevelsAbstractModel):
     id = models.IntegerField(primary_key=True)
@@ -33,6 +26,8 @@ class Province(GeolevelsAbstractModel):
     def __unicode__(self):
         return self.name
 
+
+verbose_province = _('Province')
 
 class City(GeolevelsAbstractModel):
     id = models.IntegerField(primary_key=True)
@@ -48,6 +43,8 @@ class City(GeolevelsAbstractModel):
         return self.name
 
 
+verbose_city = _('City')
+
 class Subdistrict(GeolevelsAbstractModel):
     id = models.IntegerField(primary_key=True)
     city = models.ForeignKey(City, verbose_name=verbose_city)
@@ -59,6 +56,8 @@ class Subdistrict(GeolevelsAbstractModel):
         return self.name
 
 
+verbose_subdistrict = _('Subdistrict')
+
 class Village(GeolevelsAbstractModel):
     id = models.BigIntegerField(primary_key=True)
     subdistrict = models.ForeignKey(Subdistrict, verbose_name=verbose_subdistrict)
@@ -69,6 +68,9 @@ class Village(GeolevelsAbstractModel):
     def __unicode__(self):
         return self.name
 
+
+verbose_village = _('Village')
+verbose_rw = _('RW')
 
 class RW(GeolevelsAbstractModel):
     id = models.BigIntegerField(primary_key=True)
@@ -83,6 +85,8 @@ class RW(GeolevelsAbstractModel):
     def __unicode__(self):
         return self.name
 
+
+verbose_rt = _('RT')
 
 class RT(GeolevelsAbstractModel):
     id = models.BigIntegerField(primary_key=True)
