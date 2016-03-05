@@ -6,12 +6,41 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import  models
 from django.core.validators import MinValueValidator
+from django.core import urlresolvers
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
 
+class ReportsAbstractModel(models.Model):
+    class Meta:
+        abstract = True
+    
+    def get_admin_url(self):
+        return urlresolvers.reverse(
+            'admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,)
+        )
+
+
 verbose_code = _('Code')
 verbose_note = _('Note')
+
+
+class Source(ReportsAbstractModel):
+    code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
+    
+    def __unicode__(self):
+        return '%s' % self.code
+
+
+class Disaster(ReportsAbstractModel):
+    code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
+    note = models.TextField(blank=True, verbose_name=verbose_note)
+    
+    def __unicode__(self):
+        return '%s' % self.code
+
+
 verbose_disaster = _('Disaster')
 verbose_point = _('Point')
 verbose_created = _('Created')
@@ -25,27 +54,9 @@ verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
-verbose_event = _('Event')
-verbose_source = _('Source')
 
 
-class Source(models.Model):
-    code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
-    note = models.TextField(blank=True, verbose_name=verbose_note)
-    
-    def __unicode__(self):
-        return '%s' % self.code
-
-
-class Disaster(models.Model):
-    code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
-    note = models.TextField(blank=True, verbose_name=verbose_note)
-    
-    def __unicode__(self):
-        return '%s' % self.code
-
-
-class Event(models.Model):
+class Event(ReportsAbstractModel):
     STATUS_CHOICES = (
         ('ACTIVE', _('Active')),
         ('INACTIVE', _('Inactive')),
@@ -58,7 +69,14 @@ class Event(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='ACTIVE', verbose_name=verbose_status)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     height = models.PositiveIntegerField(null=True, blank=True, verbose_name=verbose_height)
-    magnitude = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], verbose_name=verbose_magnitude)
+    magnitude = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))],
+        verbose_name=verbose_magnitude
+    )
     province = models.ForeignKey(Province, null=True, blank=True, verbose_name=verbose_province)
     city = models.ForeignKey(City, null=True, blank=True, verbose_name=verbose_city)
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True, verbose_name=verbose_subdistrict)
@@ -66,11 +84,19 @@ class Event(models.Model):
     rw = models.ForeignKey(RW, null=True, blank=True, verbose_name=verbose_rw)
     rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
     
+    class Meta:
+        ordering = ['-updated', '-created']
+        get_latest_by = 'updated'
+    
     def __unicode__(self):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
 
-class Report(models.Model):
+verbose_event = _('Event')
+verbose_source = _('Source')
+
+
+class Report(ReportsAbstractModel):
     STATUS_CHOICES = (
         ('VERIFIED', _('Verified')),
         ('UNVERIFIED', _('Unverified')),
@@ -83,6 +109,10 @@ class Report(models.Model):
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TBD', verbose_name=verbose_status)
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    
+    class Meta:
+        ordering = ['-updated', '-created']
+        get_latest_by = 'updated'
     
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.event, self.source, self.status)

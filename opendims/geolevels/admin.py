@@ -18,7 +18,7 @@ def getter_for_related_field(name, admin_order_field=None, short_description=Non
             obj = getattr(obj, related_name)
         return obj
     getter.admin_order_field = admin_order_field or name
-    getter.short_description = short_description or related_names[-1].title().replace('_',' ')
+    getter.short_description = short_description or related_names[-1].title().replace('_', ' ')
     return getter
 
 
@@ -48,7 +48,7 @@ class RelatedFieldAdmin(LeafletGeoAdmin):
         qs = super(RelatedFieldAdmin, self).get_queryset(request)
 
         # include all related fields in queryset
-        select_related = [field.rsplit('__',1)[0] for field in self.list_display if '__' in field]
+        select_related = [field.rsplit('__', 1)[0] for field in self.list_display if '__' in field]
 
         # Include all foreign key fields in queryset.
         # This is based on ChangeList.get_query_set().
@@ -72,17 +72,27 @@ class ProvinceAdmin(RelatedFieldAdmin):
 
 
 class CityAdmin(RelatedFieldAdmin):
-    list_display = ('id', 'province', 'name', 'note')
+    list_display = ('id', 'sort_province_by_name', 'name', 'note')
     search_fields = ['province__name', 'name']
+    
+    sort_province_by_name = getter_for_related_field(
+        'province',
+        admin_order_field='province__name'
+    )
 
 
 class SubdistrictAdmin(RelatedFieldAdmin):
-    list_display = ('id', 'sort_province_by_name', 'city', 'name', 'note')
+    list_display = ('id', 'sort_province_by_name', 'sort_city_by_name', 'name', 'note')
     search_fields = ['city__province__name', 'city__name', 'name']
     
     sort_province_by_name = getter_for_related_field(
         'city__province',
         admin_order_field='city__province__name'
+    )
+    
+    sort_city_by_name = getter_for_related_field(
+        'city',
+        admin_order_field='city__name'
     )
 
 
@@ -91,7 +101,7 @@ class VillageAdmin(RelatedFieldAdmin):
         'id',
         'sort_province_by_name',
         'sort_city_by_name',
-        'subdistrict',
+        'sort_subdistrict_by_name',
         'name',
         'note'
     )
@@ -105,9 +115,15 @@ class VillageAdmin(RelatedFieldAdmin):
         'subdistrict__city__province',
         admin_order_field='subdistrict__city__province__name'
     )
+    
     sort_city_by_name = getter_for_related_field(
         'subdistrict__city',
         admin_order_field='subdistrict__city__name'
+    )
+    
+    sort_subdistrict_by_name = getter_for_related_field(
+        'subdistrict',
+        admin_order_field='subdistrict__name'
     )
 
 
@@ -117,7 +133,7 @@ class RWAdmin(RelatedFieldAdmin):
         'sort_province_by_name',
         'sort_city_by_name',
         'sort_subdistrict_by_name',
-        'village',
+        'sort_village_by_name',
         'name',
         'note'
     )
@@ -132,13 +148,20 @@ class RWAdmin(RelatedFieldAdmin):
         'village__subdistrict__city__province',
         admin_order_field='village__subdistrict__city__province__name'
     )
+    
     sort_city_by_name = getter_for_related_field(
         'village__subdistrict__city',
         admin_order_field='village__subdistrict__city__name'
     )
+    
     sort_subdistrict_by_name = getter_for_related_field(
         'village__subdistrict',
         admin_order_field='village__subdistrict__name'
+    )
+    
+    sort_village_by_name = getter_for_related_field(
+        'village',
+        admin_order_field='village__name'
     )
 
 
@@ -158,20 +181,23 @@ class RTAdmin(RelatedFieldAdmin):
         'rw__village__subdistrict__city__name',
         'rw__village__subdistrict__name',
         'rw__village__name'
-    ] # No use searching RW by name
+    ]  # No use searching RW by name
     
     sort_province_by_name = getter_for_related_field(
         'rw__village__subdistrict__province',
         admin_order_field='rw__village__subdistrict__province__name'
     )
+    
     sort_city_by_name = getter_for_related_field(
         'rw__village__subdistrict__city',
         admin_order_field='rw__village__subdistrict__city__name'
     )
+    
     sort_subdistrict_by_name = getter_for_related_field(
         'rw__village__subdistrict',
         admin_order_field='rw__village__subdistrict__name'
     )
+    
     sort_village_by_name = getter_for_related_field(
         'rw__village',
         admin_order_field='rw__village__name'
