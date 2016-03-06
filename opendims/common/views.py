@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth.views import login as contrib_login
+from django.shortcuts import render, redirect
+from django.conf import settings
 
-# Create your views here.
+
+def login(request, **kwargs):
+    if request.user.is_authenticated():
+        return redirect(settings.LOGIN_REDIRECT_URL)
+    else:
+        return contrib_login(request, **kwargs)
