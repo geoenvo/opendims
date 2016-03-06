@@ -1,6 +1,6 @@
 {% extends "opendims/base.html" %}
 
-{% load staticfiles leaflet_tags %}
+{% load staticfiles leaflet_tags verbose_names %}
 
 {% block opendims_title %} - {{ event }}{% endblock %}
 
@@ -25,13 +25,35 @@
 <table class="table table-striped table-bordered table-hover table-condensed">
     <tbody>
         <tr>
-          <th>Note</th>
+          <th>{% get_verbose_field_name province 'note' %}</th>
             <td>{{ province.note }}</td>
         </tr>
     </tbody>
 </table>
 
 {% leaflet_map "country_map" callback="window.event_map_init" %}
+
+<div><h1>CITIES</h1></div>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+        {% for city in cities|slice:'1' %}
+            <th>{% get_verbose_field_name city 'name' %}</th>
+            <th>{% get_verbose_field_name city 'province' %}</th>
+            <th>{% get_verbose_field_name city 'note' %}</th>
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for city in cities %}
+        <tr>
+            <td><a href="{% url 'geolevels:city_detail' city.pk  %}">{{ city.name }}</a></td>
+            <td>{{ city.province }}</td>
+            <td>{{ city.note }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
 
@@ -46,10 +68,5 @@
     
     }
 </script>
-
-<div class="page-header"><h1>CITY</h1></div>
-        {% for province in provinces %}
-            <li><a href="{% url 'geolevels:city_detail' city.pk  %}">{{ city }}</a></li>
-        {% endfor %}
 
 {% endblock %}
