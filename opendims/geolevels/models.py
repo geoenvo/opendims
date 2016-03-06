@@ -2,17 +2,8 @@ from __future__ import unicode_literals
 
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core import urlresolvers
 
-
-class GeolevelsAbstractModel(models.Model):
-    class Meta:
-        abstract = True
-    
-    def get_admin_url(self):
-        return urlresolvers.reverse(
-            'admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,)
-        )
+from common.models import CommonAbstractModel
 
 
 verbose_note = _('Note')
@@ -20,7 +11,7 @@ verbose_name = _('Name')
 verbose_polygon = _('Polygon')
 
 
-class Province(GeolevelsAbstractModel):
+class Province(CommonAbstractModel):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
     polygon = models.MultiPolygonField(null=True, blank=True, verbose_name=verbose_polygon)
@@ -33,7 +24,7 @@ class Province(GeolevelsAbstractModel):
 verbose_province = _('Province')
 
 
-class City(GeolevelsAbstractModel):
+class City(CommonAbstractModel):
     id = models.IntegerField(primary_key=True)
     province = models.ForeignKey(Province, verbose_name=verbose_province)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
@@ -50,7 +41,7 @@ class City(GeolevelsAbstractModel):
 verbose_city = _('City')
 
 
-class Subdistrict(GeolevelsAbstractModel):
+class Subdistrict(CommonAbstractModel):
     id = models.IntegerField(primary_key=True)
     city = models.ForeignKey(City, verbose_name=verbose_city)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
@@ -64,7 +55,7 @@ class Subdistrict(GeolevelsAbstractModel):
 verbose_subdistrict = _('Subdistrict')
 
 
-class Village(GeolevelsAbstractModel):
+class Village(CommonAbstractModel):
     id = models.BigIntegerField(primary_key=True)
     subdistrict = models.ForeignKey(Subdistrict, verbose_name=verbose_subdistrict)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
@@ -79,7 +70,7 @@ verbose_village = _('Village')
 verbose_rw = _('RW')
 
 
-class RW(GeolevelsAbstractModel):
+class RW(CommonAbstractModel):
     id = models.BigIntegerField(primary_key=True)
     village = models.ForeignKey(Village, verbose_name=verbose_village)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
@@ -96,7 +87,7 @@ class RW(GeolevelsAbstractModel):
 verbose_rt = _('RT')
 
 
-class RT(GeolevelsAbstractModel):
+class RT(CommonAbstractModel):
     id = models.BigIntegerField(primary_key=True)
     rw = models.ForeignKey(RW, verbose_name=verbose_rw)
     name = models.CharField(max_length=50, verbose_name=verbose_name)

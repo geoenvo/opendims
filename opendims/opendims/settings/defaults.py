@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'leaflet',
     'crispy_forms',
     'registration',
+    'common',
     'reports',
     'geolevels',
 ]
