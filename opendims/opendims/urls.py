@@ -20,15 +20,20 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
 
+from registration.backends.default import urls as registration_urls
+
+from reports import urls as reports_urls, misc as misc_views
+from geolevels import urls as geolevels_urls
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
-    url(r'^accounts/login/$', auth_views.login, name='login'),
+    url(r'^accounts/login/$', misc_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
-    url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^admin/', admin.site.urls),
-    url(r'^reports/', include('reports.urls', namespace='reports')),
-    url(r'^geolevels/', include('geolevels.urls', namespace='geolevels')),
+    url(r'^accounts/', include(registration_urls)),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^reports/', include(reports_urls, namespace='reports')),
+    url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
 ]
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))
