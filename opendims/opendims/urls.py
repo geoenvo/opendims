@@ -22,13 +22,14 @@ from django.core.urlresolvers import reverse_lazy
 
 from registration.backends.default import urls as registration_urls
 
-from reports import urls as reports_urls, misc as misc_views
+from common import views as common_views
+from reports import urls as reports_urls
 from geolevels import urls as geolevels_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
-    url(r'^accounts/login/$', misc_views.login, name='login'),
+    url(r'^accounts/login/$', common_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
     url(r'^accounts/', include(registration_urls)),
     url(r'^admin/', include(admin.site.urls)),

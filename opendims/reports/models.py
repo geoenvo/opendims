@@ -6,26 +6,16 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import  models
 from django.core.validators import MinValueValidator
-from django.core import urlresolvers
 
+from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
-
-
-class ReportsAbstractModel(models.Model):
-    class Meta:
-        abstract = True
-    
-    def get_admin_url(self):
-        return urlresolvers.reverse(
-            'admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=(self.id,)
-        )
 
 
 verbose_code = _('Code')
 verbose_note = _('Note')
 
 
-class Source(ReportsAbstractModel):
+class Source(CommonAbstractModel):
     code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     
@@ -33,7 +23,7 @@ class Source(ReportsAbstractModel):
         return '%s' % self.code
 
 
-class Disaster(ReportsAbstractModel):
+class Disaster(CommonAbstractModel):
     code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     
@@ -56,7 +46,7 @@ verbose_rw = _('RW')
 verbose_rt = _('RT')
 
 
-class Event(ReportsAbstractModel):
+class Event(CommonAbstractModel):
     STATUS_CHOICES = (
         ('ACTIVE', _('Active')),
         ('INACTIVE', _('Inactive')),
@@ -96,11 +86,11 @@ verbose_event = _('Event')
 verbose_source = _('Source')
 
 
-class Report(ReportsAbstractModel):
+class Report(CommonAbstractModel):
     STATUS_CHOICES = (
         ('VERIFIED', _('Verified')),
         ('UNVERIFIED', _('Unverified')),
-        ('TBD', _('To be determined')),
+        ('PENDING', _('Pending')),
     )
     
     event = models.ForeignKey(Event, verbose_name=verbose_event)
