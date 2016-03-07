@@ -56,9 +56,7 @@ class EventResource(resources.ModelResource):
         widget=widgets.ForeignKeyWidget(Subdistrict, 'name')
     )
     village = fields.Field(column_name='village', attribute='village', widget=widgets.ForeignKeyWidget(Village, 'name'))
-    rw = fields.Field(column_name='RW', attribute='rw', widget=widgets.ForeignKeyWidget(RW))
-    rt = fields.Field(column_name='RT', attribute='rt', widget=widgets.ForeignKeyWidget(RT, 'name'))
-    
+
     class Meta:
         model = Event
         fields = ('id', 'disaster', 'province', 'city', 'subdistrict', 'village', 'rw', 'rt')
