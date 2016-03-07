@@ -81,9 +81,9 @@ class Event(ReportsAbstractModel):
     city = models.ForeignKey(City, null=True, blank=True, verbose_name=verbose_city)
     subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True, verbose_name=verbose_subdistrict)
     village = models.ForeignKey(Village, null=True, blank=True, verbose_name=verbose_village)
-    rw = models.ForeignKey(RW, null=True, blank=True, verbose_name=verbose_rw)
-    rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
-    
+    rw = models.CharField(blank=True, max_length=50, verbose_name=verbose_rw)
+    rt = models.CharField(blank=True, max_length=50, verbose_name=verbose_rt)
+
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
