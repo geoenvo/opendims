@@ -4,7 +4,9 @@ from django.contrib.gis import admin
 from leaflet.admin import LeafletGeoAdmin
 
 from related_admin import RelatedFieldAdmin, getter_for_related_field
+
 from .models import Province, City, Subdistrict, Village, RW, RT
+from .forms import CityForm, SubdistrictForm, VillageForm, RWForm
 
 
 class ProvinceAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
@@ -15,6 +17,7 @@ class ProvinceAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
 class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     list_display = ('id', 'sort_province_by_name', 'name', 'note')
     search_fields = ['province__name', 'name']
+    form = CityForm
     
     sort_province_by_name = getter_for_related_field(
         'province',
@@ -25,6 +28,7 @@ class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
 class SubdistrictAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     list_display = ('id', 'sort_province_by_name', 'sort_city_by_name', 'name', 'note')
     search_fields = ['city__province__name', 'city__name', 'name']
+    form = SubdistrictForm
     
     sort_province_by_name = getter_for_related_field(
         'city__province',
@@ -51,6 +55,7 @@ class VillageAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
         'subdistrict__city__name',
         'subdistrict__name'
     ]
+    form = VillageForm
     
     sort_province_by_name = getter_for_related_field(
         'subdistrict__city__province',
@@ -84,6 +89,7 @@ class RWAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
         'village__subdistrict__name',
         'village__name'
     ]
+    form = RWForm
     
     sort_province_by_name = getter_for_related_field(
         'village__subdistrict__city__province',

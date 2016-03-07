@@ -1,5 +1,48 @@
 from django.shortcuts import render, get_object_or_404
+
+from dal import autocomplete
+
 from .models import Province, City, Subdistrict, Village, RT, RW
+
+
+class AutocompleteProvince(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return Province.objects.none()
+        qs = Province.objects.all()
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+
+class AutocompleteCity(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return City.objects.none()
+        qs = City.objects.all()
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+
+class AutocompleteSubdistrict(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return Subdistrict.objects.none()
+        qs = Subdistrict.objects.all()
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+
+class AutocompleteVillage(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return Village.objects.none()
+        qs = Village.objects.all()
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
 
 
 def province_list(request):
