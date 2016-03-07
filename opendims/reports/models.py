@@ -97,7 +97,7 @@ class Report(CommonAbstractModel):
     source = models.ForeignKey(Source, verbose_name=verbose_source)
     created = models.DateTimeField(default=timezone.now, verbose_name=verbose_created)
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='TBD', verbose_name=verbose_status)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='PENDING', verbose_name=verbose_status)
     note = models.TextField(blank=True, verbose_name=verbose_note)
     
     class Meta:
