@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Event, Report
 
+from rest_framework import generics
+from .serializers import EventSerializers, ReportSerializers 
+
 
 def event_list(request):
 	events = Event.objects.all().order_by('-created')
@@ -23,3 +26,19 @@ def report_detail(request, pk):
     event = Event.objects.get(pk=report.event.pk)
     context = {'report': report, 'event': event}
     return render(request, 'reports/report_detail.html', context)
+
+class EventList(generics.ListCreateAPIView):
+        queryset = Event.objects.all()
+        serializer_class = EventSerializers
+
+class EventDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = Event.objects.all()
+        serializer_class = EventSerializers
+
+class ReportList(generics.ListCreateAPIView):
+        queryset = Report.objects.all()
+        serializer_class = ReportSerializers
+
+class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = Report.objects.all()
+        serializer_class = ReportSerializers

@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))
