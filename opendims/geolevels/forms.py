@@ -1,12 +1,11 @@
-from django.forms import ModelForm
+from django import forms
 
 from dal import autocomplete
-from leaflet.forms.widgets import LeafletWidget
 
 from .models import Province, City, Subdistrict, Village, RW, RT
 
 
-class CityForm(ModelForm):
+class CityForm(forms.ModelForm):
     class Meta:
         model = City
         fields = '__all__'
@@ -15,7 +14,7 @@ class CityForm(ModelForm):
         }
 
 
-class SubdistrictForm(ModelForm):
+class SubdistrictForm(forms.ModelForm):
     class Meta:
         model = Subdistrict
         fields = '__all__'
@@ -24,7 +23,7 @@ class SubdistrictForm(ModelForm):
         }
 
 
-class VillageForm(ModelForm):
+class VillageForm(forms.ModelForm):
     class Meta:
         model = Village
         fields = '__all__'
@@ -33,7 +32,7 @@ class VillageForm(ModelForm):
         }
 
 
-class RWForm(ModelForm):
+class RWForm(forms.ModelForm):
     class Meta:
         model = RW
         fields = '__all__'

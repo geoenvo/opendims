@@ -2,14 +2,14 @@ from django.shortcuts import render, get_object_or_404
 
 from dal import autocomplete
 
-from .models import Province, City, Subdistrict, Village, RT, RW
+from .models import Province, City, Subdistrict, Village, RW, RT
 
 
 class AutocompleteProvince(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Province.objects.none()
-        qs = Province.objects.all()
+        qs = Province.objects.all().order_by('name')
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs
@@ -19,7 +19,10 @@ class AutocompleteCity(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return City.objects.none()
-        qs = City.objects.all()
+        qs = City.objects.all().order_by('name')
+        province = self.forwarded.get('province', None)
+        if province:
+            qs = qs.filter(province=province)
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs
@@ -29,7 +32,10 @@ class AutocompleteSubdistrict(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Subdistrict.objects.none()
-        qs = Subdistrict.objects.all()
+        qs = Subdistrict.objects.all().order_by('name')
+        city = self.forwarded.get('city', None)
+        if city:
+            qs = qs.filter(city=city)
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs
@@ -39,7 +45,23 @@ class AutocompleteVillage(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Village.objects.none()
-        qs = Village.objects.all()
+        qs = Village.objects.all().order_by('name')
+        subdistrict = self.forwarded.get('subdistrict', None)
+        if subdistrict:
+            qs = qs.filter(subdistrict=subdistrict)
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+
+class AutocompleteRW(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return RW.objects.none()
+        qs = RW.objects.all().order_by('name')
+        village = self.forwarded.get('village', None)
+        if village:
+            qs = qs.filter(village=village)
         if self.q:
             qs = qs.filter(name__icontains=self.q)
         return qs
