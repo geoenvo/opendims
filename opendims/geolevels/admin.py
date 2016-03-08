@@ -6,7 +6,7 @@ from leaflet.admin import LeafletGeoAdmin
 from related_admin import RelatedFieldAdmin, getter_for_related_field
 
 from .models import Province, City, Subdistrict, Village, RW, RT
-from .forms import CityForm, SubdistrictForm, VillageForm, RWForm
+from .forms import CityForm, SubdistrictForm, VillageForm, RWForm, RTForm
 
 
 class ProvinceAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
@@ -129,6 +129,7 @@ class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
         'rw__village__subdistrict__name',
         'rw__village__name'
     ]  # No use searching RW by name
+    form = RTForm
     
     sort_province_by_name = getter_for_related_field(
         'rw__village__subdistrict__province',

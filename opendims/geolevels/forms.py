@@ -40,7 +40,8 @@ class RWForm(forms.ModelForm):
             'village': autocomplete.ModelSelect2(url='geolevels:autocomplete_village')
         }
 
-class RTform(forms.ModelForm):
+
+class RTForm(forms.ModelForm):
     class Meta:
         model = RT
         fields = '__all__'
