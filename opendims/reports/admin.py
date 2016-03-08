@@ -10,6 +10,7 @@ from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 from .models import Source, Disaster, Event, Report
+from .forms import EventForm
 
 
 verbose_mark_unverified = _('Mark Event as Unverified')
@@ -91,6 +92,7 @@ class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin
     list_filter = ['created', 'updated', 'status', 'disaster']
     search_fields = ['province__name', 'city__name', 'subdistrict__name', 'village__name', 'note']
     inlines = [ReportInline]
+    form = EventForm
     
     def province_admin_url(self, obj):
         if not obj.province:
