@@ -44,12 +44,17 @@ class EventForm(forms.ModelForm):
         village = self.cleaned_data.get('village', None)
         rw = self.cleaned_data.get('rw', None)
         rt = self.cleaned_data.get('rt', None)
+        # If RW or RT not set, set to empty string to avoid IntegrityError
+        if not rw:
+            self.cleaned_data['rw'] = ''
+        if not rt:
+            self.cleaned_data['rt'] = ''
         validation_errors = {} # For holding attribute validation error messages
         error = False
         # Since RW and RT are actually CharFields, query their proper instances first
-        if isinstance(rw, basestring) and village:
+        if isinstance(rw, basestring) and rw and village:
             rw = RW.objects.filter(name=rw, village=village).first()
-        if isinstance(rt, basestring) and rw:
+        if isinstance(rt, basestring) and rt and rw:
             rt = RT.objects.filter(name=rt, rw=rw).first()
         # Check whether the selected Geolevels have valid relations
         if (rw or rt) and not village:
