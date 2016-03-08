@@ -103,7 +103,7 @@ def rw_detail(request, pk):
     return render(request, 'geolevels/rw_detail.html', context)
 
 def rt_detail(request, pk):
-    rt = get_object_or_404(Province, pk=pk)
+    rt = get_object_or_404(RT, pk=pk)
     context = {'rt': rt}
     return render(request, 'geolevels/rt_detail.html', context)
 
