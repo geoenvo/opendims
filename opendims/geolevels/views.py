@@ -67,6 +67,19 @@ class AutocompleteRW(autocomplete.Select2QuerySetView):
         return qs
 
 
+class AutocompleteRT(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return RT.objects.none()
+        qs = RT.objects.all().order_by('name')
+        rw = self.forwarded.get('rw', None)
+        if rw:
+            qs = qs.filter(rw=rw)
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+
 def province_list(request):
 	provinces = Province.objects.all().order_by('name')
 	context = {'provinces': provinces}
