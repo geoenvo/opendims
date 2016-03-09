@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
@@ -57,7 +58,97 @@ class EventResource(resources.ModelResource):
         widget=widgets.ForeignKeyWidget(Subdistrict, 'name')
     )
     village = fields.Field(column_name='village', attribute='village', widget=widgets.ForeignKeyWidget(Village, 'name'))
-
+    rw = fields.Field(column_name='rw', attribute='rw', widget=widgets.ForeignKeyWidget(RW, 'name'))
+    rt = fields.Field(column_name='rt', attribute='rt', widget=widgets.ForeignKeyWidget(RT, 'name'))
+    
+    def before_import(self, dataset, dry_run, **kwargs):
+        """Overrides Django-Import-Export method.
+        
+        It is necessary to modify the tablib dataset before the real import
+        process, to translate from a human friendly input format like this:
+        
+        id|disaster|province|city|subdistrict|village|rw |rt
+        --|--------|--------|----|-----------|-------|---|--
+          |BJR     |        |    |           |ANCOL  |005|
+          |BJR     |        |    |           |ANCOL  |001|
+        
+        then in order to match the Event model definition, query the Village-RW
+        and RW-RT relation to produce to this:
+        
+        id|disaster|province|city|subdistrict|village|rw              |rt
+        --|--------|--------|----|-----------|-------|----------------|--
+          |BJR     |        |    |           |ANCOL  |3175020003005000|
+          |BJR     |        |    |           |ANCOL  |3175020003001000|
+        
+        Also checks whether the row's Geolevels relation is valid, if not
+        the row is not imported.
+        """
+        #print 'DEBUG BEFORE'
+        #print dataset
+        i = 0
+        last = dataset.height - 1
+        while i <= last:
+            # Get the top row
+            row = dataset[0]
+            # Get the row contents, named Geolevels by default
+            # are uppercase in the database
+            id = row[0]
+            disaster = row[1].upper()
+            province = row[2].upper()
+            city = row[3].upper()
+            subdistrict = row[4].upper()
+            village = row[5].upper()
+            rw = row[6]
+            rt = row[7]
+            # Validate Geolevels relations
+            valid_geolevels = True
+            if rw and not village:
+                valid_geolevels = False
+            if rt and not rw:
+                valid_geolevels = False
+            if rw and village:
+                try:
+                    rw_instance = RW.objects.get(name=rw, village__name=village)
+                    rw = unicode(rw_instance.pk)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+            if rt and rw:
+                try:
+                    rt_instance = RT.objects.get(name=rt, rw=rw_instance)
+                    rt = unicode(rt_instance.pk)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+            if village and subdistrict:
+                try:
+                    village_instance = Village.objects.get(name=village, subdistrict__name=subdistrict)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+            if subdistrict and city:
+                try:
+                    subdistrict_instance = Subdistrict.objects.get(name=subdistrict, city__name=city)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+            if city and province:
+                try:
+                    city_instance = City.objects.get(name=city, province__name=province)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+            new_row = (id, disaster, province, city, subdistrict, village, rw, rt)
+            # If relations are invalid don't push row to the dataset so it doesn't get imported
+            if valid_geolevels:
+                dataset.rpush(new_row)
+            dataset.lpop()
+            i = i + 1
+        #print 'DEBUG AFTER'
+        #print dataset
+        for field in self.get_fields():
+            #print field.attribute, field.column_name, field.widget
+            # Since the dataset now contains the PK of RW/RT, update the
+            # ForeignKeyWidget to query for PK instead of name column.
+            if field.attribute == 'rw' or field.attribute == 'rt':
+                #print field.widget.model, field.widget.field, print field.widget.field
+                field.widget.field = 'pk'
+    
     class Meta:
         model = Event
         fields = ('id', 'disaster', 'province', 'city', 'subdistrict', 'village', 'rw', 'rt')
@@ -86,9 +177,9 @@ class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin
         (verbose_event_details, {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
         (verbose_affected_area, {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point']}),
     ]
-    list_display = ['created', 'updated', 'status', 'disaster', 'province_admin_url', 'city_admin_url', 'subdistrict_admin_url', 'village_admin_url', 'rw', 'rt', 'height', 'magnitude', 'note']
+    list_display = ['created', 'updated', 'status', 'disaster', 'province_admin_url', 'city_admin_url', 'subdistrict_admin_url', 'village_admin_url', 'rw_admin_url', 'rt_admin_url', 'height', 'magnitude', 'note']
     readonly_fields = ['updated']
-    ordering = ['-created']
+    ordering = ['-updated', '-created']
     list_filter = ['created', 'updated', 'status', 'disaster']
     search_fields = ['province__name', 'city__name', 'subdistrict__name', 'village__name', 'note']
     inlines = [ReportInline]
@@ -147,7 +238,7 @@ class ReportAdmin(admin.ModelAdmin):
     ]
     list_display = ['created', 'updated', 'event_admin_url', 'source', 'status', 'note']
     readonly_fields = ['updated']
-    ordering = ['-created']
+    ordering = ['-updated', '-created']
     list_filter = ['created', 'updated', 'source', 'status']
     search_fields = ['note']
     actions = [make_verified, make_unverified]
