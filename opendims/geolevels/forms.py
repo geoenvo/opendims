@@ -5,12 +5,20 @@ from dal import autocomplete
 from .models import Province, City, Subdistrict, Village, RW, RT
 
 
+class ProvinceForm(forms.ModelForm):
+    class Meta:
+        model = Province
+        fields = '__all__'
+
+
 class CityForm(forms.ModelForm):
     class Meta:
         model = City
         fields = '__all__'
         widgets = {
-            'province': autocomplete.ModelSelect2(url='geolevels:autocomplete_province')
+            'province': autocomplete.ModelSelect2(
+                url='geolevels:autocomplete_province'
+            )
         }
 
 
@@ -19,7 +27,9 @@ class SubdistrictForm(forms.ModelForm):
         model = Subdistrict
         fields = '__all__'
         widgets = {
-            'city': autocomplete.ModelSelect2(url='geolevels:autocomplete_city')
+            'city': autocomplete.ModelSelect2(
+                url='geolevels:autocomplete_city'
+            )
         }
 
 
@@ -28,7 +38,9 @@ class VillageForm(forms.ModelForm):
         model = Village
         fields = '__all__'
         widgets = {
-            'subdistrict': autocomplete.ModelSelect2(url='geolevels:autocomplete_subdistrict')
+            'subdistrict': autocomplete.ModelSelect2(
+                url='geolevels:autocomplete_subdistrict'
+            )
         }
 
 
@@ -37,7 +49,9 @@ class RWForm(forms.ModelForm):
         model = RW
         fields = '__all__'
         widgets = {
-            'village': autocomplete.ModelSelect2(url='geolevels:autocomplete_village')
+            'village': autocomplete.ModelSelect2(
+                url='geolevels:autocomplete_village'
+            )
         }
 
 

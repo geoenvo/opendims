@@ -51,47 +51,65 @@ class EventResource(resources.ModelResource):
         attribute='province',
         widget=widgets.ForeignKeyWidget(Province, 'name')
     )
-    city = fields.Field(column_name='city', attribute='city', widget=widgets.ForeignKeyWidget(City, 'name'))
+    city = fields.Field(
+        column_name='city',
+        attribute='city',
+        widget=widgets.ForeignKeyWidget(City, 'name')
+    )
     subdistrict = fields.Field(
         column_name='subdistrict',
         attribute='subdistrict',
         widget=widgets.ForeignKeyWidget(Subdistrict, 'name')
     )
-    village = fields.Field(column_name='village', attribute='village', widget=widgets.ForeignKeyWidget(Village, 'name'))
-    rw = fields.Field(column_name='rw', attribute='rw', widget=widgets.ForeignKeyWidget(RW, 'name'))
-    rt = fields.Field(column_name='rt', attribute='rt', widget=widgets.ForeignKeyWidget(RT, 'name'))
-    
+    village = fields.Field(
+        column_name='village',
+        attribute='village',
+        widget=widgets.ForeignKeyWidget(Village, 'name')
+    )
+    rw = fields.Field(
+        column_name='rw',
+        attribute='rw',
+        widget=widgets.ForeignKeyWidget(RW, 'name')
+    )
+    rt = fields.Field(
+        column_name='rt',
+        attribute='rt',
+        widget=widgets.ForeignKeyWidget(RT, 'name')
+    )
+
     def before_import(self, dataset, dry_run, **kwargs):
         """Overrides Django-Import-Export method.
-        
+
         It is necessary to modify the tablib dataset before the real import
         process, to translate from a human friendly input format like this:
-        
+
         id|disaster|province|city|subdistrict|village|rw |rt
         --|--------|--------|----|-----------|-------|---|--
           |BJR     |        |    |           |ANCOL  |005|
           |BJR     |        |    |           |ANCOL  |001|
-        
+
         then in order to match the Event model definition, query the Village-RW
         and RW-RT relation to produce to this:
-        
+
         id|disaster|province|city|subdistrict|village|rw              |rt
         --|--------|--------|----|-----------|-------|----------------|--
           |BJR     |        |    |           |ANCOL  |3175020003005000|
           |BJR     |        |    |           |ANCOL  |3175020003001000|
-        
+
         Also checks whether the row's Geolevels relation is valid, if not
         the row is not imported.
         """
-        #print 'DEBUG BEFORE'
-        #print dataset
+        # print 'DEBUG BEFORE'
+        # print dataset
         i = 0
         last = dataset.height - 1
         while i <= last:
             # Get the top row
             row = dataset[0]
-            # Get the row contents, named Geolevels by default
-            # are uppercase in the database
+            """
+            Get the row contents, by default named Geolevels are uppercase
+            in the database
+            """
             id = row[0]
             disaster = row[1].upper()
             province = row[2].upper()
@@ -108,7 +126,10 @@ class EventResource(resources.ModelResource):
                 valid_geolevels = False
             if rw and village:
                 try:
-                    rw_instance = RW.objects.get(name=rw, village__name=village)
+                    rw_instance = RW.objects.get(
+                        name=rw,
+                        village__name=village
+                    )
                     rw = unicode(rw_instance.pk)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
@@ -120,38 +141,71 @@ class EventResource(resources.ModelResource):
                     valid_geolevels = False
             if village and subdistrict:
                 try:
-                    village_instance = Village.objects.get(name=village, subdistrict__name=subdistrict)
+                    Village.objects.get(
+                        name=village,
+                        subdistrict__name=subdistrict
+                    )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
             if subdistrict and city:
                 try:
-                    subdistrict_instance = Subdistrict.objects.get(name=subdistrict, city__name=city)
+                    Subdistrict.objects.get(
+                        name=subdistrict,
+                        city__name=city
+                    )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
             if city and province:
                 try:
-                    city_instance = City.objects.get(name=city, province__name=province)
+                    City.objects.get(
+                        name=city,
+                        province__name=province
+                    )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-            new_row = (id, disaster, province, city, subdistrict, village, rw, rt)
-            # If relations are invalid don't push row to the dataset so it doesn't get imported
+            new_row = (
+                id,
+                disaster,
+                province,
+                city,
+                subdistrict,
+                village,
+                rw,
+                rt
+            )
+            """
+            If relations are invalid don't push row to the dataset so it
+            doesn't get imported
+            """
             if valid_geolevels:
                 dataset.rpush(new_row)
             dataset.lpop()
             i = i + 1
-        #print 'DEBUG AFTER'
-        #print dataset
+        # print 'DEBUG AFTER'
+        # print dataset
         for field in self.get_fields():
-            #print field.attribute, field.column_name, field.widget
-            # Since the dataset now contains the PK of RW/RT, update the
-            # ForeignKeyWidget to query for PK instead of name column.
+            # print field.attribute, field.column_name, field.widget
+            """
+            Since the dataset now contains the PK of RW/RT, update the
+            ForeignKeyWidget to query for PK instead of name column.
+            """
             if field.attribute == 'rw' or field.attribute == 'rt':
-                #print field.widget.model, field.widget.field, print field.widget.field
+                # print field.widget.model, field.widget.field
+                # print field.widget.field
                 field.widget.field = 'pk'
-    
+
     class Meta:
         model = Event
-        fields = ('id', 'disaster', 'province', 'city', 'subdistrict', 'village', 'rw', 'rt')
+        fields = (
+            'id',
+            'disaster',
+            'province',
+            'city',
+            'subdistrict',
+            'village',
+            'rw',
+            'rt'
+        )
         export_order = fields
 
 
@@ -165,66 +219,130 @@ verbose_rw = _('RW')
 verbose_rt = _('RT')
 
 
-class EventAdmin(ImportExportModelAdmin, ExportActionModelAdmin, LeafletGeoAdmin):
+class EventAdmin(ImportExportModelAdmin,
+                 ExportActionModelAdmin,
+                 LeafletGeoAdmin):
     resource_class = EventResource
-    
+
     # Leaflet widget override
     settings_overrides = {
-       'DEFAULT_ZOOM': 11,
+        'DEFAULT_ZOOM': 11,
     }
-    
+
     fieldsets = [
-        (verbose_event_details, {'fields': ['created', 'disaster', 'height', 'magnitude', 'note']}),
-        (verbose_affected_area, {'fields': ['province', 'city', 'subdistrict', 'village', 'rw', 'rt', 'point']}),
+        (verbose_event_details, {
+            'fields': [
+                'created',
+                'disaster',
+                'height',
+                'magnitude',
+                'note'
+            ]
+        }),
+        (verbose_affected_area, {
+            'fields': [
+                'province',
+                'city',
+                'subdistrict',
+                'village',
+                'rw',
+                'rt',
+                'point'
+            ]
+        }),
     ]
-    list_display = ['created', 'updated', 'status', 'disaster', 'province_admin_url', 'city_admin_url', 'subdistrict_admin_url', 'village_admin_url', 'rw_admin_url', 'rt_admin_url', 'height', 'magnitude', 'note']
+    list_display = [
+        'created',
+        'updated',
+        'status',
+        'disaster',
+        'province_admin_url',
+        'city_admin_url',
+        'subdistrict_admin_url',
+        'village_admin_url',
+        'rw_admin_url',
+        'rt_admin_url',
+        'height',
+        'magnitude',
+        'note'
+    ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     list_filter = ['created', 'updated', 'status', 'disaster']
-    search_fields = ['province__name', 'city__name', 'subdistrict__name', 'village__name', 'note']
+    search_fields = [
+        'province__name',
+        'city__name',
+        'subdistrict__name',
+        'village__name',
+        'note'
+    ]
     inlines = [ReportInline]
     form = EventForm
-    
+
     def province_admin_url(self, obj):
         if not obj.province:
             return '-'
-        return format_html("<a href='{url}'>{province}</a>", url=obj.province.get_admin_url(), province=obj.province)
-    
+        return format_html(
+            "<a href='{url}'>{province}</a>",
+            url=obj.province.get_admin_url(),
+            province=obj.province
+        )
+
     province_admin_url.short_description = verbose_province
-    
+
     def city_admin_url(self, obj):
         if not obj.city:
             return '-'
-        return format_html("<a href='{url}'>{city}</a>", url=obj.city.get_admin_url(), city=obj.city)
-    
+        return format_html(
+            "<a href='{url}'>{city}</a>",
+            url=obj.city.get_admin_url(),
+            city=obj.city
+        )
+
     city_admin_url.short_description = verbose_city
-    
+
     def subdistrict_admin_url(self, obj):
         if not obj.subdistrict:
             return '-'
-        return format_html("<a href='{url}'>{subdistrict}</a>", url=obj.subdistrict.get_admin_url(), subdistrict=obj.subdistrict)
-    
+        return format_html(
+            "<a href='{url}'>{subdistrict}</a>",
+            url=obj.subdistrict.get_admin_url(),
+            subdistrict=obj.subdistrict
+        )
+
     subdistrict_admin_url.short_description = verbose_subdistrict
-    
+
     def village_admin_url(self, obj):
         if not obj.village:
             return '-'
-        return format_html("<a href='{url}'>{village}</a>", url=obj.village.get_admin_url(), village=obj.village)
-    
+        return format_html(
+            "<a href='{url}'>{village}</a>",
+            url=obj.village.get_admin_url(),
+            village=obj.village
+        )
+
     village_admin_url.short_description = verbose_village
-    
+
     def rw_admin_url(self, obj):
         if not obj.rw:
             return '-'
-        return format_html("<a href='{url}'>{rw}</a>", url=obj.rw.get_admin_url(), rw=obj.rw)
-    
+        return format_html(
+            "<a href='{url}'>{rw}</a>",
+            url=obj.rw.get_admin_url(),
+            rw=obj.rw
+        )
+
     rw_admin_url.short_description = verbose_rw
-    
+
     def rt_admin_url(self, obj):
         if not obj.rt:
             return '-'
-        return format_html("<a href='{url}'>{rt}</a>", url=obj.rt.get_admin_url(), rt=obj.rt)
-    
+        return format_html(
+            "<a href='{url}'>{rt}</a>",
+            url=obj.rt.get_admin_url(),
+            rt=obj.rt
+        )
+
     rt_admin_url.short_description = verbose_rt
 
 
@@ -234,20 +352,40 @@ verbose_event = _('Event')
 
 class ReportAdmin(admin.ModelAdmin):
     fieldsets = [
-        (verbose_report_details, {'fields': ['created', 'updated', 'event', 'source', 'status', 'note']})
+        (verbose_report_details, {
+            'fields': [
+                'created',
+                'updated',
+                'event',
+                'source',
+                'status',
+                'note'
+            ]
+        })
     ]
-    list_display = ['created', 'updated', 'event_admin_url', 'source', 'status', 'note']
+    list_display = [
+        'created',
+        'updated',
+        'event_admin_url',
+        'source',
+        'status',
+        'note'
+    ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     list_filter = ['created', 'updated', 'source', 'status']
     search_fields = ['note']
     actions = [make_verified, make_unverified]
-    
+
     def event_admin_url(self, obj):
         if not obj.event:
             return '-'
-        return format_html("<a href='{url}'>{event}</a>", url=obj.event.get_admin_url(), event=obj.event)
-    
+        return format_html(
+            "<a href='{url}'>{event}</a>",
+            url=obj.event.get_admin_url(),
+            event=obj.event
+        )
+
     event_admin_url.short_description = verbose_event
 
 

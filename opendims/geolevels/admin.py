@@ -18,7 +18,7 @@ class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     list_display = ('id', 'sort_province_by_name', 'name', 'note')
     search_fields = ['province__name', 'name']
     form = CityForm
-    
+
     sort_province_by_name = getter_for_related_field(
         'province',
         admin_order_field='province__name'
@@ -26,15 +26,21 @@ class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
 
 
 class SubdistrictAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
-    list_display = ('id', 'sort_province_by_name', 'sort_city_by_name', 'name', 'note')
+    list_display = (
+        'id',
+        'sort_province_by_name',
+        'sort_city_by_name',
+        'name',
+        'note'
+    )
     search_fields = ['city__province__name', 'city__name', 'name']
     form = SubdistrictForm
-    
+
     sort_province_by_name = getter_for_related_field(
         'city__province',
         admin_order_field='city__province__name'
     )
-    
+
     sort_city_by_name = getter_for_related_field(
         'city',
         admin_order_field='city__name'
@@ -56,17 +62,17 @@ class VillageAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
         'subdistrict__name'
     ]
     form = VillageForm
-    
+
     sort_province_by_name = getter_for_related_field(
         'subdistrict__city__province',
         admin_order_field='subdistrict__city__province__name'
     )
-    
+
     sort_city_by_name = getter_for_related_field(
         'subdistrict__city',
         admin_order_field='subdistrict__city__name'
     )
-    
+
     sort_subdistrict_by_name = getter_for_related_field(
         'subdistrict',
         admin_order_field='subdistrict__name'
@@ -90,22 +96,22 @@ class RWAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
         'village__name'
     ]
     form = RWForm
-    
+
     sort_province_by_name = getter_for_related_field(
         'village__subdistrict__city__province',
         admin_order_field='village__subdistrict__city__province__name'
     )
-    
+
     sort_city_by_name = getter_for_related_field(
         'village__subdistrict__city',
         admin_order_field='village__subdistrict__city__name'
     )
-    
+
     sort_subdistrict_by_name = getter_for_related_field(
         'village__subdistrict',
         admin_order_field='village__subdistrict__name'
     )
-    
+
     sort_village_by_name = getter_for_related_field(
         'village',
         admin_order_field='village__name'
@@ -130,22 +136,22 @@ class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
         'rw__village__name'
     ]  # No use searching RW by name
     form = RTForm
-    
+
     sort_province_by_name = getter_for_related_field(
         'rw__village__subdistrict__province',
         admin_order_field='rw__village__subdistrict__province__name'
     )
-    
+
     sort_city_by_name = getter_for_related_field(
         'rw__village__subdistrict__city',
         admin_order_field='rw__village__subdistrict__city__name'
     )
-    
+
     sort_subdistrict_by_name = getter_for_related_field(
         'rw__village__subdistrict',
         admin_order_field='rw__village__subdistrict__name'
     )
-    
+
     sort_village_by_name = getter_for_related_field(
         'rw__village',
         admin_order_field='rw__village__name'

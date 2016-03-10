@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.contrib.gis.db import  models
+from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
 
 from common.models import CommonAbstractModel
@@ -16,17 +16,25 @@ verbose_note = _('Note')
 
 
 class Source(CommonAbstractModel):
-    code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
+    code = models.CharField(
+        primary_key=True,
+        max_length=50,
+        verbose_name=verbose_code
+    )
     note = models.TextField(blank=True, verbose_name=verbose_note)
-    
+
     def __unicode__(self):
         return '%s' % self.code
 
 
 class Disaster(CommonAbstractModel):
-    code = models.CharField(primary_key=True, max_length=50, verbose_name=verbose_code)
+    code = models.CharField(
+        primary_key=True,
+        max_length=50,
+        verbose_name=verbose_code
+    )
     note = models.TextField(blank=True, verbose_name=verbose_note)
-    
+
     def __unicode__(self):
         return '%s' % self.code
 
@@ -51,14 +59,30 @@ class Event(CommonAbstractModel):
         ('ACTIVE', _('Active')),
         ('INACTIVE', _('Inactive')),
     )
-    
+
     disaster = models.ForeignKey(Disaster, verbose_name=verbose_disaster)
-    point = models.PointField(null=True, blank=True, verbose_name=verbose_point)
-    created = models.DateTimeField(default=timezone.now, verbose_name=verbose_created)
+    point = models.PointField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_point
+    )
+    created = models.DateTimeField(
+        default=timezone.now,
+        verbose_name=verbose_created
+    )
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='ACTIVE', verbose_name=verbose_status)
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default='ACTIVE',
+        verbose_name=verbose_status
+    )
     note = models.TextField(blank=True, verbose_name=verbose_note)
-    height = models.PositiveIntegerField(null=True, blank=True, verbose_name=verbose_height)
+    height = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_height
+    )
     magnitude = models.DecimalField(
         null=True,
         blank=True,
@@ -67,17 +91,37 @@ class Event(CommonAbstractModel):
         validators=[MinValueValidator(Decimal('0.01'))],
         verbose_name=verbose_magnitude
     )
-    province = models.ForeignKey(Province, null=True, blank=True, verbose_name=verbose_province)
-    city = models.ForeignKey(City, null=True, blank=True, verbose_name=verbose_city)
-    subdistrict = models.ForeignKey(Subdistrict, null=True, blank=True, verbose_name=verbose_subdistrict)
-    village = models.ForeignKey(Village, null=True, blank=True, verbose_name=verbose_village)
+    province = models.ForeignKey(
+        Province,
+        null=True,
+        blank=True,
+        verbose_name=verbose_province
+    )
+    city = models.ForeignKey(
+        City,
+        null=True,
+        blank=True,
+        verbose_name=verbose_city
+    )
+    subdistrict = models.ForeignKey(
+        Subdistrict,
+        null=True,
+        blank=True,
+        verbose_name=verbose_subdistrict
+    )
+    village = models.ForeignKey(
+        Village,
+        null=True,
+        blank=True,
+        verbose_name=verbose_village
+    )
     rw = models.ForeignKey(RW, null=True, blank=True, verbose_name=verbose_rw)
     rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
 
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
-    
+
     def __unicode__(self):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
@@ -92,17 +136,25 @@ class Report(CommonAbstractModel):
         ('UNVERIFIED', _('Unverified')),
         ('PENDING', _('Pending')),
     )
-    
+
     event = models.ForeignKey(Event, verbose_name=verbose_event)
     source = models.ForeignKey(Source, verbose_name=verbose_source)
-    created = models.DateTimeField(default=timezone.now, verbose_name=verbose_created)
+    created = models.DateTimeField(
+        default=timezone.now,
+        verbose_name=verbose_created
+    )
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='PENDING', verbose_name=verbose_status)
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default='PENDING',
+        verbose_name=verbose_status
+    )
     note = models.TextField(blank=True, verbose_name=verbose_note)
-    
+
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
-    
+
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.event, self.source, self.status)
