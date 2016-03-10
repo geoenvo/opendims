@@ -31,21 +31,21 @@ def report_detail(request, pk):
     return render(request, 'reports/report_detail.html', context)
 
 
-class EventList(generics.ListCreateAPIView):
+class APIEventList(generics.ListCreateAPIView):
         queryset = Event.objects.all()
         serializer_class = EventSerializers
 
 
-class EventDetail(generics.RetrieveUpdateDestroyAPIView):
+class APIEventDetail(generics.RetrieveUpdateDestroyAPIView):
         queryset = Event.objects.all()
         serializer_class = EventSerializers
 
 
-class ReportList(generics.ListCreateAPIView):
+class APIReportList(generics.ListCreateAPIView):
         queryset = Report.objects.all()
         serializer_class = ReportSerializers
 
 
-class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
+class APIReportDetail(generics.RetrieveUpdateDestroyAPIView):
         queryset = Report.objects.all()
         serializer_class = ReportSerializers

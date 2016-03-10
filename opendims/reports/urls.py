@@ -12,10 +12,10 @@ urlpatterns = [
     url(r'^event/(?P<pk>\d+)/$', views.event_detail, name='event_detail'),
     url(r'^report/$', views.report_list, name='report_list'),
     url(r'^report/(?P<pk>\d+)/$', views.report_detail, name='report_detail'),
-    url(r'^api/$', views.EventList.as_view()),
-    url(r'^api/(?P<pk>[0-9]+)/$', views.EventDetail.as_view()),
-    url(r'^api2/$', views.ReportList.as_view()),
-    url(r'^api2/(?P<pk>[0-9]+)/$', views.ReportDetail.as_view()),
+    url(r'^event/api/$', views.APIEventList.as_view()),
+    url(r'^event/(?P<pk>\d+)/api/$', views.APIEventDetail.as_view()),
+    url(r'^report/api/$', views.APIReportList.as_view()),
+    url(r'^report/(?P<pk>\d+)/api/$', views.APIReportDetail.as_view()),
 ]
 
 urlpaterns = format_suffix_patterns(urlpatterns)
