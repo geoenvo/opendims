@@ -5,7 +5,7 @@ from django.conf.urls import url
 from . import views
 
 from rest_framework.urlpatterns import format_suffix_patterns
-from reports import views
+
 
 urlpatterns = [
     url(r'^event/$', views.event_list, name='event_list'),
