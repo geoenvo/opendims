@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.flatpages import urls as flatpages_urls
 
 from registration.backends.default import urls as registration_urls
 
@@ -33,9 +34,10 @@ urlpatterns = [
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
     url(r'^accounts/', include(registration_urls)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^pages/', include(flatpages_urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))
