@@ -22,6 +22,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.flatpages import urls as flatpages_urls
 
 from registration.backends.default import urls as registration_urls
+from ckeditor_uploader import urls as ckeditor_uploader_urls
 
 from common import views as common_views
 from reports import urls as reports_urls
@@ -35,6 +36,7 @@ urlpatterns = [
     url(r'^accounts/', include(registration_urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include(flatpages_urls)),
+    url(r'^ckeditor/', include(ckeditor_uploader_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),

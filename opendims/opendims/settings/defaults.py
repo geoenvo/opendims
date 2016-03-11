@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'ckeditor',
+    'ckeditor_uploader',
     'djangobower',
     'import_export',
     'leaflet',
@@ -151,6 +152,10 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded')
+
+MEDIA_URL = '/uploaded/'
+
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 BOWER_INSTALLED_APPS = (
@@ -170,6 +175,40 @@ SITE_NAME = 'Open-DiMS'
 LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            [
+                'Source', '-', 'Save', '-', 'Cut', 'Copy', 'Paste',
+                'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo', '-',
+                'Find', 'Replace', '-', 'SelectAll'
+            ],
+            [
+                'Bold', 'Italic', 'Underline', 'Strike', 'Subscript',
+                'Superscript', '-', 'RemoveFormat'], '/',
+            [
+                'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter',
+                'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'
+            ],
+            ['Link', 'Unlink'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['Format'],
+            ['TextColor', 'BGColor', '-', 'Styles', 'Format', 'FontSize'],
+            ['Maximize', 'ShowBlocks', '-', 'About'],
+        ],
+        'format_tags': 'p;h1;h2;h3;h4;h5;h6;pre;address;div',
+    },
+}
+
+CKEDITOR_JQUERY_URL = STATIC_URL + 'jquery/dist/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT + '/editor'
+
+CKEDITOR_RESTRICT_BY_USER = True
+
+CKEDITOR_BROWSE_SHOW_DIRS = True
 
 MAPBOX_ACCESSTOKEN = 'pk.eyJ1IjoiZ2VvZW52byIsImEiOiJjaWxjNDBseWQyN29udHlseHJueGFjNTcxIn0.UHG-jg9OS12rmSwIHIyscg'
 

@@ -7,3 +7,4 @@ Vagrantfile
 .vagrant
 opendims/static/*
 opendims/components/*
+opendims/uploaded/*

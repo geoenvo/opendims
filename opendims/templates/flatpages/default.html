@@ -1,0 +1,14 @@
+{% extends "opendims/base.html" %}
+
+{% block opendims_title %} - {{ flatpage.title }}{% endblock %}
+
+{% block opendims_content %}
+
+<div class="page-header">
+    <h2>{{ flatpage.title }}</h2>
+</div>
+<div class="page-content">
+    {{ flatpage.content }}
+</div>
+
+{% endblock %}
