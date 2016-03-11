@@ -1,5 +1,5 @@
 from django.contrib.auth.views import login as contrib_login
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.conf import settings
 
 
