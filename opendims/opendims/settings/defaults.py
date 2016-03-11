@@ -46,10 +46,10 @@ INSTALLED_APPS = [
     'leaflet',
     'crispy_forms',
     'registration',
+    'rest_framework',
     'common',
     'reports',
     'geolevels',
-    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -168,7 +168,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 MAPBOX_ACCESSTOKEN = 'pk.eyJ1IjoiZ2VvZW52byIsImEiOiJjaWxjNDBseWQyN29udHlseHJueGFjNTcxIn0.UHG-jg9OS12rmSwIHIyscg'
 
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (-6.181956, 106.829067), # PUSDALOPS BPBD
+    'DEFAULT_CENTER': (-6.181956, 106.829067),  # PUSDALOPS BPBD
     'TILES': [
         (
             'OpenStreetMap',
