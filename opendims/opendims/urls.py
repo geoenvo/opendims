@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
@@ -41,6 +42,12 @@ urlpatterns = [
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))
 admin.site.site_title = ''.join((settings.SITE_NAME, ' site admin'))

@@ -6,10 +6,11 @@ from django.contrib.flatpages.admin import FlatpageForm as FlatpageFormOld
 from django.contrib.flatpages.models import FlatPage
 
 from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class FlatpageForm(FlatpageFormOld):
-    content = forms.CharField(widget=CKEditorWidget())
+    content = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = FlatPage
