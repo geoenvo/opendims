@@ -6,14 +6,14 @@ from .serializers import EventSerializers, ReportSerializers
 
 
 def event_list(request):
-    events = Event.objects.all().order_by('-created')
+    events = Event.objects.order_by('-created')
     context = {'events': events}
     return render(request, 'reports/event_list.html', context)
 
 
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
-    reports = Report.objects.filter(event=event).order_by('-created')
+    reports = event.report_set.order_by('-created')
     context = {'event': event, 'reports': reports}
     return render(request, 'reports/event_detail.html', context)
 

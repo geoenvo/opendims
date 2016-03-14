@@ -1,15 +1,16 @@
 {% extends "opendims/base.html" %}
 
-{% load verbose_names %}
+{% load i18n verbose_names %}
 
-{% block opendims_title %} - {{ event }}{% endblock %}
+{% block opendims_title %} - {% trans 'Events' %}{% endblock %}
 
 {% block opendims_content %}
 
 <div class="page-header">
-    <h1>EVENT</h1>
+    <h2>{% trans 'Events' %}</h2>
 </div>
-    <table class="table table-striped table-bordered table-condensed">
+
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
             {% for event in events|slice:'1' %}
@@ -22,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for event in events %}
+        {% for event in events %}
         <tr>
             <td><a href="{% url 'reports:event_detail' event.pk  %}">{{ event.created }}</a></td>
             <td>{{ event.disaster }}</td>
@@ -32,5 +33,6 @@
         </tr>
         {% endfor %}
     </tbody>
-        
+</table>
+
 {% endblock %}
