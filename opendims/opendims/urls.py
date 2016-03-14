@@ -32,6 +32,7 @@ from geolevels import urls as geolevels_urls
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
+    url(r'^bootleaf_example/$', TemplateView.as_view(template_name='bootleaf_example/example.html'), name='bootleaf_example'),
     url(r'^accounts/login/$', common_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
     url(r'^accounts/', include(registration_urls)),
