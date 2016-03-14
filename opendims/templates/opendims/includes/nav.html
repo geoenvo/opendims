@@ -16,6 +16,7 @@
                 <li class="{% active_url request 'home' %}"><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
                 <li class="{% active_url request 'page_about' %}"><a href="{% url 'page_about' %}">{% trans 'About' %}</a></li>
                 <li class="{% active_url request 'reports:event_list' %}"><a href="{% url 'reports:event_list' %}">{% trans 'Events' %}</a></li>
+                <li class="{% active_url request 'reports:report_list' %}"><a href="{% url 'reports:report_list' %}">{% trans 'Reports' %}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}

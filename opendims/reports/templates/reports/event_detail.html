@@ -85,7 +85,7 @@
 
 <h3>{% trans 'Affected area' %}</h3>
 
-{% leaflet_map "country_map" callback="window.event_map_init" %}
+{% leaflet_map "event_map" callback="window.event_map_init" %}
 
 <h3>{% trans 'Reports' %}</h3>
 
@@ -114,7 +114,7 @@
         </tr>
         {% empty %}
         <tr>
-          <td colspan="6" style="text-align: center;">{% trans 'No reports found for this event.' %}</td>
+            <td colspan="6" style="text-align: center;">{% trans 'No reports found for this event.' %}</td>
         </tr>
         {% endfor %}
     </tbody>

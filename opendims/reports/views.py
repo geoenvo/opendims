@@ -19,33 +19,32 @@ def event_detail(request, pk):
 
 
 def report_list(request):
-    reports = Report.objects.all().order_by('-created')
+    reports = Report.objects.order_by('-created')
     context = {'reports': reports}
     return render(request, 'reports/report_list.html', context)
 
 
 def report_detail(request, pk):
     report = get_object_or_404(Report, pk=pk)
-    event = Event.objects.get(pk=report.event.pk)
-    context = {'report': report, 'event': event}
+    context = {'report': report}
     return render(request, 'reports/report_detail.html', context)
 
 
 class APIEventList(generics.ListCreateAPIView):
-        queryset = Event.objects.all()
-        serializer_class = EventSerializers
+    queryset = Event.objects.all()
+    serializer_class = EventSerializers
 
 
 class APIEventDetail(generics.RetrieveUpdateDestroyAPIView):
-        queryset = Event.objects.all()
-        serializer_class = EventSerializers
+    queryset = Event.objects.all()
+    serializer_class = EventSerializers
 
 
 class APIReportList(generics.ListCreateAPIView):
-        queryset = Report.objects.all()
-        serializer_class = ReportSerializers
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializers
 
 
 class APIReportDetail(generics.RetrieveUpdateDestroyAPIView):
-        queryset = Report.objects.all()
-        serializer_class = ReportSerializers
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializers
