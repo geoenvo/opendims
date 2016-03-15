@@ -63,7 +63,8 @@
 
 <script type="text/javascript">
     function event_map_init(map, options) {
-      L.geoJson({{city.polygon.geojson|safe }}).addTo(map);
+    var citylayer = L.geoJson({{city.polygon.geojson|safe }}).addTo(map);
+    map.fitBounds(citylayer);
     }
 </script>
 

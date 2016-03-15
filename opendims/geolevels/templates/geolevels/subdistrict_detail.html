@@ -63,7 +63,8 @@
 
 <script type="text/javascript">
     function event_map_init(map, options) {
-      L.geoJson({{subdistrict.polygon.geojson|safe }}).addTo(map);
+      var SubdistrictLayer = L.geoJson({{subdistrict.polygon.geojson|safe }}).addTo(map);
+      map.fitBounds(SubdistrictLayer)
     }
 </script>
 

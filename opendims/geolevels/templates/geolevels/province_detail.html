@@ -63,10 +63,12 @@
 
 <script type="text/javascript">
     function event_map_init(map, options) {
-      
-      L.geoJson({{province.polygon.geojson|safe }}).addTo(map);
-    
+
+      var ProvinceLayer = L.geoJson({{ province.polygon.geojson|safe }}).addTo(map);
+      map.fitBounds(ProvinceLayer)
+
     }
+
 </script>
 
 {% endblock %}
