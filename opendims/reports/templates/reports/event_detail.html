@@ -127,6 +127,10 @@
 {% leaflet_js %}
 
 <script type="text/javascript">
+/**
+ * Show the polygon of the affected area in the lowest defined
+ * administrative area and display a popup of the event details.
+ */
 function event_map_init(map, options) {
     {% if event.province %}
     var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
@@ -171,24 +175,98 @@ function event_map_init(map, options) {
     var pointLayer = L.geoJson({{ event.point.geojson|safe }}).addTo(map);
     {% endif %}
     
+    var popupContent = `
+    <table class="table table-striped table-bordered">
+        <tbody>
+            <tr>
+                <th>{% get_verbose_field_name event 'created' %}</th>
+                <td>{{ event.created }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'disaster' %}</th>
+                <td>{{ event.disaster }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'height' %}</th>
+                <td>{{ event.height }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'magnitude' %}</th>
+                <td>{{ event.magnitude }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'note' %}</th>
+                <td>{{ event.note }}</td>
+            </tr>
+            {% if event.province %}
+            <tr>
+                <th>{% get_verbose_field_name event 'province' %}</th>
+                <td><a href="{% url 'geolevels:province_detail' event.province.pk %}">{{ event.province }}</a></td>
+            </tr>
+            {% endif %}
+            {% if event.city %}
+            <tr>
+                <th>{% get_verbose_field_name event 'city' %}</th>
+                <td><a href="{% url 'geolevels:city_detail' event.city.pk %}">{{ event.city }}</a></td>
+            </tr>
+            {% endif %}
+            {% if event.subdistrict %}
+            <tr>
+                <th>{% get_verbose_field_name event 'subdistrict' %}</th>
+                <td><a href="{% url 'geolevels:subdistrict_detail' event.subdistrict.pk %}">{{ event.subdistrict }}</a></td>
+            </tr>
+            {% endif %}
+            {% if event.village %}
+            <tr>
+                <th>{% get_verbose_field_name event 'village' %}</th>
+                <td><a href="{% url 'geolevels:village_detail' event.village.pk %}">{{ event.village }}</a></td>
+            </tr>
+            {% endif %}
+            {% if event.rw %}
+            <tr>
+                <th>{% get_verbose_field_name event 'rw' %}</th>
+                <td><a href="{% url 'geolevels:rw_detail' event.rw.pk %}">{{ event.rw }}</a></td>
+            </tr>
+            {% endif %}
+            {% if event.rt %}
+            <tr>
+                <th>{% get_verbose_field_name event 'rt' %}</th>
+                <td><a href="{% url 'geolevels:rt_detail' event.rt.pk %}">{{ event.rt }}</a></td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    `;
+    
+    var popupLayer;
+    
     if (typeof pointLayer !== 'undefined') {
         var pointBounds = pointLayer.getBounds();    
         var pointCenter = pointBounds.getCenter();
         map.setZoom(16);
         map.panTo(pointCenter);
+        popupLayer = pointLayer;
     } else if (typeof rtLayer !== 'undefined') {
         map.fitBounds(rtLayer);
+        popupLayer = rtLayer;
     } else if (typeof rwLayer !== 'undefined') {
         map.fitBounds(rwLayer);
+        popupLayer = rwLayer;
     } else if (typeof villageLayer !== 'undefined') {
         map.fitBounds(villageLayer);
+        popupLayer = villageLayer;
     } else if (typeof subdistrictLayer !== 'undefined') {
         map.fitBounds(subdistrictLayer);
+        popupLayer = subdistrictLayer;
     } else if (typeof cityLayer !== 'undefined') {
         map.fitBounds(cityLayer);
+        popupLayer = cityLayer;
     } else if (typeof provinceLayer !== 'undefined') {
         map.fitBounds(provinceLayer);
+        popupLayer = provinceLayer;
     }
+    
+    popupLayer.bindPopup(popupContent).openPopup();
 }
 </script>
 
