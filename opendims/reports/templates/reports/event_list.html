@@ -25,7 +25,7 @@
     <tbody>
         {% for event in events %}
         <tr>
-            <td><a href="{% url 'reports:event_detail' event.pk  %}">{{ event.created }}</a></td>
+            <td><a href="{{ event.get_absolute_url }}">{{ event.created }}</a></td>
             <td>{{ event.disaster }}</td>
             <td>{{ event.height }}</td>
             <td>{{ event.magnitude }}</td>

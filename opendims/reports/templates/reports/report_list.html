@@ -26,7 +26,7 @@
     <tbody>
         {% for report in reports %}
         <tr>
-            <td><a href="{% url 'reports:report_detail' report.pk  %}">{{ report.created }}</a></td>
+            <td><a href="{{ report.get_absolute_url }}">{{ report.created }}</a></td>
             <td>{{ report.updated }}</td>
             <td>{{ report.event }}</td>
             <td>{{ report.source }}</td>

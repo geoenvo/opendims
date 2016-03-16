@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
+from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
@@ -122,6 +123,9 @@ class Event(CommonAbstractModel):
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
 
+    def get_absolute_url(self):
+        return reverse('reports:event_detail', args=[self.pk])
+
     def __unicode__(self):
         return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
 
@@ -155,6 +159,9 @@ class Report(CommonAbstractModel):
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
+
+    def get_absolute_url(self):
+        return reverse('reports:report_detail', args=[self.pk])
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.event, self.source, self.status)
