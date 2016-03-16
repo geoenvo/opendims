@@ -9,75 +9,75 @@ class AutocompleteProvince(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Province.objects.none()
-        qs = Province.objects.all().order_by('name')
+        queryset = Province.objects.all().order_by('name')
         if self.q:
-            qs = qs.filter(name__icontains=self.q)
-        return qs
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset
 
 
 class AutocompleteCity(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return City.objects.none()
-        qs = City.objects.all().order_by('name')
+        queryset = City.objects.all().order_by('name')
         province = self.forwarded.get('province', None)
         if province:
-            qs = qs.filter(province=province)
+            queryset = queryset.filter(province=province)
         if self.q:
-            qs = qs.filter(name__icontains=self.q)
-        return qs
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset
 
 
 class AutocompleteSubdistrict(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Subdistrict.objects.none()
-        qs = Subdistrict.objects.all().order_by('name')
+        queryset = Subdistrict.objects.all().order_by('name')
         city = self.forwarded.get('city', None)
         if city:
-            qs = qs.filter(city=city)
+            queryset = queryset.filter(city=city)
         if self.q:
-            qs = qs.filter(name__icontains=self.q)
-        return qs
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset
 
 
 class AutocompleteVillage(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return Village.objects.none()
-        qs = Village.objects.all().order_by('name')
+        queryset = Village.objects.all().order_by('name')
         subdistrict = self.forwarded.get('subdistrict', None)
         if subdistrict:
-            qs = qs.filter(subdistrict=subdistrict)
+            queryset = queryset.filter(subdistrict=subdistrict)
         if self.q:
-            qs = qs.filter(name__icontains=self.q)
-        return qs
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset
 
 
 class AutocompleteRW(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return RW.objects.none()
-        qs = RW.objects.all().order_by('name')
+        queryset = RW.objects.all().order_by('name')
         village = self.forwarded.get('village', None)
         if village:
-            qs = qs.filter(village=village)
+            queryset = queryset.filter(village=village)
         if self.q:
-            qs = qs.filter(name__icontains=self.q)
-        return qs
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset
 
 
 class AutocompleteRT(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated():
             return RT.objects.none()
-        qs = RT.objects.all().order_by('name')
+        queryset = RT.objects.all().order_by('name')
         rw = self.forwarded.get('rw', None)
         if rw:
-            qs = qs.filter(rw=rw)
+            queryset = queryset.filter(rw=rw)
         if self.q:
-            qs = qs.filter(name__icontains=self.q)
-        return qs
+            queryset = queryset.filter(name__icontains=self.q)
+        return queryset
 
 
 def province_list(request):
