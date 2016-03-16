@@ -234,6 +234,7 @@ class EventAdmin(ImportExportModelAdmin,
             'fields': [
                 'created',
                 'disaster',
+                'status',
                 'height',
                 'magnitude',
                 'note'
