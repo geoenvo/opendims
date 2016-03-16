@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Event, Report
-
 from rest_framework import generics
 from .serializers import EventSerializers, ReportSerializers
 
@@ -32,7 +31,62 @@ def report_detail(request, pk):
 
 
 class APIEventList(generics.ListCreateAPIView):
-        queryset = Event.objects.all()
+        queryset = Event.objects.filter(status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterABR(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='ABR', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterBJR(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='BJR', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterCEK(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='CEK', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterGMP(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='GMP', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterKBK(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='KBK', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterLAI(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='LAI', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterLSR(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='LSR', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterROB(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='ROB', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterSOS(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='SOS', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterTER(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='TER', status='ACTIVE')
+        serializer_class = EventSerializers
+
+
+class APIDisasterTSU(generics.ListCreateAPIView):
+        queryset = Event.objects.filter(disaster='TSU', status='ACTIVE')
         serializer_class = EventSerializers
 
 
