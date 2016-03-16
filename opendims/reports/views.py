@@ -1,20 +1,25 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Event, Report
+from django.views import generic
+from django.conf import settings
+
 from rest_framework import generics
 from .serializers import EventSerializers, ReportSerializers
 
-
-def event_list(request):
-    events = Event.objects.order_by('-created')
-    context = {'events': events}
-    return render(request, 'reports/event_list.html', context)
+from .models import Event, Report
 
 
-def event_detail(request, pk):
-    event = get_object_or_404(Event, pk=pk)
-    reports = event.report_set.order_by('-created')
-    context = {'event': event, 'reports': reports}
-    return render(request, 'reports/event_detail.html', context)
+class EventListView(generic.ListView):
+    queryset = Event.objects.order_by('-created')
+    paginate_by = settings.ITEMS_PER_PAGE
+
+
+class EventDetailView(generic.DetailView):
+    model = Event
+
+    def get_context_data(self, **kwargs):
+        context = super(EventDetailView, self).get_context_data(**kwargs)
+        context['reports'] = Report.objects.filter(event=self.get_object())
+        return context
 
 
 def report_list(request):

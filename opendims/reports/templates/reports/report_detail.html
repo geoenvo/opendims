@@ -41,7 +41,7 @@
     <tbody>
         <tr>
             <th class="col-md-2">{% get_verbose_field_name report.event 'created' %}</th>
-            <td><a href="{{ event.get_absolute_url }}">{{ report.event.created }}</a></td>
+            <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created }}</a></td>
         </tr>
         <tr>
             <th>{% get_verbose_field_name report.event 'disaster' %}</th>
