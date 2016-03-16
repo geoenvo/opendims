@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.conf import settings
 
-from rest_framework import generics
 from .serializers import EventSerializer, ReportSerializer
 from rest_framework import filters
+from rest_framework import generics
+import django_filters
 
 from .models import Event, Report
 
@@ -35,23 +36,24 @@ def report_detail(request, pk):
     return render(request, 'reports/report_detail.html', context)
 
 
+class EventFilter(filters.FilterSet):
+    disaster = django_filters.CharFilter(
+        name='disaster__code',
+        lookup_expr='iexact'
+    )
+
+    class Meta:
+        model = Event
+        fields = ['disaster']
+
+
 class APIEventList(generics.ListCreateAPIView):
     queryset = Event.objects.filter(status='ACTIVE')
     serializer_class = EventSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('disaster',)
-
-
-class APIEventDetail(generics.ListCreateAPIView):
-    serializer_class = EventSerializer
-
-    def get_queryset(self):
-        queryset = Event.objects.filter(status='ACTIVE')
-        disaster_code = self.kwargs['disaster_code']
-
-        if disaster_code:
-            queryset = queryset.filter(disaster=disaster_code)
-        return queryset
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = EventFilter
+    ordering_fields = ('created',)
+    ordering = ('-created',)
 
 
 class APIReportList(generics.ListCreateAPIView):
