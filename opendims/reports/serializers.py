@@ -1,15 +1,11 @@
 from rest_framework import serializers
-
-from rest_framework_gis.serializers import (
-    GeoFeatureModelSerializer,
-    GeometrySerializerMethodField,
-)
+from rest_framework_gis import serializers as gis_serializers
 
 from .models import Event, Report
 
 
-class EventSerializer(GeoFeatureModelSerializer):
-    event_geom = GeometrySerializerMethodField()
+class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
+    event_geom = gis_serializers.GeometrySerializerMethodField()
 
     def get_event_geom(self, obj):
         """
