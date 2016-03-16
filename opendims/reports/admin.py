@@ -79,23 +79,18 @@ class EventResource(resources.ModelResource):
 
     def before_import(self, dataset, dry_run, **kwargs):
         """Overrides Django-Import-Export method.
-
         It is necessary to modify the tablib dataset before the real import
         process, to translate from a human friendly input format like this:
-
         id|disaster|province|city|subdistrict|village|rw |rt
         --|--------|--------|----|-----------|-------|---|--
           |BJR     |        |    |           |ANCOL  |005|
           |BJR     |        |    |           |ANCOL  |001|
-
         then in order to match the Event model definition, query the Village-RW
         and RW-RT relation to produce to this:
-
         id|disaster|province|city|subdistrict|village|rw              |rt
         --|--------|--------|----|-----------|-------|----------------|--
           |BJR     |        |    |           |ANCOL  |3175020003005000|
           |BJR     |        |    |           |ANCOL  |3175020003001000|
-
         Also checks whether the row's Geolevels relation is valid, if not
         the row is not imported.
         """
