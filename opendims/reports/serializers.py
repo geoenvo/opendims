@@ -2,33 +2,26 @@ from rest_framework import serializers
 
 from .models import Event, Report
 
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
-
-from geolevels.models import RW
+from rest_framework_gis.serializers import GeoFeatureModelSerializer, GeometrySerializerMethodField
 
 
-class RWSerializers(GeoFeatureModelSerializer):
-    """ A class to serialize locations as GeoJSON compatible data """
+class EventSerializer(GeoFeatureModelSerializer):
+    rw_polygon = GeometrySerializerMethodField()
 
-    class Meta:
-        model = RW
-        geo_field = 'polygon'
-        id_fields = False
-
-        fields = ()
-
-
-class EventSerializers(GeoFeatureModelSerializer):
-    rw = RWSerializers()
+    def get_rw_polygon(self, obj):
+        if obj.rw:
+            return obj.rw.polygon
+        else:
+            return None
 
     class Meta:
         model = Event
-        geo_field = 'point'
+        geo_field = 'rw_polygon'
         fields = ('id', 'disaster', 'point', 'created', 'updated', 'status', 'note', 'height', 'magnitude', 'province', 'city', 'subdistrict', 'village', 'rw', 'rt',)
 
 
-class ReportSerializers(serializers.ModelSerializer):
-        event = EventSerializers()
+class ReportSerializer(serializers.ModelSerializer):
+        event = EventSerializer()
 
         class Meta:
                 model = Report
