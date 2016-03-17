@@ -3,11 +3,10 @@ from django.views import generic
 from django.conf import settings
 
 from .serializers import EventSerializer, ReportSerializer
-from rest_framework import filters
-from rest_framework import generics
-import django_filters
+from rest_framework import generics, filters
 
 from .models import Event, Report
+from .filters import EventFilter
 
 
 class EventListView(generic.ListView):
@@ -34,17 +33,6 @@ def report_detail(request, pk):
     report = get_object_or_404(Report, pk=pk)
     context = {'report': report}
     return render(request, 'reports/report_detail.html', context)
-
-
-class EventFilter(filters.FilterSet):
-    disaster = django_filters.CharFilter(
-        name='disaster__code',
-        lookup_expr='iexact'
-    )
-
-    class Meta:
-        model = Event
-        fields = ['disaster']
 
 
 class APIEventList(generics.ListCreateAPIView):
