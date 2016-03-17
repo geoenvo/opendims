@@ -16,7 +16,7 @@ urlpatterns = [
     ),
     url(r'^report/$', views.report_list, name='report_list'),
     url(r'^report/(?P<pk>\d+)/$', views.report_detail, name='report_detail'),
-    url(r'^event/api/$', views.APIEventList.as_view()),
+    url(r'^event/api/$', views.APIEventList.as_view(), name='event_api'),
     url(r'^report/api/$', views.APIReportList.as_view()),
     url(r'^report/(?P<pk>\d+)/api/$', views.APIReportDetail.as_view()),
 ]
