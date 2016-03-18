@@ -3,6 +3,7 @@
 # Target box: ubuntu/trusty64
 
 DB_NAME='opendims'
+DB2_NAME='geolevels'
 DB_USERNAME='vagrant'
 DB_PASSWORD='password'
 POSTGRES_PASSWORD='postgres'
@@ -16,6 +17,9 @@ createdb $DB_NAME
 psql -c "CREATE ROLE $DB_USERNAME WITH LOGIN ENCRYPTED PASSWORD '$DB_PASSWORD';"
 psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USERNAME;"
 psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" $DB_NAME
+createdb $DB2_NAME
+psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB2_NAME TO $DB_USERNAME;"
+psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" $DB2_NAME
 START
 
 echo "---------------------------------------------"
