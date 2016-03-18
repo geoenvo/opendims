@@ -46,7 +46,6 @@ class CustomListCreateAPIView(generics.ListCreateAPIView):
             valid_params = self.filter_class.Meta.fields
             # Accept default "format" parameter
             valid_params.append('format')
-            print valid_params
             query_params = [query_param.lower()
                             for query_param in query_params.keys()]
             invalid_params = set(query_params) - set(valid_params)
