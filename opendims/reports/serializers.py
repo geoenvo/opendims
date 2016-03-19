@@ -4,7 +4,15 @@ from rest_framework_gis import serializers as gis_serializers
 from .models import Event, Report
 
 
+class ReportSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Report
+        field = ('id', 'source', 'created', 'updated', 'status', 'note')
+
+
 class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
+    reports = ReportSerializer(many=True, read_only=True)
     event_geom = gis_serializers.GeometrySerializerMethodField()
 
     def get_event_geom(self, obj):
@@ -45,17 +53,5 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
             'village',
             'rw',
             'rt',
+            'reports',
         )
-
-
-class ReportSerializer(serializers.ModelSerializer):
-        event = EventSerializer()
-
-        class Meta:
-                model = Report
-                field = ('event',
-                         'source',
-                         'created',
-                         'updated',
-                         'status',
-                         'note')

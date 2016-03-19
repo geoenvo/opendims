@@ -141,7 +141,11 @@ class Report(CommonAbstractModel):
         ('PENDING', _('Pending')),
     )
 
-    event = models.ForeignKey(Event, verbose_name=verbose_event)
+    event = models.ForeignKey(
+        Event,
+        verbose_name=verbose_event,
+        related_name='reports'
+    )
     source = models.ForeignKey(Source, verbose_name=verbose_source)
     created = models.DateTimeField(
         default=timezone.now,
