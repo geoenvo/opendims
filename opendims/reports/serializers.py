@@ -13,12 +13,14 @@ class ReportSerializer(serializers.ModelSerializer):
 
 class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
     reports = ReportSerializer(many=True, read_only=True)
-    event_geom = gis_serializers.GeometrySerializerMethodField()
+    geometry = gis_serializers.GeometrySerializerMethodField()
 
-    def get_event_geom(self, obj):
+    def get_geometry(self, obj):
         """
-        Return the polygon of the lowest available Geolevel.
+        Return the Event point, or polygon of the lowest available Geolevel.
         """
+        if obj.point:
+            return obj.point
         if obj.rt:
             return obj.rt.polygon
         elif obj.rw:
@@ -36,7 +38,7 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
 
     class Meta:
         model = Event
-        geo_field = 'event_geom'
+        geo_field = 'geometry'
         fields = (
             'id',
             'disaster',
