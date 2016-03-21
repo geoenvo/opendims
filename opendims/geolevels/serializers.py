@@ -17,9 +17,9 @@ class ProvinceSerializer(gis_serializers.GeoFeatureModelSerializer):
 
 
 class CitySerializer(gis_serializers.GeoFeatureModelSerializer):
-    province = serializers.SerializerMethodField()
+    province_name = serializers.SerializerMethodField()
 
-    def get_province(self, obj):
+    def get_province_name(self, obj):
         return obj.province.name
 
     class Meta:
@@ -27,6 +27,7 @@ class CitySerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'polygon'
         fields = (
                 'id',
+                'province_name',
                 'province',
                 'name',
                 'note',
@@ -34,9 +35,9 @@ class CitySerializer(gis_serializers.GeoFeatureModelSerializer):
 
 
 class SubdistrictSerializer(gis_serializers.GeoFeatureModelSerializer):
-    city = serializers.SerializerMethodField()
+    city_name = serializers.SerializerMethodField()
 
-    def get_city(self, obj):
+    def get_city_name(self, obj):
         return obj.city.name
 
     class Meta:
@@ -44,6 +45,7 @@ class SubdistrictSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'polygon'
         fields = (
                 'id',
+                'city_name',
                 'city',
                 'name',
                 'note',
@@ -51,9 +53,9 @@ class SubdistrictSerializer(gis_serializers.GeoFeatureModelSerializer):
 
 
 class VillageSerializer(gis_serializers.GeoFeatureModelSerializer):
-    subdistrict = serializers.SerializerMethodField()
+    subdistrict_name = serializers.SerializerMethodField()
 
-    def get_subdistrict(self, obj):
+    def get_subdistrict_name(self, obj):
         return obj.subdistrict.name
 
     class Meta:
@@ -61,6 +63,7 @@ class VillageSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'polygon'
         fields = (
                 'id',
+                'subdistrict_name',
                 'subdistrict',
                 'name',
                 'note',
@@ -68,9 +71,9 @@ class VillageSerializer(gis_serializers.GeoFeatureModelSerializer):
 
 
 class RWSerializer(gis_serializers.GeoFeatureModelSerializer):
-    village = serializers.SerializerMethodField()
+    village_name = serializers.SerializerMethodField()
 
-    def get_village(self, obj):
+    def get_village_name(self, obj):
         return obj.village.name
 
     class Meta:
@@ -78,6 +81,7 @@ class RWSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'polygon'
         fields = (
                 'id',
+                'village_name',
                 'village',
                 'name',
                 'note',

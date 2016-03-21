@@ -44,20 +44,18 @@ class VillageFilter(filters.FilterSet):
 
 
 class RWFilter(filters.FilterSet):
-    name = django_filters.CharFilter(name='name', lookup_type='iexact')
     id = django_filters.NumberFilter(name='id', lookup_type='exact')
     village = django_filters.CharFilter(name='village__name', lookup_type='iexact')
 
     class Meta:
         model = RW
-        fields = ['id', 'village', 'name']
+        fields = ['id', 'village']
 
 
 class RTFilter(filters.FilterSet):
-    name = django_filters.CharFilter(name='name', lookup_type='iexact')
     id = django_filters.NumberFilter(name='id', lookup_type='exact')
-    rw = django_filters.CharFilter(name='rw__name', lookup_type='iexact')
+    rw = django_filters.CharFilter(name='rw__id', lookup_type='iexact')
 
     class Meta:
         model = RT
-        fields = ['id', 'rw', 'name']
+        fields = ['id', 'rw']
