@@ -4,6 +4,94 @@ from dal import autocomplete
 
 from .models import Province, City, Subdistrict, Village, RW, RT
 
+from django.views import generic
+from django.conf import settings
+
+from .serializers import ProvinceSerializer, CitySerializer, SubdistrictSerializer, VillageSerializer, RWSerializer, RTSerializer
+from rest_framework import generics, filters, response, status
+
+from .filters import ProvinceFilter, CityFilter, SubdistrictFilter, VillageFilter, RWFilter, RTFilter
+
+
+class CustomListCreateAPIView(generics.ListCreateAPIView):
+    """
+    Subclass API View to deal with django-filter strict not working. Overrides
+    get method to check for invalid query params. If found return error 400.
+    http://stackoverflow.com/questions/27182527
+    """
+    def is_valid_query_params(self, query_params):
+        if query_params:
+            valid_params = self.filter_class.Meta.fields
+            # Accept default "format" parameter
+            valid_params.append('format')
+            print valid_params
+            query_params = [query_param.lower()
+                            for query_param in query_params.keys()]
+            invalid_params = set(query_params) - set(valid_params)
+            if invalid_params:
+                return False
+        return True
+
+    def get(self, request, *args, **kwargs):
+        if not self.is_valid_query_params(request.query_params):
+            return response.Response(status=status.HTTP_400_BAD_REQUEST)
+        return super(CustomListCreateAPIView, self).get(
+                                                    request, *args, **kwargs)
+
+
+class APIProvinceList(CustomListCreateAPIView):
+    queryset = Province.objects.filter()
+    serializer_class = ProvinceSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = ProvinceFilter
+    ordering_fields = ('id',)
+    ordering = ('-id',)
+
+
+class APICityList(CustomListCreateAPIView):
+    queryset = City.objects.filter()
+    serializer_class = CitySerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = CityFilter
+    ordering_fields = ('id',)
+    ordering = ('-id',)
+
+
+class APISubdistrictList(CustomListCreateAPIView):
+    queryset = Subdistrict.objects.filter()
+    serializer_class = SubdistrictSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = SubdistrictFilter
+    ordering_fields = ('id',)
+    ordering = ('-id',)
+
+
+class APIVillageList(CustomListCreateAPIView):
+    queryset = Village.objects.filter()
+    serializer_class = VillageSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = VillageFilter
+    ordering_fields = ('id',)
+    ordering = ('-id',)
+
+
+class APIRWList(CustomListCreateAPIView):
+    queryset = RW.objects.filter()
+    serializer_class = RWSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = RWFilter
+    ordering_fields = ('id',)
+    ordering = ('-id',)
+
+
+class APIRTList(CustomListCreateAPIView):
+    queryset = RT.objects.filter()
+    serializer_class = RTSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = RTFilter
+    ordering_fields = ('id',)
+    ordering = ('-id',)
+
 
 class AutocompleteProvince(autocomplete.Select2QuerySetView):
     def get_queryset(self):
