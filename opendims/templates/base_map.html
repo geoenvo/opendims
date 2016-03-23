@@ -489,9 +489,9 @@
         });*/
           /* Update list.js featureList */
           featureList = new List("features", {
-            valueNames: ["feature-name"]
+            valueNames: ["feature-disaster"]
           });
-          featureList.sort("feature-name", {
+          featureList.sort("feature-disaster", {
             order: "desc"
           });
         }
@@ -776,7 +776,6 @@
                 // Get center of bounds
                 var center = bounds.getCenter();
 
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -786,11 +785,8 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                  title: popupContent,
-                  riseOnHover: true
                 }).addTo(map);
 
-                layer.bindPopup(popupContent);
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.subdistrict + ','+ feature.properties.village +  "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.reports.source + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                 layer.on({
@@ -801,12 +797,15 @@
                     highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
                   }
                 });
+
                 /*$("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + layer.getLatLng().lat + '" lng="' + layer.getLatLng().lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="assets/img/treedown.png"></td><td class="feature-name">' + layer.feature.properties.disaster + '</td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 LAISearch.push({
                   name: layer.feature.properties.disater,
                   address: layer.feature.properties.rw,
                   source: "LAI",
-                  id: L.stamp(layer)
+                  id: stamp,
+                  lat: layer.feature.geometry.coordinates[1],
+                  lng: layer.feature.geometry.coordinates[0]
               });*/
 
             }
@@ -844,7 +843,6 @@
                 var center = bounds.getCenter();
                 console.log(center);
 
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -854,11 +852,9 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                  title: popupContent,
-                  riseOnHover: true
                 }).addTo(map);
 
-                layer.bindPopup(popupContent);
+
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.URL + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                 layer.on({
@@ -926,11 +922,8 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                  title: popupContent,
-                  riseOnHover: true
                 }).addTo(map);
 
-                layer.bindPopup(popupContent);
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                 layer.on({
@@ -988,9 +981,7 @@
                 // Get center of bounds
 
                 var center = bounds.getCenter();
-                console.log(center);
 
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -1000,8 +991,7 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                   title: popupContent,
-                   riseOnHover: true
+
                   }).addTo(map);
 
                 layer.bindPopup(popupContent);
@@ -1051,7 +1041,6 @@
             };
           },
           onEachFeature: function (feature, layer) {
-            console.log('ROB');
 
             if (feature.geometry.type === 'MultiPolygon' && feature.properties) {
 
@@ -1059,9 +1048,6 @@
                 var bounds = layer.getBounds();
                 // Get center of bounds
                 var center = bounds.getCenter();
-                console.log(center);
-
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -1071,11 +1057,8 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                    title: popupContent,
-                    riseOnHover: true
                 }).addTo(map);
 
-                layer.bindPopup(popupContent);
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                 layer.on({
@@ -1106,8 +1089,6 @@
         });
         $.getJSON("{% url 'reports:event_api' %}?disaster=ROB&format=json", function (data) {
             ROB.addData(data);
-            console.log(ROB);
-            console.log(data);
         });
 
 
@@ -1135,8 +1116,6 @@
                 var center = bounds.getCenter();
                 console.log(center);
 
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
-
                 // Use center to put marker on map
                 var marker = L.marker(center, {
                   icon: L.icon({
@@ -1145,11 +1124,7 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                  title: popupContent,
-                  riseOnHover: true
                 }).addTo(map);
-
-                layer.bindPopup(popupContent);
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                 layer.on({
@@ -1169,12 +1144,8 @@
                   lat: layer.feature.geometry.coordinates[1],
                   lng: layer.feature.geometry.coordinates[0]
               });*/
-
-
             }
-
             if (feature.properties) {
-
             }
           }
         });
@@ -1195,10 +1166,8 @@
             };
           },
           onEachFeature: function (feature, layer) {
-            console.log('CEK');
 
             if (feature.geometry.type === 'MultiPolygon' && feature.properties) {
-                console.log('CEK 2');
 
                 // Get bounds of polygon
                 var bounds = layer.getBounds();
@@ -1208,8 +1177,6 @@
                 console.log(center);
 
 
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
-
                 // Use center to put marker on map
                 var marker = L.marker(center, {
                   icon: L.icon({
@@ -1218,11 +1185,8 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                  title: popupContent,
-                  riseOnHover: true
-                }).addTo(map);
 
-                layer.bindPopup(popupContent);
+                }).addTo(map);
 
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
@@ -1254,8 +1218,7 @@
         });
         $.getJSON("{% url 'reports:event_api' %}?disaster=CEK&format=json", function (data) {
             CEK.addData(data);
-            console.log(CEK);
-            console.log(data);
+
         });
 
         var GMPLayer = L.geoJson(null)
@@ -1269,10 +1232,9 @@
             };
           },
           onEachFeature: function (feature, layer) {
-            console.log('GMP');
+
 
             if (feature.geometry.type === 'MultiPolygon' && feature.properties) {
-                console.log('GMP 2');
 
 
                 // Get bounds of polygon
@@ -1280,9 +1242,6 @@
                 // Get center of bounds
 
                 var center = bounds.getCenter();
-                console.log(center);
-
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -1292,8 +1251,6 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                    title: popupContent,
-                    riseOnHover: true
                   }).addTo(map);
 
                 layer.bindPopup(popupContent);
@@ -1327,8 +1284,7 @@
         });
         $.getJSON("{% url 'reports:event_api' %}?disaster=GMP&format=json", function (data) {
             GMP.addData(data);
-            console.log(GMP);
-            console.log(data);
+
         });
 
 
@@ -1351,12 +1307,9 @@
 
                 // Get bounds of polygon
                 var bounds = layer.getBounds();
+
                 // Get center of bounds
-
                 var center = bounds.getCenter();
-                console.log(center);
-
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -1366,11 +1319,7 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                   }),
-                  title: popupContent,
-                  riseOnHover: true
                 }).addTo(map);
-
-                layer.bindPopup(popupContent);
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.reports.source + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                 layer.on({
@@ -1401,8 +1350,7 @@
         });
         $.getJSON("{% url 'reports:event_api' %}?disaster=BJR&format=json", function (data) {
             BJR.addData(data);
-            console.log(BJR);
-            console.log(data);
+
         });
 
 
@@ -1418,19 +1366,16 @@
                     };
                     },
        onEachFeature: function (feature, layer) {
-          console.log('LSR');
 
         if (feature.geometry.type === 'MultiPolygon' && feature.properties) {
           console.log('LSR 2');
 
                 // Get bounds of polygon
                 var bounds = layer.getBounds();
+
                 // Get center of bounds
-
                 var center = bounds.getCenter();
-                    console.log(center);
 
-                popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
              // Use center to put marker on map
                 var marker = L.marker(center, {
@@ -1440,11 +1385,9 @@
                     iconAnchor: [12, 28],
                     popupAnchor: [0, -25]
                     }),
-                    title: popupContent,
-                    riseOnHover: true
+
                     }).addTo(map);
 
-                    layer.bindPopup(popupContent);
 
                 var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                     layer.on({
@@ -1490,18 +1433,14 @@
                         };
                         },
            onEachFeature: function (feature, layer) {
-              console.log('KBK');
 
             if (feature.geometry.type === 'MultiPolygon' && feature.properties) {
 
                 // Get bounds of polygon
                     var bounds = layer.getBounds();
+
                 // Get center of bounds
-
                     var center = bounds.getCenter();
-                        console.log(center);
-
-                    popupContent = feature.properties.disaster + ': ' + feature.properties.rw
 
                 // Use center to put marker on map
                     var marker = L.marker(center, {
@@ -1511,11 +1450,9 @@
                         iconAnchor: [12, 28],
                         popupAnchor: [0, -25]
                         }),
-                        title: popupContent,
-                        riseOnHover: true
+
                         }).addTo(map);
 
-                        layer.bindPopup(popupContent);
 
                         var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Disaster</th><td>" + feature.properties.disaster + "</td></tr>" + "<tr><th>Location</th><td>" + feature.properties.rw + "</td></tr>" + "<tr><th>Report</th><td>" + feature.properties.ADRESS1 + "</td></tr>" + "<tr><th>Detail</th><td><a class='url-break' href='" + feature.properties.URL + "' target='_blank'>" + feature.properties.URL + "</a></td></tr>" + "<table>";
                         layer.on({
@@ -1546,8 +1483,7 @@
                 });
                 $.getJSON("{% url 'reports:event_api' %}?disaster=KBK&format=json", function (data) {
                     KBK.addData(data);
-                    console.log(KBK);
-                    console.log(data);
+
                     });
 
         map = L.map("map", {
