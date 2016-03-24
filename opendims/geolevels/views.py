@@ -166,21 +166,21 @@ def city_detail(request, pk):
 
 def subdistrict_detail(request, pk):
     subdistrict = get_object_or_404(Subdistrict, pk=pk)
-    villages = Village.objects.all().order_by('name')
+    villages = Village.objects.filter(subdistrict=subdistrict).order_by('name')    
     context = {'subdistrict': subdistrict, 'villages': villages}
     return render(request, 'geolevels/subdistrict_detail.html', context)
 
 
 def village_detail(request, pk):
     village = get_object_or_404(Village, pk=pk)
-    rws = RW.objects.all().order_by('name')
+    rws = RW.objects.all().filter(village=village).order_by('name')
     context = {'village': village, 'rws': rws}
     return render(request, 'geolevels/village_detail.html', context)
 
 
 def rw_detail(request, pk):
     rw = get_object_or_404(RW, pk=pk)
-    rts = RT.objects.all().order_by('name')
+    rts = RT.objects.all().filter(rw=rw).order_by('name')
     context = {'rw': rw, 'rts': rts}
     return render(request, 'geolevels/rw_detail.html', context)
 
