@@ -158,7 +158,8 @@ def province_detail(request, pk):
 
 def city_detail(request, pk):
     city = get_object_or_404(City, pk=pk)
-    subdistricts = Subdistrict.objects.all().order_by('name')
+    #subdistricts = Subdistrict.objects.all().order_by('name')
+    subdistricts = Subdistrict.objects.filter(city=city).order_by('name')
     context = {'city': city, 'subdistricts': subdistricts}
     return render(request, 'geolevels/city_detail.html', context)
 
