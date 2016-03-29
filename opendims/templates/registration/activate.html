@@ -1,16 +1,18 @@
-{% extends "opendims/base.html" %}
+{% extends "opendims/layouts/col_1.html" %}
 
 {% load i18n staticfiles %}
 
-{% block opendims_title %} - {% trans "Account Activation Failed" %}{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Account Activation Failed" %}{% endblock %}
 
-{% block opendims_content %}
+{% block main %}
 
-<div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default">
-        <div class="panel-heading">{% trans "Account Activation Failed" %}</div>
-        <div class="panel-body">
-            <p>{% trans "Account activation failed." %}</p>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Account Activation Failed" %}</div>
+            <div class="panel-body">
+                <p>{% trans "Account activation failed." %}</p>
+            </div>
         </div>
     </div>
 </div>

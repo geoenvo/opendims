@@ -1,10 +1,10 @@
-{% extends "opendims/base.html" %}
+{% extends "opendims/layouts/col_2.html" %}
 
 {% load staticfiles %}
 
-{% block opendims_title %} - About{% endblock %}
+{% block title %}{{ block.super }} - About{% endblock %}
 
-{% block opendims_content %}
+{% block main %}
 
 <div class="page-header">
     <h2>About Open-DiMS</h2>

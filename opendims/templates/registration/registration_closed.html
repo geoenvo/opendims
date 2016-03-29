@@ -1,16 +1,18 @@
-{% extends "opendims/base.html" %}
+{% extends "opendims/layouts/col_1.html" %}
 
 {% load i18n staticfiles %}
 
-{% block opendims_title %} - {% trans "Registration Closed" %}{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Registration Closed" %}{% endblock %}
 
-{% block opendims_content %}
+{% block main %}
 
-<div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default">
-        <div class="panel-heading">{% trans "Registration Closed" %}</div>
-        <div class="panel-body">
-            <p>{% trans "Sorry, but registration is closed at this moment. Come back later." %}</p>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">{% trans "Registration Closed" %}</div>
+            <div class="panel-body">
+                <p>{% trans "Sorry, but registration is closed at this moment. Come back later." %}</p>
+            </div>
         </div>
     </div>
 </div>

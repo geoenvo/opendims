@@ -1,0 +1,30 @@
+{% extends "opendims/base.html" %}
+
+{% block content %}
+
+{% include "opendims/includes/nav.html" %}
+
+{% include "opendims/includes/masthead.html" %}
+
+<div class="container">
+    <div class="no-gutter row">
+        <!-- center column -->
+        <div id="content" class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading" style="background-color:#111;color:#fff;"></div>
+                <div class="panel-body">
+                    {% block main %}{% endblock main %}
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /center column -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+
+{% include "opendims/includes/footer.html" %}
+
+{% endblock %}
