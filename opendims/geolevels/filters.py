@@ -5,8 +5,8 @@ from .models import Province, City, Subdistrict, Village, RW, RT
 
 
 class ProvinceFilter(filters.FilterSet):
+    id = django_filters.NumberFilter(name='id')
     name = django_filters.CharFilter(name='name', lookup_type='iexact')
-    id = django_filters.NumberFilter(name='id', lookup_type='exact')
 
     class Meta:
         model = Province
@@ -14,38 +14,47 @@ class ProvinceFilter(filters.FilterSet):
 
 
 class CityFilter(filters.FilterSet):
+    id = django_filters.NumberFilter(name='id')
     name = django_filters.CharFilter(name='name', lookup_type='iexact')
-    id = django_filters.NumberFilter(name='id', lookup_type='exact')
-    province = django_filters.CharFilter(name='province__name', lookup_type='iexact')
+    province = django_filters.CharFilter(
+        name='province__name',
+        lookup_type='iexact'
+    )
 
     class Meta:
         model = City
-        fields = ['id', 'province', 'name']
+        fields = ['id', 'name', 'province']
 
 
 class SubdistrictFilter(filters.FilterSet):
+    id = django_filters.NumberFilter(name='id')
     name = django_filters.CharFilter(name='name', lookup_type='iexact')
-    id = django_filters.NumberFilter(name='id', lookup_type='exact')
     city = django_filters.CharFilter(name='city__name', lookup_type='iexact')
 
     class Meta:
         model = Subdistrict
-        fields = ['id', 'city', 'name']
+        fields = ['id', 'name', 'city']
 
 
 class VillageFilter(filters.FilterSet):
+    id = django_filters.NumberFilter(name='id')
     name = django_filters.CharFilter(name='name', lookup_type='iexact')
-    id = django_filters.NumberFilter(name='id', lookup_type='exact')
-    subdistrict = django_filters.CharFilter(name='subdistrict__name', lookup_type='iexact')
+    subdistrict = django_filters.CharFilter(
+        name='subdistrict__name',
+        lookup_type='iexact'
+    )
 
     class Meta:
         model = Village
-        fields = ['id', 'subdistrict', 'name']
+        fields = ['id', 'name', 'subdistrict']
 
 
 class RWFilter(filters.FilterSet):
-    id = django_filters.NumberFilter(name='id', lookup_type='exact')
-    village = django_filters.CharFilter(name='village__name', lookup_type='iexact')
+    id = django_filters.NumberFilter(name='id')
+    village = django_filters.CharFilter(
+        name='village__name',
+        lookup_type='iexact'
+    )
 
     class Meta:
         model = RW
@@ -53,8 +62,8 @@ class RWFilter(filters.FilterSet):
 
 
 class RTFilter(filters.FilterSet):
-    id = django_filters.NumberFilter(name='id', lookup_type='exact')
-    rw = django_filters.CharFilter(name='rw__id', lookup_type='iexact')
+    id = django_filters.NumberFilter(name='id')
+    rw = django_filters.NumberFilter(name='rw__id')
 
     class Meta:
         model = RT

@@ -2,37 +2,70 @@ from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 
 from .models import Event, Report
+from common.serializers import DateTimeFieldTZ
+
 
 class ReportSerializer(serializers.ModelSerializer):
+    source_note = serializers.SerializerMethodField()
+    created = DateTimeFieldTZ()
+    updated = DateTimeFieldTZ()
+
+    def get_source_note(self, obj):
+        return obj.source.note
 
     class Meta:
         model = Report
-        field = ('id', 'source', 'created', 'updated', 'status', 'note')
+        field = (
+            'id',
+            'event',
+            'source',
+            'source_note',
+            'created',
+            'updated',
+            'status',
+            'note'
+        )
 
 
 class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
     reports = ReportSerializer(many=True, read_only=True)
     geometry = gis_serializers.GeometrySerializerMethodField()
+    disaster_note = serializers.SerializerMethodField()
+    created = DateTimeFieldTZ()
+    updated = DateTimeFieldTZ()
     province_name = serializers.SerializerMethodField()
     city_name = serializers.SerializerMethodField()
     subdistrict_name = serializers.SerializerMethodField()
     village_name = serializers.SerializerMethodField()
     rw_name = serializers.SerializerMethodField()
+    rt_name = serializers.SerializerMethodField()
 
-    def get_rw_name(self, obj):
-        return obj.rw.name
-
-    def get_village_name(self, obj):
-        return obj.village.name
-
-    def get_subdistrict_name(self, obj):
-        return obj.subdistrict.name
-
-    def get_city_name(self, obj):
-        return obj.city.name
+    def get_disaster_note(self, obj):
+        return obj.disaster.note
 
     def get_province_name(self, obj):
-        return obj.province.name
+        if obj.province:
+            return obj.province.name
+
+    def get_city_name(self, obj):
+        if obj.city:
+            return obj.city.name
+
+    def get_subdistrict_name(self, obj):
+        if obj.subdistrict:
+            return obj.subdistrict.name
+
+    def get_village_name(self, obj):
+        if obj.village:
+            return obj.village.name
+
+    def get_rw_name(self, obj):
+        if obj.rw:
+            return obj.rw.name
+
+    def get_rt_name(self, obj):
+        if obj.rt:
+            return obj.rt.name
 
     def get_geometry(self, obj):
         """
@@ -61,23 +94,25 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = (
             'id',
             'disaster',
-            'point',
+            'disaster_note',
             'created',
             'updated',
             'status',
             'note',
             'height',
             'magnitude',
-            'province_name',
             'province',
-            'city_name',
+            'province_name',
             'city',
-            'subdistrict_name',
+            'city_name',
             'subdistrict',
-            'village_name',
+            'subdistrict_name',
             'village',
-            'rw_name',
+            'village_name',
             'rw',
+            'rw_name',
             'rt',
+            'rt_name',
+            'point',
             'reports',
         )

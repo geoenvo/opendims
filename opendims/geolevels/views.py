@@ -1,16 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 
 from dal import autocomplete
+from rest_framework import generics, filters
 
+from common.views import CustomListCreateAPIView
 from .models import Province, City, Subdistrict, Village, RW, RT
-from reports.views import CustomListCreateAPIView
-
-from django.views import generic
-from django.conf import settings
-
 from .serializers import ProvinceSerializer, CitySerializer, SubdistrictSerializer, VillageSerializer, RWSerializer, RTSerializer
-from rest_framework import generics, filters, response, status
-
 from .filters import ProvinceFilter, CityFilter, SubdistrictFilter, VillageFilter, RWFilter, RTFilter
 
 
@@ -158,7 +153,6 @@ def province_detail(request, pk):
 
 def city_detail(request, pk):
     city = get_object_or_404(City, pk=pk)
-    #subdistricts = Subdistrict.objects.all().order_by('name')
     subdistricts = Subdistrict.objects.filter(city=city).order_by('name')
     context = {'city': city, 'subdistricts': subdistricts}
     return render(request, 'geolevels/city_detail.html', context)
@@ -166,21 +160,21 @@ def city_detail(request, pk):
 
 def subdistrict_detail(request, pk):
     subdistrict = get_object_or_404(Subdistrict, pk=pk)
-    villages = Village.objects.filter(subdistrict=subdistrict).order_by('name')    
+    villages = Village.objects.filter(subdistrict=subdistrict).order_by('name')
     context = {'subdistrict': subdistrict, 'villages': villages}
     return render(request, 'geolevels/subdistrict_detail.html', context)
 
 
 def village_detail(request, pk):
     village = get_object_or_404(Village, pk=pk)
-    rws = RW.objects.all().filter(village=village).order_by('name')
+    rws = RW.objects.filter(village=village).order_by('name')
     context = {'village': village, 'rws': rws}
     return render(request, 'geolevels/village_detail.html', context)
 
 
 def rw_detail(request, pk):
     rw = get_object_or_404(RW, pk=pk)
-    rts = RT.objects.all().filter(rw=rw).order_by('name')
+    rts = RT.objects.filter(rw=rw).order_by('name')
     context = {'rw': rw, 'rts': rts}
     return render(request, 'geolevels/rw_detail.html', context)
 

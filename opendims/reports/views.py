@@ -7,7 +7,7 @@ from rest_framework import generics, filters
 
 from common.views import CustomListCreateAPIView
 from .models import Event, Report
-from .filters import EventFilter
+from .filters import EventFilter, ReportFilter
 
 
 class EventListView(generic.ListView):
@@ -45,11 +45,10 @@ class APIEventList(CustomListCreateAPIView):
     ordering = ('-created',)
 
 
-class APIReportList(generics.ListCreateAPIView):
-    queryset = Report.objects.all()
+class APIReportList(CustomListCreateAPIView):
+    queryset = Report.objects.filter(status='VERIFIED')
     serializer_class = ReportSerializer
-
-
-class APIReportDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Report.objects.all()
-    serializer_class = ReportSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    filter_class = ReportFilter
+    ordering_fields = ('created',)
+    ordering = ('-created',)

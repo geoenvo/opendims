@@ -10,10 +10,10 @@ class ProvinceSerializer(gis_serializers.GeoFeatureModelSerializer):
         model = Province
         geo_field = 'polygon'
         fields = (
-                'id',
-                'name',
-                'note',
-                )
+            'id',
+            'name',
+            'note',
+        )
 
 
 class CitySerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -26,12 +26,12 @@ class CitySerializer(gis_serializers.GeoFeatureModelSerializer):
         model = City
         geo_field = 'polygon'
         fields = (
-                'id',
-                'province_name',
-                'province',
-                'name',
-                'note',
-                )
+            'id',
+            'province',
+            'province_name',
+            'name',
+            'note',
+        )
 
 
 class SubdistrictSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -44,12 +44,12 @@ class SubdistrictSerializer(gis_serializers.GeoFeatureModelSerializer):
         model = Subdistrict
         geo_field = 'polygon'
         fields = (
-                'id',
-                'city_name',
-                'city',
-                'name',
-                'note',
-                )
+            'id',
+            'city',
+            'city_name',
+            'name',
+            'note',
+        )
 
 
 class VillageSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -62,12 +62,12 @@ class VillageSerializer(gis_serializers.GeoFeatureModelSerializer):
         model = Village
         geo_field = 'polygon'
         fields = (
-                'id',
-                'subdistrict_name',
-                'subdistrict',
-                'name',
-                'note',
-                )
+            'id',
+            'subdistrict',
+            'subdistrict_name',
+            'name',
+            'note',
+        )
 
 
 class RWSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -80,22 +80,27 @@ class RWSerializer(gis_serializers.GeoFeatureModelSerializer):
         model = RW
         geo_field = 'polygon'
         fields = (
-                'id',
-                'village_name',
-                'village',
-                'name',
-                'note',
-                )
+            'id',
+            'village',
+            'village_name',
+            'name',
+            'note',
+        )
 
 
 class RTSerializer(gis_serializers.GeoFeatureModelSerializer):
+    rw_name = serializers.SerializerMethodField()
+
+    def get_rw_name(self, obj):
+        return obj.rw.name
 
     class Meta:
         model = RT
         geo_field = 'polygon'
         fields = (
-                'id',
-                'rw',
-                'name',
-                'note',
-                )
+            'id',
+            'rw',
+            'rw_name',
+            'name',
+            'note',
+        )
