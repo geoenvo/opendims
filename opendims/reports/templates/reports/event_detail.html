@@ -23,8 +23,12 @@
             <td>{{ event.created }}</td>
         </tr>
         <tr>
+            <th>{% get_verbose_field_name event 'updated' %}</th>
+            <td>{{ event.updated }}</td>
+        </tr>
+        <tr>
             <th>{% get_verbose_field_name event 'disaster' %}</th>
-            <td>{{ event.disaster }}</td>
+            <td>{{ event.disaster.note }}</td>
         </tr>
         <tr>
             <th>{% get_verbose_field_name event 'height' %}</th>
@@ -93,9 +97,9 @@
     <thead>
         <tr>
             {% for report in reports|slice:'1' %}
-            <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
+            <th>{% get_verbose_field_name report 'created' %}</th>
             <th>{% get_verbose_field_name report 'updated' %}</th>
-            <th>{% get_verbose_field_name report 'event' %}</th>
             <th>{% get_verbose_field_name report 'source' %}</th>
             <th>{% get_verbose_field_name report 'status' %}</th>
             <th>{% get_verbose_field_name report 'note' %}</th>
@@ -105,10 +109,10 @@
     <tbody>
         {% for report in reports %}
         <tr>
-            <td><a href="{{ report.get_absolute_url }}">{{ report.created }}</a></td>
+            <td><a href="{{ report.get_absolute_url }}">{{ report.event }}</a></td>
+            <td>{{ report.created }}</td>
             <td>{{ report.updated }}</td>
-            <td>{{ report.event }}</td>
-            <td>{{ report.source }}</td>
+            <td>{{ report.source.note }}</td>
             <td>{{ report.status }}</td>
             <td>{{ report.note }}</td>
         </tr>
@@ -131,7 +135,7 @@
  * Show the polygon of the affected area in the lowest defined
  * administrative area and display a popup of the event details.
  */
-function event_map_init(map, options) {
+function leaflet_map_init(map, options) {
     {% if event.province %}
 
     var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
@@ -198,7 +202,7 @@ function event_map_init(map, options) {
             </tr>
             <tr>
                 <th>{% get_verbose_field_name event 'disaster' %}</th>
-                <td>{{ event.disaster }}</td>
+                <td>{{ event.disaster.note }}</td>
             </tr>
             <tr>
                 <th>{% get_verbose_field_name event 'height' %}</th>

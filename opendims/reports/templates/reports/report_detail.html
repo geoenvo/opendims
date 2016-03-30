@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <th>{% get_verbose_field_name report 'source' %}</th>
-            <td>{{ report.source }}</td>
+            <td>{{ report.source.note }}</td>
         </tr>
         <tr>
             <th>{% get_verbose_field_name report 'status' %}</th>
@@ -42,6 +42,10 @@
         <tr>
             <th class="col-md-2">{% get_verbose_field_name report.event 'created' %}</th>
             <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created }}</a></td>
+        </tr>
+        <tr>
+            <th>{% get_verbose_field_name report.event 'updated' %}</th>
+            <td>{{ report.event.updated }}</td>
         </tr>
         <tr>
             <th>{% get_verbose_field_name report.event 'disaster' %}</th>
