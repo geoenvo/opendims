@@ -28,11 +28,11 @@ from ckeditor_uploader import urls as ckeditor_uploader_urls
 from common import views as common_views
 from reports import urls as reports_urls
 from geolevels import urls as geolevels_urls
+from maps import urls as maps_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
-    url(r'^map/$', TemplateView.as_view(template_name='opendims/page_map.html'), name='page_map'),
     url(r'^bootleaf_example/$', TemplateView.as_view(template_name='bootleaf_example/example.html'), name='bootleaf_example'),
     url(r'^bootleaf_test/$', TemplateView.as_view(template_name='bootleaf_example/test.html'), name='bootleaf_test'),
     url(r'^accounts/login/$', common_views.login, name='login'),
@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
+    url(r'^maps/', include(maps_urls, namespace='maps')),
 ]
 
 if settings.DEBUG:
