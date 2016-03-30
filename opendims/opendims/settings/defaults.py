@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'common',
     'reports',
     'geolevels',
+    'maps',
 ]
 
 MIDDLEWARE_CLASSES = [
