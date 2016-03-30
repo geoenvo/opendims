@@ -12,7 +12,7 @@ from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
 if __name__ == '__main__':
     conn = psycopg2.connect(
-        "dbname='geolevels' user ='vagrant' password='password'"
+        "host='localhost' dbname='geolevels' user ='vagrant' password='password'"
     )
     cur = conn.cursor()
     sql_prov = "SELECT * FROM boundary_prov;"
