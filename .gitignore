@@ -8,3 +8,5 @@ Vagrantfile
 opendims/static/*
 opendims/components/*
 opendims/uploaded/*
+opendims/opendims/settings/local_settings.py
+opendims/opendims/settings/production.py
