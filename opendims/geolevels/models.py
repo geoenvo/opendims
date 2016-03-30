@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
 
@@ -20,6 +21,9 @@ class Province(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+
+    def get_absolute_url(self):
+        return reverse('geolevels:province_detail', args=[self.pk])
 
     def __unicode__(self):
         return self.name
@@ -42,6 +46,9 @@ class City(CommonAbstractModel):
     class Meta:
         verbose_name_plural = _('Cities')
 
+    def get_absolute_url(self):
+        return reverse('geolevels:city_detail', args=[self.pk])
+
     def __unicode__(self):
         return self.name
 
@@ -59,6 +66,9 @@ class Subdistrict(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+
+    def get_absolute_url(self):
+        return reverse('geolevels:subdistrict_detail', args=[self.pk])
 
     def __unicode__(self):
         return self.name
@@ -80,6 +90,9 @@ class Village(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+
+    def get_absolute_url(self):
+        return reverse('geolevels:village_detail', args=[self.pk])
 
     def __unicode__(self):
         return self.name
@@ -103,6 +116,9 @@ class RW(CommonAbstractModel):
     class Meta:
         verbose_name = verbose_rw
 
+    def get_absolute_url(self):
+        return reverse('geolevels:rw_detail', args=[self.pk])
+
     def __unicode__(self):
         return self.name
 
@@ -123,6 +139,9 @@ class RT(CommonAbstractModel):
 
     class Meta:
         verbose_name = verbose_rt
+
+    def get_absolute_url(self):
+        return reverse('geolevels:rt_detail', args=[self.pk])
 
     def __unicode__(self):
         return self.name

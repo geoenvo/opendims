@@ -1,22 +1,16 @@
-{% extends "opendims/base.html" %}
+{% extends "reports/reports.html" %}
 
 {% load i18n leaflet_tags verbose_names %}
 
-{% block opendims_title %} - {{ event }}{% endblock %}
+{% block title %}{{ block.super }} - {{ event }}{% endblock %}
 
 {% block extra_css %}
 
 {% leaflet_css %}
 
-<style>
-.leaflet-container {
-    height: 400px;
-}
-</style>
-
 {% endblock %}
 
-{% block opendims_content %}
+{% block main %}
 
 <div class="page-header">
     <h2>{{ event }}</h2>
@@ -25,7 +19,7 @@
 <table class="table table-striped table-bordered">
     <tbody>
         <tr>
-            <th>{% get_verbose_field_name event 'created' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name event 'created' %}</th>
             <td>{{ event.created }}</td>
         </tr>
         <tr>
@@ -44,56 +38,62 @@
             <th>{% get_verbose_field_name event 'note' %}</th>
             <td>{{ event.note }}</td>
         </tr>
+
         {% if event.province %}
         <tr>
             <th>{% get_verbose_field_name event 'province' %}</th>
-            <td><a href="{% url 'geolevels:province_detail' event.province.pk %}">{{ event.province }}</a></td>
+            <td><a href="{{ event.province.get_absolute_url }}">{{ event.province }}</a></td>
         </tr>
         {% endif %}
+
         {% if event.city %}
         <tr>
             <th>{% get_verbose_field_name event 'city' %}</th>
-            <td><a href="{% url 'geolevels:city_detail' event.city.pk %}">{{ event.city }}</a></td>
+            <td><a href="{{ event.city.get_absolute_url }}">{{ event.city }}</a></td>
         </tr>
         {% endif %}
+
         {% if event.subdistrict %}
         <tr>
             <th>{% get_verbose_field_name event 'subdistrict' %}</th>
-            <td><a href="{% url 'geolevels:subdistrict_detail' event.subdistrict.pk %}">{{ event.subdistrict }}</a></td>
+            <td><a href="{{ event.subdistrict.get_absolute_url }}">{{ event.subdistrict }}</a></td>
         </tr>
         {% endif %}
+
         {% if event.village %}
         <tr>
             <th>{% get_verbose_field_name event 'village' %}</th>
-            <td><a href="{% url 'geolevels:village_detail' event.village.pk %}">{{ event.village }}</a></td>
+            <td><a href="{{ event.village.get_absolute_url }}">{{ event.village }}</a></td>
         </tr>
         {% endif %}
+
         {% if event.rw %}
         <tr>
             <th>{% get_verbose_field_name event 'rw' %}</th>
-            <td><a href="{% url 'geolevels:rw_detail' event.rw.pk %}">{{ event.rw }}</a></td>
+            <td><a href="{{ event.rw.get_absolute_url }}">{{ event.rw }}</a></td>
         </tr>
         {% endif %}
+
         {% if event.rt %}
         <tr>
             <th>{% get_verbose_field_name event 'rt' %}</th>
-            <td><a href="{% url 'geolevels:rt_detail' event.rt.pk %}">{{ event.rt }}</a></td>
+            <td><a href="{{ event.rt.get_absolute_url }}">{{ event.rt }}</a></td>
         </tr>
         {% endif %}
     </tbody>
 </table>
 
-<h3>{% trans 'Affected area' %}</h3>
+<h3>{% trans "Affected area" %}</h3>
 
-{% leaflet_map "event_map" callback="window.event_map_init" %}
+{% leaflet_map "leaflet_map" callback="window.leaflet_map_init" %}
 
-<h3>{% trans 'Reports' %}</h3>
+<h3>{% trans "Reports" %}</h3>
 
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
             {% for report in reports|slice:'1' %}
-            <th>{% get_verbose_field_name report 'created' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
             <th>{% get_verbose_field_name report 'updated' %}</th>
             <th>{% get_verbose_field_name report 'event' %}</th>
             <th>{% get_verbose_field_name report 'source' %}</th>
@@ -114,7 +114,7 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan="6" style="text-align: center;">{% trans 'No reports found for this event.' %}</td>
+            <td colspan="6" class="text-center">{% trans "No reports found for this event." %}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -133,53 +133,67 @@
  */
 function event_map_init(map, options) {
     {% if event.province %}
+
     var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     {% if event.city %}
+
     if (typeof provinceLayer !== 'undefined') {
         map.removeLayer(provinceLayer);
     }
     var cityLayer = L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     {% if event.subdistrict %}
+
     if (typeof cityLayer !== 'undefined') {
         map.removeLayer(cityLayer);
     }
     var subdistrictLayer = L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     {% if event.village %}
+
     if (typeof subdistrictLayer !== 'undefined') {
         map.removeLayer(subdistrictLayer);
     }
     var villageLayer = L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     {% if event.rw %}
+
     if (typeof villageLayer !== 'undefined') {
         map.removeLayer(villageLayer);
     }
     var rwLayer = L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     {% if event.rt %}
+
     if (typeof rwLayer !== 'undefined') {
         map.removeLayer(rwLayer);
     }
     var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     {% if event.point %}
+
     var pointLayer = L.geoJson({{ event.point.geojson|safe }}).addTo(map);
+
     {% endif %}
 
     var popupContent = `
     <table class="table table-striped table-bordered">
         <tbody>
             <tr>
-                <th>{% get_verbose_field_name event 'created' %}</th>
+                <th class="col-md-2">{% get_verbose_field_name event 'created' %}</th>
                 <td>{{ event.created }}</td>
             </tr>
             <tr>
@@ -198,40 +212,46 @@ function event_map_init(map, options) {
                 <th>{% get_verbose_field_name event 'note' %}</th>
                 <td>{{ event.note }}</td>
             </tr>
+
             {% if event.province %}
             <tr>
                 <th>{% get_verbose_field_name event 'province' %}</th>
-                <td><a href="{% url 'geolevels:province_detail' event.province.pk %}">{{ event.province }}</a></td>
+                <td><a href="{{ event.province.get_absolute_url }}">{{ event.province }}</a></td>
             </tr>
             {% endif %}
+
             {% if event.city %}
             <tr>
                 <th>{% get_verbose_field_name event 'city' %}</th>
-                <td><a href="{% url 'geolevels:city_detail' event.city.pk %}">{{ event.city }}</a></td>
+                <td><a href="{{ event.city.get_absolute_url }}">{{ event.city }}</a></td>
             </tr>
             {% endif %}
+
             {% if event.subdistrict %}
             <tr>
                 <th>{% get_verbose_field_name event 'subdistrict' %}</th>
-                <td><a href="{% url 'geolevels:subdistrict_detail' event.subdistrict.pk %}">{{ event.subdistrict }}</a></td>
+                <td><a href="{{ event.subdistrict.get_absolute_url }}">{{ event.subdistrict }}</a></td>
             </tr>
             {% endif %}
+
             {% if event.village %}
             <tr>
                 <th>{% get_verbose_field_name event 'village' %}</th>
-                <td><a href="{% url 'geolevels:village_detail' event.village.pk %}">{{ event.village }}</a></td>
+                <td><a href="{{ event.village.get_absolute_url }}">{{ event.village }}</a></td>
             </tr>
             {% endif %}
+
             {% if event.rw %}
             <tr>
                 <th>{% get_verbose_field_name event 'rw' %}</th>
-                <td><a href="{% url 'geolevels:rw_detail' event.rw.pk %}">{{ event.rw }}</a></td>
+                <td><a href="{{ event.rw.get_absolute_url }}">{{ event.rw }}</a></td>
             </tr>
             {% endif %}
+
             {% if event.rt %}
             <tr>
                 <th>{% get_verbose_field_name event 'rt' %}</th>
-                <td><a href="{% url 'geolevels:rt_detail' event.rt.pk %}">{{ event.rt }}</a></td>
+                <td><a href="{{ event.rt.get_absolute_url }}">{{ event.rt }}</a></td>
             </tr>
             {% endif %}
         </tbody>

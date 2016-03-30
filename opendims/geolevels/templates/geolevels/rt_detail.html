@@ -1,4 +1,4 @@
-{% extends "opendims/layouts/col_2.html" %}
+{% extends "geolevels/geolevels.html" %}
 
 {% load i18n leaflet_tags verbose_names %}
 
@@ -7,12 +7,6 @@
 {% block extra_css %}
 
 {% leaflet_css %}
-
-<style>
-.leaflet-container {
-    height: 400px;
-}
-</style>
 
 {% endblock %}
 
@@ -42,8 +36,10 @@
 <script type="text/javascript">
 function leaflet_map_init(map, options) {
     {% if rt %}
+    
     var rtLayer = L.geoJson({{ rt.polygon.geojson|safe }}).addTo(map);
     map.fitBounds(rtLayer);
+    
     {% endif %}
 }
 </script>

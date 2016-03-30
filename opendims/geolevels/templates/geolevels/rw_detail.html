@@ -1,4 +1,4 @@
-{% extends "opendims/layouts/col_2.html" %}
+{% extends "geolevels/geolevels.html" %}
 
 {% load i18n leaflet_tags verbose_names %}
 
@@ -7,12 +7,6 @@
 {% block extra_css %}
 
 {% leaflet_css %}
-
-<style>
-.leaflet-container {
-    height: 400px;
-}
-</style>
 
 {% endblock %}
 
@@ -52,7 +46,7 @@
     <tbody>
         {% for rt in rts %}
         <tr>
-            <td><a href="{% url 'geolevels:rt_detail' rt.pk  %}">{{ rt.name }}</a></td>
+            <td><a href="{{ rt.get_absolute_url }}">{{ rt.name }}</a></td>
             <td>{{ rt.rw }}</td>
             <td>{{ rt.note }}</td>
         </tr>
@@ -73,8 +67,10 @@
 <script type="text/javascript">
 function leaflet_map_init(map, options) {
     {% if rw %}
+
     var rwLayer = L.geoJson({{ rw.polygon.geojson|safe }}).addTo(map);
     map.fitBounds(rwLayer);
+
     {% endif %}
 }
 </script>

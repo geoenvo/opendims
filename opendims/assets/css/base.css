@@ -14,7 +14,7 @@ body {
 }
 
 header {
-    /*min-height: 180px;*/
+    min-height: 180px;
     margin-bottom: 5px;
 }
 
@@ -31,7 +31,7 @@ header {
     #sidebar.affix-top {
         position: static;
     }
-    
+
     #sidebar.affix {
         position: fixed !important;
         top: 20px;
@@ -45,7 +45,7 @@ header {
     #rightCol.affix-bottom {
         padding-top: 0;
     }
-    
+
     #rightCol.affix {
         position: fixed !important;
         top: 20px;
@@ -78,7 +78,7 @@ a, a:hover {
 .highlight {
     color: #77CCDD;
 }
-  
+
 h3.highlight  {
     padding-top: 13px;
     padding-bottom: 14px;
@@ -127,7 +127,7 @@ h3.highlight  {
     color: #fff;
     border-width: 0;
 }
-  
+
 .navbar-toggle:hover {
     background-color: #fff;
 }
@@ -211,6 +211,29 @@ footer {
 /* end custom theme */
 
 /* Open-DiMS styles */
+header {
+    min-height: auto;
+}
+
+.col-1 .no-gutter.row > .col-md-12,
+.col-2 .no-gutter.row > .col-md-10,
+.col-3 .no-gutter.row > .col-md-3 {
+    padding-right: 15px;
+}
+
 #content .page-header {
     margin-top: 0;
+}
+
+.page-header h2 {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+footer {
+    height: auto;
+}
+
+.leaflet-container {
+    height: 400px;
 }

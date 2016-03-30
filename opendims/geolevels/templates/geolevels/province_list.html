@@ -1,4 +1,4 @@
-{% extends "opendims/layouts/col_2.html" %}
+{% extends "geolevels/geolevels.html" %}
 
 {% load i18n verbose_names %}
 
@@ -22,7 +22,7 @@
     <tbody>
         {% for province in provinces %}
         <tr>
-            <td><a href="{% url 'geolevels:province_detail' province.pk  %}">{{ province.name }}</a></td>
+            <td><a href="{{ province.get_absolute_url }}">{{ province.name }}</a></td>
             <td>{{ province.note }}</td>
         </tr>
         {% empty %}

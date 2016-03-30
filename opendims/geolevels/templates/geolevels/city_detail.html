@@ -1,4 +1,4 @@
-{% extends "opendims/layouts/col_2.html" %}
+{% extends "geolevels/geolevels.html" %}
 
 {% load i18n leaflet_tags verbose_names %}
 
@@ -8,18 +8,12 @@
 
 {% leaflet_css %}
 
-<style>
-.leaflet-container {
-    height: 400px;
-}
-</style>
-
 {% endblock %}
 
 {% block main %}
 
 <div class="page-header">
-    <h2>{{ city }} - {{city.province}}</h2>
+    <h2>{{ city }} - {{ city.province }}</h2>
 </div>
 
 <table class="table table-striped table-bordered">
@@ -48,7 +42,7 @@
     <tbody>
         {% for subdistrict in subdistricts %}
         <tr>
-            <td><a href="{% url 'geolevels:subdistrict_detail' subdistrict.pk  %}">{{ subdistrict.name }}</a></td>
+            <td><a href="{{ subdistrict.get_absolute_url }}">{{ subdistrict.name }}</a></td>
             <td>{{ subdistrict.city }}</td>
             <td>{{ subdistrict.note }}</td>
         </tr>
@@ -69,8 +63,10 @@
 <script type="text/javascript">
 function leaflet_map_init(map, options) {
     {% if city %}
+
     var cityLayer = L.geoJson({{city.polygon.geojson|safe }}).addTo(map);
     map.fitBounds(cityLayer);
+
     {% endif %}
 }
 </script>
