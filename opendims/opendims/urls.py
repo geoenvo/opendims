@@ -31,20 +31,20 @@ from geolevels import urls as geolevels_urls
 from maps import urls as maps_urls
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
-    url(r'^bootleaf_example/$', TemplateView.as_view(template_name='bootleaf_example/example.html'), name='bootleaf_example'),
-    url(r'^bootleaf_test/$', TemplateView.as_view(template_name='bootleaf_example/test.html'), name='bootleaf_test'),
-    url(r'^accounts/login/$', common_views.login, name='login'),
-    url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
-    url(r'^accounts/', include(registration_urls)),
+    # url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
+    # url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
+    # url(r'^bootleaf_example/$', TemplateView.as_view(template_name='bootleaf_example/example.html'), name='bootleaf_example'),
+    # url(r'^bootleaf_test/$', TemplateView.as_view(template_name='bootleaf_example/test.html'), name='bootleaf_test'),
+    # url(r'^accounts/login/$', common_views.login, name='login'),
+    # url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
+    # url(r'^accounts/', include(registration_urls)),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^pages/', include(flatpages_urls)),
-    url(r'^ckeditor/', include(ckeditor_uploader_urls)),
+    # url(r'^pages/', include(flatpages_urls)),
+    # url(r'^ckeditor/', include(ckeditor_uploader_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
-    url(r'^maps/', include(maps_urls, namespace='maps')),
+    # url(r'^maps/', include(maps_urls, namespace='maps')),
 ]
 
 if settings.DEBUG:

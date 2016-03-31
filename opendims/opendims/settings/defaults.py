@@ -171,7 +171,7 @@ ADMIN_REORDER = (
     ('reports', ('Event', 'Report', 'Source', 'Disaster')),
 )
 
-SITE_NAME = 'Open-DiMS'
+SITE_NAME = 'API'
 
 LOGIN_REDIRECT_URL = '/'
 
