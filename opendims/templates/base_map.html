@@ -311,9 +311,7 @@
     -->
     <script type="text/javascript">
     $(document).ready(function(){
-        var map, featureList, museumSearch = [], BJRSearch =[], KBKSearch = [], LAISearch = [], GMPSearch = [],
-        CEKSearch = [], ROBSearch = [], ABRSearch = [], TSUSearch = [], SOSSearch = [], TERSearch = [], LSRSearch = [] ;
-
+        var map, featureList, BJRSearch =[], KBKSearch = [], LAISearch = [], GMPSearch = [], CEKSearch = [], ROBSearch = [], ABRSearch = [], TSUSearch = [], SOSSearch = [], TERSearch = [], LSRSearch = [];
 
         $(window).resize(function() {
           sizeLayerControl();
@@ -389,18 +387,17 @@
         function sidebarClick(id) {
           var layer = markerClusters.getLayer(id);
 
-          //DISASTER
           var center;
           var bounds;
 
           if (layer.feature.geometry.type === 'Point') {
-              center = layer.getCenter();
-
+            center = layer.getCenter();
           }
           else if (layer.feature.geometry.type === 'MultiPolygon') {
-              bounds = layer.getBounds();
-              center = bounds.getCenter();
+            bounds = layer.getBounds();
+            center = bounds.getCenter();
           }
+
           map.setView([center.lat, center.lng], 17);
 
           layer.fire("click");
@@ -410,6 +407,7 @@
             map.invalidateSize();
           }
         }
+        // end sidebarClick()
 
         function syncSidebar() {
           /* Empty sidebar features */
@@ -420,18 +418,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -443,18 +440,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/abration.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -466,18 +462,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/tornado.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -489,18 +484,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/treedown.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -512,18 +506,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/seaflood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -535,18 +528,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/earthquake.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -558,18 +550,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/strike.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -581,18 +572,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/tsunami.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -604,18 +594,17 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/fire.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -627,40 +616,39 @@
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/shooting.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
             }
           });
+
           LSR.eachLayer(function (layer) {
             if (map.hasLayer(LSRLayer)) {
               var center;
 
               if (layer.feature.geometry.type === 'Point') {
-                  center = layer.getLatLng();
+                center = layer.getLatLng();
               }
               else if (layer.feature.geometry.type === 'MultiPolygon') {
-                  var bounds = layer.getBounds();
-                  center = bounds.getCenter();
+                var bounds = layer.getBounds();
+                center = bounds.getCenter();
               }
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
                   var featureName = layer.feature.properties.disaster;
                   var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/avalanche.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
               }
@@ -673,6 +661,7 @@
             order: "asc"
           });
         }
+        // end syncSidebar()
 
         /* Basemap Layers */
         var mapquestOSM = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
@@ -716,83 +705,84 @@
 
         var LAILayer = L.geoJson(null);
         var LAI = L.geoJson(null, {
-            style: function (feature) {
+          style: function (feature) {
             return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-        onEachFeature: function (feature, layer) {
+              color: 'blue',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
             var center;
 
             if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
             else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
+              center = layer.getLatLng();
+            }
 
             if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
+              var featureName = feature.properties.disaster + '-' + feature.properties.created;
+              var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
+              popupContent = featureName + ': ' + featureLocation;
 
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+              $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
 
-                LAISearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'LAI',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
+              LAISearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'LAI',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
 
-                // Use center to put a fixed marker on map
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/treedown.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                    }),
-                    title: popupContent,
-                    riseOnHover: true
-                }).addTo(map);
+            // Use center to put a fixed marker on map
+            var marker = L.marker(center, {
+              icon: L.icon({
+                iconUrl: "{% static 'img/markers/treedown.png' %}",
+                iconSize: [24, 28],
+                iconAnchor: [12, 28],
+                popupAnchor: [0, -25]
+              }),
+              title: popupContent,
+              riseOnHover: true
+            }).addTo(map);
 
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Event</th><td>" + featureName + "</td></tr>" +
-                              "<tr><th>Name</th><td>" + feature.properties.disaster_note + "</td></tr>" +
-                              "<tr><th>Location</th><td>" + featureLocation + "</td></tr>" +
-                              "<tr><th>Report</th><td>" + feature.properties.reports + "</td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View Detail' + "</a></td></tr>" + "<table>";
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
+            var content = "<table class='table table-striped table-bordered table-condensed'>" +
+              "<tr><th>Event</th><td>" + featureName + "</td></tr>" +
+              "<tr><th>Name</th><td>" + feature.properties.disaster_note + "</td></tr>" +
+              "<tr><th>Location</th><td>" + featureLocation + "</td></tr>" +
+              "<tr><th>Report</th><td>" + feature.properties.reports + "</td></tr>" +
+              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View Detail' + "</a></td></tr>" + "<table>";
 
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
-                },
+            layer.on({
+              click: function (e) {
+                $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
+                $("#feature-info").html(content);
+                $("#featureModal").modal("show");
+                highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+              }
             });
-            $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json", function (data) {
-            LAI.addData(data);
+
+            marker.on({
+              click: function (e) {
+                $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
+                $("#feature-info").html(content);
+                $("#featureModal").modal("show");
+                highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
+              }
             });
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json", function (data) {
+          LAI.addData(data);
+        });
 
         var TERLayer = L.geoJson(null);
         var TER = L.geoJson(null, {
