@@ -23,11 +23,11 @@
     <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/leaflet.groupedlayercontrol.css' %}">
     <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/app.css' %}">
 
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'bootleaf_example/assets/img/favicon-76.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'bootleaf_example/assets/img/favicon-120.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'bootleaf_example/assets/img/favicon-152.png' %}">
-    <link rel="icon" sizes="196x196" href="{% static 'bootleaf_example/assets/img/favicon-196.png' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'bootleaf_example/assets/img/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/opendims.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'assets/opendims.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'assets/opendims.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'assets/opendims.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
   </head>
 
   <body>
@@ -716,6 +716,15 @@
           onEachFeature: function (feature, layer) {
             var center;
 
+            var report =[];
+
+            var reports = feature.properties.reports;
+
+            for (var i= 0; i < reports.length; i++)
+            {
+                report = reports[i];
+            }
+
             if (feature.geometry.type === 'MultiPolygon') {
               // Get bounds and center of polygon
               var bounds = layer.getBounds();
@@ -755,12 +764,16 @@
             }).addTo(map);
 
             var content = "<table class='table table-striped table-bordered table-condensed'>" +
-              "<tr><th>Event</th><td>" + featureName + "</td></tr>" +
-              "<tr><th>Name</th><td>" + feature.properties.disaster_note + "</td></tr>" +
-              "<tr><th>Location</th><td>" + featureLocation + "</td></tr>" +
-              "<tr><th>Report</th><td>" + feature.properties.reports + "</td></tr>" +
-              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View Detail' + "</a></td></tr>" + "<table>";
-
+                          "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
+                          "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
+                          "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
+                          "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
+                          "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
+                          "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
+                          "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
+                          "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
+                          "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
+                          "<table>";
             layer.on({
               click: function (e) {
                 $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
@@ -966,8 +979,7 @@
                         highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
                     }
                 });
-
-                },
+              },
             });
             $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json", function (data) {
             ABR.addData(data);
