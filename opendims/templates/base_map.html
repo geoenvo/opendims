@@ -12,7 +12,7 @@
     <meta name="theme-color" content="yellow">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Open-DiMS</title>
+    <title>{% block title %}{{ SITE_NAME }}{% endblock title %}</title>
 
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
@@ -38,7 +38,7 @@
             <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
             <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
           </div>
-          <a class="navbar-brand" href="#">Open-DiMS</a>
+          <a class="navbar-brand" href="#">{{ SITE_NAME }}</a>
         </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="search">
@@ -59,7 +59,7 @@
               </ul>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download Geojson Data <b class="caret"></b></a>
+                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download GeoJSON Data <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'reports:event_api' %}?disaster=ABR&format=json" download="ABR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Abrasi</a></li>
                   <li><a href="{% url 'reports:event_api' %}?disaster=BJR&format=json" download="BJR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Banjir</a></li>
@@ -67,7 +67,7 @@
                   <li><a href="{% url 'reports:event_api' %}?disaster=GMP&format=json" download="GMP.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Gempa Bumi</a></li>
                   <li><a href="{% url 'reports:event_api' %}?disaster=KBK&format=json" download="KBK.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Kebakaran</a></li>
                   <li><a href="{% url 'reports:event_api' %}?disaster=LSR&format=json" download="LSR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Longsor</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=LAI&format=json" download="LAI.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Lain-Lain</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=LAI&format=json" download="LAI.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Lain-lain</a></li>
                   <li><a href="{% url 'reports:event_api' %}?disaster=ROB&format=json" download="ROB.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Banjir Laut</a></li>
                   <li><a href="{% url 'reports:event_api' %}?disaster=SOS&format=json" download="SOS.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Tawuran</a></li>
                   <li><a href="{% url 'reports:event_api' %}?disaster=TER&format=json" download="TER.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Teror</a></li>
@@ -493,10 +493,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
-                  $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/treedown.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
+                  $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/caution.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -707,7 +739,7 @@
         var LAI = L.geoJson(null, {
           style: function (feature) {
             return {
-              color: 'blue',
+              color: '#FFFF00',
               fill: true,
               opacity: 1,
               clickable: true
@@ -716,15 +748,7 @@
           onEachFeature: function (feature, layer) {
             var center;
 
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
+            // Event geometry can be either a MultiPolygon or Point
             if (feature.geometry.type === 'MultiPolygon') {
               // Get bounds and center of polygon
               var bounds = layer.getBounds();
@@ -735,11 +759,113 @@
             }
 
             if (feature.properties) {
-              var featureName = feature.properties.disaster + '-' + feature.properties.created;
-              var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-              popupContent = featureName + ': ' + featureLocation;
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
 
-              $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/caution.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
 
               LAISearch.push({
                 name: featureName,
@@ -750,47 +876,7 @@
                 lng: center.lng
               });
             }
-
-            // Use center to put a fixed marker on map
-            var marker = L.marker(center, {
-              icon: L.icon({
-                iconUrl: "{% static 'img/markers/treedown.png' %}",
-                iconSize: [24, 28],
-                iconAnchor: [12, 28],
-                popupAnchor: [0, -25]
-              }),
-              title: popupContent,
-              riseOnHover: true
-            }).addTo(map);
-
-            var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                          "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                          "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                          "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                          "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                          "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                          "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                          "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                          "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                          "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                          "<table>";
-            layer.on({
-              click: function (e) {
-                $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
-                $("#feature-info").html(content);
-                $("#featureModal").modal("show");
-                highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-              }
-            });
-
-            marker.on({
-              click: function (e) {
-                $("#feature-title").html(feature.properties.disaster + '-' + feature.properties.created);
-                $("#feature-info").html(content);
-                $("#featureModal").modal("show");
-                highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-              }
-            });
+            // end if (feature.properties)
           },
         });
         $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json", function (data) {
@@ -1390,7 +1476,6 @@
             for (var i= 0; i < reports.length; i++)
             {
                 report = reports[i];
-                console.log(report);
             }
 
             if (feature.geometry.type === 'MultiPolygon') {
@@ -1960,7 +2045,7 @@
             "<img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Laut": ROBLayer,
             "<img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi": GMPLayer,
             "<img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran": KBKLayer,
-            "<img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Lain-lain": LAILayer,
+            "<img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain": LAILayer,
             "<img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor": LSRLayer,
             "<img src='{% static "img/markers/tornado.png" %}' width='24' height='28'>&nbsp;Puting Beliung": CEKLayer,
             "<img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Tawuran": SOSLayer,
@@ -1993,7 +2078,8 @@
         $(document).one("ajaxStop", function () {
           $("#loading").hide();
           sizeLayerControl();
-          map.fitBounds(BJR.getBounds());
+
+          //map.fitBounds(BJR.getBounds());
 
           featureList = new List("features", {valueNames: ["feature-name"]});
           featureList.sort("feature-name", {order:"asc"});
@@ -2240,7 +2326,7 @@
             displayKey: "name",
             source: LAIBH.ttAdapter(),
             templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang</h4>",
+              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
               suggestion: function (data) {
                 return data.name + '<br><small>' + data.location + '</small>';
               }
@@ -2286,9 +2372,7 @@
           templates: {
             header: "<h4 class='typeahead-header'><img src='{% static "bootleaf_example/assets/img/globe.png" %}' width='25' height='25'>&nbsp;GeoNames</h4>"
           }
-      }
-
-      ).on("typeahead:selected", function (obj, datum) {
+      }).on("typeahead:selected", function (obj, datum) {
           if (datum.source === "LAI") {
             if (!map.hasLayer(LAILayer)) {
               map.addLayer(LAILayer);
