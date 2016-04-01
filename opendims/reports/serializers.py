@@ -28,7 +28,7 @@ class ReportSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
-    reports = ReportSerializer(many=True, read_only=True)
+    reports = serializers.SerializerMethodField()
     geometry = gis_serializers.GeometrySerializerMethodField()
     disaster_note = serializers.SerializerMethodField()
     created = DateTimeFieldTZ()
@@ -39,6 +39,11 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
     village_name = serializers.SerializerMethodField()
     rw_name = serializers.SerializerMethodField()
     rt_name = serializers.SerializerMethodField()
+
+    def get_reports(self, obj):
+        reports = Report.objects.filter(event=obj, status='VERIFIED')
+        serializer = ReportSerializer(instance=reports, many=True)
+        return serializer.data
 
     def get_disaster_note(self, obj):
         return obj.disaster.note
