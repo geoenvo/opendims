@@ -151,11 +151,23 @@ def province_detail(request, pk):
     return render(request, 'geolevels/province_detail.html', context)
 
 
+def city_list(request):
+    cities = City.objects.all().order_by('name')
+    context = {'cities': cities}
+    return render(request, 'geolevels/city_list.html', context)
+
+
 def city_detail(request, pk):
     city = get_object_or_404(City, pk=pk)
     subdistricts = Subdistrict.objects.filter(city=city).order_by('name')
     context = {'city': city, 'subdistricts': subdistricts}
     return render(request, 'geolevels/city_detail.html', context)
+
+
+def subdistrict_list(request):
+    subdistricts = Subdistrict.objects.all().order_by('name')
+    context = {'subdistricts': subdistricts}
+    return render(request, 'geolevels/subdistrict_list.html', context)
 
 
 def subdistrict_detail(request, pk):
@@ -165,6 +177,12 @@ def subdistrict_detail(request, pk):
     return render(request, 'geolevels/subdistrict_detail.html', context)
 
 
+def village_list(request):
+    villages = Village.objects.all().order_by('name')
+    context = {'villages': villages}
+    return render(request, 'geolevels/village_list.html', context)
+
+
 def village_detail(request, pk):
     village = get_object_or_404(Village, pk=pk)
     rws = RW.objects.filter(village=village).order_by('name')
@@ -172,11 +190,23 @@ def village_detail(request, pk):
     return render(request, 'geolevels/village_detail.html', context)
 
 
+def rw_list(request):
+    rws = RW.objects.all().order_by('pk')
+    context = {'rws': rws}
+    return render(request, 'geolevels/rw_list.html', context)
+
+
 def rw_detail(request, pk):
     rw = get_object_or_404(RW, pk=pk)
     rts = RT.objects.filter(rw=rw).order_by('name')
     context = {'rw': rw, 'rts': rts}
     return render(request, 'geolevels/rw_detail.html', context)
+
+
+def rt_list(request):
+    rts = RT.objects.all().order_by('pk')
+    context = {'rts': rts}
+    return render(request, 'geolevels/rt_list.html', context)
 
 
 def rt_detail(request, pk):
