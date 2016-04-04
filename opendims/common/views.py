@@ -5,7 +5,7 @@ from django.conf import settings
 from rest_framework import generics, response, status
 
 
-class CustomListCreateAPIView(generics.ListCreateAPIView):
+class CustomListCreateAPIView(generics.ListAPIView):
     """
     Subclass API View to deal with django-filter strict not working. Overrides
     get method to check for invalid query params. If found return error 400.
