@@ -427,10 +427,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -449,10 +481,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/abration.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -471,10 +535,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/tornado.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -547,10 +643,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/seaflood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -569,10 +697,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/earthquake.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -591,10 +751,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/strike.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -613,10 +805,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/tsunami.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -635,10 +859,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/fire.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -657,10 +913,42 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/shooting.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
           });
@@ -679,18 +967,44 @@
 
               if (map.getBounds().contains(center)) {
                 if (layer.feature.properties) {
-                  var featureName = layer.feature.properties.disaster;
-                  var featureLocation = layer.feature.properties.province_name + ', ' + layer.feature.properties.city_name + ', ' + layer.feature.properties.subdistrict_name + ', ' + layer.feature.properties.village_name + ', ' + 'RW:' + layer.feature.properties.rw_name;
+                  var featureCreated = " - ";
+                  var featureDisaster = " - ";
+                  var featureProvinceName = " - ";
+                  var featureCityName = " - ";
+                  var featureSubdistrictName = " - ";
+                  var featureVillageName = " - ";
+                  var featureRWName = " - ";
+
+                  if (layer.feature.properties.created) {
+                    featureCreated = layer.feature.properties.created;
+                  }
+                  if (layer.feature.properties.disaster) {
+                    featureDisaster = layer.feature.properties.disaster;
+                  }
+                  if (layer.feature.properties.province) {
+                    featureProvinceName = layer.feature.properties.province_name;
+                  }
+                  if (layer.feature.properties.city) {
+                    featureCityName = layer.feature.properties.city_name;
+                  }
+                  if (layer.feature.properties.subdistrict) {
+                    featureSubdistrictName = layer.feature.properties.subdistrict_name;
+                  }
+                  if (layer.feature.properties.village) {
+                    featureVillageName = layer.feature.properties.village_name;
+                  }
+                  if (layer.feature.properties.rw) {
+                    featureRWName = layer.feature.properties.rw_name;
+                  }
+
+                  var featureName = featureDisaster + ' - ' + featureCreated;
+                  var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+
                   $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/avalanche.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
                 }
+                // end if (layer.feature.properties)
               }
             }
-          });
-          featureList = new List("features", {
-            valueNames: ["feature-name"]
-          });
-          featureList.sort("feature-name", {
-            order: "asc"
           });
         }
         // end syncSidebar()
@@ -813,7 +1127,7 @@
                 if (feature.properties.reports.length > 0) {
                   contentReports = "<ol style='margin-bottom: 0;'>";
                   for (var i = 0; i < feature.properties.reports.length; i++) {
-                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + feature.properties.reports[i].source  + "</a></li>";
                   }
                   contentReports = contentReports + "</ol>";
                 }
@@ -885,955 +1199,1483 @@
 
         var TERLayer = L.geoJson(null);
         var TER = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-        onEachFeature: function (feature, layer) {
-            var center;
-            //Do looping for reports object
-
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-                TERSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'TER',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-            var marker = L.marker(center, {
-                icon: L.icon({
-                    iconUrl: "{% static 'img/markers/shooting.png' %}",
-                    iconSize: [24, 28],
-                    iconAnchor: [12, 28],
-                    popupAnchor: [0, -25]
-                }),
-                title: popupContent,
-                riseOnHover: true
-            }).addTo(map);
-
-            var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                          "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                          "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                          "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                          "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                          "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                          "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                          "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                          "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                          "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                          "<table>";
-
-            layer.on({
-                click: function (e) {
-                    $("#feature-title").html(featureName);
-                    $("#feature-info").html(content);
-                    $("#featureModal").modal("show");
-                    highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-
-            marker.on({
-                click: function (e) {
-                    $("#feature-title").html(featureName);
-                    $("#feature-info").html(content);
-                    $("#featureModal").modal("show");
-                    highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                }
-            });
-
-            },
-        });
-        $.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json", function (data) {
-        TER.addData(data);
-        });
-
-        var ABRLayer = L.geoJson(null);
-        var ABR = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-        onEachFeature: function (feature, layer) {
-            var center;
-            //Do looping for reports object
-
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                ABRSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'ABR',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-
-                // Use center to put a fixed marker on map
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/abration.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                    }),
-                    title: popupContent,
-                    riseOnHover: true
-                }).addTo(map);
-
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                              "<table>";
-
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
-
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-              },
-            });
-            $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json", function (data) {
-            ABR.addData(data);
-            });
-
-        var TSULayer = L.geoJson(null);
-        var TSU = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-        onEachFeature: function (feature, layer) {
-            var center;
-            //Do looping for reports object
-
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-                TSUSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'TSU',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-
-                // Use center to put a fixed marker on map
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/tsunami.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                    }),
-                    title: popupContent,
-                    riseOnHover: true
-                }).addTo(map);
-
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Height</th><td>" + feature.properties.height+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                              "<table>";
-
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
-
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-                },
-            });
-            $.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json", function (data) {
-            TSU.addData(data);
-            });
-
-        var ROBLayer = L.geoJson(null);
-        var ROB = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-        onEachFeature: function (feature, layer) {
-            var center;
-            //Do looping for reports object
-
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                ROBSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'ROB',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/seaflood.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                    }),
-                    title: popupContent,
-                    riseOnHover: true
-                }).addTo(map);
-
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Height</th><td>" + feature.properties.height+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                              "<table>";
-
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
-
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-                },
-            });
-            $.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json", function (data) {
-            ROB.addData(data);
-            });
-
-        var SOSLayer = L.geoJson(null);
-        var SOS = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-            onEachFeature: function (feature, layer) {
-            var center;
-
-            //Do looping for reports object
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-                consle.log(report)
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                SOSSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'SOS',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-
-                // Use center to put a fixed marker on map
-            var marker = L.marker(center, {
-                icon: L.icon({
-                    iconUrl: "{% static 'img/markers/strike.png' %}",
-                    iconSize: [24, 28],
-                    iconAnchor: [12, 28],
-                    popupAnchor: [0, -25]
-                }),
-                title: popupContent,
-                riseOnHover: true
-            }).addTo(map);
-
-            var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                          "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                          "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                          "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                          "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                          "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                          "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                          "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                          "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                          "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                          "<table>";
-
-            layer.on({
-                click: function (e) {
-                    $("#feature-title").html(featureName);
-                    $("#feature-info").html(content);
-                    $("#featureModal").modal("show");
-                    highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-
-            marker.on({
-                click: function (e) {
-                    $("#feature-title").html(featureName);
-                    $("#feature-info").html(content);
-                    $("#featureModal").modal("show");
-                    highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                }
-            });
-        },
-        });
-        $.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json", function (data) {
-        SOS.addData(data);
-        });
-
-        var CEKLayer = L.geoJson(null);
-        var CEK = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-            onEachFeature: function (feature, layer) {
-            var center;
-            //Do looping for reports object
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                CEKSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'CEK',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-
-                // Use center to put a fixed marker on map
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/tornado.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                    }),
-                    title: popupContent,
-                    riseOnHover: true
-                }).addTo(map);
-
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                              "<table>";
-
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
-
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-            },
-            });
-            $.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json", function (data) {
-            CEK.addData(data);
-            });
-
-        var GMPLayer = L.geoJson(null);
-        var GMP = L.geoJson(null, {
-            style: function (feature) {
-            return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-        onEachFeature: function (feature, layer) {
-            var center;
-
-            //Do looping for reports object
-
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
-            if (feature.geometry.type === 'MultiPolygon') {
-                // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
-            else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
-            if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-                GMPSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'GMP',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
-                }
-
-                // Use center to put a fixed marker on map
-            var marker = L.marker(center, {
-                icon: L.icon({
-                    iconUrl: "{% static 'img/markers/earthquake.png' %}",
-                    iconSize: [24, 28],
-                    iconAnchor: [12, 28],
-                    popupAnchor: [0, -25]
-                }),
-                title: popupContent,
-                riseOnHover: true
-            }).addTo(map);
-
-            var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                          "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                          "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                          "<tr><th>Magnitude</th><td>" + feature.properties.magnitude+ "</td></tr>" +
-                          "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                          "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                          "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                          "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                          "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                          "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                          "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                          "<table>";
-
-            layer.on({
-                click: function (e) {
-                    $("#feature-title").html(featureName);
-                    $("#feature-info").html(content);
-                    $("#featureModal").modal("show");
-                    highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-
-            marker.on({
-                click: function (e) {
-                    $("#feature-title").html(featureName);
-                    $("#feature-info").html(content);
-                    $("#featureModal").modal("show");
-                    highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                }
-            });
-
-            },
-            });
-            $.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json", function (data) {
-            GMP.addData(data);
-            });
-
-        var BJRLayer = L.geoJson(null);
-        var BJR = L.geoJson(null, {
           style: function (feature) {
             return {
-              color: 'blue',
+              color: '#FFFF00',
               fill: true,
               opacity: 1,
               clickable: true
             };
           },
-        onEachFeature: function (feature, layer) {
+          onEachFeature: function (feature, layer) {
             var center;
-            //Do looping for reports object
 
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
+            // Event geometry can be either a MultiPolygon or Point
             if (feature.geometry.type === 'MultiPolygon') {
-          // Get bounds and center of polygon
-            var bounds = layer.getBounds();
-            center = bounds.getCenter();
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
             }
             else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-
+              center = layer.getLatLng();
             }
+
             if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
 
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                BJRSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'BJR',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
                 }
-                // Use center to put a fixed marker on map
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/flood.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                    }),
-                    title: popupContent,
-                    riseOnHover: true
-                }).addTo(map);
+              }
 
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Height</th><td>" + feature.properties.height+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" + "</table>";
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
 
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
 
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-                },
-            });
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/shooting.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              TERSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'TER',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json", function (data) {
+          TER.addData(data);
+        });
+
+        var ABRLayer = L.geoJson(null);
+        var ABR = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#00AEFF',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/abration.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              ABRSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'ABR',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json", function (data) {
+          ABR.addData(data);
+        });
+
+        var TSULayer = L.geoJson(null);
+        var TSU = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#28ADAD',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/tsunami.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              TSUSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'TSU',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json", function (data) {
+          TSU.addData(data);
+        });
+
+        var ROBLayer = L.geoJson(null);
+        var ROB = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#128E4D',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/seaflood.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              ROBSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'ROB',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json", function (data) {
+          ROB.addData(data);
+        });
+
+        var SOSLayer = L.geoJson(null);
+        var SOS = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#000000',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/strike.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              SOSSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'SOS',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json", function (data) {
+          SOS.addData(data);
+        });
+
+        var CEKLayer = L.geoJson(null);
+        var CEK = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#F07C00',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/tornado.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              CEKSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'CEK',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json", function (data) {
+          CEK.addData(data);
+        });
+
+        var GMPLayer = L.geoJson(null);
+        var GMP = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#B52DAC',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/earthquake.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              GMPSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'GMP',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json", function (data) {
+          GMP.addData(data);
+        });
+
+        var BJRLayer = L.geoJson(null);
+        var BJR = L.geoJson(null, {
+          style: function (feature) {
+            return {
+              color: '#3759BF',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
+
+            // Event geometry can be either a MultiPolygon or Point
+            if (feature.geometry.type === 'MultiPolygon') {
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
+            else if (feature.geometry.type === 'Point') {
+              center = layer.getLatLng();
+            }
+
+            if (feature.properties) {
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
+
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
+                }
+              }
+
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/flood.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
+
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              BJRSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'BJR',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
         $.getJSON("{% url "reports:event_api" %}?disaster=BJR&format=json", function (data) {
-        BJR.addData(data);
+          BJR.addData(data);
         });
 
         var LSRLayer = L.geoJson(null);
         var LSR = L.geoJson(null, {
-            style: function (feature) {
+          style: function (feature) {
             return {
-            color: 'blue',
-            fill: true,
-            opacity: 1,
-            clickable: true
+              color: '#F06668',
+              fill: true,
+              opacity: 1,
+              clickable: true
             };
-        },
-        onEachFeature: function (feature, layer) {
+          },
+          onEachFeature: function (feature, layer) {
             var center;
-            //Do looping for reports object
 
-            var report =[];
-
-            var reports = feature.properties.reports;
-
-            for (var i= 0; i < reports.length; i++)
-            {
-                report = reports[i];
-            }
-
+            // Event geometry can be either a MultiPolygon or Point
             if (feature.geometry.type === 'MultiPolygon') {
-
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
             }
             else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
+              center = layer.getLatLng();
             }
 
             if (feature.properties) {
-                var featureName = feature.properties.disaster + '-' + feature.properties.created;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
 
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                LSRSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'LSR',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
                 }
+              }
 
-            // Use center to put a fixed marker on map
-                var marker = L.marker(center, {
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
+
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
+
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
                 icon: L.icon({
-                    iconUrl: "{% static 'img/markers/avalanche.png' %}",
-                    iconSize: [24, 28],
-                    iconAnchor: [12, 28],
-                    popupAnchor: [0, -25]
+                  iconUrl: "{% static 'img/markers/avalanche.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
                 }),
                 title: popupContent,
                 riseOnHover: true
-                }).addTo(map);
+              }).addTo(map);
 
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                              "<table>";
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
 
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
 
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-                 },
-            });
+              LSRSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'LSR',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
         $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json", function (data) {
-        LSR.addData(data);
+          LSR.addData(data);
         });
 
         var KBKLayer = L.geoJson(null);
         var KBK = L.geoJson(null, {
-            style: function (feature) {
+          style: function (feature) {
             return {
-                color: 'blue',
-                fill: true,
-                opacity: 1,
-                clickable: true
-                };
-            },
-            onEachFeature: function (feature, layer) {
-                var center;
-                //Do looping for reports object
+              color: '#BD0404',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            var center;
 
-                var report =[];
-
-                var reports = feature.properties.reports;
-
-                for (var i= 0; i < reports.length; i++)
-                {
-                    report = reports[i];
-                }
-
+            // Event geometry can be either a MultiPolygon or Point
             if (feature.geometry.type === 'MultiPolygon') {
-                        // Get bounds and center of polygon
-                var bounds = layer.getBounds();
-                center = bounds.getCenter();
-                }
+              // Get bounds and center of polygon
+              var bounds = layer.getBounds();
+              center = bounds.getCenter();
+            }
             else if (feature.geometry.type === 'Point') {
-                center = layer.getLatLng();
-                }
+              center = layer.getLatLng();
+            }
 
             if (feature.properties) {
-                var featureName = feature.properties.disaster;
-                var featureLocation = feature.properties.province_name + ', ' + feature.properties.city_name + ', ' + feature.properties.subdistrict_name + ', ' + feature.properties.village_name + ', ' + feature.properties.rw_name;
-                popupContent = featureName + ': ' + featureLocation;
+              var featureCreated = " - ";
+              var featureDisaster = " - ";
+              var featureProvinceName = " - ";
+              var featureCityName = " - ";
+              var featureSubdistrictName = " - ";
+              var featureVillageName = " - ";
+              var featureRWName = " - ";
+              var contentCreated = " - ";
+              var contentDisaster = " - ";
+              var contentProvince = " - ";
+              var contentCity = " - ";
+              var contentSubdistrict = " - ";
+              var contentVillage = " - ";
+              var contentRW = " - ";
+              var contentDetail = " - ";
+              var contentReports = " - ";
 
-                $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/flood.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
-
-                KBKSearch.push({
-                    name: featureName,
-                    location: featureLocation,
-                    source: 'KBK',
-                    id: L.stamp(layer),
-                    lat: center.lat,
-                    lng: center.lng
-                    });
+              if (feature.properties.created) {
+                featureCreated = feature.properties.created;
+                contentCreated = featureCreated;
+              }
+              if (feature.properties.disaster) {
+                featureDisaster = feature.properties.disaster;
+              }
+              if (feature.properties.disaster_note) {
+                contentDisaster = feature.properties.disaster_note;
+              }
+              if (feature.properties.province) {
+                featureProvinceName = feature.properties.province_name;
+                contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+              }
+              if (feature.properties.city) {
+                featureCityName = feature.properties.city_name;
+                contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+              }
+              if (feature.properties.subdistrict) {
+                featureSubdistrictName = feature.properties.subdistrict_name;
+                contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+              }
+              if (feature.properties.village) {
+                featureVillageName = feature.properties.village_name;
+                contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+              }
+              if (feature.properties.rw) {
+                featureRWName = feature.properties.rw_name;
+                contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+              }
+              if (feature.id) {
+                contentDetail = "<a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + "View event detail"  + "</a>";
+              }
+              if (feature.properties.reports) {
+                if (feature.properties.reports.length > 0) {
+                  contentReports = "<ol style='margin-bottom: 0;'>";
+                  for (var i = 0; i < feature.properties.reports.length; i++) {
+                    contentReports = contentReports + "<li><a class='url-break' href='" + "{% url "reports:report_list" %}" + feature.properties.reports[i].id + "' target='_blank'>" + "View report detail"  + "</a></li>";
+                  }
+                  contentReports = contentReports + "</ol>";
                 }
+              }
 
-                var marker = L.marker(center, {
-                    icon: L.icon({
-                        iconUrl: "{% static 'img/markers/fire.png' %}",
-                        iconSize: [24, 28],
-                        iconAnchor: [12, 28],
-                        popupAnchor: [0, -25]
-                        }),
-                        title: popupContent,
-                        riseOnHover: true
-                        }).addTo(map);
+              var featureName = featureDisaster + ' - ' + featureCreated;
+              var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName;
+              var popupContent = featureName + ': ' + featureLocation;
 
-                var content = "<table class='table table-striped table-bordered table-condensed'>" +
-                              "<tr><th>Created</th><td>" + feature.properties.created + "</td></tr>" +
-                              "<tr><th>Disaster</th><td>" + feature.properties.disaster_note+ "</td></tr>" +
-                              "<tr><th>Province</th><td><a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a></td></tr>" +
-                              "<tr><th>City</th><td><a class='url-break' href='" + '/geolevels/city/' + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a></td></tr>" +
-                              "<tr><th>Subdistrict</th><td><a class='url-break' href='" + '/geolevels/subdistrict/' + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a></td></tr>" +
-                              "<tr><th>Village</th><td><a class='url-break' href='" + '/geolevels/village/' + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a></td></tr>" +
-                              "<tr><th>Rw</th><td><a class='url-break' href='" + '/geolevels/rw/' + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a></td></tr>" +
-                              "<tr><th>Detail</th><td><a class='url-break' href='" + "{% url "reports:event_list" %}" + feature.id + "' target='_blank'>" + 'View event detail' + "</a></td></tr>" +
-                              "<tr><th>Report</th><td><a class='url-break' href='" + "{% url "reports:report_list" %}" + report.id + "' target='_blank'>" + 'View report detail' + "</a></td></tr>" +
-                              "<table>";
+              var content = "<table class='table table-striped table-bordered table-condensed'>";
+              content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+              content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+              content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+              content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+              content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+              content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+              content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+              content = content + "<tr><th>Detail</th><td>" + contentDetail  + "</td></tr>";
+              content = content + "<tr><th>Reports</th><td>" + contentReports  + "</td></tr>";
+              content = content + "</table>";
 
-                layer.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                        }
-                    });
+              // Use center to put a fixed marker on map
+              var marker = L.marker(center, {
+                icon: L.icon({
+                  iconUrl: "{% static 'img/markers/avalanche.png' %}",
+                  iconSize: [24, 28],
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25]
+                }),
+                title: popupContent,
+                riseOnHover: true
+              }).addTo(map);
 
-                marker.on({
-                    click: function (e) {
-                        $("#feature-title").html(featureName);
-                        $("#feature-info").html(content);
-                        $("#featureModal").modal("show");
-                        highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], highlightStyle));
-                    }
-                });
-            },
-            });
-            $.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json", function (data) {
-            KBK.addData(data);
-            });
+              layer.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  if (feature.geometry.type === 'Point') {
+                    highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                  }
+                }
+              });
+
+              marker.on({
+                click: function (e) {
+                  $("#feature-title").html(featureName);
+                  $("#feature-info").html(content);
+                  $("#featureModal").modal("show");
+                  highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+                }
+              });
+
+              KBKSearch.push({
+                name: featureName,
+                location: featureLocation,
+                source: 'KBK',
+                id: L.stamp(layer),
+                lat: center.lat,
+                lng: center.lng
+              });
+            }
+            // end if (feature.properties)
+          },
+        });
+        $.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json", function (data) {
+          KBK.addData(data);
+        });
 
         map = L.map("map", {
           zoom: 13,
