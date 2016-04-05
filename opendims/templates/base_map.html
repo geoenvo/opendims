@@ -391,7 +391,7 @@
           var bounds;
 
           if (layer.feature.geometry.type === 'Point') {
-            center = layer.getCenter();
+            center = layer.getLatLng();
           }
           else if (layer.feature.geometry.type === 'MultiPolygon') {
             bounds = layer.getBounds();
