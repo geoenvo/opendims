@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'reports',
     'geolevels',
     'maps',
+    'jaksafe',
 ]
 
 MIDDLEWARE_CLASSES = [
