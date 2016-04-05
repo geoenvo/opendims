@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
-    <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/MarkerCluster.css' %}">
-    <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/MarkerCluster.Default.css' %}">
-    <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/L.Control.Locate.css' %}">
-    <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/leaflet.groupedlayercontrol.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet.markercluster/dist/MarkerCluster.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet.markercluster/dist/MarkerCluster.Default.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet.locatecontrol/dist/L.Control.Locate.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/app.css' %}">
 
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon-76x76.png' %}">
@@ -287,7 +287,7 @@
           <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">
-              Developed by <a href='http://bryanmcbride.com'>bryanmcbride.com</a>
+              Developed by <a href='http://www.geo.co.id'>GEO</a>
             </h4>
           </div>
           <div class="modal-body">
@@ -299,16 +299,14 @@
 
     <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'bootleaf_example/assets/js/typeahead.bundle.min.js' %}"></script>
-    <script src="{% static 'bootleaf_example/assets/js/handlebars.min.js' %}"></script>
-    <script src="{% static 'bootleaf_example/assets/js/list.min.js' %}"></script>
+    <script src="{% static 'typeahead.js/dist/typeahead.bundle.min.js' %}"></script>
+    <script src="{% static 'handlebars/handlebars.min.js' %}"></script>
+    <script src="{% static 'list.js/dist/list.min.js' %}"></script>
     <script src="{% static 'leaflet/leaflet.js' %}"></script>
-    <script src="{% static 'bootleaf_example/assets/js/leaflet.markercluster.js' %}"></script>
-    <script src="{% static 'bootleaf_example/assets/js/L.Control.Locate.min.js' %}"></script>
-    <script src="{% static 'bootleaf_example/assets/js/leaflet.groupedlayercontrol.js' %}"></script>
-    <!--
-    <script src="{% static 'bootleaf_example/assets/js/app.js' %}"></script>
-    -->
+    <script src="{% static 'leaflet.markercluster/dist/leaflet.markercluster.js' %}"></script>
+    <script src="{% static 'leaflet.locatecontrol/dist/L.Control.Locate.min.js' %}"></script>
+    <script src="{% static 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.js' %}"></script>
+    <!-- <script src="{% static 'bootleaf_example/assets/js/app.js' %}"></script> -->
     <script type="text/javascript">
     $(document).ready(function(){
         var map, featureList, BJRSearch = [], KBKSearch = [], LAISearch = [], GMPSearch = [], CEKSearch = [], ROBSearch = [], ABRSearch = [], TSUSearch = [], SOSSearch = [], TERSearch = [], LSRSearch = [];
@@ -2826,7 +2824,7 @@
         });
         attributionControl.onAdd = function (map) {
           var div = L.DomUtil.create("div", "leaflet-control-attribution");
-          div.innerHTML = "<span class='hidden-xs'>Developed by <a href='http://bryanmcbride.com'>bryanmcbride.com</a> | </span><a href='#' onclick='$(\"#attributionModal\").modal(\"show\"); return false;'>Attribution</a>";
+          div.innerHTML = "<span class='hidden-xs'>Developed by <a href='http://www.geo.co.id'>GEO</a> | </span><a href='#' onclick='$(\"#attributionModal\").modal(\"show\"); return false;'>Attribution</a>";
           return div;
         };
         map.addControl(attributionControl);
