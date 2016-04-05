@@ -14,20 +14,34 @@ from .models import Source, Disaster, Event, Report
 from .forms import EventForm
 
 
-verbose_mark_unverified = _('Mark Event as Unverified')
-verbose_mark_verified = _('Mark Event as Verified')
+verbose_set_active = _('Set Event as Active')
+verbose_set_inactive = _('Set Event as Inactive')
+verbose_set_unverified = _('Set Event as Unverified')
+verbose_set_verified = _('Set Event as Verified')
 
 
-def make_unverified(modeladmin, request, queryset):
+def set_unverified(modeladmin, request, queryset):
     queryset.update(status='UNVERIFIED')
 
-make_unverified.short_description = verbose_mark_unverified
+set_unverified.short_description = verbose_set_unverified
 
 
-def make_verified(modeladmin, request, queryset):
+def set_verified(modeladmin, request, queryset):
     queryset.update(status='VERIFIED')
 
-make_verified.short_description = verbose_mark_verified
+set_verified.short_description = verbose_set_verified
+
+
+def set_inactive(modeladmin, request, queryset):
+    queryset.update(status='INACTIVE')
+
+set_inactive.short_description = verbose_set_inactive
+
+
+def set_active(modeladmin, request, queryset):
+    queryset.update(status='ACTIVE')
+
+set_active.short_description = verbose_set_active
 
 
 class ReportInline(admin.TabularInline):
@@ -272,6 +286,7 @@ class EventAdmin(ImportExportModelAdmin,
         'village__name',
         'note'
     ]
+    actions = [set_active, set_inactive]
     inlines = [ReportInline]
     form = EventForm
 
@@ -371,7 +386,7 @@ class ReportAdmin(admin.ModelAdmin):
     ordering = ['-updated', '-created']
     list_filter = ['created', 'updated', 'source', 'status']
     search_fields = ['note']
-    actions = [make_verified, make_unverified]
+    actions = [set_verified, set_unverified]
 
     def event_admin_url(self, obj):
         if not obj.event:
