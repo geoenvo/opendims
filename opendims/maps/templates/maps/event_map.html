@@ -1,1 +1,18 @@
-{% extends "base_map.html" %}
+{% extends "opendims/base_map.html" %}
+
+{% block title %}{{ block.super }} - Event Map{% endblock %}
+
+{% block map_title %}Event Map{% endblock %}
+
+{% block about %}
+<p>Map description.</p>
+{% endblock %}
+
+{% block disclaimer %}
+<p>The data provided on this site is for informational purposes only.</p>
+<p>Absolutely no accuracy or completeness guarantee is implied or intended.</p>
+{% endblock %}
+
+{% block contact %}
+<p>Contact information.</p>
+{% endblock %}
