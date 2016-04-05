@@ -9,7 +9,7 @@
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="yellow">
+    <meta name="theme-color" content="black">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>{% block title %}{{ SITE_NAME }}{% endblock title %}</title>
@@ -23,11 +23,11 @@
     <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/leaflet.groupedlayercontrol.css' %}">
     <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/app.css' %}">
 
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/opendims.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'assets/opendims.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'assets/opendims.png' %}">
-    <link rel="icon" sizes="196x196" href="{% static 'assets/opendims.png' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon-152x152.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'favicon-196x196.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
   </head>
 
   <body>
@@ -48,8 +48,8 @@
             </div>
           </form>
           <ul class="nav navbar-nav">
-            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About</a></li>
-            <li class="dropdown">
+            <li class="hidden"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About</a></li>
+            <li class="hidden dropdown">
               <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe white"></i>&nbsp;&nbsp;Tools <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
@@ -59,22 +59,22 @@
               </ul>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download GeoJSON Data <b class="caret"></b></a>
+                <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download Event GeoJSON <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="{% url 'reports:event_api' %}?disaster=ABR&format=json" download="ABR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Abrasi</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=BJR&format=json" download="BJR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Banjir</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=CEK&format=json" download="CEK.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Cuaca Kencang</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=GMP&format=json" download="GMP.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Gempa Bumi</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=KBK&format=json" download="KBK.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Kebakaran</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=LSR&format=json" download="LSR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Longsor</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=LAI&format=json" download="LAI.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Lain-lain</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=ROB&format=json" download="ROB.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Banjir Laut</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=SOS&format=json" download="SOS.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Tawuran</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=TER&format=json" download="TER.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Teror</a></li>
-                  <li><a href="{% url 'reports:event_api' %}?disaster=TSU&format=json" download="TSU.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Data Tsunami</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=ABR&format=json" download="ABR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Abrasi</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=CEK&format=json" download="CEK.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Angin Kencang</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=BJR&format=json" download="BJR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Banjir</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=ROB&format=json" download="ROB.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Banjir Rob</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=GMP&format=json" download="GMP.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Gempa Bumi</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=KBK&format=json" download="KBK.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Kebakaran</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=SOS&format=json" download="SOS.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Konflik Sosial</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=LAI&format=json" download="LAI.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Lain-lain</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=LSR&format=json" download="LSR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Longsor</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=TER&format=json" download="TER.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Terorisme</a></li>
+                  <li><a href="{% url 'reports:event_api' %}?disaster=TSU&format=json" download="TSU.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Tsunami</a></li>
                 </ul>
             </li>
-            <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Events List</a></li>
+            <li class="hidden-xs"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp;&nbsp;Event List</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
@@ -311,7 +311,7 @@
     -->
     <script type="text/javascript">
     $(document).ready(function(){
-        var map, featureList, BJRSearch =[], KBKSearch = [], LAISearch = [], GMPSearch = [], CEKSearch = [], ROBSearch = [], ABRSearch = [], TSUSearch = [], SOSSearch = [], TERSearch = [], LSRSearch = [];
+        var map, featureList, BJRSearch = [], KBKSearch = [], LAISearch = [], GMPSearch = [], CEKSearch = [], ROBSearch = [], ABRSearch = [], TSUSearch = [], SOSSearch = [], TERSearch = [], LSRSearch = [];
 
         $(window).resize(function() {
           sizeLayerControl();
@@ -417,6 +417,7 @@
             if (map.hasLayer(BJRLayer)) {
               var center;
 
+              // Event geometry can be Point or MultiPolygon
               if (layer.feature.geometry.type === 'Point') {
                 center = layer.getLatLng();
               }
@@ -1045,9 +1046,6 @@
           zoomToBoundsOnClick: true,
           disableClusteringAtZoom: 16
         });
-
-        //popupContent as global variable
-        var popupContent = '';
 
         var LAILayer = L.geoJson(null);
         var LAI = L.geoJson(null, {
@@ -2632,7 +2630,7 @@
               // Use center to put a fixed marker on map
               var marker = L.marker(center, {
                 icon: L.icon({
-                  iconUrl: "{% static 'img/markers/avalanche.png' %}",
+                  iconUrl: "{% static 'img/markers/fire.png' %}",
                   iconSize: [24, 28],
                   iconAnchor: [12, 28],
                   popupAnchor: [0, -25]
@@ -2687,8 +2685,6 @@
 
         /* Layer control listeners that allow for a single markerClusters layer */
         map.on("overlayadd", function(e) {
-
-          //DISASTER
           if (e.layer === BJRLayer) {
             markerClusters.addLayer(BJR);
             syncSidebar();
@@ -2744,6 +2740,8 @@
             syncSidebar();
           }
         });
+        // end overlayadd
+
         map.on("overlayremove", function(e) {
           if (e.layer === BJRLayer) {
             markerClusters.removeLayer(BJR);
@@ -2799,6 +2797,8 @@
             syncSidebar();
           }
         });
+        // end overlayremove
+
         /* Filter sidebar feature list to only show features in current map bounds */
         map.on("moveend", function (e) {
           syncSidebar();
@@ -2817,6 +2817,7 @@
             }
           });
         }
+
         map.on("layeradd", updateAttribution);
         map.on("layerremove", updateAttribution);
 
@@ -2880,18 +2881,17 @@
         };
 
         var groupedOverlays = {
-          //DISASTER
-          "Affected Area": {
+          "Affected Areas": {
             "<img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi": ABRLayer,
+            "<img src='{% static "img/markers/tornado.png" %}' width='24' height='28'>&nbsp;Angin Kencang": CEKLayer,
             "<img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir": BJRLayer,
-            "<img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Laut": ROBLayer,
+            "<img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob": ROBLayer,
             "<img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi": GMPLayer,
             "<img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran": KBKLayer,
+            "<img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial": SOSLayer,
             "<img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain": LAILayer,
             "<img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor": LSRLayer,
-            "<img src='{% static "img/markers/tornado.png" %}' width='24' height='28'>&nbsp;Puting Beliung": CEKLayer,
-            "<img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Tawuran": SOSLayer,
-            "<img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Teror": TERLayer,
+            "<img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme": TERLayer,
             "<img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami": TSULayer,
           },
         };
@@ -2927,9 +2927,9 @@
           featureList.sort("feature-name", {order:"asc"});
 
           var BJRBH = new Bloodhound({
-            name: "BJR : Banjir",
+            name: "BJR",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: BJRSearch,
@@ -2939,7 +2939,7 @@
           var LAIBH = new Bloodhound({
             name: "LAI",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: LAISearch,
@@ -2949,7 +2949,7 @@
           var KBKBH = new Bloodhound({
             name: "KBK",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: KBKSearch,
@@ -2959,7 +2959,7 @@
           var LSRBH = new Bloodhound({
             name: "LSR",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: LSRSearch,
@@ -2969,7 +2969,7 @@
           var SOSBH = new Bloodhound({
             name: "SOS",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: SOSSearch,
@@ -2979,7 +2979,7 @@
           var ROBBH = new Bloodhound({
             name: "ROB",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: ROBSearch,
@@ -2989,7 +2989,7 @@
           var GMPBH = new Bloodhound({
             name: "GMP",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: GMPSearch,
@@ -2999,7 +2999,7 @@
           var TERBH = new Bloodhound({
             name: "TER",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: TERSearch,
@@ -3009,7 +3009,7 @@
           var ABRBH = new Bloodhound({
             name: "ABR",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: ABRSearch,
@@ -3019,7 +3019,7 @@
           var TSUBH = new Bloodhound({
             name: "TSU",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: TSUSearch,
@@ -3029,7 +3029,7 @@
           var CEKBH = new Bloodhound({
             name: "CEK",
             datumTokenizer: function (d) {
-            return Bloodhound.tokenizers.whitespace(d.name);
+              return Bloodhound.tokenizers.whitespace(d.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: CEKSearch,
@@ -3046,7 +3046,7 @@
               url: "http://api.geonames.org/searchJSON?username=bootleaf&featureClass=P&maxRows=5&countryCode=US&name_startsWith=%QUERY",
               filter: function (data) {
                 return $.map(data.geonames, function (result) {
-                return {
+                  return {
                     name: result.name + ", " + result.adminCode1,
                     lat: result.lat,
                     lng: result.lng,
@@ -3081,148 +3081,149 @@
           geonamesBH.initialize();
 
           /* instantiate the typeahead UI */
-          $("#searchbox").typeahead({
-            minLength: 3,
-            highlight: true,
-            hint: false
-          },
+          $("#searchbox").typeahead(
+            {
+              minLength: 3,
+              highlight: true,
+              hint: false
+            },
+            {
+              name: "BJR",
+              displayKey: "name",
+              source: BJRBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "ABR",
+              displayKey: "name",
+              source: ABRBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "ROB",
+              displayKey: "name",
+              source: ROBBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "TSU",
+              displayKey: "name",
+              source: TSUBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "LSR",
+              displayKey: "name",
+              source: LSRBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "SOS",
+              displayKey: "name",
+              source: SOSBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "TER",
+              displayKey: "name",
+              source: TERBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "LAI",
+              displayKey: "name",
+              source: LAIBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "GMP",
+              displayKey: "name",
+              source: GMPBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "KBK",
+              displayKey: "name",
+              source: KBKBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
+            {
+              name: "CEK",
+              displayKey: "name",
+              source: CEKBH.ttAdapter(),
+              templates: {
+                header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tornado.png" %}' width='25' height='25'>&nbsp;Angin Kencang</h4>",
+                suggestion: function (data) {
+                  return data.name + '<br><small>' + data.location + '</small>';
+                }
+              }
+            },
           {
-            name: "BJR",
+            name: "GeoNames",
             displayKey: "name",
-            source: BJRBH.ttAdapter(),
+            source: geonamesBH.ttAdapter(),
             templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
+              header: "<h4 class='typeahead-header'><img src='{% static "bootleaf_example/assets/img/globe.png" %}' width='25' height='25'>&nbsp;GeoNames</h4>"
+            }
+          }).on("typeahead:selected", function (obj, datum) {
+            if (datum.source === "LAI") {
+              if (!map.hasLayer(LAILayer)) {
+                map.addLayer(LAILayer);
               }
-            }
-          },
-          {
-            name: "ABR",
-            displayKey: "name",
-            source: ABRBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
+              map.setView([datum.lat, datum.lng], 17);
+              if (map._layers[datum.id]) {
+                map._layers[datum.id].fire("click");
               }
-            }
-          },
-          {
-            name: "ROB",
-            displayKey: "name",
-            source: ROBBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Laut</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "TSU",
-            displayKey: "name",
-            source: TSUBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "LSR",
-            displayKey: "name",
-            source: LSRBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "SOS",
-            displayKey: "name",
-            source: SOSBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Tawuran</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "TER",
-            displayKey: "name",
-            source: TERBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Teror</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "LAI",
-            displayKey: "name",
-            source: LAIBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "GMP",
-            displayKey: "name",
-            source: GMPBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-          {
-            name: "KBK",
-            displayKey: "name",
-            source: KBKBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-          },
-           {
-            name: "CEK",
-            displayKey: "name",
-            source: CEKBH.ttAdapter(),
-            templates: {
-              header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tornado.png" %}' width='25' height='25'>&nbsp;Puting Beliung</h4>",
-              suggestion: function (data) {
-                return data.name + '<br><small>' + data.location + '</small>';
-              }
-            }
-        },
-        {
-          name: "GeoNames",
-          displayKey: "name",
-          source: geonamesBH.ttAdapter(),
-          templates: {
-            header: "<h4 class='typeahead-header'><img src='{% static "bootleaf_example/assets/img/globe.png" %}' width='25' height='25'>&nbsp;GeoNames</h4>"
-          }
-      }).on("typeahead:selected", function (obj, datum) {
-          if (datum.source === "LAI") {
-            if (!map.hasLayer(LAILayer)) {
-              map.addLayer(LAILayer);
-            }
-            map.setView([datum.lat, datum.lng], 17);
-            if (map._layers[datum.id]) {
-              map._layers[datum.id].fire("click");
-            }
             }
             if (datum.source === "ROB") {
               if (!map.hasLayer(ROBLayer)) {
@@ -3338,7 +3339,8 @@
           });
           $(".twitter-typeahead").css("position", "static");
           $(".twitter-typeahead").css("display", "block");
-      });
+        });
+        // end ajaxStop
 
         // Leaflet patch to make layer control scrollable on touch browsers
         var container = $(".leaflet-control-layers")[0];
@@ -3350,6 +3352,7 @@
           L.DomEvent.disableClickPropagation(container);
         }
     });
+    // end ready()
     </script>
   </body>
 </html>

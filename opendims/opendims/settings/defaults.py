@@ -163,6 +163,12 @@ BOWER_INSTALLED_APPS = (
     'jquery#2.2.1',
     'bootstrap#3.3.6',
     'font-awesome#4.5.0',
+    'typeahead.js#0.10.5',
+    'handlebars#3.0.3',
+    'list.js#1.1.1',
+    'leaflet.markercluster#0.4.0',
+    'leaflet.locatecontrol#0.43.0',
+    'leaflet-groupedlayercontrol#0.3.0',
 )
 
 # App model reordering in /admin page
