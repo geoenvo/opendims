@@ -1,0 +1,86 @@
+ [
+    {
+        "pk": 1,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Bendung Katulampa"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Depok"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Manggarai"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Karet"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Krukut Hulu"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Pesanggarahan"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Angke Hulu"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Waduk Pluit"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pasar Ikan"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Cipinang Hulu"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Sunter Hulu"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "waterlevel.WaterGate",
+        "fields": {
+            "name": "Pintu Air Pos Pulo Gadung"
+        }
+    }
+]
