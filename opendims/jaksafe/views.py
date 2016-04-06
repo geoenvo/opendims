@@ -4,7 +4,7 @@ from django.conf import settings
 
 from rest_framework import generics, filters
 
-from common.views import CustomListCreateAPIView
+from common.views import CustomListAPIView
 from .models import JaksafeReportAuto
 
 class JaksafeReportAutoListView(generic.ListView):
