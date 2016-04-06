@@ -109,3 +109,26 @@ if __name__ == '__main__':
                             rw.name = rw_id[10:13]
                         print rw.id, rw.name
                         rw.save()
+                        cur6 = conn.cursor()
+                        sql_rt = (
+                            "SELECT * FROM boundary_rt WHERE id_rw= '%s'"
+                            % rw.id
+                        )
+                        cur6.execute(sql_rt)
+                        rows_rt = cur6.fetchall()
+                        list_rt = [
+                            RT(
+                                id=row_rt[4],
+                                name=row_rt[11],
+                                polygon=row_rt[1],
+                                rw=rw
+                            ) for row_rt in rows_rt
+                        ]
+
+                        for rt in list_rt:
+                            if not rt.name:
+                                print 'NULL RT FOUND'
+                                rt_id = str(rt.id)
+                                rt.name = rt_id[13:]
+                            print rt.id, rt.name
+                            rt.save()
