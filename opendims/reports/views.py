@@ -5,7 +5,7 @@ from django.conf import settings
 from .serializers import EventSerializer, ReportSerializer
 from rest_framework import generics, filters
 
-from common.views import CustomListCreateAPIView
+from common.views import CustomListAPIView
 from .models import Event, Report
 from .filters import EventFilter, ReportFilter
 
@@ -36,7 +36,7 @@ def report_detail(request, pk):
     return render(request, 'reports/report_detail.html', context)
 
 
-class APIEventList(CustomListCreateAPIView):
+class APIEventList(CustomListAPIView):
     queryset = Event.objects.filter(status='ACTIVE')
     serializer_class = EventSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -45,7 +45,7 @@ class APIEventList(CustomListCreateAPIView):
     ordering = ('-created',)
 
 
-class APIReportList(CustomListCreateAPIView):
+class APIReportList(CustomListAPIView):
     queryset = Report.objects.filter(status='VERIFIED')
     serializer_class = ReportSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)

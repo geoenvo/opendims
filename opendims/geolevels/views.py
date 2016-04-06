@@ -3,13 +3,13 @@ from django.shortcuts import render, get_object_or_404
 from dal import autocomplete
 from rest_framework import generics, filters
 
-from common.views import CustomListCreateAPIView
+from common.views import CustomListAPIView
 from .models import Province, City, Subdistrict, Village, RW, RT
 from .serializers import ProvinceSerializer, CitySerializer, SubdistrictSerializer, VillageSerializer, RWSerializer, RTSerializer
 from .filters import ProvinceFilter, CityFilter, SubdistrictFilter, VillageFilter, RWFilter, RTFilter
 
 
-class APIProvinceList(CustomListCreateAPIView):
+class APIProvinceList(CustomListAPIView):
     queryset = Province.objects.all()
     serializer_class = ProvinceSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -18,7 +18,7 @@ class APIProvinceList(CustomListCreateAPIView):
     ordering = ('-id',)
 
 
-class APICityList(CustomListCreateAPIView):
+class APICityList(CustomListAPIView):
     queryset = City.objects.all()
     serializer_class = CitySerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -27,7 +27,7 @@ class APICityList(CustomListCreateAPIView):
     ordering = ('-id',)
 
 
-class APISubdistrictList(CustomListCreateAPIView):
+class APISubdistrictList(CustomListAPIView):
     queryset = Subdistrict.objects.all()
     serializer_class = SubdistrictSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -36,7 +36,7 @@ class APISubdistrictList(CustomListCreateAPIView):
     ordering = ('-id',)
 
 
-class APIVillageList(CustomListCreateAPIView):
+class APIVillageList(CustomListAPIView):
     queryset = Village.objects.all()
     serializer_class = VillageSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -45,7 +45,7 @@ class APIVillageList(CustomListCreateAPIView):
     ordering = ('-id',)
 
 
-class APIRWList(CustomListCreateAPIView):
+class APIRWList(CustomListAPIView):
     queryset = RW.objects.all()
     serializer_class = RWSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -54,7 +54,7 @@ class APIRWList(CustomListCreateAPIView):
     ordering = ('-id',)
 
 
-class APIRTList(CustomListCreateAPIView):
+class APIRTList(CustomListAPIView):
     queryset = RT.objects.all()
     serializer_class = RTSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
