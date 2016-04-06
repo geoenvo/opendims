@@ -30,6 +30,7 @@ from reports import urls as reports_urls
 from geolevels import urls as geolevels_urls
 from maps import urls as maps_urls
 from jaksafe import urls as jaksafe_urls
+from waterlevel import urls as waterlevel_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
@@ -47,6 +48,7 @@ urlpatterns = [
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
     url(r'^maps/', include(maps_urls, namespace='maps')),
     url(r'^jaksafe/', include(jaksafe_urls, namespace='jaksafe')),
+    url(r'^waterlevel/', include(waterlevel_urls, namespace='waterlevel')),
 ]
 
 if settings.DEBUG:
