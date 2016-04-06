@@ -9,6 +9,11 @@ from .models import Event
 
 
 class EventForm(forms.ModelForm):
+    class Media:
+        js = (
+            'js/admin_event.js',
+        )
+
     def clean(self):
         """Method for validating the EventForm.
 

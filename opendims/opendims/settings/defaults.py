@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'geolevels',
     'waterlevel',
     'maps',
+    'jaksafe',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -164,6 +165,12 @@ BOWER_INSTALLED_APPS = (
     'jquery#2.2.1',
     'bootstrap#3.3.6',
     'font-awesome#4.5.0',
+    'typeahead.js#0.10.5',
+    'handlebars#3.0.3',
+    'list.js#1.1.1',
+    'leaflet.markercluster#0.4.0',
+    'leaflet.locatecontrol#0.43.0',
+    'leaflet-groupedlayercontrol#0.3.0',
 )
 
 # App model reordering in /admin page
@@ -206,7 +213,7 @@ CKEDITOR_BROWSE_SHOW_DIRS = True
 MAPBOX_ACCESSTOKEN = 'pk.eyJ1IjoiZ2VvZW52byIsImEiOiJjaWxjNDBseWQyN29udHlseHJueGFjNTcxIn0.UHG-jg9OS12rmSwIHIyscg'
 
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (-6.181956, 106.829067),  # PUSDALOPS BPBD
+    'DEFAULT_CENTER': (-6.208973, 106.846933),
     'TILES': [
         (
             'OpenStreetMap',

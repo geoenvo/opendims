@@ -29,6 +29,7 @@ from common import views as common_views
 from reports import urls as reports_urls
 from geolevels import urls as geolevels_urls
 from maps import urls as maps_urls
+from jaksafe import urls as jaksafe_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
@@ -45,6 +46,7 @@ urlpatterns = [
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
     url(r'^maps/', include(maps_urls, namespace='maps')),
+    url(r'^jaksafe/', include(jaksafe_urls, namespace='jaksafe')),
 ]
 
 if settings.DEBUG:
