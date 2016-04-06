@@ -177,6 +177,7 @@ BOWER_INSTALLED_APPS = (
 ADMIN_REORDER = (
     ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
     ('reports', ('Event', 'Report', 'Source', 'Disaster')),
+    ('waterlevel', ('WaterGate', 'WaterLevelReport')),
 )
 
 SITE_NAME = 'Open-DiMS'

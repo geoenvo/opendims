@@ -104,7 +104,7 @@ if __name__ == '__main__':
 
                     for rw in list_rw:
                         if not rw.name:
-                            # print 'NULL FOUND'
+                            # print 'NULL RW FOUND'
                             rw_id = str(rw.id)
                             rw.name = rw_id[10:13]
                         print rw.id, rw.name
@@ -127,7 +127,7 @@ if __name__ == '__main__':
 
                         for rt in list_rt:
                             if not rt.name:
-                                print 'NULL RT FOUND'
+                                # print 'NULL RT FOUND'
                                 rt_id = str(rt.id)
                                 rt.name = rt_id[13:]
                             print rt.id, rt.name

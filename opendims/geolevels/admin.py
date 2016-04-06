@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 from django.contrib.gis import admin
-from leaflet.admin import LeafletGeoAdmin
 
+from leaflet.admin import LeafletGeoAdmin
 from related_admin import RelatedFieldAdmin, getter_for_related_field
 
 from .models import Province, City, Subdistrict, Village, RW, RT
@@ -138,7 +138,7 @@ class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     form = RTForm
 
     sort_province_by_name = getter_for_related_field(
-        'rw__village__subdistrict__province',
+        'rw__village__subdistrict__city__province',
         admin_order_field='rw__village__subdistrict__province__name'
     )
 

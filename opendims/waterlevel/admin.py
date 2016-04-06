@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
+
+from leaflet.admin import LeafletGeoAdmin
 
 from .models import WaterGate, WaterLevelReport
 
@@ -13,30 +13,29 @@ verbose_Location = _('Location')
 verbose_waterlevelreport_details = _('Water Level Report details')
 
 
-class WaterGateAdmin(admin.ModelAdmin):
+class WaterGateAdmin(LeafletGeoAdmin):
     fieldsets = [
         (verbose_watergate_details, {
             'fields': [
                 'name',
                 'point',
-                ('siaga_1_min','siaga_1_max'),
-                ('siaga_2_min','siaga_2_max'),
-                ('siaga_3_min','siaga_3_max'),
+                ('siaga_1_min', 'siaga_1_max'),
+                ('siaga_2_min', 'siaga_2_max'),
+                ('siaga_3_min', 'siaga_3_max'),
                 'note'
-            ]})
-        ]
-
+            ]
+        })
+    ]
     list_display = [
-    'name',
-    'point',
-    'siaga_1_max',
-    'siaga_2_max',
-    'siaga_3_max'
-]
+        'name',
+        'point',
+        'siaga_1_max',
+        'siaga_2_max',
+        'siaga_3_max'
+    ]
 
 
 class WaterLevelReportAdmin(admin.ModelAdmin):
-
     fieldsets = [
         (verbose_waterlevelreport_details, {
             'fields': [
