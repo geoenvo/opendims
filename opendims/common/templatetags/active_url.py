@@ -3,10 +3,11 @@ from django.core.urlresolvers import reverse
 
 register = template.Library()
 
+
 @register.simple_tag
 def active_url(request, url_name, by_path=False):
     """ Return the string 'active' if current request.path is same as name
-    
+
     Args:
         request: Django request object
         url_name: name of the url or the actual path

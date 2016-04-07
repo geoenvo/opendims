@@ -4,11 +4,12 @@ from collections import OrderedDict
 
 register = template.Library()
 
+
 # from http://www.djangosnippets.org/snippets/1937/
 def register_render_tag(renderer):
     """
-    Decorator that creates a template tag using the given renderer as the 
-    render function for the template tag node - the render function takes two 
+    Decorator that creates a template tag using the given renderer as the
+    render function for the template tag node - the render function takes two
     arguments - the template context and the tag token
     """
     def tag(parser, token):
@@ -20,11 +21,12 @@ def register_render_tag(renderer):
         setattr(tag, copy_attr, getattr(renderer, copy_attr))
     return register.tag(tag)
 
+
 @register_render_tag
 def admin_reorder(context, token):
     """
-    Called in admin/base_site.html template override and applies custom ordering
-    of apps/models defined by settings.ADMIN_REORDER
+    Called in admin/base_site.html template override and applies
+    custom ordering of apps/models defined by settings.ADMIN_REORDER
     """
     # sort key function - use index of item in order if exists, otherwise item
     sort = lambda order, item: (order.index(item), "") if item in order else (
