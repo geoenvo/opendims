@@ -5,11 +5,13 @@ from django.utils.translation import gettext_lazy as _
 from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
+from common.validators import MimetypeValidator, FileSizeValidator
 
 
 verbose_note = _('Note')
 verbose_name = _('Name')
 verbose_polygon = _('Polygon')
+verbose_geojson = _('GeoJSON')
 
 
 class Province(CommonAbstractModel):
@@ -21,6 +23,16 @@ class Province(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    geojson = models.FileField(
+        null=True,
+        blank=True,
+        upload_to='geolevels/province/',
+        validators=[
+            MimetypeValidator(('text/plain', 'application/json')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_geojson
+    )
 
     def get_absolute_url(self):
         return reverse('geolevels:province_detail', args=[self.pk])
@@ -42,6 +54,16 @@ class City(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    geojson = models.FileField(
+        null=True,
+        blank=True,
+        upload_to='geolevels/city/',
+        validators=[
+            MimetypeValidator(('text/plain', 'application/json')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_geojson
+    )
 
     class Meta:
         verbose_name_plural = _('Cities')
@@ -66,6 +88,16 @@ class Subdistrict(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    geojson = models.FileField(
+        null=True,
+        blank=True,
+        upload_to='geolevels/subdistrict/',
+        validators=[
+            MimetypeValidator(('text/plain', 'application/json')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_geojson
+    )
 
     def get_absolute_url(self):
         return reverse('geolevels:subdistrict_detail', args=[self.pk])
@@ -90,6 +122,16 @@ class Village(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    geojson = models.FileField(
+        null=True,
+        blank=True,
+        upload_to='geolevels/village/',
+        validators=[
+            MimetypeValidator(('text/plain', 'application/json')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_geojson
+    )
 
     def get_absolute_url(self):
         return reverse('geolevels:village_detail', args=[self.pk])
@@ -112,6 +154,16 @@ class RW(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    geojson = models.FileField(
+        null=True,
+        blank=True,
+        upload_to='geolevels/rw/',
+        validators=[
+            MimetypeValidator(('text/plain', 'application/json')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_geojson
+    )
 
     class Meta:
         verbose_name = verbose_rw
@@ -136,6 +188,16 @@ class RT(CommonAbstractModel):
         verbose_name=verbose_polygon
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    geojson = models.FileField(
+        null=True,
+        blank=True,
+        upload_to='geolevels/rt/',
+        validators=[
+            MimetypeValidator(('text/plain', 'application/json')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_geojson
+    )
 
     class Meta:
         verbose_name = verbose_rt

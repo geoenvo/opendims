@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import json
 
 from django.contrib.gis import admin
 
@@ -9,12 +10,33 @@ from .models import Province, City, Subdistrict, Village, RW, RT
 from .forms import CityForm, SubdistrictForm, VillageForm, RWForm, RTForm
 
 
-class ProvinceAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
+class GeolevelsAdmin(admin.ModelAdmin):
+
+    def save_model(self, request, obj, form, change):
+        """
+        Replace Geolevel multipolygon with uploaded .geojson CRS84 file.
+        """
+        obj.save()
+        if obj.geojson:
+            with open(obj.geojson.path) as f:
+                geojson = json.load(f)
+                if 'features' in geojson and 'crs' in geojson:
+                    crs = geojson['crs']['properties']['name']
+                    if 'CRS84' in crs:
+                        for feature in geojson['features']:
+                            if feature['geometry']['type'] == 'MultiPolygon':
+                                geometry = feature['geometry']
+                        if geometry:
+                            obj.polygon = json.dumps(geometry)
+                            obj.save()
+
+
+class ProvinceAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     list_display = ('id', 'name', 'note')
     search_fields = ['name']
 
 
-class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
+class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     list_display = ('id', 'sort_province_by_name', 'name', 'note')
     search_fields = ['province__name', 'name']
     form = CityForm
@@ -25,7 +47,7 @@ class CityAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     )
 
 
-class SubdistrictAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
+class SubdistrictAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     list_display = (
         'id',
         'sort_province_by_name',
@@ -47,7 +69,7 @@ class SubdistrictAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     )
 
 
-class VillageAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
+class VillageAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     list_display = (
         'id',
         'sort_province_by_name',
@@ -79,7 +101,7 @@ class VillageAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     )
 
 
-class RWAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
+class RWAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     list_display = (
         'id',
         'sort_province_by_name',
@@ -118,7 +140,7 @@ class RWAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
     )
 
 
-class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin):
+class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     list_display = (
         'id',
         'sort_province_by_name',
