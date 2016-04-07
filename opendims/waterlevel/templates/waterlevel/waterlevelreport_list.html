@@ -1,0 +1,46 @@
+{% extends "waterlevel/waterlevel.html" %}
+
+{% load i18n verbose_names %}
+
+{% block title %}{{ block.super }} - {% trans "WaterLevelReports" %}{% endblock %}
+
+{% block main %}
+
+<div class="page-header">
+    <h2>{% trans "Water Level Reports" %}</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for waterlevelreport in waterlevelreport_list|slice:'1' %}
+            <th class="col-md-2">{% get_verbose_field_name waterlevelreport 'watergate' %}</th>
+            <th>{% get_verbose_field_name waterlevelreport 'created' %}</th>
+            <th>{% get_verbose_field_name waterlevelreport 'updated' %}</th>
+            <th>{% get_verbose_field_name waterlevelreport 'height' %}</th>
+            <th>{% get_verbose_field_name waterlevelreport 'weather' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    
+        {% for waterlevelreport in waterlevelreport_list %}
+        <tr>
+            <td><a href="{{ waterlevelreport.get_absolute_url }}">{{ waterlevelreport.watergate }}</a></td>
+            <td>{{ waterlevelreport.created }}</td>
+            <td>{{ waterlevelreport.updated }}</td>
+            <td>{{ waterlevelreport.height }}</td>
+            <td>{{ waterlevelreport.weather }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">{% trans "No water level report found." %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+
+{% include 'opendims/includes/pagination.html' with page=page_obj %}
+
+{% endblock %}
