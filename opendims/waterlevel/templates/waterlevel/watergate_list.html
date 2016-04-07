@@ -1,0 +1,48 @@
+{% extends "waterlevel/waterlevel.html" %}
+
+{% load i18n verbose_names %}
+
+{% block title %}{{ block.super }} - {% trans "WaterGates" %}{% endblock %}
+
+{% block main %}
+
+<div class="page-header">
+    <h2>{% trans "Water Gates" %}</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for watergate in watergate_list|slice:'1' %}
+            <th class="col-md-2">{% get_verbose_field_name watergate 'name' %}</th>
+            <th>{% get_verbose_field_name watergate 'siaga_1_min' %}</th>
+            <th>{% get_verbose_field_name watergate 'siaga_2_min' %}</th>
+            <th>{% get_verbose_field_name watergate 'siaga_2_max' %}</th>
+            <th>{% get_verbose_field_name watergate 'siaga_3_min' %}</th>
+            <th>{% get_verbose_field_name watergate 'siaga_3_max' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    
+        {% for watergate in watergate_list %}
+        <tr>
+            <td><a href="{{ watergate.get_absolute_url }}">{{ watergate.name }}</a></td>
+            <td>{{ watergate.siaga_1_min }}</td>
+            <td>{{ watergate.siaga_2_min }}</td>
+            <td>{{ watergate.siaga_2_max }}</td>
+            <td>{{ watergate.siaga_3_min }}</td>
+            <td>{{ watergate.siaga_3_max }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">{% trans "No water gates found." %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+
+{% include 'opendims/includes/pagination.html' with page=page_obj %}
+
+{% endblock %}

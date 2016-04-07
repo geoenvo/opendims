@@ -13,6 +13,18 @@ urlpatterns = [
         views.APIWaterLevelList.as_view(),
         name='waterlevel_api'
     ),
+    url(
+        r'^waterlevelreport/$',
+        views.WaterLevelReportListView.as_view(),
+        name='waterlevelreport_list'
+    ),
+    url(
+        r'^watergate/$',
+        views.WaterGateListView.as_view(),
+        name='watergate_list'
+    ),
+
+
 ]
 
 urlpaterns = format_suffix_patterns(urlpatterns)
