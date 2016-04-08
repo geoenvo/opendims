@@ -37,7 +37,8 @@ def report_detail(request, pk):
 
 
 class APIEventList(CustomListAPIView):
-    queryset = Event.objects.filter(status='ACTIVE')
+    # queryset = Event.objects.filter(status='ACTIVE')
+    queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_class = EventFilter
@@ -46,7 +47,7 @@ class APIEventList(CustomListAPIView):
 
 
 class APIReportList(CustomListAPIView):
-    queryset = Report.objects.filter(status='VERIFIED')
+    queryset = Report.objects.all()
     serializer_class = ReportSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_class = ReportFilter

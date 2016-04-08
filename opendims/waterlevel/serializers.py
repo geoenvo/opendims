@@ -28,7 +28,7 @@ class WaterLevelSerializer(gis_serializers.GeoFeatureModelSerializer):
     reports = serializers.SerializerMethodField()
 
     def get_reports(self, obj):
-        reports = WaterLevelReport.objects.filter(watergate=obj).order_by('created')
+        reports = WaterLevelReport.objects.filter(watergate=obj).order_by('-created')
         date = self.context['request'].GET.get('date', None)
         if date:
             try:

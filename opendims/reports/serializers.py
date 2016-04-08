@@ -41,7 +41,7 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
     rt_name = serializers.SerializerMethodField()
 
     def get_reports(self, obj):
-        reports = Report.objects.filter(event=obj, status='VERIFIED').order_by('created')
+        reports = Report.objects.filter(event=obj).order_by('-created')
         serializer = ReportSerializer(instance=reports, many=True)
         return serializer.data
 
