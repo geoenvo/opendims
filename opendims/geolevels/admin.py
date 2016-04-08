@@ -155,8 +155,7 @@ class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
         'rw__village__subdistrict__province__name',
         'rw__village__subdistrict__city__name',
         'rw__village__subdistrict__name',
-        'rw__village__name',
-        'rw__name'
+        'rw__village__name'
     ]  # No use searching RW by name
     form = RTForm
 
@@ -178,11 +177,6 @@ class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
     sort_village_by_name = getter_for_related_field(
         'rw__village',
         admin_order_field='rw__village__name'
-    )
-
-    sort_village_by_name = getter_for_related_field(
-        'rw__name',
-        admin_order_field='rw__name'
     )
 
 
