@@ -47,15 +47,21 @@ class APIEventList(CustomListAPIView):
 
     def get_queryset(self):
         """
-        For non-logged in visitors show ACTIVE events only.
-        If date parameter is not provided, return events from
+        For non authenticated users show ACTIVE events only.
+        If 'date' parameter is not provided, return events from
         the current day only.
+        If 'all' parameter is provided, show all records to
+        authenticated users.
         """
         queryset = Event.objects.all()
-        if not self.request.user.is_authenticated():
+        authenticated = self.request.user.is_authenticated()
+        if not authenticated:
             queryset = queryset.filter(status='ACTIVE')
         date = self.request.query_params.get('date', None)
+        show_all = self.request.query_params.get('all', None)
         if not date:
+            if authenticated and show_all:
+                return queryset
             now = timezone.localtime(timezone.now())
             queryset = queryset.filter(
                 created__year=now.year,
@@ -74,15 +80,21 @@ class APIReportList(CustomListAPIView):
 
     def get_queryset(self):
         """
-        For non-logged in visitors show VERIFIED reports only.
-        If date parameter is not provided, return reports from
+        For non authenticated users show VERIFIED reports only.
+        If 'date' parameter is not provided, return reports from
         the current day only.
+        If 'all' parameter is provided, show all records to
+        authenticated users.
         """
         queryset = Report.objects.all()
-        if not self.request.user.is_authenticated():
+        authenticated = self.request.user.is_authenticated()
+        if not authenticated:
             queryset = queryset.filter(status='VERIFIED')
         date = self.request.query_params.get('date', None)
+        show_all = self.request.query_params.get('all', None)
         if not date:
+            if authenticated and show_all:
+                return queryset
             now = timezone.localtime(timezone.now())
             queryset = queryset.filter(
                 created__year=now.year,
