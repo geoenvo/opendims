@@ -13,14 +13,14 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            {% for subdistrict in subdistricts|slice:'1' %}
+            {% for subdistrict in subdistrict_list|slice:'1' %}
             <th class="col-md-3">{% get_verbose_field_name subdistrict 'name' %}</th>
             <th>{% get_verbose_field_name subdistrict 'note' %}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for subdistrict in subdistricts %}
+        {% for subdistrict in subdistrict_list %}
         <tr>
             <td><a href="{{ subdistrict.get_absolute_url }}">{{ subdistrict.name }}</a></td>
             <td>{{ subdistrict.note }}</td>

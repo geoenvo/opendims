@@ -13,14 +13,14 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            {% for province in provinces|slice:'1' %}
+            {% for province in province_list|slice:'1' %}
             <th class="col-md-3">{% get_verbose_field_name province 'name' %}</th>
             <th>{% get_verbose_field_name province 'note' %}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for province in provinces %}
+        {% for province in province_list %}
         <tr>
             <td><a href="{{ province.get_absolute_url }}">{{ province.name }}</a></td>
             <td>{{ province.note }}</td>
