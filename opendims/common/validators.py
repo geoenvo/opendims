@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
+from django.core.exceptions import ValidationError
 
 import magic
 
@@ -25,6 +25,7 @@ class FileSizeValidator(object):
         self.max_size_mb = max_size_mb
 
     def __call__(self, value):
-        print value.file.size
         if value.file.size > self.max_size_mb * 1024 * 1024:
-            raise ValidationError(_('Maximum file upload size:') + ' %d MB' % self.max_size_mb)
+            raise ValidationError(
+                _('Maximum file upload size:') + ' %d MB' % self.max_size_mb
+            )

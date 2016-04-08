@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-import json
+import os, json
 
 from django.contrib.gis import admin
 
@@ -15,20 +15,27 @@ class GeolevelsAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         """
         Replace Geolevel multipolygon with uploaded .geojson CRS84 file.
+        Delete the .geojson file after updating the multipolygon.
         """
         obj.save()
         if obj.geojson:
             with open(obj.geojson.path) as f:
                 geojson = json.load(f)
+                f.close()
                 if 'features' in geojson and 'crs' in geojson:
                     crs = geojson['crs']['properties']['name']
                     if 'CRS84' in crs:
                         for feature in geojson['features']:
                             if feature['geometry']['type'] == 'MultiPolygon':
                                 geometry = feature['geometry']
-                        if geometry:
-                            obj.polygon = json.dumps(geometry)
-                            obj.save()
+                                if geometry:
+                                    obj.polygon = json.dumps(geometry)
+            try:
+                os.remove(obj.geojson.path)
+            except:
+                pass
+            obj.geojson = None
+            obj.save()
 
 
 class ProvinceAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
