@@ -27,6 +27,10 @@
             <td>{{ event.updated }}</td>
         </tr>
         <tr>
+            <th>{% get_verbose_field_name event 'status' %}</th>
+            <td>{{ event.status }}</td>
+        </tr>
+        <tr>
             <th>{% get_verbose_field_name event 'disaster' %}</th>
             <td>{{ event.disaster.note }}</td>
         </tr>
@@ -199,6 +203,10 @@ function leaflet_map_init(map, options) {
             <tr>
                 <th class="col-md-2">{% get_verbose_field_name event 'created' %}</th>
                 <td>{{ event.created }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'status' %}</th>
+                <td>{{ event.status }}</td>
             </tr>
             <tr>
                 <th>{% get_verbose_field_name event 'disaster' %}</th>
