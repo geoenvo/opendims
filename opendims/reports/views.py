@@ -24,7 +24,20 @@ class EventDetailView(generic.DetailView):
         return context
 
 
-def report_list(request):
+class ReportListView(generic.ListView):
+    queryset = Report.objects.order_by('-created')
+    paginate_by = settings.ITEMS_PER_PAGE
+
+
+class ReportDetailView(generic.DetailView):
+    model = Report
+
+    def get_context_data(self, **kwargs):
+        context = super(ReportDetailView, self).get_context_data(**kwargs)
+        return context
+
+
+"""def report_list(request):
     reports = Report.objects.order_by('-created')
     context = {'reports': reports}
     return render(request, 'reports/report_list.html', context)
@@ -33,7 +46,7 @@ def report_list(request):
 def report_detail(request, pk):
     report = get_object_or_404(Report, pk=pk)
     context = {'report': report}
-    return render(request, 'reports/report_detail.html', context)
+    return render(request, 'reports/report_detail.html', context)"""
 
 
 class APIEventList(CustomListAPIView):
