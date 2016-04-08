@@ -215,6 +215,7 @@ MAPBOX_ACCESSTOKEN = 'pk.eyJ1IjoiZ2VvZW52byIsImEiOiJjaWxjNDBseWQyN29udHlseHJueGF
 
 LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (-6.208973, 106.846933),
+    'DEFAULT_ZOOM': 11,
     'TILES': [
         (
             'OpenStreetMap',
