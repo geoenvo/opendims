@@ -37,18 +37,6 @@ class ReportDetailView(generic.DetailView):
         return context
 
 
-"""def report_list(request):
-    reports = Report.objects.order_by('-created')
-    context = {'reports': reports}
-    return render(request, 'reports/report_list.html', context)
-
-
-def report_detail(request, pk):
-    report = get_object_or_404(Report, pk=pk)
-    context = {'report': report}
-    return render(request, 'reports/report_detail.html', context)"""
-
-
 class APIEventList(CustomListAPIView):
     queryset = Event.objects.filter(status='ACTIVE')
     serializer_class = EventSerializer
