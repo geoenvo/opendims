@@ -47,7 +47,7 @@ urlpatterns = [
         name='rw_detail'
         ),
     url(r'^rw/api/$', views.APIRWList.as_view(), name='rw_api'),
-    url(r'^rt/$', views.VillageListView.as_view(), name='rt_list'),
+    url(r'^rt/$', views.RTListView.as_view(), name='rt_list'),
     url(
         r'^rt/(?P<pk>\d+)/$',
         views.RTDetailView.as_view(),
