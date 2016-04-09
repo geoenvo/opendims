@@ -2646,8 +2646,8 @@ $(document).ready(function(){
     });
 
     map = L.map("map", {
-      zoom: 13,
-      center: [-6.134410, 106.813545],
+      zoom: {{ DEFAULT_ZOOM }},
+      center: [{{ DEFAULT_CENTER.0 }}, {{ DEFAULT_CENTER.1 }}],
       layers: [mapquestOSM, markerClusters, highlight],
       zoomControl: false,
       attributionControl: false
