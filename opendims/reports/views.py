@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.conf import settings
+from django.utils import timezone
 
 from .serializers import EventSerializer, ReportSerializer
 from rest_framework import generics, filters
@@ -38,18 +39,66 @@ class ReportDetailView(generic.DetailView):
 
 
 class APIEventList(CustomListAPIView):
-    queryset = Event.objects.filter(status='ACTIVE')
     serializer_class = EventSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_class = EventFilter
     ordering_fields = ('created',)
     ordering = ('-created',)
 
+    def get_queryset(self):
+        """
+        For non authenticated users show ACTIVE events only.
+        If 'date' parameter is not provided, return events from
+        the current day only.
+        If 'all' parameter is provided, show all records to
+        authenticated users.
+        """
+        queryset = Event.objects.all()
+        authenticated = self.request.user.is_authenticated()
+        if not authenticated:
+            queryset = queryset.filter(status='ACTIVE')
+        date = self.request.query_params.get('date', None)
+        show_all = self.request.query_params.get('all', None)
+        if not date:
+            if authenticated and show_all:
+                return queryset
+            now = timezone.localtime(timezone.now())
+            queryset = queryset.filter(
+                created__year=now.year,
+                created__month=now.month,
+                created__day=now.day
+            )
+        return queryset
+
 
 class APIReportList(CustomListAPIView):
-    queryset = Report.objects.filter(status='VERIFIED')
     serializer_class = ReportSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_class = ReportFilter
     ordering_fields = ('created',)
     ordering = ('-created',)
+
+    def get_queryset(self):
+        """
+        For non authenticated users show VERIFIED reports only.
+        If 'date' parameter is not provided, return reports from
+        the current day only.
+        If 'all' parameter is provided, show all records to
+        authenticated users.
+        """
+        queryset = Report.objects.all()
+        authenticated = self.request.user.is_authenticated()
+        if not authenticated:
+            queryset = queryset.filter(status='VERIFIED')
+        date = self.request.query_params.get('date', None)
+        show_all = self.request.query_params.get('all', None)
+        if not date:
+            if authenticated and show_all:
+                return queryset
+            now = timezone.localtime(timezone.now())
+            queryset = queryset.filter(
+                created__year=now.year,
+                created__month=now.month,
+                created__day=now.day
+            )
+        return queryset
