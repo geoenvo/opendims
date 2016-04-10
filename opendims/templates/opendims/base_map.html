@@ -171,7 +171,7 @@
           <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">
-              {{ SITE_NAME }} Developed by <a href='http://www.geo.co.id'>GEO</a>
+              {{ SITE_NAME }} developed by <a href='http://www.geo.co.id'>GEO</a>
             </h4>
           </div>
           <div class="modal-body">
@@ -345,7 +345,7 @@
       });
 
       /* Filter sidebar feature list to only show features in current map bounds */
-      map.on("moveend", function (e) {
+      map.on("moveend", function(e) {
         syncSidebar();
       });
 
@@ -369,9 +369,9 @@
       var attributionControl = L.control({
         position: "bottomright"
       });
-      attributionControl.onAdd = function (map) {
+      attributionControl.onAdd = function(map) {
         var div = L.DomUtil.create("div", "leaflet-control-attribution");
-        div.innerHTML = "<span class='hidden-xs'>Developed by <a href='http://bryanmcbride.com'>bryanmcbride.com</a> | </span><a href='#' onclick='$(\"#attributionModal\").modal(\"show\"); return false;'>Attribution</a>";
+        div.innerHTML = "<span class='hidden-xs'>{{ SITE_NAME }} developed by <a href='http://www.geo.co.id'>GEO</a> | </span><a href='#' onclick='$(\"#attributionModal\").modal(\"show\"); return false;'>Attribution</a>";
         return div;
       };
       map.addControl(attributionControl);
@@ -426,18 +426,18 @@
       };
 
       /* Highlight search box text on click */
-      $("#searchbox").click(function () {
+      $("#searchbox").click(function() {
         $(this).select();
       });
 
       /* Prevent hitting enter from refreshing the page */
-      $("#searchbox").keypress(function (e) {
+      $("#searchbox").keypress(function(e) {
         if (e.which == 13) {
           e.preventDefault();
         }
       });
 
-      $("#featureModal").on("hidden.bs.modal", function (e) {
+      $("#featureModal").on("hidden.bs.modal", function(e) {
         $(document).on("mouseout", ".feature-row", clearHighlight);
       });
 
