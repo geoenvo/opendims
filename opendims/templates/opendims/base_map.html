@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{% static 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootleaf_example/assets/css/app.css' %}">
 
+    {% block extra_css_lib %}{% endblock extra_css_lib %}
+
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon-76x76.png' %}">
     <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon-120x120.png' %}">
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon-152x152.png' %}">
@@ -206,6 +208,8 @@
     <script src="{% static 'leaflet.locatecontrol/dist/L.Control.Locate.min.js' %}"></script>
     <script src="{% static 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.js' %}"></script>
     <!-- <script src="{% static 'bootleaf_example/assets/js/app.js' %}"></script> -->
+
+    {% block extra_js_lib %}{% endblock extra_js_lib %}
 
     <script type="text/javascript">
     $(document).ready(function(){

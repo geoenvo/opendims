@@ -4,6 +4,10 @@
 
 {% block title %}{{ block.super }} - Event Map{% endblock %}
 
+{% block extra_css_lib %}
+<link rel="stylesheet" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}">
+{% endblock %}
+
 {% block map_navbar_tools %}
 <li class="hidden"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
 <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="filter-btn"><i class="fa fa-filter"></i>&nbsp;&nbsp;Filter</a></li>
@@ -61,27 +65,41 @@
         <form id="filter-form">
           <fieldset>
             <div class="form-group">
-              <label for="name">Username:</label>
-              <input type="text" class="form-control" id="username">
-            </div>
-            <div class="form-group">
-              <label for="email">Password:</label>
-              <input type="password" class="form-control" id="password">
+              <label for="name">Date:</label>
+              <div class="input-group date" id="datetimepicker">
+                <input type="text" class="form-control" placeholder="YYYY-MM-DD" readonly="readonly" id="filter-date" />
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
             </div>
           </fieldset>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" data-dismiss="modal">Filter</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="filter-reset-btn">Reset</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="filter-submit-btn">Filter</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 {% endblock %}
 
+{% block extra_js_lib  %}
+<script src="{% static 'moment/min/moment.min.js' %}"></script>
+<script src="{% static 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+{% endblock %}
+
 {% block extra_js %}
 var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], TERSearch = [], TSUSearch = [];
+var ABRLayer, ABR, ABRMarkers, CEKLayer, CEK, CEKMarkers, BJRLayer, BJR, BJRMarkers, ROBLayer, ROB, ROBMarkers, GMPLayer, GMP, GMPMarkers, KBKLayer, KBK, KBKMarkers, SOSLayer, SOS, SOSMarkers, LAILayer, LAI, LAIMarkers, LSRLayer, LSR, LSRMarkers, TERLayer, TER, TERMarkers, TSULayer, TSU, TSUMarkers;
+
+$("#datetimepicker").datetimepicker({
+  format: 'YYYY-MM-DD',
+  showTodayButton: true,
+  ignoreReadonly: true,
+});
 
 $("#full-extent-btn").click(function() {
   //map.fitBounds(BJR.getBounds());
@@ -95,6 +113,105 @@ $("#filter-btn").click(function() {
   return false;
 });
 
+$("#filter-reset-btn").click(function() {
+  $("#filter-date").val("");
+  clearEvents();
+  loadEvents();
+});
+
+$("#filter-submit-btn").click(function() {
+  clearEvents();
+  loadEvents($("#filter-date").val());
+});
+
+/**
+ * Function for clearing all Event layers and the typeahead search cache.
+*/
+function clearEvents() {
+  map.removeLayer(ABRLayer);
+  ABR.clearLayers();
+  ABRMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  ABRSearch.length = 0;
+
+  map.removeLayer(CEKLayer);
+  CEK.clearLayers();
+  CEKMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  CEKSearch.length = 0;
+
+  map.removeLayer(BJRLayer);
+  BJR.clearLayers();
+  BJRMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  BJRSearch.length = 0;
+
+  map.removeLayer(ROBLayer);
+  ROB.clearLayers();
+  ROBMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  ROBSearch.length = 0;
+
+  map.removeLayer(GMPLayer);
+  GMP.clearLayers();
+  GMPMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  GMPSearch.length = 0;
+
+  map.removeLayer(KBKLayer);
+  KBK.clearLayers();
+  KBKMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  KBKSearch.length = 0;
+
+  map.removeLayer(SOSLayer);
+  SOS.clearLayers();
+  SOSMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  SOSSearch.length = 0;
+
+  map.removeLayer(LAILayer);
+  LAI.clearLayers();
+  LAIMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  LAISearch.length = 0;
+
+  map.removeLayer(LSRLayer);
+  LSR.clearLayers();
+  LSRMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  LSRSearch.length = 0;
+
+  map.removeLayer(TERLayer);
+  TER.clearLayers();
+  TERMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  TERSearch.length = 0;
+
+  map.removeLayer(TSULayer);
+  TSU.clearLayers();
+  TSUMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  TSUSearch.length = 0;
+
+  $("#searchbox").typeahead('destroy');
+}
+
+/**
+ * Function used in syncSidebar() to populate the sidebar with layers
+ * visible within the map bounds.
+*/
 function syncSidebarLayer(layer, layerGroup, markerImgPath) {
   if (map.hasLayer(layerGroup)) {
     var center;
@@ -205,7 +322,10 @@ function syncSidebar() {
 }
 // end syncSidebar()
 
-function drawLayerFeature(feature, layer, markerImgPath, layerGroupSearch, layerGroupSearchSource) {
+/**
+ * Function for drawing and initializing a feature part of a layer.
+*/
+function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGroupSearch, layerGroupSearchSource) {
   var center;
 
   // Event geometry can be either a MultiPolygon or Point
@@ -314,6 +434,8 @@ function drawLayerFeature(feature, layer, markerImgPath, layerGroupSearch, layer
       riseOnHover: true
     }).addTo(map);
 
+    layerMarkers.addLayer(marker);
+
     layer.on({
       click: function (e) {
         $("#feature-title").html(featureName);
@@ -347,203 +469,235 @@ function drawLayerFeature(feature, layer, markerImgPath, layerGroupSearch, layer
 }
 // end drawLayerFeature()
 
-var ABRLayer = L.geoJson(null);
-var ABR = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#00AEFF',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/abration.png' %}", ABRSearch, "ABR");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json", function (data) {
-  ABR.addData(data);
-});
+// Event layer switcher trigger and marker layers.
+ABRLayer = L.geoJson(null);
+ABRMarkers = L.layerGroup();
+CEKLayer = L.geoJson(null);
+CEKMarkers = L.layerGroup();
+BJRLayer = L.geoJson(null);
+BJRMarkers = L.layerGroup();
+ROBLayer = L.geoJson(null);
+ROBMarkers = L.layerGroup();
+GMPLayer = L.geoJson(null);
+GMPMarkers = L.layerGroup();
+KBKLayer = L.geoJson(null);
+KBKMarkers = L.layerGroup();
+SOSLayer = L.geoJson(null);
+SOSMarkers = L.layerGroup();
+LAILayer = L.geoJson(null);
+LAIMarkers = L.layerGroup();
+LSRLayer = L.geoJson(null);
+LSRMarkers = L.layerGroup();
+TERLayer = L.geoJson(null);
+TERMarkers = L.layerGroup();
+TSULayer = L.geoJson(null);
+TSUMarkers = L.layerGroup();
 
-var CEKLayer = L.geoJson(null);
-var CEK = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#F07C00',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/tornado.png' %}", CEKSearch, "CEK");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json", function (data) {
-  CEK.addData(data);
-});
+/**
+ * Function for initializing all the event layers.
+*/
+function loadEvents(date) {
+  date = typeof date !== 'undefined' ? date : false;
+  dateFilter = '';
 
-var BJRLayer = L.geoJson(null);
-var BJR = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#3759BF',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/flood.png' %}", BJRSearch, "BJR");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=BJR&format=json", function (data) {
-  BJR.addData(data);
-});
+  if (date !== false) {
+    dateFilter = '&date=' + date;
+  }
 
-var ROBLayer = L.geoJson(null);
-var ROB = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#128E4D',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/seaflood.png' %}", ROBSearch, "ROB");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json", function (data) {
-  ROB.addData(data);
-});
+  $("#loading").show();
 
-var GMPLayer = L.geoJson(null);
-var GMP = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#B52DAC',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/earthquake.png' %}", GMPSearch, "GMP");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json", function (data) {
-  GMP.addData(data);
-});
+  ABR = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#00AEFF',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, ABRMarkers, "{% static 'img/markers/abration.png' %}", ABRSearch, "ABR");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json" + dateFilter, function (data) {
+    ABR.addData(data);
+  });
 
-var KBKLayer = L.geoJson(null);
-var KBK = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#BD0404',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/fire.png' %}", KBKSearch, "KBK");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json", function (data) {
-  KBK.addData(data);
-});
+  CEK = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#F07C00',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, CEKMarkers, "{% static 'img/markers/tornado.png' %}", CEKSearch, "CEK");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json" + dateFilter, function (data) {
+    CEK.addData(data);
+  });
 
-var SOSLayer = L.geoJson(null);
-var SOS = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#000000',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/strike.png' %}", SOSSearch, "SOS");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json", function (data) {
-  SOS.addData(data);
-});
+  BJR = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#3759BF',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, BJRMarkers, "{% static 'img/markers/flood.png' %}", BJRSearch, "BJR");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=BJR&format=json" + dateFilter, function (data) {
+    BJR.addData(data);
+  });
 
-var LAILayer = L.geoJson(null);
-var LAI = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#FFFF00',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/caution.png' %}", LAISearch, "LAI");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json", function (data) {
-  LAI.addData(data);
-});
+  ROB = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#128E4D',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, ROBMarkers, "{% static 'img/markers/seaflood.png' %}", ROBSearch, "ROB");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json" + dateFilter, function (data) {
+    ROB.addData(data);
+  });
 
-var LSRLayer = L.geoJson(null);
-var LSR = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#F06668',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/avalanche.png' %}", LSRSearch, "LSR");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json", function (data) {
-  LSR.addData(data);
-});
+  GMP = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#B52DAC',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, GMPMarkers, "{% static 'img/markers/earthquake.png' %}", GMPSearch, "GMP");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json" + dateFilter, function (data) {
+    GMP.addData(data);
+  });
 
-var TERLayer = L.geoJson(null);
-var TER = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#FFFF00',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/shooting.png' %}", TERSearch, "TER");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json", function (data) {
-  TER.addData(data);
-});
+  KBK = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#BD0404',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, KBKMarkers, "{% static 'img/markers/fire.png' %}", KBKSearch, "KBK");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json" + dateFilter, function (data) {
+    KBK.addData(data);
+  });
 
-var TSULayer = L.geoJson(null);
-var TSU = L.geoJson(null, {
-  style: function (feature) {
-    return {
-      color: '#28ADAD',
-      fill: true,
-      opacity: 1,
-      clickable: true
-    };
-  },
-  onEachFeature: function (feature, layer) {
-    drawLayerFeature(feature, layer, "{% static 'img/markers/tsunami.png' %}", TSUSearch, "TSU");
-  },
-});
-$.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json", function (data) {
-  TSU.addData(data);
-});
+  SOS = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#000000',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, SOSMarkers, "{% static 'img/markers/strike.png' %}", SOSSearch, "SOS");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json" + dateFilter, function (data) {
+    SOS.addData(data);
+  });
+
+  LAI = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#FFFF00',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, LAIMarkers, "{% static 'img/markers/caution.png' %}", LAISearch, "LAI");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json" + dateFilter, function (data) {
+    LAI.addData(data);
+  });
+
+  LSR = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#F06668',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, LSRMarkers, "{% static 'img/markers/avalanche.png' %}", LSRSearch, "LSR");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json" + dateFilter, function (data) {
+    LSR.addData(data);
+  });
+
+  TER = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#FFFF00',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, TERMarkers, "{% static 'img/markers/shooting.png' %}", TERSearch, "TER");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json" + dateFilter, function (data) {
+    TER.addData(data);
+  });
+
+  TSU = L.geoJson(null, {
+    style: function (feature) {
+      return {
+        color: '#28ADAD',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      drawLayerFeature(feature, layer, TSUMarkers, "{% static 'img/markers/tsunami.png' %}", TSUSearch, "TSU");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json" + dateFilter, function (data) {
+    TSU.addData(data);
+  });
+
+  loadEventSearch();
+}
+// end loadEvents()
+
+loadEvents();
 
 /* Layer control listeners that allow for a single markerClusters layer */
 map.on("overlayadd", function(e) {
@@ -682,422 +836,428 @@ var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, {
   collapsed: isCollapsed
 }).addTo(map);
 
-/* Typeahead search functionality */
-$(document).one("ajaxStop", function () {
-  $("#loading").hide();
-  sizeLayerControl();
+/**
+ * Function for initializing the event Typeahead search.
+*/
+function loadEventSearch() {
+  /* Typeahead search functionality */
+  $(document).one("ajaxStop", function () {
+    $("#loading").hide();
+    sizeLayerControl();
 
-  //map.fitBounds(BJR.getBounds());
+    //map.fitBounds(BJR.getBounds());
 
-  featureList = new List("features", {valueNames: ["feature-name"]});
-  featureList.sort("feature-name", {order:"asc"});
+    featureList = new List("features", {valueNames: ["feature-name"]});
+    featureList.sort("feature-name", {order:"asc"});
 
-  var ABRBH = new Bloodhound({
-    name: "ABR",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: ABRSearch,
-    limit: 10
-  });
-
-  var CEKBH = new Bloodhound({
-    name: "CEK",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: CEKSearch,
-    limit: 10
-  });
-
-  var BJRBH = new Bloodhound({
-    name: "BJR",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: BJRSearch,
-    limit: 10
-  });
-
-  var ROBBH = new Bloodhound({
-    name: "ROB",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: ROBSearch,
-    limit: 10
-  });
-
-  var GMPBH = new Bloodhound({
-    name: "GMP",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: GMPSearch,
-    limit: 10
-  });
-
-  var KBKBH = new Bloodhound({
-    name: "KBK",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: KBKSearch,
-    limit: 10
-  });
-
-  var SOSBH = new Bloodhound({
-    name: "SOS",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: SOSSearch,
-    limit: 10
-  });
-
-  var LAIBH = new Bloodhound({
-    name: "LAI",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: LAISearch,
-    limit: 10
-  });
-
-  var LSRBH = new Bloodhound({
-    name: "LSR",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: LSRSearch,
-    limit: 10
-  });
-
-  var TERBH = new Bloodhound({
-    name: "TER",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: TERSearch,
-    limit: 10
-  });
-
-  var TSUBH = new Bloodhound({
-    name: "TSU",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: TSUSearch,
-    limit: 10
-  });
-
-  var geonamesBH = new Bloodhound({
-    name: "GeoNames",
-    datumTokenizer: function (d) {
-      return Bloodhound.tokenizers.whitespace(d.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {
-      url: "http://api.geonames.org/searchJSON?username=bootleaf&featureClass=P&maxRows=5&countryCode=US&name_startsWith=%QUERY",
-      filter: function (data) {
-        return $.map(data.geonames, function (result) {
-          return {
-            name: result.name + ", " + result.adminCode1,
-            lat: result.lat,
-            lng: result.lng,
-            source: "GeoNames"
-          };
-        });
-      },
-      ajax: {
-        beforeSend: function (jqXhr, settings) {
-          settings.url += "&east=" + map.getBounds().getEast() + "&west=" + map.getBounds().getWest() + "&north=" + map.getBounds().getNorth() + "&south=" + map.getBounds().getSouth();
-          $("#searchicon").removeClass("fa-search").addClass("fa-refresh fa-spin");
-        },
-        complete: function (jqXHR, status) {
-          $('#searchicon').removeClass("fa-refresh fa-spin").addClass("fa-search");
-        }
-      }
-    },
-    limit: 10
-  });
-
-  ABRBH.initialize();
-  CEKBH.initialize();
-  BJRBH.initialize();
-  ROBBH.initialize();
-  GMPBH.initialize();
-  KBKBH.initialize();
-  SOSBH.initialize();
-  LAIBH.initialize();
-  LSRBH.initialize();
-  TERBH.initialize();
-  TSUBH.initialize();
-  geonamesBH.initialize();
-
-  /* instantiate the typeahead UI */
-  $("#searchbox").typeahead(
-    {
-      minLength: 3,
-      highlight: true,
-      hint: false
-    },
-    {
+    var ABRBH = new Bloodhound({
       name: "ABR",
-      displayKey: "name",
-      source: ABRBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: ABRSearch,
+      limit: 10
+    });
+
+    var CEKBH = new Bloodhound({
       name: "CEK",
-      displayKey: "name",
-      source: CEKBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tornado.png" %}' width='25' height='25'>&nbsp;Angin Kencang</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: CEKSearch,
+      limit: 10
+    });
+
+    var BJRBH = new Bloodhound({
       name: "BJR",
-      displayKey: "name",
-      source: BJRBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: BJRSearch,
+      limit: 10
+    });
+
+    var ROBBH = new Bloodhound({
       name: "ROB",
-      displayKey: "name",
-      source: ROBBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: ROBSearch,
+      limit: 10
+    });
+
+    var GMPBH = new Bloodhound({
       name: "GMP",
-      displayKey: "name",
-      source: GMPBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: GMPSearch,
+      limit: 10
+    });
+
+    var KBKBH = new Bloodhound({
       name: "KBK",
-      displayKey: "name",
-      source: KBKBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: KBKSearch,
+      limit: 10
+    });
+
+    var SOSBH = new Bloodhound({
       name: "SOS",
-      displayKey: "name",
-      source: SOSBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: SOSSearch,
+      limit: 10
+    });
+
+    var LAIBH = new Bloodhound({
       name: "LAI",
-      displayKey: "name",
-      source: LAIBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: LAISearch,
+      limit: 10
+    });
+
+    var LSRBH = new Bloodhound({
       name: "LSR",
-      displayKey: "name",
-      source: LSRBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: LSRSearch,
+      limit: 10
+    });
+
+    var TERBH = new Bloodhound({
       name: "TER",
-      displayKey: "name",
-      source: TERBH.ttAdapter(),
-      templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
-        }
-      }
-    },
-    {
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: TERSearch,
+      limit: 10
+    });
+
+    var TSUBH = new Bloodhound({
       name: "TSU",
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: TSUSearch,
+      limit: 10
+    });
+
+    var geonamesBH = new Bloodhound({
+      name: "GeoNames",
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote: {
+        url: "http://api.geonames.org/searchJSON?username=bootleaf&featureClass=P&maxRows=5&countryCode=US&name_startsWith=%QUERY",
+        filter: function (data) {
+          return $.map(data.geonames, function (result) {
+            return {
+              name: result.name + ", " + result.adminCode1,
+              lat: result.lat,
+              lng: result.lng,
+              source: "GeoNames"
+            };
+          });
+        },
+        ajax: {
+          beforeSend: function (jqXhr, settings) {
+            settings.url += "&east=" + map.getBounds().getEast() + "&west=" + map.getBounds().getWest() + "&north=" + map.getBounds().getNorth() + "&south=" + map.getBounds().getSouth();
+            $("#searchicon").removeClass("fa-search").addClass("fa-refresh fa-spin");
+          },
+          complete: function (jqXHR, status) {
+            $('#searchicon').removeClass("fa-refresh fa-spin").addClass("fa-search");
+          }
+        }
+      },
+      limit: 10
+    });
+
+    ABRBH.initialize();
+    CEKBH.initialize();
+    BJRBH.initialize();
+    ROBBH.initialize();
+    GMPBH.initialize();
+    KBKBH.initialize();
+    SOSBH.initialize();
+    LAIBH.initialize();
+    LSRBH.initialize();
+    TERBH.initialize();
+    TSUBH.initialize();
+    geonamesBH.initialize();
+
+    /* instantiate the typeahead UI */
+    $("#searchbox").typeahead(
+      {
+        minLength: 3,
+        highlight: true,
+        hint: false
+      },
+      {
+        name: "ABR",
+        displayKey: "name",
+        source: ABRBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "CEK",
+        displayKey: "name",
+        source: CEKBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tornado.png" %}' width='25' height='25'>&nbsp;Angin Kencang</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "BJR",
+        displayKey: "name",
+        source: BJRBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "ROB",
+        displayKey: "name",
+        source: ROBBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "GMP",
+        displayKey: "name",
+        source: GMPBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "KBK",
+        displayKey: "name",
+        source: KBKBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "SOS",
+        displayKey: "name",
+        source: SOSBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "LAI",
+        displayKey: "name",
+        source: LAIBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "LSR",
+        displayKey: "name",
+        source: LSRBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "TER",
+        displayKey: "name",
+        source: TERBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
+        name: "TSU",
+        displayKey: "name",
+        source: TSUBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami</h4>",
+          suggestion: function (data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+    {
+      name: "GeoNames",
       displayKey: "name",
-      source: TSUBH.ttAdapter(),
+      source: geonamesBH.ttAdapter(),
       templates: {
-        header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami</h4>",
-        suggestion: function (data) {
-          return data.name + '<br><small>' + data.location + '</small>';
+        header: "<h4 class='typeahead-header'><img src='{% static "bootleaf_example/assets/img/globe.png" %}' width='25' height='25'>&nbsp;GeoNames</h4>"
+      }
+    }).on("typeahead:selected", function (obj, datum) {
+      if (datum.source === "ABR") {
+        if (!map.hasLayer(ABRLayer)) {
+          map.addLayer(ABRLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
         }
       }
-    },
-  {
-    name: "GeoNames",
-    displayKey: "name",
-    source: geonamesBH.ttAdapter(),
-    templates: {
-      header: "<h4 class='typeahead-header'><img src='{% static "bootleaf_example/assets/img/globe.png" %}' width='25' height='25'>&nbsp;GeoNames</h4>"
-    }
-  }).on("typeahead:selected", function (obj, datum) {
-    if (datum.source === "ABR") {
-      if (!map.hasLayer(ABRLayer)) {
-        map.addLayer(ABRLayer);
+      if (datum.source === "CEK") {
+        if (!map.hasLayer(CEKLayer)) {
+          map.addLayer(CEKLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
+      if (datum.source === "BJR") {
+        if (!map.hasLayer(BJRLayer)) {
+          map.addLayer(BJRLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-    }
-    if (datum.source === "CEK") {
-      if (!map.hasLayer(CEKLayer)) {
-        map.addLayer(CEKLayer);
+      if (datum.source === "ROB") {
+        if (!map.hasLayer(ROBLayer)) {
+          map.addLayer(ROBLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
+      if (datum.source === "GMP") {
+        if (!map.hasLayer(GMPLayer)) {
+          map.addLayer(GMPLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-    }
-    if (datum.source === "BJR") {
-      if (!map.hasLayer(BJRLayer)) {
-        map.addLayer(BJRLayer);
+      if (datum.source === "KBK") {
+        if (!map.hasLayer(KBKLayer)) {
+          map.addLayer(KBKLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
+      if (datum.source === "SOS") {
+        if (!map.hasLayer(SOSLayer)) {
+          map.addLayer(SOSLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-    }
-    if (datum.source === "ROB") {
-      if (!map.hasLayer(ROBLayer)) {
-        map.addLayer(ROBLayer);
+      if (datum.source === "LAI") {
+        if (!map.hasLayer(LAILayer)) {
+          map.addLayer(LAILayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
+      if (datum.source === "LSR") {
+        if (!map.hasLayer(LSRLayer)) {
+          map.addLayer(LSRLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-    }
-    if (datum.source === "GMP") {
-      if (!map.hasLayer(GMPLayer)) {
-        map.addLayer(GMPLayer);
+      if (datum.source === "TER") {
+        if (!map.hasLayer(TERLayer)) {
+          map.addLayer(TERLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
+      if (datum.source === "TSU") {
+        if (!map.hasLayer(TSULayer)) {
+          map.addLayer(TSULayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
       }
-    }
-    if (datum.source === "KBK") {
-      if (!map.hasLayer(KBKLayer)) {
-        map.addLayer(KBKLayer);
+      if (datum.source === "GeoNames") {
+        map.setView([datum.lat, datum.lng], 14);
       }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
+      if ($(".navbar-collapse").height() > 50) {
+        $(".navbar-collapse").collapse("hide");
       }
-    }
-    if (datum.source === "SOS") {
-      if (!map.hasLayer(SOSLayer)) {
-        map.addLayer(SOSLayer);
-      }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
-      }
-    }
-    if (datum.source === "LAI") {
-      if (!map.hasLayer(LAILayer)) {
-        map.addLayer(LAILayer);
-      }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
-      }
-    }
-    if (datum.source === "LSR") {
-      if (!map.hasLayer(LSRLayer)) {
-        map.addLayer(LSRLayer);
-      }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
-      }
-    }
-    if (datum.source === "TER") {
-      if (!map.hasLayer(TERLayer)) {
-        map.addLayer(TERLayer);
-      }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
-      }
-    }
-    if (datum.source === "TSU") {
-      if (!map.hasLayer(TSULayer)) {
-        map.addLayer(TSULayer);
-      }
-      map.setView([datum.lat, datum.lng], 17);
-      if (map._layers[datum.id]) {
-        map._layers[datum.id].fire("click");
-      }
-    }
-    if (datum.source === "GeoNames") {
-      map.setView([datum.lat, datum.lng], 14);
-    }
-    if ($(".navbar-collapse").height() > 50) {
-      $(".navbar-collapse").collapse("hide");
-    }
-  }).on("typeahead:opened", function () {
-    $(".navbar-collapse.in").css("max-height", $(document).height() - $(".navbar-header").height());
-    $(".navbar-collapse.in").css("height", $(document).height() - $(".navbar-header").height());
-  }).on("typeahead:closed", function () {
-    $(".navbar-collapse.in").css("max-height", "");
-    $(".navbar-collapse.in").css("height", "");
+    }).on("typeahead:opened", function () {
+      $(".navbar-collapse.in").css("max-height", $(document).height() - $(".navbar-header").height());
+      $(".navbar-collapse.in").css("height", $(document).height() - $(".navbar-header").height());
+    }).on("typeahead:closed", function () {
+      $(".navbar-collapse.in").css("max-height", "");
+      $(".navbar-collapse.in").css("height", "");
+    });
+    $(".twitter-typeahead").css("position", "static");
+    $(".twitter-typeahead").css("display", "block");
   });
-  $(".twitter-typeahead").css("position", "static");
-  $(".twitter-typeahead").css("display", "block");
-});
-// end ajaxStop
+  // end ajaxStop
+}
+// end loadEventSearch()
 
 // Leaflet patch to make layer control scrollable on touch browsers
 var container = $(".leaflet-control-layers")[0];

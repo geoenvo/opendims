@@ -171,6 +171,7 @@ BOWER_INSTALLED_APPS = (
     'leaflet.markercluster#0.4.0',
     'leaflet.locatecontrol#0.43.0',
     'leaflet-groupedlayercontrol#0.3.0',
+    'eonasdan-bootstrap-datetimepicker#4.17.37',
 )
 
 # App model reordering in /admin page
