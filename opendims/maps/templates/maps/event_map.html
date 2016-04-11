@@ -8,6 +8,21 @@
 <link rel="stylesheet" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}">
 {% endblock %}
 
+{% block extra_css %}
+<style>
+.filter-info {
+    padding: 6px 8px;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.filter-info .table td {
+  border: 0;
+}
+</style>
+{% endblock %}
+
 {% block map_navbar_tools %}
 <li class="hidden"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
 <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="filter-btn"><i class="fa fa-filter"></i>&nbsp;&nbsp;Filter</a></li>
@@ -73,6 +88,15 @@
                 </span>
               </div>
             </div>
+
+            <div class="form-group{% if not user.is_authenticated %} hidden{% endif %}">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="filter-all">
+                  Show inactive events
+                </label>
+              </div>
+            </div>
           </fieldset>
         </form>
       </div>
@@ -92,6 +116,7 @@
 {% endblock %}
 
 {% block extra_js %}
+var filterInfoControl;
 var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], TERSearch = [], TSUSearch = [];
 var ABRLayer, ABR, ABRMarkers, CEKLayer, CEK, CEKMarkers, BJRLayer, BJR, BJRMarkers, ROBLayer, ROB, ROBMarkers, GMPLayer, GMP, GMPMarkers, KBKLayer, KBK, KBKMarkers, SOSLayer, SOS, SOSMarkers, LAILayer, LAI, LAIMarkers, LSRLayer, LSR, LSRMarkers, TERLayer, TER, TERMarkers, TSULayer, TSU, TSUMarkers;
 
@@ -115,13 +140,15 @@ $("#filter-btn").click(function() {
 
 $("#filter-reset-btn").click(function() {
   $("#filter-date").val("");
+  $("#filter-all").prop("checked", false);
+
   clearEvents();
   loadEvents();
 });
 
 $("#filter-submit-btn").click(function() {
   clearEvents();
-  loadEvents($("#filter-date").val());
+  loadEvents($("#filter-date").val(), $("#filter-all").is(":checked"));
 });
 
 /**
@@ -204,6 +231,8 @@ function clearEvents() {
     map.removeLayer(layer);
   });
   TSUSearch.length = 0;
+
+  clearHighlight();
 
   $("#searchbox").typeahead('destroy');
 }
@@ -503,13 +532,45 @@ TSUMarkers = L.layerGroup();
 
 /**
  * Function for initializing all the event layers.
+ * @param {string} date - API filter in YYYY-MM-DD format.
+ * @param {boolean} all - API filter to show inactive events.
 */
-function loadEvents(date) {
-  date = typeof date !== 'undefined' ? date : false;
-  dateFilter = '';
+function loadEvents(date, all) {
+  var date = typeof date !== 'undefined' ? date : false;
+  var all = typeof all !== 'undefined' ? all : false;
+  var apiFilter = '';
 
-  if (date !== false) {
-    dateFilter = '&date=' + date;
+  var filterInfo = '';
+  var showFilterInfoControl = false;
+
+  if (date !== false && date.length) {
+    apiFilter = apiFilter + "&date=" + date;
+    filterInfo = filterInfo + "<tr><td>Showing events on:</td><td>" + date + "</td></tr>";
+    showFilterInfoControl = true;
+  }
+
+  if (all !== false) {
+    apiFilter = apiFilter + "&all=1";
+    filterInfo = filterInfo + '<tr><td>Showing inactive events:</td><td><span class="glyphicon glyphicon-ok"></span></td></tr>';
+    showFilterInfoControl = true;
+  }
+
+  if (showFilterInfoControl) {
+    filterInfoControl = L.control({
+      position: "topleft"
+    });
+
+    filterInfoControl.onAdd = function(map) {
+      var div = L.DomUtil.create("div", "filter-info");
+      div.innerHTML = "<table class='table hidden-xs'>" + filterInfo + "</table>";
+      return div;
+    }
+
+    map.addControl(filterInfoControl);
+  } else {
+    if (filterInfoControl) {
+      map.removeControl(filterInfoControl);
+    }
   }
 
   $("#loading").show();
@@ -527,7 +588,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, ABRMarkers, "{% static 'img/markers/abration.png' %}", ABRSearch, "ABR");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json" + apiFilter, function(data) {
     ABR.addData(data);
   });
 
@@ -544,7 +605,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, CEKMarkers, "{% static 'img/markers/tornado.png' %}", CEKSearch, "CEK");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json" + apiFilter, function(data) {
     CEK.addData(data);
   });
 
@@ -561,7 +622,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, BJRMarkers, "{% static 'img/markers/flood.png' %}", BJRSearch, "BJR");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=BJR&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=BJR&format=json" + apiFilter, function(data) {
     BJR.addData(data);
   });
 
@@ -578,7 +639,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, ROBMarkers, "{% static 'img/markers/seaflood.png' %}", ROBSearch, "ROB");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json" + apiFilter, function(data) {
     ROB.addData(data);
   });
 
@@ -595,7 +656,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, GMPMarkers, "{% static 'img/markers/earthquake.png' %}", GMPSearch, "GMP");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json" + apiFilter, function(data) {
     GMP.addData(data);
   });
 
@@ -612,7 +673,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, KBKMarkers, "{% static 'img/markers/fire.png' %}", KBKSearch, "KBK");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json" + apiFilter, function(data) {
     KBK.addData(data);
   });
 
@@ -629,7 +690,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, SOSMarkers, "{% static 'img/markers/strike.png' %}", SOSSearch, "SOS");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json" + apiFilter, function(data) {
     SOS.addData(data);
   });
 
@@ -646,7 +707,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, LAIMarkers, "{% static 'img/markers/caution.png' %}", LAISearch, "LAI");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json" + apiFilter, function(data) {
     LAI.addData(data);
   });
 
@@ -663,7 +724,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, LSRMarkers, "{% static 'img/markers/avalanche.png' %}", LSRSearch, "LSR");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json" + apiFilter, function(data) {
     LSR.addData(data);
   });
 
@@ -680,7 +741,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, TERMarkers, "{% static 'img/markers/shooting.png' %}", TERSearch, "TER");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json" + apiFilter, function(data) {
     TER.addData(data);
   });
 
@@ -697,7 +758,7 @@ function loadEvents(date) {
       drawLayerFeature(feature, layer, TSUMarkers, "{% static 'img/markers/tsunami.png' %}", TSUSearch, "TSU");
     },
   });
-  $.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json" + dateFilter, function(data) {
+  $.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json" + apiFilter, function(data) {
     TSU.addData(data);
   });
 
