@@ -8,9 +8,10 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 
 urlpatterns = [
-    url(r'^ReportAutoSummary/$', views.JaksafeReportAutoListView.as_view(), name='JaksafeReportAuto_list'),
-    url(r'^ReportAutoSummary/(?P<pk>\d+)/$', views.JaksafeReportAutoDetailView.as_view(), name='JaksafeReportAuto_detail'),
 
+    url(r'^reportautosummary/$', views.ReportAutoSummaryListView.as_view(), name='reportautosummary_list'),
+    url(r'^reportautosummary/(?P<pk>\d+)/$', views.ReportAutoSummaryDetailView.as_view(), name='reportautosummary_detail'),
+    url(r'^reportautosummary/api/$', views.APIReportAutoSummaryList.as_view(), name='APIReportAutoSummaryList'),
 ]
 
 urlpaterns = format_suffix_patterns(urlpatterns)

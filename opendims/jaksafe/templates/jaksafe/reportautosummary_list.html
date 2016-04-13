@@ -1,0 +1,42 @@
+{% extends "jaksafe/jaksafe.html" %}
+
+{% load i18n verbose_names %}
+
+{% block title %}{{ block.super }} - {% trans "Jaksafe Auto Summary" %}{% endblock %}
+
+{% block main %}
+
+<div class="page-header">
+    <h2>{% trans "Jaksafe Auto Summary" %}</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for reportautosummary in reportautosummary_list|slice:'1' %}
+            <th class="col-md-2">{% get_verbose_field_name reportautosummary 'created' %}</th>
+            <th>{% get_verbose_field_name reportautosummary 'damage_total' %}</th>
+            <th>{% get_verbose_field_name reportautosummary 'loss_total' %}</th>
+            <th>{% get_verbose_field_name reportautosummary 'village' %}</th>
+            <th>{% get_verbose_field_name reportautosummary 'note' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for reportautosummary in reportautosummary_list %}
+        <tr>
+            <td><a href="{{ reportautosummary.get_absolute_url }}">{{ reportautosummary.created }}</a></td>
+            <td>{{ reportautosummary.village }}</td>
+            <td>{{ reportautosummary.damage_total }}</td>
+            <td>{{ reportautosummary.loss_total }}</td>
+            <td>{{ reportautosummary.note }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">{% trans 'No Data found.' %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
