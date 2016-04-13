@@ -38,9 +38,11 @@
     <li><a href="{% url 'reports:event_api' %}?disaster=ROB&format=json" download="ROB.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Banjir Rob</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=GMP&format=json" download="GMP.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Gempa Bumi</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=KBK&format=json" download="KBK.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Kebakaran</a></li>
+    <li><a href="{% url 'reports:event_api' %}?disaster=KLB&format=json" download="KLB.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Kejadian Luar Biasa</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=SOS&format=json" download="SOS.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Konflik Sosial</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=LAI&format=json" download="LAI.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Lain-lain</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=LSR&format=json" download="LSR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Longsor</a></li>
+    <li><a href="{% url 'reports:event_api' %}?disaster=PHT&format=json" download="LSR.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Pohon Tumbang</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=TER&format=json" download="TER.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Terorisme</a></li>
     <li><a href="{% url 'reports:event_api' %}?disaster=TSU&format=json" download="TSU.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Tsunami</a></li>
   </ul>
@@ -116,8 +118,8 @@
 
 {% block extra_js %}
 var filterInfoControl;
-var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], TERSearch = [], TSUSearch = [], KLBSearch = [], PHTSearch = [];
-var ABRLayer, ABR, ABRMarkers, CEKLayer, CEK, CEKMarkers, BJRLayer, BJR, BJRMarkers, ROBLayer, ROB, ROBMarkers, GMPLayer, GMP, GMPMarkers, KBKLayer, KBK, KBKMarkers, SOSLayer, SOS, SOSMarkers, LAILayer, LAI, LAIMarkers, LSRLayer, LSR, LSRMarkers, TERLayer, TER, TERMarkers, TSULayer, TSU, TSUMarkers;
+var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], KLBSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], PHTSearch = [], TERSearch = [], TSUSearch = [];
+var ABRLayer, ABR, ABRMarkers, CEKLayer, CEK, CEKMarkers, BJRLayer, BJR, BJRMarkers, ROBLayer, ROB, ROBMarkers, GMPLayer, GMP, GMPMarkers, KBKLayer, KBK, KBKMarkers, KLBLayer, KLB, KLBMarkers, SOSLayer, SOS, SOSMarkers, LAILayer, LAI, LAIMarkers, LSRLayer, LSR, LSRMarkers, PHTLayer, PHT, PHTMarkers, TERLayer, TER, TERMarkers, TSULayer, TSU, TSUMarkers;
 
 $("#datetimepicker").datetimepicker({
   format: 'YYYY-MM-DD',
@@ -203,13 +205,6 @@ function clearEvents() {
   });
   KLBSearch.length = 0;
 
-  map.removeLayer(PHTLayer);
-  PHT.clearLayers();
-  PHTMarkers.eachLayer(function(layer) {
-    map.removeLayer(layer);
-  });
-  PHTSearch.length = 0;
-
   map.removeLayer(SOSLayer);
   SOS.clearLayers();
   SOSMarkers.eachLayer(function(layer) {
@@ -230,6 +225,13 @@ function clearEvents() {
     map.removeLayer(layer);
   });
   LSRSearch.length = 0;
+
+  map.removeLayer(PHTLayer);
+  PHT.clearLayers();
+  PHTMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  PHTSearch.length = 0;
 
   map.removeLayer(TERLayer);
   TER.clearLayers();
@@ -346,10 +348,6 @@ function syncSidebar() {
     syncSidebarLayer(layer, KLBLayer, "{% static 'img/markers/ruins.png' %}");
   });
 
-  PHT.eachLayer(function(layer) {
-    syncSidebarLayer(layer, PHTLayer, "{% static 'img/markers/treedown.png' %}");
-  });
-
   KBK.eachLayer(function(layer) {
     syncSidebarLayer(layer, KBKLayer, "{% static 'img/markers/fire.png' %}");
   });
@@ -364,6 +362,10 @@ function syncSidebar() {
 
   LSR.eachLayer(function(layer) {
     syncSidebarLayer(layer, LSRLayer, "{% static 'img/markers/fallingrocks.png' %}");
+  });
+
+  PHT.eachLayer(function(layer) {
+    syncSidebarLayer(layer, PHTLayer, "{% static 'img/markers/treedown.png' %}");
   });
 
   TER.eachLayer(function(layer) {
@@ -548,18 +550,18 @@ ROBLayer = L.geoJson(null);
 ROBMarkers = L.layerGroup();
 GMPLayer = L.geoJson(null);
 GMPMarkers = L.layerGroup();
-PHTLayer = L.geoJson(null);
-PHTMarkers = L.layerGroup();
-KLBLayer = L.geoJson(null);
-KLBMarkers = L.layerGroup();
 KBKLayer = L.geoJson(null);
 KBKMarkers = L.layerGroup();
+KLBLayer = L.geoJson(null);
+KLBMarkers = L.layerGroup();
 SOSLayer = L.geoJson(null);
 SOSMarkers = L.layerGroup();
 LAILayer = L.geoJson(null);
 LAIMarkers = L.layerGroup();
 LSRLayer = L.geoJson(null);
 LSRMarkers = L.layerGroup();
+PHTLayer = L.geoJson(null);
+PHTMarkers = L.layerGroup();
 TERLayer = L.geoJson(null);
 TERMarkers = L.layerGroup();
 TSULayer = L.geoJson(null);
@@ -661,40 +663,6 @@ function loadEvents(date, all) {
     BJR.addData(data);
   });
 
-  KLB = L.geoJson(null, {
-    style: function(feature) {
-      return {
-        color: '#B2B5B1',
-        fill: true,
-        opacity: 1,
-        clickable: true
-      };
-    },
-    onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, KLBMarkers, "{% static 'img/markers/ruins.png' %}", KLBSearch, "KLB");
-    },
-  });
-  $.getJSON("{% url "reports:event_api" %}?disaster=KLB&format=json" + apiFilter, function(data) {
-    KLB.addData(data);
-  });
-
-  PHT = L.geoJson(null, {
-    style: function(feature) {
-      return {
-        color: '#2DB32D',
-        fill: true,
-        opacity: 1,
-        clickable: true
-      };
-    },
-    onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, PHTMarkers, "{% static 'img/markers/treedown.png' %}", PHTSearch, "PHT");
-    },
-  });
-  $.getJSON("{% url "reports:event_api" %}?disaster=PHT&format=json" + apiFilter, function(data) {
-    PHT.addData(data);
-  });
-
   ROB = L.geoJson(null, {
     style: function(feature) {
       return {
@@ -746,6 +714,23 @@ function loadEvents(date, all) {
     KBK.addData(data);
   });
 
+  KLB = L.geoJson(null, {
+    style: function(feature) {
+      return {
+        color: '#B2B5B1',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function(feature, layer) {
+      drawLayerFeature(feature, layer, KLBMarkers, "{% static 'img/markers/ruins.png' %}", KLBSearch, "KLB");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=KLB&format=json" + apiFilter, function(data) {
+    KLB.addData(data);
+  });
+
   SOS = L.geoJson(null, {
     style: function(feature) {
       return {
@@ -795,6 +780,23 @@ function loadEvents(date, all) {
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json" + apiFilter, function(data) {
     LSR.addData(data);
+  });
+
+  PHT = L.geoJson(null, {
+    style: function(feature) {
+      return {
+        color: '#2DB32D',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function(feature, layer) {
+      drawLayerFeature(feature, layer, PHTMarkers, "{% static 'img/markers/treedown.png' %}", PHTSearch, "PHT");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=PHT&format=json" + apiFilter, function(data) {
+    PHT.addData(data);
   });
 
   TER = L.geoJson(null, {
@@ -1084,16 +1086,6 @@ function loadEventSearch() {
       limit: 10
     });
 
-    var PHTBH = new Bloodhound({
-      name: "PHT",
-      datumTokenizer: function(d) {
-        return Bloodhound.tokenizers.whitespace(d.name);
-      },
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      local: PHTSearch,
-      limit: 10
-    });
-
     var SOSBH = new Bloodhound({
       name: "SOS",
       datumTokenizer: function(d) {
@@ -1121,6 +1113,16 @@ function loadEventSearch() {
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       local: LSRSearch,
+      limit: 10
+    });
+
+    var PHTBH = new Bloodhound({
+      name: "PHT",
+      datumTokenizer: function(d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: PHTSearch,
       limit: 10
     });
 
@@ -1184,8 +1186,8 @@ function loadEventSearch() {
     KLBBH.initialize();
     SOSBH.initialize();
     LAIBH.initialize();
-    PHTBH.initialize();
     LSRBH.initialize();
+    PHTBH.initialize();
     TERBH.initialize();
     TSUBH.initialize();
     geonamesBH.initialize();
@@ -1297,22 +1299,22 @@ function loadEventSearch() {
         }
       },
       {
-        name: "PHT",
+        name: "LSR",
         displayKey: "name",
-        source: PHTBH.ttAdapter(),
+        source: LSRBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fallingrocks.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
         }
       },
       {
-        name: "LSR",
+        name: "PHT",
         displayKey: "name",
-        source: LSRBH.ttAdapter(),
+        source: PHTBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fallingrocks.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
