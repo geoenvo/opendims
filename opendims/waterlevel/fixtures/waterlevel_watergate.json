@@ -3,84 +3,96 @@
         "pk": 1,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Bendung Katulampa"
+            "name": "Pintu Air Bendung Katulampa",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.83666, -6.63304 ] }"
         }
     },
     {
         "pk": 2,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Depok"
+            "name": "Pintu Air Pos Depok",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.81583, -6.42721 ] }"
         }
     },
     {
         "pk": 3,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Manggarai"
+            "name": "Pintu Air Manggarai",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.848368346691, -6.2078583783917] }"
         }
     },
     {
         "pk": 4,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Karet"
+            "name": "Pintu Air Karet",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.811324357986, -6.19980821099993] }"
         }
     },
     {
         "pk": 5,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Krukut Hulu"
+            "name": "Pintu Air Pos Krukut Hulu",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.79888, -6.34416 ] }"
         }
     },
     {
         "pk": 6,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Pesanggarahan"
+            "name": "Pintu Air Pos Pesanggarahan",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.77221, -6.39694 ] }"
         }
     },
     {
         "pk": 7,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Angke Hulu"
+            "name": "Pintu Air Pos Angke Hulu",
+            "point": "{ 'type':'Point', 'coordinates': [ 106.69416, -6.21832 ] }"
         }
     },
     {
         "pk": 8,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Waduk Pluit"
+            "name": "Pintu Air Waduk Pluit",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.79777, -6.11111 ] }"
         }
     },
     {
         "pk": 9,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pasar Ikan"
+            "name": "Pintu Air Pasar Ikan",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.809339523315, -6.12685782002426] }"
         }
     },
     {
         "pk": 10,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Cipinang Hulu"
+            "name": "Pintu Air Pos Cipinang Hulu",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.87277, -6.33944 ] }"
         }
     },
     {
         "pk": 11,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Sunter Hulu"
+            "name": "Pintu Air Pos Sunter Hulu",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.92138, -6.31749 ] }"
         }
     },
     {
         "pk": 12,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Pulo Gadung"
+            "name": "Pintu Air Pos Pulo Gadung",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.90416, -6.19055 ] }"
         }
     }
 ]

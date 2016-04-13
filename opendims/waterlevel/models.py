@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
+from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
 
@@ -61,6 +62,9 @@ class WaterGate(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
+    def get_absolute_url(self):
+        return reverse('waterlevel:watergate_detail', args=[self.pk])
+
     def __unicode__(self):
         return '[%s]' % (self.name)
 
@@ -100,5 +104,20 @@ class WaterLevelReport(CommonAbstractModel):
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
 
+
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.watergate, self.height, self.weather)
+
+
+    def get_threshold_level(self):
+        threshold_level = ''
+
+        if self.height < self.watergate.siaga_3_min:
+            threshold_level = 'SIAGA-4'
+        elif self.height >= self.watergate.siaga_3_min and self.height <= self.watergate.siaga_3_max:
+            threshold_level = 'SIAGA-3'
+        elif self.height >= self.watergate.siaga_2_min and self.height <= self.watergate.siaga_2_max:
+            threshold_level = 'SIAGA-2'
+        else:
+            self.threshold_level = 'SIAGA-1'
+        return self.threshold_level

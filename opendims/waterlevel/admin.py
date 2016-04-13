@@ -14,6 +14,10 @@ verbose_waterlevelreport_details = _('Water Level Report details')
 
 
 class WaterGateAdmin(LeafletGeoAdmin):
+    settings_overrides = {
+            'DEFAULT_ZOOM': 13,
+        }
+
     fieldsets = [
         (verbose_watergate_details, {
             'fields': [
@@ -28,7 +32,6 @@ class WaterGateAdmin(LeafletGeoAdmin):
     ]
     list_display = [
         'name',
-        'point',
         'siaga_1_max',
         'siaga_2_max',
         'siaga_3_max'

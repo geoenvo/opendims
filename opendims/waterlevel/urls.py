@@ -14,16 +14,16 @@ urlpatterns = [
         name='waterlevel_api'
     ),
     url(
-        r'^waterlevelreport/$',
-        views.WaterLevelReportListView.as_view(),
-        name='waterlevelreport_list'
-    ),
-    url(
-        r'^watergate/$',
+        r'^$',
         views.WaterGateListView.as_view(),
         name='watergate_list'
-    ),
+        ),
 
+    url(
+        r'^(?P<pk>\d+)/$',
+        views.WaterGateDetailView.as_view(),
+        name='watergate_detail'
+    ),
 
 ]
 
