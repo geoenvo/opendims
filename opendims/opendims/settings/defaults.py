@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+from django.core.urlresolvers import reverse_lazy
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'common',
     'reports',
+    'reporting',
     'geolevels',
     'waterlevel',
     'maps',
@@ -180,11 +183,16 @@ ADMIN_REORDER = (
     ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
     ('reports', ('Event', 'Report', 'Source', 'Disaster')),
     ('waterlevel', ('WaterGate', 'WaterLevelReport')),
+    ('reporting', ('Report', 'Template', 'Attachment')),
 )
 
 SITE_NAME = 'Open-DiMS'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = reverse_lazy('login')
+
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+
+LOGOUT_URL = reverse_lazy('logout')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 

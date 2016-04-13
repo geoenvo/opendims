@@ -88,7 +88,6 @@
                 </span>
               </div>
             </div>
-
             <div class="form-group{% if not user.is_authenticated %} hidden{% endif %}">
               <div class="checkbox">
                 <label>
@@ -117,7 +116,7 @@
 
 {% block extra_js %}
 var filterInfoControl;
-var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], TERSearch = [], TSUSearch = [];
+var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], TERSearch = [], TSUSearch = [], KLBSearch = [], PHTSearch = [];
 var ABRLayer, ABR, ABRMarkers, CEKLayer, CEK, CEKMarkers, BJRLayer, BJR, BJRMarkers, ROBLayer, ROB, ROBMarkers, GMPLayer, GMP, GMPMarkers, KBKLayer, KBK, KBKMarkers, SOSLayer, SOS, SOSMarkers, LAILayer, LAI, LAIMarkers, LSRLayer, LSR, LSRMarkers, TERLayer, TER, TERMarkers, TSULayer, TSU, TSUMarkers;
 
 $("#datetimepicker").datetimepicker({
@@ -197,6 +196,20 @@ function clearEvents() {
   });
   KBKSearch.length = 0;
 
+  map.removeLayer(KLBLayer);
+  KLB.clearLayers();
+  KLBMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  KLBSearch.length = 0;
+
+  map.removeLayer(PHTLayer);
+  PHT.clearLayers();
+  PHTMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  PHTSearch.length = 0;
+
   map.removeLayer(SOSLayer);
   SOS.clearLayers();
   SOSMarkers.eachLayer(function(layer) {
@@ -258,6 +271,7 @@ function syncSidebarLayer(layer, layerGroup, markerImgPath) {
       if (layer.feature.properties) {
         var featureCreated = " - ";
         var featureDisaster = " - ";
+        var featureStatus = " - ";
         var featureProvinceName = " - ";
         var featureCityName = " - ";
         var featureSubdistrictName = " - ";
@@ -270,6 +284,9 @@ function syncSidebarLayer(layer, layerGroup, markerImgPath) {
         }
         if (layer.feature.properties.disaster) {
           featureDisaster = layer.feature.properties.disaster;
+        }
+        if (layer.feature.properties.status) {
+          featureStatus = layer.feature.properties.status;
         }
         if (layer.feature.properties.province) {
           featureProvinceName = layer.feature.properties.province_name;
@@ -325,6 +342,14 @@ function syncSidebar() {
     syncSidebarLayer(layer, GMPLayer, "{% static 'img/markers/earthquake.png' %}");
   });
 
+  KLB.eachLayer(function(layer) {
+    syncSidebarLayer(layer, KLBLayer, "{% static 'img/markers/ruins.png' %}");
+  });
+
+  PHT.eachLayer(function(layer) {
+    syncSidebarLayer(layer, PHTLayer, "{% static 'img/markers/treedown.png' %}");
+  });
+
   KBK.eachLayer(function(layer) {
     syncSidebarLayer(layer, KBKLayer, "{% static 'img/markers/fire.png' %}");
   });
@@ -338,7 +363,7 @@ function syncSidebar() {
   });
 
   LSR.eachLayer(function(layer) {
-    syncSidebarLayer(layer, LSRLayer, "{% static 'img/markers/avalanche.png' %}");
+    syncSidebarLayer(layer, LSRLayer, "{% static 'img/markers/fallingrocks.png' %}");
   });
 
   TER.eachLayer(function(layer) {
@@ -378,6 +403,7 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
   if (feature.properties) {
     var featureCreated = " - ";
     var featureDisaster = " - ";
+    var featureStatus = " - ";
     var featureProvinceName = " - ";
     var featureCityName = " - ";
     var featureSubdistrictName = " - ";
@@ -386,6 +412,7 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     var featureRTName = " - ";
     var contentCreated = " - ";
     var contentDisaster = " - ";
+    var contentStatus = " - ";
     var contentProvince = " - ";
     var contentCity = " - ";
     var contentSubdistrict = " - ";
@@ -401,6 +428,9 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     }
     if (feature.properties.disaster) {
       featureDisaster = feature.properties.disaster;
+    }
+    if (feature.properties.status) {
+      contentStatus = feature.properties.status;
     }
     if (feature.properties.disaster_note) {
       contentDisaster = feature.properties.disaster_note;
@@ -449,6 +479,7 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     var content = "<table class='table table-striped table-bordered table-condensed'>";
     content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
     content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
+    content = content + "<tr><th>Status</th><td>" + contentStatus + "</td></tr>";
     content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
     content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
     content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
@@ -517,6 +548,10 @@ ROBLayer = L.geoJson(null);
 ROBMarkers = L.layerGroup();
 GMPLayer = L.geoJson(null);
 GMPMarkers = L.layerGroup();
+PHTLayer = L.geoJson(null);
+PHTMarkers = L.layerGroup();
+KLBLayer = L.geoJson(null);
+KLBMarkers = L.layerGroup();
 KBKLayer = L.geoJson(null);
 KBKMarkers = L.layerGroup();
 SOSLayer = L.geoJson(null);
@@ -626,6 +661,40 @@ function loadEvents(date, all) {
     BJR.addData(data);
   });
 
+  KLB = L.geoJson(null, {
+    style: function(feature) {
+      return {
+        color: '#B2B5B1',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function(feature, layer) {
+      drawLayerFeature(feature, layer, KLBMarkers, "{% static 'img/markers/ruins.png' %}", KLBSearch, "KLB");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=KLB&format=json" + apiFilter, function(data) {
+    KLB.addData(data);
+  });
+
+  PHT = L.geoJson(null, {
+    style: function(feature) {
+      return {
+        color: '#2DB32D',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function(feature, layer) {
+      drawLayerFeature(feature, layer, PHTMarkers, "{% static 'img/markers/treedown.png' %}", PHTSearch, "PHT");
+    },
+  });
+  $.getJSON("{% url "reports:event_api" %}?disaster=PHT&format=json" + apiFilter, function(data) {
+    PHT.addData(data);
+  });
+
   ROB = L.geoJson(null, {
     style: function(feature) {
       return {
@@ -714,14 +783,14 @@ function loadEvents(date, all) {
   LSR = L.geoJson(null, {
     style: function(feature) {
       return {
-        color: '#F06668',
+        color: '#9D7050',
         fill: true,
         opacity: 1,
         clickable: true
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, LSRMarkers, "{% static 'img/markers/avalanche.png' %}", LSRSearch, "LSR");
+      drawLayerFeature(feature, layer, LSRMarkers, "{% static 'img/markers/fallingrocks.png' %}", LSRSearch, "LSR");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json" + apiFilter, function(data) {
@@ -800,6 +869,11 @@ map.on("overlayadd", function(e) {
     syncSidebar();
   }
 
+  if (e.layer === KLBLayer) {
+    markerClusters.addLayer(KLB);
+    syncSidebar();
+  }
+
   if (e.layer === SOSLayer) {
     markerClusters.addLayer(SOS);
     syncSidebar();
@@ -812,6 +886,11 @@ map.on("overlayadd", function(e) {
 
   if (e.layer === LSRLayer) {
     markerClusters.addLayer(LSR);
+    syncSidebar();
+  }
+
+  if (e.layer === PHTLayer) {
+    markerClusters.addLayer(PHT);
     syncSidebar();
   }
 
@@ -858,6 +937,11 @@ map.on("overlayremove", function(e) {
     syncSidebar();
   }
 
+  if (e.layer === KLBLayer) {
+    markerClusters.removeLayer(KLB);
+    syncSidebar();
+  }
+
   if (e.layer === SOSLayer) {
     markerClusters.removeLayer(SOS);
     syncSidebar();
@@ -870,6 +954,11 @@ map.on("overlayremove", function(e) {
 
   if (e.layer === LSRLayer) {
     markerClusters.removeLayer(LSR);
+    syncSidebar();
+  }
+
+  if (e.layer === PHTLayer) {
+    markerClusters.removeLayer(PHT);
     syncSidebar();
   }
 
@@ -893,9 +982,11 @@ var groupedOverlays = {
     "<img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob": ROBLayer,
     "<img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi": GMPLayer,
     "<img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran": KBKLayer,
+    "<img src='{% static "img/markers/ruins.png" %}' width='24' height='28'>&nbsp;Kejadian Luar Biasa": KLBLayer,
     "<img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial": SOSLayer,
     "<img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain": LAILayer,
-    "<img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor": LSRLayer,
+    "<img src='{% static "img/markers/fallingrocks.png" %}' width='24' height='28'>&nbsp;Longsor": LSRLayer,
+    "<img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang": PHTLayer,
     "<img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme": TERLayer,
     "<img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami": TSULayer,
   },
@@ -980,6 +1071,26 @@ function loadEventSearch() {
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       local: KBKSearch,
+      limit: 10
+    });
+
+    var KLBBH = new Bloodhound({
+      name: "KLB",
+      datumTokenizer: function(d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: KLBSearch,
+      limit: 10
+    });
+
+    var PHTBH = new Bloodhound({
+      name: "PHT",
+      datumTokenizer: function(d) {
+        return Bloodhound.tokenizers.whitespace(d.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: PHTSearch,
       limit: 10
     });
 
@@ -1070,8 +1181,10 @@ function loadEventSearch() {
     ROBBH.initialize();
     GMPBH.initialize();
     KBKBH.initialize();
+    KLBBH.initialize();
     SOSBH.initialize();
     LAIBH.initialize();
+    PHTBH.initialize();
     LSRBH.initialize();
     TERBH.initialize();
     TSUBH.initialize();
@@ -1151,6 +1264,17 @@ function loadEventSearch() {
         }
       },
       {
+        name: "KLB",
+        displayKey: "name",
+        source: KLBBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/ruins.png" %}' width='24' height='28'>&nbsp;Kejadian Luar Biasa</h4>",
+          suggestion: function(data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
         name: "SOS",
         displayKey: "name",
         source: SOSBH.ttAdapter(),
@@ -1173,11 +1297,22 @@ function loadEventSearch() {
         }
       },
       {
+        name: "PHT",
+        displayKey: "name",
+        source: PHTBH.ttAdapter(),
+        templates: {
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang</h4>",
+          suggestion: function(data) {
+            return data.name + '<br><small>' + data.location + '</small>';
+          }
+        }
+      },
+      {
         name: "LSR",
         displayKey: "name",
         source: LSRBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/avalanche.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fallingrocks.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1267,6 +1402,15 @@ function loadEventSearch() {
           map._layers[datum.id].fire("click");
         }
       }
+      if (datum.source === "KLB") {
+        if (!map.hasLayer(KLBLayer)) {
+          map.addLayer(KLBLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
+      }
       if (datum.source === "SOS") {
         if (!map.hasLayer(SOSLayer)) {
           map.addLayer(SOSLayer);
@@ -1288,6 +1432,15 @@ function loadEventSearch() {
       if (datum.source === "LSR") {
         if (!map.hasLayer(LSRLayer)) {
           map.addLayer(LSRLayer);
+        }
+        map.setView([datum.lat, datum.lng], 17);
+        if (map._layers[datum.id]) {
+          map._layers[datum.id].fire("click");
+        }
+      }
+      if (datum.source === "PHT") {
+        if (!map.hasLayer(PHTLayer)) {
+          map.addLayer(PHTLayer);
         }
         map.setView([datum.lat, datum.lng], 17);
         if (map._layers[datum.id]) {

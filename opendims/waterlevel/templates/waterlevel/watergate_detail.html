@@ -13,7 +13,7 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            {% for waterlevelreport in waterlevelreport_list|slice:'1' %}
+            {% for waterlevelreport in waterlevelreports|slice:'1' %}
             <th class="col-md-2">{% get_verbose_field_name waterlevelreport 'watergate' %}</th>
             <th>{% get_verbose_field_name waterlevelreport 'created' %}</th>
             <th>{% get_verbose_field_name waterlevelreport 'updated' %}</th>
@@ -24,9 +24,9 @@
     </thead>
     <tbody>
     
-        {% for waterlevelreport in waterlevelreport_list %}
+        {% for waterlevelreport in waterlevelreports %}
         <tr>
-            <td><a href="{{ waterlevelreport.get_absolute_url }}">{{ waterlevelreport.watergate }}</a></td>
+            <td>{{ waterlevelreport.watergate }}</td>
             <td>{{ waterlevelreport.created }}</td>
             <td>{{ waterlevelreport.updated }}</td>
             <td>{{ waterlevelreport.height }}</td>
