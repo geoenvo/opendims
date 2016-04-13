@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'common',
     'reports',
+    'reporting',
     'geolevels',
     'waterlevel',
     'maps',
@@ -181,6 +182,7 @@ ADMIN_REORDER = (
     ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
     ('reports', ('Event', 'Report', 'Source', 'Disaster')),
     ('waterlevel', ('WaterGate', 'WaterLevelReport')),
+    ('reporting', ('Report', 'Template', 'Attachment')),
 )
 
 SITE_NAME = 'Open-DiMS'
