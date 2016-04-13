@@ -13,14 +13,14 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            {% for rt in rts|slice:'1' %}
+            {% for rt in rt_list|slice:'1' %}
             <th class="col-md-3">{% get_verbose_field_name rt 'name' %}</th>
             <th>{% get_verbose_field_name rt 'note' %}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for rt in rts %}
+        {% for rt in rt_list %}
         <tr>
             <td><a href="{{ rt.get_absolute_url }}">{{ rt.name }}</a></td>
             <td>{{ rt.note }}</td>

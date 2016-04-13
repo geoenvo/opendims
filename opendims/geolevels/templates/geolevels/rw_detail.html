@@ -34,10 +34,6 @@
         <tr>
         {% for rt in rts|slice:'1' %}
             <th class="col-md-3">{% get_verbose_field_name rt 'name' %}</th>
-            <th>{% get_verbose_field_name rt 'province' %}</th>
-            <th>{% get_verbose_field_name rt 'city' %}</th>
-            <th>{% get_verbose_field_name rt 'subdistrict' %}</th>
-            <th>{% get_verbose_field_name rt 'village' %}</th>
             <th>{% get_verbose_field_name rt 'rw' %}</th>
             <th>{% get_verbose_field_name rt 'note' %}</th>
         {% endfor %}

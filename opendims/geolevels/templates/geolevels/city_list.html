@@ -13,14 +13,14 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            {% for city in cities|slice:'1' %}
+            {% for city in city_list|slice:'1' %}
             <th class="col-md-3">{% get_verbose_field_name city 'name' %}</th>
             <th>{% get_verbose_field_name city 'note' %}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for city in cities %}
+        {% for city in city_list %}
         <tr>
             <td><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></td>
             <td>{{ city.note }}</td>

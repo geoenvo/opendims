@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.views import generic
+from django.conf import settings
+
 
 from dal import autocomplete
 from rest_framework import generics, filters
@@ -138,78 +141,84 @@ class AutocompleteRT(autocomplete.Select2QuerySetView):
         return queryset
 
 
-def province_list(request):
-    provinces = Province.objects.all().order_by('name')
-    context = {'provinces': provinces}
-    return render(request, 'geolevels/province_list.html', context)
+class ProvinceListView(generic.ListView):
+    queryset = Province.objects.order_by('name')
+    paginate_by = settings.ITEMS_PER_PAGE
 
 
-def province_detail(request, pk):
-    province = get_object_or_404(Province, pk=pk)
-    cities = City.objects.all().order_by('name')
-    context = {'province': province, 'cities': cities}
-    return render(request, 'geolevels/province_detail.html', context)
+class ProvinceDetailView(generic.DetailView):
+    model = Province
+
+    def get_context_data(self, **kwargs):
+        context = super(ProvinceDetailView, self).get_context_data(**kwargs)
+        context['cities'] = City.objects.filter(province=self.get_object()).order_by('name')
+        return context
 
 
-def city_list(request):
-    cities = City.objects.all().order_by('name')
-    context = {'cities': cities}
-    return render(request, 'geolevels/city_list.html', context)
+class CityListView(generic.ListView):
+    queryset = City.objects.order_by('name')
+    paginate_by = settings.ITEMS_PER_PAGE
 
 
-def city_detail(request, pk):
-    city = get_object_or_404(City, pk=pk)
-    subdistricts = Subdistrict.objects.filter(city=city).order_by('name')
-    context = {'city': city, 'subdistricts': subdistricts}
-    return render(request, 'geolevels/city_detail.html', context)
+class CityDetailView(generic.DetailView):
+    model = City
+
+    def get_context_data(self, **kwargs):
+        context = super(CityDetailView, self).get_context_data(**kwargs)
+        context['subdistricts'] = Subdistrict.objects.filter(city=self.get_object()).order_by('name')
+        return context
 
 
-def subdistrict_list(request):
-    subdistricts = Subdistrict.objects.all().order_by('name')
-    context = {'subdistricts': subdistricts}
-    return render(request, 'geolevels/subdistrict_list.html', context)
+class SubdistrictListView(generic.ListView):
+    queryset = Subdistrict.objects.order_by('name')
+    paginate_by = settings.ITEMS_PER_PAGE
 
 
-def subdistrict_detail(request, pk):
-    subdistrict = get_object_or_404(Subdistrict, pk=pk)
-    villages = Village.objects.filter(subdistrict=subdistrict).order_by('name')
-    context = {'subdistrict': subdistrict, 'villages': villages}
-    return render(request, 'geolevels/subdistrict_detail.html', context)
+class SubdistrictDetailView(generic.DetailView):
+    model = Subdistrict
+
+    def get_context_data(self, **kwargs):
+        context = super(SubdistrictDetailView, self).get_context_data(**kwargs)
+        context['villages'] = Village.objects.filter(subdistrict=self.get_object()).order_by('name')
+        return context
 
 
-def village_list(request):
-    villages = Village.objects.all().order_by('name')
-    context = {'villages': villages}
-    return render(request, 'geolevels/village_list.html', context)
+class VillageListView(generic.ListView):
+    queryset = Village.objects.order_by('name')
+    paginate_by = settings.ITEMS_PER_PAGE
 
 
-def village_detail(request, pk):
-    village = get_object_or_404(Village, pk=pk)
-    rws = RW.objects.filter(village=village).order_by('name')
-    context = {'village': village, 'rws': rws}
-    return render(request, 'geolevels/village_detail.html', context)
+class VillageDetailView(generic.DetailView):
+    model = Village
+
+    def get_context_data(self, **kwargs):
+        context = super(VillageDetailView, self).get_context_data(**kwargs)
+        context['rws'] = RW.objects.filter(village=self.get_object()).order_by('name')
+        return context
 
 
-def rw_list(request):
-    rws = RW.objects.all().order_by('pk')
-    context = {'rws': rws}
-    return render(request, 'geolevels/rw_list.html', context)
+class RWListView(generic.ListView):
+    queryset = RW.objects.order_by('name')
+    paginate_by = settings.ITEMS_PER_PAGE
 
 
-def rw_detail(request, pk):
-    rw = get_object_or_404(RW, pk=pk)
-    rts = RT.objects.filter(rw=rw).order_by('name')
-    context = {'rw': rw, 'rts': rts}
-    return render(request, 'geolevels/rw_detail.html', context)
+class RWDetailView(generic.DetailView):
+    model = RW
+
+    def get_context_data(self, **kwargs):
+        context = super(RWDetailView, self).get_context_data(**kwargs)
+        context['rts'] = RT.objects.filter(rw=self.get_object()).order_by('name')
+        return context
 
 
-def rt_list(request):
-    rts = RT.objects.all().order_by('pk')
-    context = {'rts': rts}
-    return render(request, 'geolevels/rt_list.html', context)
+class RTListView(generic.ListView):
+    queryset = RT.objects.order_by('name')
+    paginate_by = settings.ITEMS_PER_PAGE
 
 
-def rt_detail(request, pk):
-    rt = get_object_or_404(RT, pk=pk)
-    context = {'rt': rt}
-    return render(request, 'geolevels/rt_detail.html', context)
+class RTDetailView(generic.DetailView):
+    model = RT
+
+    def get_context_data(self, **kwargs):
+        context = super(RTDetailView, self).get_context_data(**kwargs)
+        return context

@@ -28,7 +28,11 @@ class WaterLevelSerializer(gis_serializers.GeoFeatureModelSerializer):
     reports = serializers.SerializerMethodField()
 
     def get_reports(self, obj):
-        reports = WaterLevelReport.objects.filter(watergate=obj).order_by('created')
+        """
+        If date parameter is not provided, Return water level reports
+        from the current day only.
+        """
+        reports = WaterLevelReport.objects.filter(watergate=obj).order_by('-created')
         date = self.context['request'].GET.get('date', None)
         if date:
             try:
@@ -41,7 +45,6 @@ class WaterLevelSerializer(gis_serializers.GeoFeatureModelSerializer):
             except ValueError:
                 return []
         else:
-            # No date parameter, return reports from current day
             now = timezone.localtime(timezone.now())
             reports = reports.filter(
                 created__year=now.year,

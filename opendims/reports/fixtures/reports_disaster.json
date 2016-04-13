@@ -75,5 +75,19 @@
         "fields": {
             "note": "Lain-lain"
         }
+    },
+    {
+        "pk": "PHT",
+        "model": "reports.Disaster",
+        "fields": {
+            "note": "Pohon Tumbang"
+        }
+    },
+    {
+        "pk": "KLB",
+        "model": "reports.Disaster",
+        "fields": {
+            "note": "Kejadian Luar Biasa"
+        }
     }
 ]
