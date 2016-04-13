@@ -62,6 +62,10 @@
             <td>{{ report.event.disaster.note }}</td>
         </tr>
         <tr>
+            <th>{% get_verbose_field_name report.event 'status' %}</th>
+            <td>{{ report.event.status }}</td>
+        </tr>
+        <tr>
             <th>{% get_verbose_field_name report.event 'height' %}</th>
             <td>{{ report.event.height }}</td>
         </tr>
