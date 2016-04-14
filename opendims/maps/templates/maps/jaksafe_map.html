@@ -120,7 +120,7 @@
             };
           },
           onEachFeature: function(feature, layer) {
-            drawLayerFeature(feature, layer, "{% static 'img/markers/abration.png' %}");
+            drawLayerFeature(feature, layer);
           },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + todaydate +"&format=json", function(data) {
@@ -136,6 +136,9 @@
               clickable: true
             };
           },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer);
+          },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + yesterdaydate +"&format=json", function(data) {
           yesterday_layer.addData(data);
@@ -149,6 +152,9 @@
               opacity: 1,
               clickable: true
             };
+          },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer);
           },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past2date +"&format=json", function(data) {
@@ -164,6 +170,9 @@
               clickable: true
             };
           },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer);
+          },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past3date +"&format=json", function(data) {
           past3_layer.addData(data);
@@ -177,6 +186,9 @@
               opacity: 1,
               clickable: true
             };
+          },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer);
           },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past4date +"&format=json", function(data) {
@@ -192,6 +204,9 @@
               clickable: true
             };
           },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer);
+          },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past5date +"&format=json", function(data) {
           past5_layer.addData(data);
@@ -205,6 +220,9 @@
               opacity: 1,
               clickable: true
             };
+          },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer);
           },
         });
         $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past6date +"&format=json", function(data) {
@@ -320,7 +338,7 @@
             content = content + "</table>";
 
             layer.on({
-              click: function(e) {
+              click: function() {
                 $("#feature-title").html(featureName);
                 $("#feature-info").html(content);
                 $("#featureModal").modal("show");
