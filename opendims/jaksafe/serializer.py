@@ -4,6 +4,7 @@ from rest_framework_gis import serializers as gis_serializers
 from .models import ReportAutoSummary
 from common.serializers import DateTimeFieldTZ
 
+
 class JaksafeSerializer(gis_serializers.GeoFeatureModelSerializer):
     created = DateTimeFieldTZ()
     geometry = gis_serializers.GeometrySerializerMethodField()
@@ -11,6 +12,7 @@ class JaksafeSerializer(gis_serializers.GeoFeatureModelSerializer):
 
     def get_geometry(self, obj):
         return obj.village.polygon
+
     def get_village_name(self, obj):
         return obj.village.name
 

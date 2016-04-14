@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#000000">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Report Auto Summary</title>
+    <title>JakSAFE Report Auto Summary</title>
 
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
@@ -252,6 +252,7 @@
           if (feature.properties) {
             var featureCreated = " - ";
             var featureVillage = " - ";
+            var featuresource = " - ";
             var contentCreated = " - ";
             var contentVillage = " - ";
             var contentrw = " - ";
@@ -280,7 +281,8 @@
               contentrw = feature.properties.rw;
             }
             if (feature.properties.source) {
-              contentsource = feature.properties.source;
+              featuresource = feature.properties.source;
+              contentsource = "<a class='url-break' href='" + featuresource + "' target='_blank'>" + featuresource + "</a>";
             }
             if (feature.properties.note) {
               contentnote = feature.properties.note;
@@ -349,13 +351,13 @@
         }
 
         var groupedOverlays = {
-            "Today's DaLA Report": today_layer,
-            "Yesterday's DaLA Report": yesterday_layer,
-            "2 Days Ago's DaLA Report": past2_layer,
-            "3 Days Ago's DaLA Report": past3_layer,
-            "4 Days Ago's DaLA Report": past4_layer,
-            "5 Days Ago's DaLA Report": past5_layer,
-            "6 Days Ago's DaLA Report": past6_layer
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #3759BF;background:rgba(55, 89, 191, 0.2)'></span>Today's DaLA Summary Report": today_layer,
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #fd1900;background:rgba(253, 25, 0, 0.2)'></span>Yesterday": yesterday_layer,
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #22fd00;background:rgba(34, 253, 0, 0.2)'></span>Two Days Ago": past2_layer,
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #00f6fd;background:rgba(0, 246, 253, 0.2)'></span>Three Days Ago": past3_layer,
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #fd00f2;background:rgba(253, 0, 242, 0.2)'></span>Four Days Ago": past4_layer,
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #fda600;background:rgba(253, 166, 0, 0.2)'></span>Five Days Ago": past5_layer,
+            "<span style='margin-right:4px;padding-left:15px;border:3px solid #575865;background:rgba(87, 88, 101, 0.2)'></span>Six Days": past6_layer
         };
 
         L.control.layers(null, groupedOverlays, {
