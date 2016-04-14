@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Report Auto Summary</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'bootleaf_example/assets/img/favicon-76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'bootleaf_example/assets/img/favicon-120.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'bootleaf_example/assets/img/favicon-152.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'bootleaf_example/assets/img/favicon-196.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'bootleaf_example/assets/img/favicon.ico' %}">
+    <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    </style>
+  </head>
+
+  <body>
+    <div id='map'></div>
+    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+
+
+    <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-primary" id="feature-title"></h4>
+          </div>
+          <div class="modal-body" id="feature-info"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var map;
+        var mapquestOSM = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
+          attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+        });
+
+        var today_date = new Date();
+        var yyyy = today_date.getFullYear().toString();
+        var mm = (today_date.getMonth()+1).toString();
+        var dd  = today_date.getDate().toString();
+        var todaydate = yyyy + '-' + mm + '-' + dd;
+
+        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        var yesterdayyyyy = yesterday.getFullYear().toString();
+        var yesterdaymm = (yesterday.getMonth()+1).toString();
+        var yesterdaydd  = yesterday.getDate().toString();
+        var yesterdaydate = yesterdayyyyy + '-' + yesterdaymm + '-' + yesterdaydd;
+
+        var past2 = new Date(new Date().setDate(new Date().getDate()-2));
+        var past2yyyy = past2.getFullYear().toString();
+        var past2mm = (past2.getMonth()+1).toString();
+        var past2dd  = past2.getDate().toString();
+        var past2date = past2yyyy + '-' + past2mm + '-' + past2dd;
+
+        var past3 = new Date(new Date().setDate(new Date().getDate()-3));
+        var past3yyyy = past3.getFullYear().toString();
+        var past3mm = (past3.getMonth()+1).toString();
+        var past3dd  = past3.getDate().toString();
+        var past3date = past3yyyy + '-' + past3mm + '-' + past3dd;
+
+        var past4 = new Date(new Date().setDate(new Date().getDate()-4));
+        var past4yyyy = past4.getFullYear().toString();
+        var past4mm = (past4.getMonth()+1).toString();
+        var past4dd  = past4.getDate().toString();
+        var past4date = past4yyyy + '-' + past4mm + '-' + past4dd;
+
+        var past5 = new Date(new Date().setDate(new Date().getDate()-5));
+        var past5yyyy = past5.getFullYear().toString();
+        var past5mm = (past5.getMonth()+1).toString();
+        var past5dd  = past5.getDate().toString();
+        var past5date = past5yyyy + '-' + past5mm + '-' + past5dd;
+
+        var past6 = new Date(new Date().setDate(new Date().getDate()-6));
+        var past6yyyy = past6.getFullYear().toString();
+        var past6mm = (past6.getMonth()+1).toString();
+        var past6dd  = past6.getDate().toString();
+        var past6date = past6yyyy + '-' + past6mm + '-' + past6dd;
+
+
+        var today_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#3759BF',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+          onEachFeature: function(feature, layer) {
+            drawLayerFeature(feature, layer, "{% static 'img/markers/abration.png' %}");
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + todaydate +"&format=json", function(data) {
+          today_layer.addData(data);
+        });
+
+        var yesterday_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#fd1900',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + yesterdaydate +"&format=json", function(data) {
+          yesterday_layer.addData(data);
+        });
+
+        var past2_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#22fd00',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past2date +"&format=json", function(data) {
+          past2_layer.addData(data);
+        });
+
+        var past3_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#00f6fd',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past3date +"&format=json", function(data) {
+          past3_layer.addData(data);
+        });
+
+        var past4_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#fd00f2',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past4date +"&format=json", function(data) {
+          past4_layer.addData(data);
+        });
+
+        var past5_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#fda600',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past5date +"&format=json", function(data) {
+          past5_layer.addData(data);
+        });
+
+        var past6_layer = L.geoJson(null, {
+          style: function(feature) {
+            return {
+              color: '#575865',
+              fill: true,
+              opacity: 1,
+              clickable: true
+            };
+          },
+        });
+        $.getJSON("{% url "jaksafe:APIReportAutoSummaryList" %}?date=" + past6date +"&format=json", function(data) {
+          past6_layer.addData(data);
+        });
+
+        map = L.map("map", {
+          zoom: {{ DEFAULT_ZOOM }},
+          center: [{{ DEFAULT_CENTER.0 }}, {{ DEFAULT_CENTER.1 }}],
+          layers: [mapquestOSM, today_layer],
+          zoomControl: false,
+          attributionControl: false
+        });
+
+        function drawLayerFeature(feature, layer) {
+          var center;
+          // Event geometry can be either a MultiPolygon or Point
+          if (feature.geometry.type === 'MultiPolygon') {
+            // Get bounds and center of polygon
+            var bounds = layer.getBounds();
+            center = bounds.getCenter();
+          }
+          else if (feature.geometry.type === 'Point') {
+            center = layer.getLatLng();
+          }
+
+          if (feature.properties) {
+            var featureCreated = " - ";
+            var featureVillage = " - ";
+            var contentCreated = " - ";
+            var contentVillage = " - ";
+            var contentrw = " - ";
+            var contentsource = " - ";
+            var contentnote = " - ";
+            var contentdamage_infrastruktur = " - ";
+            var contentloss_infrastruktur = " - ";
+            var contentdamage_lintas_sektor = " - ";
+            var contentloss_lintas_sektor = " - ";
+            var contentdamage_produktif = " - ";
+            var contentloss_produktif = " - ";
+            var contentdamage_sosial_perumahan = " - ";
+            var contentloss_sosial_perumahan = " - ";
+            var contentdamage_total = " - ";
+            var contentloss_total = " - ";
+
+            if (feature.properties.created) {
+              featureCreated = feature.properties.created;
+              contentCreated = featureCreated;
+            }
+            if (feature.properties.village_name) {
+              featureVillage = feature.properties.village_name;
+              contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+            }
+            if (feature.properties.rw) {
+              contentrw = feature.properties.rw;
+            }
+            if (feature.properties.source) {
+              contentsource = feature.properties.source;
+            }
+            if (feature.properties.note) {
+              contentnote = feature.properties.note;
+            }
+            if (feature.properties.damage_infrastruktur) {
+              contentdamage_infrastruktur = feature.properties.damage_infrastruktur;
+            }
+            if (feature.properties.loss_infrastruktur) {
+              contentloss_infrastruktur = feature.properties.loss_infrastruktur;
+            }
+            if (feature.properties.damage_lintas_sektor) {
+              contentdamage_lintas_sektor = feature.properties.damage_lintas_sektor;
+            }
+            if (feature.properties.loss_lintas_sektor) {
+              contentloss_lintas_sektor = feature.properties.loss_lintas_sektor;
+            }
+            if (feature.properties.damage_produktif) {
+              contentdamage_produktif = feature.properties.damage_produktif;
+            }
+            if (feature.properties.loss_produktif) {
+              contentloss_produktif = feature.properties.loss_produktif;
+            }
+            if (feature.properties.damage_sosial_perumahan) {
+              contentdamage_sosial_perumahan = feature.properties.damage_sosial_perumahan;
+            }
+            if (feature.properties.loss_sosial_perumahan) {
+              contentloss_sosial_perumahan = feature.properties.loss_sosial_perumahan;
+            }
+            if (feature.properties.damage_total) {
+              contentdamage_total = feature.properties.damage_total;
+            }
+            if (feature.properties.loss_total) {
+              contentloss_total = feature.properties.loss_total;
+            }
+
+            var featureName = featureVillage + ' - ' + featureCreated;
+
+
+            var content = "<table class='table table-striped table-bordered table-condensed'>";
+            content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
+            content = content + "<tr><th>Village</th><td>" + contentVillage + "</td></tr>";
+            content = content + "<tr><th>RW</th><td>" + contentrw + "</td></tr>";
+            content = content + "<tr><th>Source</th><td>" + contentsource  + "</td></tr>";
+            content = content + "<tr><th>Note</th><td>" + contentnote  + "</td></tr>";
+            content = content + "<tr><th>Infrastructure Damage</th><td>" + contentdamage_infrastruktur  + "</td></tr>";
+            content = content + "<tr><th>Infrastructure Loss</th><td>" + contentloss_infrastruktur  + "</td></tr>";
+            content = content + "<tr><th>Trans-sector Damage</th><td>" + contentdamage_lintas_sektor  + "</td></tr>";
+            content = content + "<tr><th>Trans-sector Loss</th><td>" + contentloss_lintas_sektor  + "</td></tr>";
+            content = content + "<tr><th>Productive Damage</th><td>" + contentdamage_produktif  + "</td></tr>";
+            content = content + "<tr><th>Productive Loss</th><td>" + contentloss_produktif  + "</td></tr>";
+            content = content + "<tr><th>Social Estate Damage</th><td>" + contentdamage_sosial_perumahan  + "</td></tr>";
+            content = content + "<tr><th>Social Estate Loss</th><td>" + contentloss_sosial_perumahan  + "</td></tr>";
+            content = content + "<tr><th>Total Damage</th><td>" + contentdamage_total  + "</td></tr>";
+            content = content + "<tr><th>Total Loss</th><td>" + contentloss_total + "</td></tr>";
+            content = content + "</table>";
+
+            layer.on({
+              click: function(e) {
+                $("#feature-title").html(featureName);
+                $("#feature-info").html(content);
+                $("#featureModal").modal("show");
+              }
+            });
+
+          }
+        }
+
+        var groupedOverlays = {
+            "Today's DaLA Report": today_layer,
+            "Yesterday's DaLA Report": yesterday_layer,
+            "2 Days Ago's DaLA Report": past2_layer,
+            "3 Days Ago's DaLA Report": past3_layer,
+            "4 Days Ago's DaLA Report": past4_layer,
+            "5 Days Ago's DaLA Report": past5_layer,
+            "6 Days Ago's DaLA Report": past6_layer
+        };
+
+        L.control.layers(null, groupedOverlays, {
+          collapsed: false
+        }).addTo(map);
+
+    });
+    </script>
+  </body>
+</html>

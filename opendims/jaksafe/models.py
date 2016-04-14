@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from decimal import Decimal
-
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
@@ -26,7 +25,7 @@ verbose_rw = _('RW')
 verbose_source = _('Source')
 verbose_note = _('Note')
 
-class JaksafeReportAuto(CommonAbstractModel):
+class ReportAutoSummary(CommonAbstractModel):
     created = models.DateTimeField(
         default=timezone.now,
         verbose_name=verbose_date
@@ -34,12 +33,11 @@ class JaksafeReportAuto(CommonAbstractModel):
 
     village = models.ForeignKey(
         Village,
-        null=True,
-        blank=True,
         verbose_name=verbose_village
     )
     rw = models.TextField(blank=True, verbose_name=verbose_rw)
     source = models.URLField(blank=True, default='',verbose_name=verbose_source)
+    note = models.TextField(blank=True, default='', verbose_name=verbose_note)
     damage_infrastruktur = models.DecimalField(
         null=True,
         blank=True,
@@ -61,7 +59,7 @@ class JaksafeReportAuto(CommonAbstractModel):
         decimal_places=2,
         verbose_name=verbose_sectordamage
     )
-    loss_lintas_sector = models.DecimalField(
+    loss_lintas_sektor = models.DecimalField(
         null=True,
         blank=True,
         max_digits=18,
@@ -82,14 +80,14 @@ class JaksafeReportAuto(CommonAbstractModel):
         decimal_places=2,
         verbose_name=verbose_productloss
     )
-    damage_social_perumahan = models.DecimalField(
+    damage_sosial_perumahan = models.DecimalField(
         null=True,
         blank=True,
         max_digits=18,
         decimal_places=2,
         verbose_name=verbose_socialdamage
     )
-    loss_social_perumahan = models.DecimalField(
+    loss_sosial_perumahan = models.DecimalField(
         null=True,
         blank=True,
         max_digits=18,
@@ -110,14 +108,13 @@ class JaksafeReportAuto(CommonAbstractModel):
         decimal_places=2,
         verbose_name=verbose_totalloss
     )
-    note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
         ordering = ['-created']
         get_latest_by = 'created'
 
     def get_absolute_url(self):
-        return reverse('jaksafe:JaksafeReportAuto_detail', args=[self.pk])
+        return reverse('jaksafe:reportautosummary_detail', args=[self.pk])
 
     def __unicode__(self):
         return '[%s] - %s' % (self.village, timezone.localtime(self.created))

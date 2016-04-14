@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'waterlevel',
     'maps',
     'jaksafe',
+    'django_crontab',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -260,3 +261,7 @@ LEAFLET_CONFIG = {
 ACCOUNT_ACTIVATION_DAYS = 7
 
 ITEMS_PER_PAGE = 10
+
+CRONJOBS = [
+    ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job')
+]
