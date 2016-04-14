@@ -9,6 +9,8 @@ from geolevels.models import Village
 from .models import ReportAutoSummary
 
 verbose_ReportAutoSummary = _('ReportAutoSummary')
+
+
 class ReportAutoSummaryAdmin(admin.ModelAdmin):
     list_display = [
         'created',

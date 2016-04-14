@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from common.models import CommonAbstractModel
 from geolevels.models import Village
 
-verbose_date = _('Created')
+verbose_created = _('Created')
 verbose_infradamage = _('Infrastructure Damage')
 verbose_infraloss = _('Infrastructure Loss')
 verbose_sectordamage = _('Trans-sector Damage')
@@ -25,10 +25,11 @@ verbose_rw = _('RW')
 verbose_source = _('Source')
 verbose_note = _('Note')
 
+
 class ReportAutoSummary(CommonAbstractModel):
     created = models.DateTimeField(
         default=timezone.now,
-        verbose_name=verbose_date
+        verbose_name=verbose_created
     )
 
     village = models.ForeignKey(
@@ -36,7 +37,9 @@ class ReportAutoSummary(CommonAbstractModel):
         verbose_name=verbose_village
     )
     rw = models.TextField(blank=True, verbose_name=verbose_rw)
-    source = models.URLField(blank=True, default='',verbose_name=verbose_source)
+    source = models.URLField(
+        blank=True, default='',
+        verbose_name=verbose_source)
     note = models.TextField(blank=True, default='', verbose_name=verbose_note)
     damage_infrastruktur = models.DecimalField(
         null=True,
