@@ -1,11 +1,13 @@
 from __future__ import unicode_literals
 
-
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
+from django.core.files.temp import NamedTemporaryFile
+from django.core.files import File
 
 from ckeditor.fields import RichTextField
+from xhtml2pdf import pisa
 
 from common.models import CommonAbstractModel
 from reports.models import Disaster
@@ -124,13 +126,29 @@ class Report(CommonAbstractModel):
         return '[%s] - %s' % (self.template, timezone.localtime(self.created))
 
     def save(self, *args, **kwargs):
-        report_content = ''
-        template = self.template
+        report_content = self.template.content
+        if self.text_id:
+            report_content = report_content.replace('[[id]]', self.text_id)
         if self.text_title:
-            report_content = template.content.replace('[[title]]', self.text_title)
+            report_content = report_content.replace('[[title]]', self.text_title)
         if self.text_author:
             report_content = report_content.replace('[[author]]', self.text_author)
         self.content = report_content
+
+        # Write replaced html template to temp pdf file
+        pdf_temp = NamedTemporaryFile()
+        pisa.CreatePDF(
+            self.content.encode('utf-8'),
+            dest=pdf_temp,
+            encoding='utf-8'
+        )
+        # YYYYMMDD-template_name.pdf
+        pdf_filename = "{}__{}{}".format(
+            self.created.strftime('%Y%m%d-%H%M'),
+            self.template.name.replace(' ', '_'),
+            '.pdf'
+        )
+        self.file.save(pdf_filename, File(pdf_temp), save=False)
 
         super(Report, self).save(*args, **kwargs)
 
