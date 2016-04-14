@@ -8,7 +8,17 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_waterlevelreport(watergate, hour):
+def get_waterlevelreport(watergate, now):
+    date_start = datetime.datetime(now.year, now.month, now.day, 0)
+    waterlevelreports = WaterLevelReport.objects.filter(
+        watergate=watergate,
+        created__range=(date_start, now)
+    ).order_by('created')
+    return waterlevelreports
+
+
+@register.simple_tag
+def get_waterlevelreport_old(watergate, hour):
     now = timezone.localtime(timezone.now())
     created = datetime.datetime(now.year, now.month, now.day, hour)
     waterlevelreports = WaterLevelReport.objects.filter(
@@ -23,6 +33,7 @@ def get_waterlevelreport(watergate, hour):
         return waterlevelreports[0]
     else:
         return False
+
 
 @register.simple_tag
 def get_waterlevelreportchart(watergate, hour):

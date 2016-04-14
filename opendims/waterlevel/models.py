@@ -28,7 +28,6 @@ verbose_siaga3max = _('Siaga 3 max')
 class WaterGate(CommonAbstractModel):
     name = models.CharField(
         max_length=100,
-        blank=True,
         verbose_name=verbose_name
     )
     point = models.PointField(
@@ -62,11 +61,11 @@ class WaterGate(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
-    def get_absolute_url(self):
-        return reverse('waterlevel:watergate_detail', args=[self.pk])
-
     def __unicode__(self):
         return '[%s]' % (self.name)
+
+    def get_absolute_url(self):
+        return reverse('waterlevel:watergate_detail', args=[self.pk])
 
 
 class WaterLevelReport(CommonAbstractModel):
@@ -79,39 +78,35 @@ class WaterLevelReport(CommonAbstractModel):
     )
 
     height = models.PositiveIntegerField(
-        null=True,
-        blank=True,
+        default=0,
         verbose_name=verbose_height
     )
     created = models.DateTimeField(
-            default=timezone.now,
-            verbose_name=verbose_created
+        default=timezone.now,
+        verbose_name=verbose_created
     )
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
     weather = models.CharField(
-            max_length=50,
-            choices=WEATHER_CHOICES,
-            default='T',
-            verbose_name=verbose_weather
-        )
+        max_length=50,
+        choices=WEATHER_CHOICES,
+        default='T',
+        verbose_name=verbose_weather
+    )
     watergate = models.ForeignKey(
         WaterGate,
-        verbose_name=verbose_watergate,
-        related_name='waterlevelreports'
+        related_name='waterlevelreports',
+        verbose_name=verbose_watergate
     )
 
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
 
-
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.watergate, self.height, self.weather)
 
-
     def get_threshold_level(self):
         threshold_level = ''
-
         if self.height < self.watergate.siaga_3_min:
             threshold_level = 'SIAGA-4'
         elif self.height >= self.watergate.siaga_3_min and self.height <= self.watergate.siaga_3_max:
@@ -119,5 +114,5 @@ class WaterLevelReport(CommonAbstractModel):
         elif self.height >= self.watergate.siaga_2_min and self.height <= self.watergate.siaga_2_max:
             threshold_level = 'SIAGA-2'
         else:
-            self.threshold_level = 'SIAGA-1'
-        return self.threshold_level
+            threshold_level = 'SIAGA-1'
+        return threshold_level

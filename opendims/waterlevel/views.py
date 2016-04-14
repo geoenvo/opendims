@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.conf import settings
+from django.utils import timezone
 
 from rest_framework import generics, filters
 
@@ -9,8 +10,12 @@ from .serializers import WaterLevelSerializer
 
 
 class WaterGateListView(generic.ListView):
-    queryset = WaterGate.objects.order_by('-name')
-    paginate_by = settings.ITEMS_PER_PAGE
+    queryset = WaterGate.objects.all().order_by('name')
+
+    def get_context_data(self, **kwargs):
+        context = super(WaterGateListView, self).get_context_data(**kwargs)
+        context['now'] = timezone.localtime(timezone.now())
+        return context
 
 
 class WaterGateDetailView(generic.DetailView):
