@@ -164,40 +164,74 @@ class EventResource(resources.ModelResource):
                 valid_geolevels = False
             if rt and not rw:
                 valid_geolevels = False
+            if disaster and valid_geolevels:
+                try:
+                    Disaster.objects.get(pk=disaster)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('Invalid disaster code. Skipping this row for import.')))
             if province and valid_geolevels:
                 try:
-                    Province.objects.get(name=province)
+                    province_instance = Province.objects.get(name=province)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
                     messages.error(request, "Error (row {}): {}".format(row_count, _('Province not found. Skipping this row for import.')))
-            if city and province and valid_geolevels:
+            if city and valid_geolevels:
                 try:
-                    City.objects.get(name=city, province__name=province)
+                    city_instance = City.objects.get(name=city)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
                     messages.error(request, "Error (row {}): {}".format(row_count, _('City not found. Skipping this row for import.')))
-            if subdistrict and city and valid_geolevels:
+            if subdistrict and valid_geolevels:
                 try:
-                    Subdistrict.objects.get(name=subdistrict, city__name=city)
+                    subdistrict_instance = Subdistrict.objects.get(
+                        name=subdistrict)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
                     messages.error(request, "Error (row {}): {}".format(row_count, _('Subdistrict not found. Skipping this row for import.')))
-            if village and subdistrict and valid_geolevels:
+            if village and valid_geolevels:
                 try:
-                    Village.objects.get(
-                        name=village,
-                        subdistrict__name=subdistrict
-                    )
+                    village_instance = Village.objects.get(name=village)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
                     messages.error(request, "Error (row {}): {}".format(row_count, _('Village not found. Skipping this row for import.')))
-            if rw and village and valid_geolevels:
+            if city_instance and province_instance and valid_geolevels:
                 try:
-                    rw_instance = RW.objects.get(name=rw, village__name=village)
+                    City.objects.get(
+                        name=city_instance.name,
+                        province__name=province_instance.name
+                    )
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('City not found in the province. Skipping this row for import.')))
+            if subdistrict_instance and city_instance and valid_geolevels:
+                try:
+                    Subdistrict.objects.get(
+                        name=subdistrict_instance.name,
+                        city__name=city_instance.name
+                    )
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('Subdistrict not found in the city. Skipping this row for import.')))
+            if village_instance and subdistrict_instance and valid_geolevels:
+                try:
+                    Village.objects.get(
+                        name=village_instance.name,
+                        subdistrict__name=subdistrict_instance.name
+                    )
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('Village not found in the subdistrict. Skipping this row for import.')))
+            if rw and village_instance and valid_geolevels:
+                try:
+                    rw_instance = RW.objects.get(
+                        name=rw,
+                        village__name=village_instance.name
+                    )
                     rw = unicode(rw_instance.pk)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('RW not found. Skipping this row for import.')))
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('RW not found in the village. Skipping this row for import.')))
             if rt and rw and valid_geolevels:
                 try:
                     rt_instance = RT.objects.get(name=rt, rw=rw_instance)
