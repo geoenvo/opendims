@@ -95,16 +95,16 @@ class EventResource(resources.ModelResource):
         """Overrides Django-Import-Export method.
         It is necessary to modify the tablib dataset before the real import
         process, to translate from a human friendly input format like this:
-        id|disaster|province|city|subdistrict|village|rw |rt
-        --|--------|--------|----|-----------|-------|---|--
-          |BJR     |        |    |           |ANCOL  |005|
-          |BJR     |        |    |           |ANCOL  |001|
+        id|disaster|province|city|subdistrict|village|rw |rt|height
+        --|--------|--------|----|-----------|-------|---|--|
+          |BJR     |        |    |           |ANCOL  |005|  |
+          |BJR     |        |    |           |ANCOL  |001|  |
         then in order to match the Event model definition, query the Village-RW
         and RW-RT relation to produce to this:
-        id|disaster|province|city|subdistrict|village|rw              |rt
-        --|--------|--------|----|-----------|-------|----------------|--
-          |BJR     |        |    |           |ANCOL  |3175020003005000|
-          |BJR     |        |    |           |ANCOL  |3175020003001000|
+        id|disaster|province|city|subdistrict|village|rw              |rt|height
+        --|--------|--------|----|-----------|-------|----------------|--|
+          |BJR     |        |    |           |ANCOL  |3175020003005000|  |
+          |BJR     |        |    |           |ANCOL  |3175020003001000|  |
         Also checks whether the row's Geolevels relation is valid, if not
         the row is not imported.
         """
@@ -127,6 +127,7 @@ class EventResource(resources.ModelResource):
             village = row[5].upper()
             rw = row[6]
             rt = row[7]
+            height = row[8]
             # Validate Geolevels relations
             valid_geolevels = True
             if rw and not village:
@@ -180,7 +181,8 @@ class EventResource(resources.ModelResource):
                 subdistrict,
                 village,
                 rw,
-                rt
+                rt,
+                height
             )
             """
             If relations are invalid don't push row to the dataset so it
@@ -213,7 +215,8 @@ class EventResource(resources.ModelResource):
             'subdistrict',
             'village',
             'rw',
-            'rt'
+            'rt',
+            'height'
         )
         export_order = fields
 
