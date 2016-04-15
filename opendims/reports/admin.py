@@ -6,7 +6,13 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
 from leaflet.admin import LeafletGeoAdmin
 
-from import_export import resources, fields, widgets
+import django
+from django.utils.encoding import force_text
+from django.http import HttpResponse
+from django.template.response import TemplateResponse
+from django.contrib import messages
+
+from import_export import resources, fields, widgets, forms
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
@@ -110,7 +116,11 @@ class EventResource(resources.ModelResource):
         """
         # print 'DEBUG BEFORE'
         # print dataset
+
+        # Get request object for sending error messages
+        request = kwargs.pop('request', None)
         i = 0
+        row_count = i + 2
         last = dataset.height - 1
         while i <= last:
             # Get the top row
@@ -127,6 +137,15 @@ class EventResource(resources.ModelResource):
             village = row[5].upper()
             rw = row[6]
             rt = row[7]
+            # Pad single digit RT/RW with zeros
+            if rw and len(rw) < 3:
+                diff = 3 - len(rw)
+                for i in range(diff):
+                    rw = '0' + rw
+            if rt and len(rt) < 3:
+                diff = 3 - len(rt)
+                for i in range(diff):
+                    rt = '0' + rt
             height = row[8]
             # Validate Geolevels relations
             valid_geolevels = True
@@ -134,22 +153,25 @@ class EventResource(resources.ModelResource):
                 valid_geolevels = False
             if rt and not rw:
                 valid_geolevels = False
-            if rw and village:
+            if province and valid_geolevels:
                 try:
-                    rw_instance = RW.objects.get(
-                        name=rw,
-                        village__name=village
-                    )
-                    rw = unicode(rw_instance.pk)
+                    Province.objects.get(name=province)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-            if rt and rw:
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('Province not found. Skipping this row for import.')))
+            if city and province and valid_geolevels:
                 try:
-                    rt_instance = RT.objects.get(name=rt, rw=rw_instance)
-                    rt = unicode(rt_instance.pk)
+                    City.objects.get(name=city, province__name=province)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-            if village and subdistrict:
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('City not found. Skipping this row for import.')))
+            if subdistrict and city and valid_geolevels:
+                try:
+                    Subdistrict.objects.get(name=subdistrict, city__name=city)
+                except ObjectDoesNotExist:
+                    valid_geolevels = False
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('Subdistrict not found. Skipping this row for import.')))
+            if village and subdistrict and valid_geolevels:
                 try:
                     Village.objects.get(
                         name=village,
@@ -157,22 +179,21 @@ class EventResource(resources.ModelResource):
                     )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-            if subdistrict and city:
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('Village not found. Skipping this row for import.')))
+            if rw and village and valid_geolevels:
                 try:
-                    Subdistrict.objects.get(
-                        name=subdistrict,
-                        city__name=city
-                    )
+                    rw_instance = RW.objects.get(name=rw, village__name=village)
+                    rw = unicode(rw_instance.pk)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-            if city and province:
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('RW not found. Skipping this row for import.')))
+            if rt and rw and valid_geolevels:
                 try:
-                    City.objects.get(
-                        name=city,
-                        province__name=province
-                    )
+                    rt_instance = RT.objects.get(name=rt, rw=rw_instance)
+                    rt = unicode(rt_instance.pk)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
+                    messages.error(request, "Error (row {}): {}".format(row_count, _('RT not found. Skipping this row for import.')))
             new_row = (
                 id,
                 disaster,
@@ -192,6 +213,7 @@ class EventResource(resources.ModelResource):
                 dataset.rpush(new_row)
             dataset.lpop()
             i = i + 1
+            row_count = i + 2
         # print 'DEBUG AFTER'
         # print dataset
         for field in self.get_fields():
@@ -292,6 +314,72 @@ class EventAdmin(ImportExportModelAdmin,
     actions = [set_active, set_inactive]
     inlines = [ReportInline]
     form = EventForm
+
+    def import_action(self, request, *args, **kwargs):
+        '''
+        Overrides import_action() in import_export/admin.py
+        just to pass a request object to import_data() to
+        be used in before_import().
+        '''
+        resource = self.get_import_resource_class()()
+
+        context = {}
+
+        import_formats = self.get_import_formats()
+        form = forms.ImportForm(import_formats,
+                                request.POST or None,
+                                request.FILES or None)
+
+        if request.POST and form.is_valid():
+            input_format = import_formats[
+                int(form.cleaned_data['input_format'])
+            ]()
+            import_file = form.cleaned_data['import_file']
+            # first always write the uploaded file to disk as it may be a
+            # memory file or else based on settings upload handlers
+            tmp_storage = self.get_tmp_storage_class()()
+            data = bytes()
+            for chunk in import_file.chunks():
+                data += chunk
+
+            tmp_storage.save(data, input_format.get_read_mode())
+
+            # then read the file, using the proper format-specific mode
+            # warning, big files may exceed memory
+            try:
+                data = tmp_storage.read(input_format.get_read_mode())
+                if not input_format.is_binary() and self.from_encoding:
+                    data = force_text(data, self.from_encoding)
+                dataset = input_format.create_dataset(data)
+            except UnicodeDecodeError as e:
+                return HttpResponse(_(u"<h1>Imported file is not in unicode: %s</h1>" % e))
+            except Exception as e:
+                return HttpResponse(_(u"<h1>%s encountred while trying to read file: %s</h1>" % (type(e).__name__, e)))
+            result = resource.import_data(dataset, dry_run=True,
+                                          raise_errors=False,
+                                          file_name=import_file.name,
+                                          user=request.user, request=request)
+
+            context['result'] = result
+
+            if not result.has_errors():
+                context['confirm_form'] = forms.ConfirmImportForm(initial={
+                    'import_file_name': tmp_storage.name,
+                    'original_file_name': import_file.name,
+                    'input_format': form.cleaned_data['input_format'],
+                })
+
+        if django.VERSION >= (1, 8, 0):
+            context.update(self.admin_site.each_context(request))
+        elif django.VERSION >= (1, 7, 0):
+            context.update(self.admin_site.each_context())
+
+        context['form'] = form
+        context['opts'] = self.model._meta
+        context['fields'] = [f.column_name for f in resource.get_fields()]
+
+        return TemplateResponse(request, [self.import_template_name],
+                                context)
 
     def province_admin_url(self, obj):
         if not obj.province:
