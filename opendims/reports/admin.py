@@ -10,8 +10,8 @@ from import_export import resources, fields, widgets
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
-from .models import Source, Disaster, Event, Report
-from .forms import EventForm
+from .models import Source, Disaster, Event, Report, EventImage, EventImpact
+from .forms import EventForm, EventImpactForm
 
 
 verbose_set_active = _('Set Event as Active')
@@ -47,6 +47,17 @@ set_active.short_description = verbose_set_active
 class ReportInline(admin.TabularInline):
     model = Report
     extra = 3
+
+
+class EventImageInLine(admin.TabularInline):
+    model = EventImage
+    extra = 1
+
+
+class EventImpactInLine(admin.TabularInline):
+    model = EventImpact
+    form = EventImpactForm
+    extra = 1
 
 
 class SourceAdmin(admin.ModelAdmin):
@@ -287,7 +298,7 @@ class EventAdmin(ImportExportModelAdmin,
         'note'
     ]
     actions = [set_active, set_inactive]
-    inlines = [ReportInline]
+    inlines = [ReportInline, EventImageInLine, EventImpactInLine]
     form = EventForm
 
     def province_admin_url(self, obj):
@@ -361,6 +372,35 @@ verbose_report_details = _('Report details')
 verbose_event = _('Event')
 
 
+class EventImageAdmin(admin.ModelAdmin):
+
+    list_display = [
+        'order',
+        'image',
+        'published'
+    ]
+
+
+class EventImpactAdmin(ImportExportModelAdmin,
+                       ExportActionModelAdmin,
+                       LeafletGeoAdmin):
+    form = EventImpactForm
+
+    list_display = [
+        'event',
+        'village',
+        'rw',
+        'rt',
+        'evac_point',
+        'evac_total',
+        'affected_total',
+        'affected_death',
+        'affected_injury',
+        'loss_total',
+        'note'
+    ]
+
+
 class ReportAdmin(admin.ModelAdmin):
     fieldsets = [
         (verbose_report_details, {
@@ -404,3 +444,5 @@ admin.site.register(Source, SourceAdmin)
 admin.site.register(Disaster, DisasterAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Event, EventAdmin)
+admin.site.register(EventImage, EventImageAdmin)
+admin.site.register(EventImpact, EventImpactAdmin)

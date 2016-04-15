@@ -9,6 +9,7 @@ from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
+from common.validators import MimetypeValidator, FileSizeValidator
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 
 
@@ -53,6 +54,13 @@ verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
+verbose_rt_text = _('RT Text')
+verbose_evac_point = _('Evacution Point')
+verbose_evac_total = _('Evacution Total')
+verbose_affected_total = _('Affected Total')
+verbose_affected_death = _('Affected Death')
+verbose_affected_injury = _('Affected Injury')
+verbose_image = _('Image')
 
 
 class Event(CommonAbstractModel):
@@ -72,6 +80,7 @@ class Event(CommonAbstractModel):
         verbose_name=verbose_created
     )
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
+    closed = models.DateTimeField(null=True, blank=True)
     status = models.CharField(
         max_length=50,
         choices=STATUS_CHOICES,
@@ -169,3 +178,103 @@ class Report(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.event, self.source, self.status)
+
+
+class EventImage(CommonAbstractModel):
+    CHOICES = [(i, i) for i in range(11)]
+
+    event = models.ForeignKey(
+        Event,
+        verbose_name=verbose_event,
+        related_name='eventimages'
+    )
+    order = models.PositiveIntegerField(choices=CHOICES, default=0)
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        upload_to='reports/event_image/',
+        validators=[
+            MimetypeValidator(('image/png')),
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_image
+    )
+    published = models.BooleanField()
+
+
+class EventImpact(CommonAbstractModel):
+    event = models.ForeignKey(
+        Event,
+        verbose_name=verbose_event,
+        related_name='eventimpacts'
+    )
+    province = models.ForeignKey(
+        Province,
+        null=True,
+        blank=True,
+        verbose_name=verbose_province
+    )
+    city = models.ForeignKey(
+        City,
+        null=True,
+        blank=True,
+        verbose_name=verbose_city
+    )
+    subdistrict = models.ForeignKey(
+        Subdistrict,
+        null=True,
+        blank=True,
+        verbose_name=verbose_subdistrict
+    )
+    village = models.ForeignKey(
+        Village,
+        null=True,
+        blank=True,
+        verbose_name=verbose_village
+    )
+    rw = models.ForeignKey(RW, null=True, blank=True, verbose_name=verbose_rw)
+    rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
+
+    rt_text = models.TextField(
+        blank=True,
+        verbose_name=verbose_rt_text
+    )
+    evac_point = models.PointField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_evac_point
+    )
+    evac_total = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_evac_total
+    )
+    affected_total = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_affected_total
+    )
+    affected_death = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_affected_death
+    )
+    affected_injury = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_affected_injury
+    )
+    loss_total = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=18,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))],
+    )
+    note = models.TextField(blank=True)
+
+    def __unicode__(self):
+        return '[%s] - %s' % (self.event, self.note)
+
+    class Meta:
+        ordering = ['note']
