@@ -66,7 +66,7 @@ class CommonEventForm(forms.ModelForm):
 class EventForm(CommonEventForm):
     class Media:
         js = (
-            'js/admin_event.js',
+            'reports/js/admin_event.js',
         )
 
     class Meta:
@@ -99,7 +99,7 @@ class EventForm(CommonEventForm):
 class EventImpactForm(CommonEventForm):
     class Media:
         js = (
-            'js/admin_eventimpact.js',
+            'reports/js/admin_eventimpact.js',
         )
 
     class Meta:

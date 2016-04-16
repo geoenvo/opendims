@@ -63,6 +63,7 @@ class EventImpactInline(LeafletGeoAdminMixin, admin.StackedInline):
     model = EventImpact
     form = EventImpactForm
     extra = 1
+    max_num = 1
 
 
 class SourceAdmin(admin.ModelAdmin):
@@ -122,9 +123,10 @@ class EventAdmin(ImportExportModelAdmin,
     ]
     list_display = [
         'created',
-        'updated',
-        'status',
         'disaster',
+        'status',
+        'updated',
+        'closed',
         'province_admin_url',
         'city_admin_url',
         'subdistrict_admin_url',
@@ -137,7 +139,8 @@ class EventAdmin(ImportExportModelAdmin,
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['created', 'updated', 'status', 'disaster']
+    date_hierarchy = 'created'
+    list_filter = ['disaster', 'status', 'created', 'updated']
     search_fields = [
         'province__name',
         'city__name',
@@ -147,6 +150,8 @@ class EventAdmin(ImportExportModelAdmin,
     ]
     actions = [set_active, set_inactive]
     inlines = [ReportInline, EventImageInline, EventImpactInline]
+    save_as = True
+    save_on_top = True
 
     def import_action(self, request, *args, **kwargs):
         '''
@@ -216,7 +221,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def province_admin_url(self, obj):
         if not obj.province:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{province}</a>",
             url=obj.province.get_admin_url(),
@@ -227,7 +232,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def city_admin_url(self, obj):
         if not obj.city:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{city}</a>",
             url=obj.city.get_admin_url(),
@@ -238,7 +243,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def subdistrict_admin_url(self, obj):
         if not obj.subdistrict:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{subdistrict}</a>",
             url=obj.subdistrict.get_admin_url(),
@@ -249,7 +254,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def village_admin_url(self, obj):
         if not obj.village:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{village}</a>",
             url=obj.village.get_admin_url(),
@@ -260,7 +265,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def rw_admin_url(self, obj):
         if not obj.rw:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{rw}</a>",
             url=obj.rw.get_admin_url(),
@@ -271,7 +276,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def rt_admin_url(self, obj):
         if not obj.rt:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{rt}</a>",
             url=obj.rt.get_admin_url(),
