@@ -5,14 +5,14 @@ $(document).ready(function() {
       // Get the map object
       var leafletMap = e.originalEvent.detail.map;
       var leaftletMapContainer = leafletMap.getContainer();
-      if ($(leaftletMapContainer).attr('id') == 'id_point_map') {
+      if ($(leaftletMapContainer).attr('id') == 'id_evac_point_map') {
         map = leafletMap;
       }
     }
   );
   
   // On selecting a geolevel, show the geolevel polygon on the leaflet map
-  $('.autocomplete-light-event select').on("select2:selecting", function(e) {
+  $('.autocomplete-light-eventimpact select').on("select2:selecting", function(e) {
     var apiEndpoint = $(this).data('autocomplete-light-url');
     var data = e.params.args.data;
     if (data.id) {
