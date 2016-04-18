@@ -62,8 +62,8 @@ class EventImageInline(admin.TabularInline):
 class EventImpactInline(LeafletGeoAdminMixin, admin.StackedInline):
     model = EventImpact
     form = EventImpactForm
-    extra = 1
-    max_num = 1
+    extra = 5
+    max_num = 5
 
 
 class SourceAdmin(admin.ModelAdmin):
