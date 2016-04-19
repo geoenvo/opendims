@@ -14,40 +14,7 @@ def get_waterlevelreport(watergate, now):
         watergate=watergate,
         created__range=(date_start, now)
     ).order_by('created')
+    for i in created__range:
+        if i = waterlevelreport.created|date:"H"|add:"0":
+        
     return waterlevelreports
-
-
-@register.simple_tag
-def get_waterlevelreport_old(watergate, hour):
-    now = timezone.localtime(timezone.now())
-    created = datetime.datetime(now.year, now.month, now.day, hour)
-    waterlevelreports = WaterLevelReport.objects.filter(
-        watergate=watergate,
-        created__year=created.year,
-        created__month=created.month,
-        created__day=created.day,
-        created__hour=created.hour
-    ).order_by('-created')
-
-    if waterlevelreports:
-        return waterlevelreports[0]
-    else:
-        return False
-
-
-@register.simple_tag
-def get_waterlevelreportchart(watergate, hour):
-    now = timezone.localtime(timezone.now())
-    created = datetime.datetime(now.year, now.month, now.day, hour)
-    waterlevelreports = WaterLevelReport.objects.filter(
-        watergate=watergate,
-        created__year=created.year,
-        created__month=created.month,
-        created__day=created.day,
-        created__hour=created.hour
-    ).order_by('-created')
-
-    if waterlevelreports:
-        return waterlevelreports[0].height
-    else:
-        return '0'
