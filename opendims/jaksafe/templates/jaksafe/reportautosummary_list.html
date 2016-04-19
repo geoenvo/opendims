@@ -15,9 +15,9 @@
         <tr>
             {% for reportautosummary in reportautosummary_list|slice:'1' %}
             <th class="col-md-2">{% get_verbose_field_name reportautosummary 'created' %}</th>
+            <th>{% get_verbose_field_name reportautosummary 'village' %}</th>
             <th>{% get_verbose_field_name reportautosummary 'damage_total' %}</th>
             <th>{% get_verbose_field_name reportautosummary 'loss_total' %}</th>
-            <th>{% get_verbose_field_name reportautosummary 'village' %}</th>
             <th>{% get_verbose_field_name reportautosummary 'note' %}</th>
             {% endfor %}
         </tr>

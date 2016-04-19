@@ -1,17 +1,22 @@
 from __future__ import unicode_literals
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
 from leaflet.admin import LeafletGeoAdmin
 
-from import_export import resources, fields, widgets
+import django
+from django.utils.encoding import force_text
+from django.http import HttpResponse
+from django.template.response import TemplateResponse
+
+from import_export import forms
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
 
-from geolevels.models import Province, City, Subdistrict, Village, RW, RT
-from .models import Source, Disaster, Event, Report
-from .forms import EventForm
+from common.admin import LeafletGeoAdminMixin
+from .models import Source, Disaster, Event, Report, EventImage, EventImpact
+from .forms import EventForm, EventImpactForm
+from .resources import EventResource
 
 
 verbose_set_active = _('Set Event as Active')
@@ -46,7 +51,19 @@ set_active.short_description = verbose_set_active
 
 class ReportInline(admin.TabularInline):
     model = Report
-    extra = 3
+    extra = 1
+
+
+class EventImageInline(admin.TabularInline):
+    model = EventImage
+    extra = 1
+
+
+class EventImpactInline(LeafletGeoAdminMixin, admin.StackedInline):
+    model = EventImpact
+    form = EventImpactForm
+    extra = 5
+    max_num = 5
 
 
 class SourceAdmin(admin.ModelAdmin):
@@ -57,165 +74,6 @@ class SourceAdmin(admin.ModelAdmin):
 class DisasterAdmin(admin.ModelAdmin):
     list_display = ['code', 'note']
     ordering = ['code']
-
-
-class EventResource(resources.ModelResource):
-    province = fields.Field(
-        column_name='province',
-        attribute='province',
-        widget=widgets.ForeignKeyWidget(Province, 'name')
-    )
-    city = fields.Field(
-        column_name='city',
-        attribute='city',
-        widget=widgets.ForeignKeyWidget(City, 'name')
-    )
-    subdistrict = fields.Field(
-        column_name='subdistrict',
-        attribute='subdistrict',
-        widget=widgets.ForeignKeyWidget(Subdistrict, 'name')
-    )
-    village = fields.Field(
-        column_name='village',
-        attribute='village',
-        widget=widgets.ForeignKeyWidget(Village, 'name')
-    )
-    rw = fields.Field(
-        column_name='rw',
-        attribute='rw',
-        widget=widgets.ForeignKeyWidget(RW, 'name')
-    )
-    rt = fields.Field(
-        column_name='rt',
-        attribute='rt',
-        widget=widgets.ForeignKeyWidget(RT, 'name')
-    )
-
-    def before_import(self, dataset, dry_run, **kwargs):
-        """Overrides Django-Import-Export method.
-        It is necessary to modify the tablib dataset before the real import
-        process, to translate from a human friendly input format like this:
-        id|disaster|province|city|subdistrict|village|rw |rt
-        --|--------|--------|----|-----------|-------|---|--
-          |BJR     |        |    |           |ANCOL  |005|
-          |BJR     |        |    |           |ANCOL  |001|
-        then in order to match the Event model definition, query the Village-RW
-        and RW-RT relation to produce to this:
-        id|disaster|province|city|subdistrict|village|rw              |rt
-        --|--------|--------|----|-----------|-------|----------------|--
-          |BJR     |        |    |           |ANCOL  |3175020003005000|
-          |BJR     |        |    |           |ANCOL  |3175020003001000|
-        Also checks whether the row's Geolevels relation is valid, if not
-        the row is not imported.
-        """
-        # print 'DEBUG BEFORE'
-        # print dataset
-        i = 0
-        last = dataset.height - 1
-        while i <= last:
-            # Get the top row
-            row = dataset[0]
-            """
-            Get the row contents, by default named Geolevels are uppercase
-            in the database
-            """
-            id = row[0]
-            disaster = row[1].upper()
-            province = row[2].upper()
-            city = row[3].upper()
-            subdistrict = row[4].upper()
-            village = row[5].upper()
-            rw = row[6]
-            rt = row[7]
-            # Validate Geolevels relations
-            valid_geolevels = True
-            if rw and not village:
-                valid_geolevels = False
-            if rt and not rw:
-                valid_geolevels = False
-            if rw and village:
-                try:
-                    rw_instance = RW.objects.get(
-                        name=rw,
-                        village__name=village
-                    )
-                    rw = unicode(rw_instance.pk)
-                except ObjectDoesNotExist:
-                    valid_geolevels = False
-            if rt and rw:
-                try:
-                    rt_instance = RT.objects.get(name=rt, rw=rw_instance)
-                    rt = unicode(rt_instance.pk)
-                except ObjectDoesNotExist:
-                    valid_geolevels = False
-            if village and subdistrict:
-                try:
-                    Village.objects.get(
-                        name=village,
-                        subdistrict__name=subdistrict
-                    )
-                except ObjectDoesNotExist:
-                    valid_geolevels = False
-            if subdistrict and city:
-                try:
-                    Subdistrict.objects.get(
-                        name=subdistrict,
-                        city__name=city
-                    )
-                except ObjectDoesNotExist:
-                    valid_geolevels = False
-            if city and province:
-                try:
-                    City.objects.get(
-                        name=city,
-                        province__name=province
-                    )
-                except ObjectDoesNotExist:
-                    valid_geolevels = False
-            new_row = (
-                id,
-                disaster,
-                province,
-                city,
-                subdistrict,
-                village,
-                rw,
-                rt
-            )
-            """
-            If relations are invalid don't push row to the dataset so it
-            doesn't get imported
-            """
-            if valid_geolevels:
-                dataset.rpush(new_row)
-            dataset.lpop()
-            i = i + 1
-        # print 'DEBUG AFTER'
-        # print dataset
-        for field in self.get_fields():
-            # print field.attribute, field.column_name, field.widget
-            """
-            Since the dataset now contains the PK of RW/RT, update the
-            ForeignKeyWidget to query for PK instead of name column.
-            """
-            if field.attribute == 'rw' or field.attribute == 'rt':
-                # print field.widget.model, field.widget.field
-                # print field.widget.field
-                field.widget.field = 'pk'
-
-    class Meta:
-        model = Event
-        fields = (
-            'id',
-            'disaster',
-            'province',
-            'city',
-            'subdistrict',
-            'village',
-            'rw',
-            'rt'
-        )
-        export_order = fields
 
 
 verbose_event_details = _('Event details')
@@ -238,6 +96,7 @@ class EventAdmin(ImportExportModelAdmin,
         'DEFAULT_ZOOM': 11,
     }
 
+    form = EventForm
     fieldsets = [
         (verbose_event_details, {
             'fields': [
@@ -258,14 +117,16 @@ class EventAdmin(ImportExportModelAdmin,
                 'rw',
                 'rt',
                 'point'
-            ]
+            ],
+            'classes': ['autocomplete-light-event']
         }),
     ]
     list_display = [
         'created',
-        'updated',
-        'status',
         'disaster',
+        'status',
+        'updated',
+        'closed',
         'province_admin_url',
         'city_admin_url',
         'subdistrict_admin_url',
@@ -278,7 +139,8 @@ class EventAdmin(ImportExportModelAdmin,
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['created', 'updated', 'status', 'disaster']
+    date_hierarchy = 'created'
+    list_filter = ['disaster', 'status', 'created', 'updated']
     search_fields = [
         'province__name',
         'city__name',
@@ -287,12 +149,79 @@ class EventAdmin(ImportExportModelAdmin,
         'note'
     ]
     actions = [set_active, set_inactive]
-    inlines = [ReportInline]
-    form = EventForm
+    inlines = [ReportInline, EventImageInline, EventImpactInline]
+    save_as = True
+    save_on_top = True
+
+    def import_action(self, request, *args, **kwargs):
+        '''
+        Overrides import_action() in import_export/admin.py
+        just to pass a request object to import_data() to
+        be used in before_import().
+        '''
+        resource = self.get_import_resource_class()()
+
+        context = {}
+
+        import_formats = self.get_import_formats()
+        form = forms.ImportForm(import_formats,
+                                request.POST or None,
+                                request.FILES or None)
+
+        if request.POST and form.is_valid():
+            input_format = import_formats[
+                int(form.cleaned_data['input_format'])
+            ]()
+            import_file = form.cleaned_data['import_file']
+            # first always write the uploaded file to disk as it may be a
+            # memory file or else based on settings upload handlers
+            tmp_storage = self.get_tmp_storage_class()()
+            data = bytes()
+            for chunk in import_file.chunks():
+                data += chunk
+
+            tmp_storage.save(data, input_format.get_read_mode())
+
+            # then read the file, using the proper format-specific mode
+            # warning, big files may exceed memory
+            try:
+                data = tmp_storage.read(input_format.get_read_mode())
+                if not input_format.is_binary() and self.from_encoding:
+                    data = force_text(data, self.from_encoding)
+                dataset = input_format.create_dataset(data)
+            except UnicodeDecodeError as e:
+                return HttpResponse(_(u"<h1>Imported file is not in unicode: %s</h1>" % e))
+            except Exception as e:
+                return HttpResponse(_(u"<h1>%s encountred while trying to read file: %s</h1>" % (type(e).__name__, e)))
+            result = resource.import_data(dataset, dry_run=True,
+                                          raise_errors=False,
+                                          file_name=import_file.name,
+                                          user=request.user, request=request)
+
+            context['result'] = result
+
+            if not result.has_errors():
+                context['confirm_form'] = forms.ConfirmImportForm(initial={
+                    'import_file_name': tmp_storage.name,
+                    'original_file_name': import_file.name,
+                    'input_format': form.cleaned_data['input_format'],
+                })
+
+        if django.VERSION >= (1, 8, 0):
+            context.update(self.admin_site.each_context(request))
+        elif django.VERSION >= (1, 7, 0):
+            context.update(self.admin_site.each_context())
+
+        context['form'] = form
+        context['opts'] = self.model._meta
+        context['fields'] = [f.column_name for f in resource.get_fields()]
+
+        return TemplateResponse(request, [self.import_template_name],
+                                context)
 
     def province_admin_url(self, obj):
         if not obj.province:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{province}</a>",
             url=obj.province.get_admin_url(),
@@ -303,7 +232,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def city_admin_url(self, obj):
         if not obj.city:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{city}</a>",
             url=obj.city.get_admin_url(),
@@ -314,7 +243,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def subdistrict_admin_url(self, obj):
         if not obj.subdistrict:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{subdistrict}</a>",
             url=obj.subdistrict.get_admin_url(),
@@ -325,7 +254,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def village_admin_url(self, obj):
         if not obj.village:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{village}</a>",
             url=obj.village.get_admin_url(),
@@ -336,7 +265,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def rw_admin_url(self, obj):
         if not obj.rw:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{rw}</a>",
             url=obj.rw.get_admin_url(),
@@ -347,7 +276,7 @@ class EventAdmin(ImportExportModelAdmin,
 
     def rt_admin_url(self, obj):
         if not obj.rt:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{rt}</a>",
             url=obj.rt.get_admin_url(),
@@ -359,6 +288,66 @@ class EventAdmin(ImportExportModelAdmin,
 
 verbose_report_details = _('Report details')
 verbose_event = _('Event')
+
+
+class EventImageAdmin(admin.ModelAdmin):
+    list_display = [
+        'order',
+        'image',
+        'published'
+    ]
+
+
+verbose_impact_data = _('Impact data')
+
+
+class EventImpactAdmin(LeafletGeoAdmin):
+    settings_overrides = {
+        'DEFAULT_ZOOM': 11,
+    }
+
+    form = EventImpactForm
+    fieldsets = [
+        (verbose_event, {
+            'fields': [
+                'event'
+            ]
+        }),
+        (verbose_affected_area, {
+            'fields': [
+                'province',
+                'city',
+                'subdistrict',
+                'village',
+                'rw',
+                'rt',
+                'rt_text',
+                'evac_point'
+            ],
+            'classes': ['autocomplete-light-eventimpact']
+        }),
+        (verbose_impact_data, {
+            'fields': [
+                ('affected_total', 'affected_death', 'affected_injury'),
+                'evac_total',
+                'loss_total',
+                'note'
+            ]
+        }),
+    ]
+    list_display = [
+        'event',
+        'village',
+        'rw',
+        'rt',
+        'rt_text',
+        'affected_total',
+        'affected_death',
+        'affected_injury',
+        'evac_total',
+        'loss_total',
+        'note'
+    ]
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -404,3 +393,5 @@ admin.site.register(Source, SourceAdmin)
 admin.site.register(Disaster, DisasterAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Event, EventAdmin)
+admin.site.register(EventImage, EventImageAdmin)
+admin.site.register(EventImpact, EventImpactAdmin)

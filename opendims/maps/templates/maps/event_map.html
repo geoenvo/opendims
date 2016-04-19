@@ -325,55 +325,55 @@ function syncSidebar() {
   $("#feature-list tbody").empty();
 
   ABR.eachLayer(function(layer) {
-    syncSidebarLayer(layer, ABRLayer, "{% static 'img/markers/abration.png' %}");
+    syncSidebarLayer(layer, ABRLayer, "{% static 'img/markers/ABR.png' %}");
   });
 
   CEK.eachLayer(function(layer) {
-    syncSidebarLayer(layer, CEKLayer, "{% static 'img/markers/tornado.png' %}");
+    syncSidebarLayer(layer, CEKLayer, "{% static 'img/markers/CEK.png' %}");
   });
 
   BJR.eachLayer(function(layer) {
-    syncSidebarLayer(layer, BJRLayer, "{% static 'img/markers/flood.png' %}");
+    syncSidebarLayer(layer, BJRLayer, "{% static 'img/markers/BJR.png' %}");
   });
 
   ROB.eachLayer(function(layer) {
-    syncSidebarLayer(layer, ROBLayer, "{% static 'img/markers/seaflood.png' %}");
+    syncSidebarLayer(layer, ROBLayer, "{% static 'img/markers/ROB.png' %}");
   });
 
   GMP.eachLayer(function(layer) {
-    syncSidebarLayer(layer, GMPLayer, "{% static 'img/markers/earthquake.png' %}");
+    syncSidebarLayer(layer, GMPLayer, "{% static 'img/markers/GMP.png' %}");
   });
 
   KLB.eachLayer(function(layer) {
-    syncSidebarLayer(layer, KLBLayer, "{% static 'img/markers/ruins.png' %}");
+    syncSidebarLayer(layer, KLBLayer, "{% static 'img/markers/KLB.png' %}");
   });
 
   KBK.eachLayer(function(layer) {
-    syncSidebarLayer(layer, KBKLayer, "{% static 'img/markers/fire.png' %}");
+    syncSidebarLayer(layer, KBKLayer, "{% static 'img/markers/KBK.png' %}");
   });
 
   SOS.eachLayer(function(layer) {
-    syncSidebarLayer(layer, SOSLayer, "{% static 'img/markers/strike.png' %}");
+    syncSidebarLayer(layer, SOSLayer, "{% static 'img/markers/SOS.png' %}");
   });
 
   LAI.eachLayer(function(layer) {
-    syncSidebarLayer(layer, LAILayer, "{% static 'img/markers/caution.png' %}");
+    syncSidebarLayer(layer, LAILayer, "{% static 'img/markers/LAI.png' %}");
   });
 
   LSR.eachLayer(function(layer) {
-    syncSidebarLayer(layer, LSRLayer, "{% static 'img/markers/fallingrocks.png' %}");
+    syncSidebarLayer(layer, LSRLayer, "{% static 'img/markers/LSR.png' %}");
   });
 
   PHT.eachLayer(function(layer) {
-    syncSidebarLayer(layer, PHTLayer, "{% static 'img/markers/treedown.png' %}");
+    syncSidebarLayer(layer, PHTLayer, "{% static 'img/markers/PHT.png' %}");
   });
 
   TER.eachLayer(function(layer) {
-    syncSidebarLayer(layer, TERLayer, "{% static 'img/markers/shooting.png' %}");
+    syncSidebarLayer(layer, TERLayer, "{% static 'img/markers/TER.png' %}");
   });
 
   TSU.eachLayer(function(layer) {
-    syncSidebarLayer(layer, TSULayer, "{% static 'img/markers/tsunami.png' %}");
+    syncSidebarLayer(layer, TSULayer, "{% static 'img/markers/TSU.png' %}");
   });
 
   /* Update list.js featureList */
@@ -622,7 +622,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, ABRMarkers, "{% static 'img/markers/abration.png' %}", ABRSearch, "ABR");
+      drawLayerFeature(feature, layer, ABRMarkers, "{% static 'img/markers/ABR.png' %}", ABRSearch, "ABR");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=ABR&format=json" + apiFilter, function(data) {
@@ -639,7 +639,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, CEKMarkers, "{% static 'img/markers/tornado.png' %}", CEKSearch, "CEK");
+      drawLayerFeature(feature, layer, CEKMarkers, "{% static 'img/markers/CEK.png' %}", CEKSearch, "CEK");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=CEK&format=json" + apiFilter, function(data) {
@@ -656,7 +656,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, BJRMarkers, "{% static 'img/markers/flood.png' %}", BJRSearch, "BJR");
+      drawLayerFeature(feature, layer, BJRMarkers, "{% static 'img/markers/BJR.png' %}", BJRSearch, "BJR");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=BJR&format=json" + apiFilter, function(data) {
@@ -673,7 +673,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, ROBMarkers, "{% static 'img/markers/seaflood.png' %}", ROBSearch, "ROB");
+      drawLayerFeature(feature, layer, ROBMarkers, "{% static 'img/markers/ROB.png' %}", ROBSearch, "ROB");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=ROB&format=json" + apiFilter, function(data) {
@@ -690,7 +690,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, GMPMarkers, "{% static 'img/markers/earthquake.png' %}", GMPSearch, "GMP");
+      drawLayerFeature(feature, layer, GMPMarkers, "{% static 'img/markers/GMP.png' %}", GMPSearch, "GMP");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=GMP&format=json" + apiFilter, function(data) {
@@ -707,7 +707,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, KBKMarkers, "{% static 'img/markers/fire.png' %}", KBKSearch, "KBK");
+      drawLayerFeature(feature, layer, KBKMarkers, "{% static 'img/markers/KBK.png' %}", KBKSearch, "KBK");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=KBK&format=json" + apiFilter, function(data) {
@@ -724,7 +724,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, KLBMarkers, "{% static 'img/markers/ruins.png' %}", KLBSearch, "KLB");
+      drawLayerFeature(feature, layer, KLBMarkers, "{% static 'img/markers/KLB.png' %}", KLBSearch, "KLB");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=KLB&format=json" + apiFilter, function(data) {
@@ -741,7 +741,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, SOSMarkers, "{% static 'img/markers/strike.png' %}", SOSSearch, "SOS");
+      drawLayerFeature(feature, layer, SOSMarkers, "{% static 'img/markers/SOS.png' %}", SOSSearch, "SOS");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=SOS&format=json" + apiFilter, function(data) {
@@ -758,7 +758,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, LAIMarkers, "{% static 'img/markers/caution.png' %}", LAISearch, "LAI");
+      drawLayerFeature(feature, layer, LAIMarkers, "{% static 'img/markers/LAI.png' %}", LAISearch, "LAI");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=LAI&format=json" + apiFilter, function(data) {
@@ -775,7 +775,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, LSRMarkers, "{% static 'img/markers/fallingrocks.png' %}", LSRSearch, "LSR");
+      drawLayerFeature(feature, layer, LSRMarkers, "{% static 'img/markers/LSR.png' %}", LSRSearch, "LSR");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=LSR&format=json" + apiFilter, function(data) {
@@ -792,7 +792,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, PHTMarkers, "{% static 'img/markers/treedown.png' %}", PHTSearch, "PHT");
+      drawLayerFeature(feature, layer, PHTMarkers, "{% static 'img/markers/PHT.png' %}", PHTSearch, "PHT");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=PHT&format=json" + apiFilter, function(data) {
@@ -809,7 +809,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, TERMarkers, "{% static 'img/markers/shooting.png' %}", TERSearch, "TER");
+      drawLayerFeature(feature, layer, TERMarkers, "{% static 'img/markers/TER.png' %}", TERSearch, "TER");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=TER&format=json" + apiFilter, function(data) {
@@ -826,7 +826,7 @@ function loadEvents(date, all) {
       };
     },
     onEachFeature: function(feature, layer) {
-      drawLayerFeature(feature, layer, TSUMarkers, "{% static 'img/markers/tsunami.png' %}", TSUSearch, "TSU");
+      drawLayerFeature(feature, layer, TSUMarkers, "{% static 'img/markers/TSU.png' %}", TSUSearch, "TSU");
     },
   });
   $.getJSON("{% url "reports:event_api" %}?disaster=TSU&format=json" + apiFilter, function(data) {
@@ -978,19 +978,19 @@ map.on("overlayremove", function(e) {
 
 var groupedOverlays = {
   "Affected Areas": {
-    "<img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi": ABRLayer,
-    "<img src='{% static "img/markers/tornado.png" %}' width='24' height='28'>&nbsp;Angin Kencang": CEKLayer,
-    "<img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir": BJRLayer,
-    "<img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob": ROBLayer,
-    "<img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi": GMPLayer,
-    "<img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran": KBKLayer,
-    "<img src='{% static "img/markers/ruins.png" %}' width='24' height='28'>&nbsp;Kejadian Luar Biasa": KLBLayer,
-    "<img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial": SOSLayer,
-    "<img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain": LAILayer,
-    "<img src='{% static "img/markers/fallingrocks.png" %}' width='24' height='28'>&nbsp;Longsor": LSRLayer,
-    "<img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang": PHTLayer,
-    "<img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme": TERLayer,
-    "<img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami": TSULayer,
+    "<img src='{% static "img/markers/ABR.png" %}' width='24' height='28'>&nbsp;Abrasi": ABRLayer,
+    "<img src='{% static "img/markers/CEK.png" %}' width='24' height='28'>&nbsp;Angin Kencang": CEKLayer,
+    "<img src='{% static "img/markers/BJR.png" %}' width='24' height='28'>&nbsp;Banjir": BJRLayer,
+    "<img src='{% static "img/markers/ROB.png" %}' width='24' height='28'>&nbsp;Banjir Rob": ROBLayer,
+    "<img src='{% static "img/markers/GMP.png" %}' width='24' height='28'>&nbsp;Gempa Bumi": GMPLayer,
+    "<img src='{% static "img/markers/KBK.png" %}' width='24' height='28'>&nbsp;Kebakaran": KBKLayer,
+    "<img src='{% static "img/markers/KLB.png" %}' width='24' height='28'>&nbsp;Kejadian Luar Biasa": KLBLayer,
+    "<img src='{% static "img/markers/SOS.png" %}' width='24' height='28'>&nbsp;Konflik Sosial": SOSLayer,
+    "<img src='{% static "img/markers/LAI.png" %}' width='24' height='28'>&nbsp;Lain-lain": LAILayer,
+    "<img src='{% static "img/markers/LSR.png" %}' width='24' height='28'>&nbsp;Longsor": LSRLayer,
+    "<img src='{% static "img/markers/PHT.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang": PHTLayer,
+    "<img src='{% static "img/markers/TER.png" %}' width='24' height='28'>&nbsp;Terorisme": TERLayer,
+    "<img src='{% static "img/markers/TSU.png" %}' width='24' height='28'>&nbsp;Tsunami": TSULayer,
   },
 };
 
@@ -1204,7 +1204,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: ABRBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/abration.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/ABR.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1215,7 +1215,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: CEKBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tornado.png" %}' width='25' height='25'>&nbsp;Angin Kencang</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/CEK.png" %}' width='25' height='25'>&nbsp;Angin Kencang</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1226,7 +1226,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: BJRBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/flood.png" %}' width='24' height='28'>&nbsp;Banjir</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/BJR.png" %}' width='24' height='28'>&nbsp;Banjir</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1237,7 +1237,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: ROBBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/seaflood.png" %}' width='24' height='28'>&nbsp;Banjir Rob</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/ROB.png" %}' width='24' height='28'>&nbsp;Banjir Rob</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1248,7 +1248,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: GMPBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/earthquake.png" %}' width='24' height='28'>&nbsp;Gempa Bumi</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/GMP.png" %}' width='24' height='28'>&nbsp;Gempa Bumi</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1259,7 +1259,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: KBKBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fire.png" %}' width='24' height='28'>&nbsp;Kebakaran</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/KBK.png" %}' width='24' height='28'>&nbsp;Kebakaran</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1270,7 +1270,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: KLBBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/ruins.png" %}' width='24' height='28'>&nbsp;Kejadian Luar Biasa</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/KLB.png" %}' width='24' height='28'>&nbsp;Kejadian Luar Biasa</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1281,7 +1281,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: SOSBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/strike.png" %}' width='24' height='28'>&nbsp;Konflik Sosial</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/SOS.png" %}' width='24' height='28'>&nbsp;Konflik Sosial</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1292,7 +1292,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: LAIBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/caution.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/LAI.png" %}' width='24' height='28'>&nbsp;Lain-lain</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1303,7 +1303,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: LSRBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/fallingrocks.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/LSR.png" %}' width='24' height='28'>&nbsp;Longsor</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1314,7 +1314,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: PHTBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/treedown.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/PHT.png" %}' width='24' height='28'>&nbsp;Pohon Tumbang</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1325,7 +1325,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: TERBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/shooting.png" %}' width='24' height='28'>&nbsp;Terorisme</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/TER.png" %}' width='24' height='28'>&nbsp;Terorisme</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
@@ -1336,7 +1336,7 @@ function loadEventSearch() {
         displayKey: "name",
         source: TSUBH.ttAdapter(),
         templates: {
-          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/tsunami.png" %}' width='24' height='28'>&nbsp;Tsunami</h4>",
+          header: "<h4 class='typeahead-header'><img src='{% static "img/markers/TSU.png" %}' width='24' height='28'>&nbsp;Tsunami</h4>",
           suggestion: function(data) {
             return data.name + '<br><small>' + data.location + '</small>';
           }
