@@ -14,7 +14,4 @@ def get_waterlevelreport(watergate, now):
         watergate=watergate,
         created__range=(date_start, now)
     ).order_by('created')
-    for i in created__range:
-        if i = waterlevelreport.created|date:"H"|add:"0":
-        
     return waterlevelreports
