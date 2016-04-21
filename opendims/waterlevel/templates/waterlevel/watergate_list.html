@@ -30,226 +30,101 @@
     display: inline-block;
 }
 
-table, th, td {
+table, th{
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: center;
 }
 
 table.table1, table.table1 tr, table.table1 td {
-    border: 0px ;
+    border: 10px ;
     border-collapse: collapse;
+    text-align: right;
+    
+    border-spacing: 5px;
+    padding: 0px;
 }
 
-.scrollit {
-    overflow:auto;
-    width:500px;
+.pull-left {
+  float: left !important;
 }
 </style>
-{% endblock %}
+{% endblock extra_css %}
 
 {% block main %}
-<table class="table table-striped table-bordered">
-    <thead>
-        {% for i in now.hour|add:"1"|loop %}
-        <th class="text-center">{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00</th>
-        {% endfor %}
-    </thead>
-    <tbody>
-        {% for watergate in watergate_list %}
-        <tr>
-            {% get_waterlevelreport watergate now as waterlevelreports %}
 
-            {% for waterlevelreport in waterlevelreports %}
-            <td class="text-center {{ waterlevelreport.get_threshold_level }}">{{ waterlevelreport.height }} {{ waterlevelreport.weather }}</td>
-            {% endfor %}
-
-            {% if waterlevelreports.count < now.hour|add:"1" %}
-
-            {% subtract now.hour|add:"1" waterlevelreports.count as diff  %}
-
-            {% for i in diff|loop %}
-            <td class="text-center">-</td>
-            {% endfor %}
-
-            {% endif %}
-        </tr>
-        {% endfor  %}
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %}
-
-
-<div class="page-header" >
-    <h2>{% trans "Water Gates" %}</h2>
-</div>
-
-
-<p id="date"></p>
-
-<script>
-var d = new Date();
-document.getElementById("date").innerHTML = d;
-</script>
-
-
-<table style="float:left;" >
+<div class="col-xs-6">
+    <div class="table-responsive">
+    <table  class="table table-striped table-bordered">
     <thead>
         <tr>
             {% for watergate in watergate_list|slice:'1' %}
-            <th rowspan="2" class="text-center">{% get_verbose_field_name watergate 'name' %}</th>
-            <th colspan="5" class="text-center">BATAS SIAGA</th>
+            <th rowspan="2" >{% get_verbose_field_name watergate 'name' %}</th>
+            <th colspan="5" >BATAS SIAGA</th>
         </tr>
-          <tr>
-            <th style='background-color:#ff6666' class="text-center">SIAGA 1</th>
-            <th style='background-color:#ffcc00' class="text-center">SIAGA 2</th>
-            <th style='background-color:#ffff66' class="text-center">SIAGA 3</th>
+        <tr>
+            <th class="SIAGA-1">SIAGA 1</th>
+            <th class="SIAGA-2">SIAGA 2</th>
+            <th class="SIAGA-3">SIAGA 3</th>
           </tr>
             {% endfor %}
-
     </thead>
+    
     <tbody>
-
-        {% for watergate in watergate_list %}
         <tr>
-            <td><a href="{{ watergate.get_absolute_url }}">{{ watergate.name }}</a></td>
-            <td style='background-color:#ff6666' class="text-center"> ≥{{ watergate.siaga_1_min }}</td>
-            <td style='background-color:#ffcc00' class="text-center">{{ watergate.siaga_2_min }} ~ {{ watergate.siaga_2_max }}</td>
-            <td style='background-color:#ffff66' class="text-center">{{ watergate.siaga_3_min }} ~ {{ watergate.siaga_3_max }}</td>
+            {% for watergate in watergate_list %}
+            <td align="left"><a href="{{ watergate.get_absolute_url }}">{{ watergate.name }}</a></td>
+            <td class="SIAGA-1" align="center"> ≥{{ watergate.siaga_1_min }}</td>
+            <td class="SIAGA-2" align="center">{{ watergate.siaga_2_min }} ~ {{ watergate.siaga_2_max }}</td>
+            <td class="SIAGA-3" align="center">{{ watergate.siaga_3_min }} ~ {{ watergate.siaga_3_max }}</td>
         </tr>
-        {% empty %}
+            {% empty %}
         <tr>
            <td colspan="6" class="text-center">{% trans "No water gates found." %}</td>
         </tr>
-        {% endfor %}
-
+            {% endfor %}
     </tbody>
+    </table>
+    </div>
+</div>
 
-</table>
-
-<div class="scrollit">
-<table>
+    <div class="table-responsive">
+    <table class="table table-striped table-bordered">
     <thead>
-
-        <tr>
+       <tr>
             <th colspan="24" class="text-center">WAKTU</th>
+       </tr>
+       <tr>
+            {% for i in now.hour|add:"1"|loop %}
+            <th class="text-center">{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00</th>
+            {% endfor %}
         </tr>
-          <tr>
-            <th class="text-center">00:00</th>
-            <th class="text-center">01:00</th>
-            <th class="text-center">02:00</th>
-            <th class="text-center">03:00</th>
-            <th class="text-center">04:00</th>
-            <th class="text-center">05:00</th>
-            <th class="text-center">06:00</th>
-            <th class="text-center">07:00</th>
-            <th class="text-center">08:00</th>
-            <th class="text-center">09:00</th>
-            <th class="text-center">10:00</th>
-            <th class="text-center">11:00</th>
-            <th class="text-center">12:00</th>
-            <th class="text-center">13:00</th>
-            <th class="text-center">14:00</th>
-            <th class="text-center">15:00</th>
-            <th class="text-center">16:00</th>
-            <th class="text-center">17:00</th>
-            <th class="text-center">18:00</th>
-            <th class="text-center">19:00</th>
-            <th class="text-center">20:00</th>
-            <th class="text-center">21:00</th>
-            <th class="text-center">22:00</th>
-            <th class="text-center">23:00</th>
-
-          </tr>
-
     </thead>
+    
     <tbody>
-
+    <tr>
         {% for watergate in watergate_list %}
-        <tr>
-            {% get_waterlevelreport watergate 0 as waterlevelreport0 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center">{{ waterlevelreport0.height|default:"0" }} {{ waterlevelreport0.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 1 as waterlevelreport1 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center">{{ waterlevelreport1.height|default:"0" }} {{ waterlevelreport1.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 2 as waterlevelreport2 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center">{{ waterlevelreport2.height|default:"0" }} {{ waterlevelreport2.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 3 as waterlevelreport3 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport3.height|default:"0" }} {{ waterlevelreport3.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 4 as waterlevelreport4 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport4.height|default:"0" }} {{ waterlevelreport4.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 5 as waterlevelreport5 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport5.height|default:"0" }} {{ waterlevelreport5.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 6 as waterlevelreport6 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport6.height|default:"0" }} {{ waterlevelreport6.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 7 as waterlevelreport7 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport7.height|default:"0" }} {{ waterlevelreport7.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 8 as waterlevelreport8 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport8.height|default:"0" }} {{ waterlevelreport8.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 9 as waterlevelreport9 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport9.height|default:"0" }} {{ waterlevelreport9.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 10 as waterlevelreport10 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport10.height|default:"0" }} {{ waterlevelreport10.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 11 as waterlevelreport11 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport11.height|default:"0" }} {{ waterlevelreport11.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 12 as waterlevelreport12 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport12.height|default:"0" }} {{ waterlevelreport12.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 13 as waterlevelreport13 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport13.height|default:"0" }} {{ waterlevelreport13.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 14 as waterlevelreport14 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport14.height|default:"0" }} {{ waterlevelreport14.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 15 as waterlevelreport15 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport15.height|default:"0" }} {{ waterlevelreport15.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 16 as waterlevelreport16 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport16.height|default:"0" }} {{ waterlevelreport16.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 17 as waterlevelreport17 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport17.height|default:"0" }} {{ waterlevelreport17.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 18 as waterlevelreport18 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport18.height|default:"0" }} {{ waterlevelreport18.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 19 as waterlevelreport19 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport19.height|default:"0" }} {{ waterlevelreport19.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 20 as waterlevelreport20 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}"align="center"> {{ waterlevelreport20.height|default:"0" }} {{ waterlevelreport20.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 21 as waterlevelreport21 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport21.height|default:"0" }} {{ waterlevelreport21.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 22 as waterlevelreport22 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center"> {{ waterlevelreport22.height|default:"0" }} {{ waterlevelreport22.weather|default:"" }}</td>
-            {% get_waterlevelreport watergate 23 as waterlevelreport23 %}
-            <td class="{{ waterlevelreport0.get_threshold_level }}" align="center">  {{ waterlevelreport23.height|default:"0" }} {{ waterlevelreport23.weather|default:"" }}</td>
+            {% get_waterlevelreport watergate now as waterlevelreports %}
+                {% for waterlevelreport in waterlevelreports %}
+                    <td class="text-center {{ waterlevelreport.get_threshold_level }}">{% if forloop.counter0 = waterlevelreport.created|date:"H"|add:"0" %} {{ waterlevelreport.height }}{{ waterlevelreport.weather }}{% else %} 0{% endif %}</td>
+                {% endfor %}
 
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="6" >{% trans "No water gates found." %}</td>
-        </tr>
-        {% endfor %}
-
+            {% if waterlevelreports.count < now.hour|add:"1" %}
+                {% subtract now.hour|add:"1" waterlevelreports.count as diff  %}
+                    {% for i in diff|loop %}
+                     <td class="text-center">-</td>
+                    {% endfor %}
+            {% endif %}
+     </tr>
+        {% endfor  %}
     </tbody>
-
-</table>
-
+    </table>
 </div>
 
 
-<div style="float:left"><table  class="table1" width="500" cellspacing="0" cellpadding="4" >
+<div class="pull-left"><table  class="table1" width="500" cellspacing="0" cellpadding="4" >
         <tr>
-            <td  align="right" ><strong>Siaga I</strong></td>
+            <td align="right" ><strong>Siaga I</strong></td>
             <td>&nbsp;&nbsp;</td>
             <td class="SIAGA-1">&nbsp;&nbsp;</td><td>Bencana</td>
             <td align="right"><strong>Siaga II</strong></td>
@@ -277,470 +152,49 @@ document.getElementById("date").innerHTML = d;
         </tr>
     </table>
 
-
-
-
-
-
 <head>
+{% block extra_js_lib  %}
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
 </head>
 
 
 <body>
 
-  <div id="myDiv" style="width: 900px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="chart" style="width: 900px; height: 400px;">
   <script>
-    {% for watergate in watergate_list %}
-    var trace1 = {
-   y: [ {% get_waterlevelreportchart 1 0 %},
-        {% get_waterlevelreportchart 1 1 %},
-        {% get_waterlevelreportchart 1 2 %},
-        {% get_waterlevelreportchart 1 3 %},
-        {% get_waterlevelreportchart 1 4 %},
-        {% get_waterlevelreportchart 1 5 %},
-        {% get_waterlevelreportchart 1 6 %},
-        {% get_waterlevelreportchart 1 7 %},
-        {% get_waterlevelreportchart 1 8 %},
-        {% get_waterlevelreportchart 1 9 %},
-        {% get_waterlevelreportchart 1 10 %},
-        {% get_waterlevelreportchart 1 11 %},
-        {% get_waterlevelreportchart 1 12 %},
-        {% get_waterlevelreportchart 1 13 %},
-        {% get_waterlevelreportchart 1 14 %},
-        {% get_waterlevelreportchart 1 15 %},
-        {% get_waterlevelreportchart 1 16 %},
-        {% get_waterlevelreportchart 1 17 %},
-        {% get_waterlevelreportchart 1 18 %},
-        {% get_waterlevelreportchart 1 19 %},
-        {% get_waterlevelreportchart 1 20 %},
-        {% get_waterlevelreportchart 1 21 %},
-        {% get_waterlevelreportchart 1 22 %},
-        {% get_waterlevelreportchart 1 23 %}
+   {% for watergate in watergate_list %}
+      {% get_waterlevelreport watergate now as waterlevelreports %}
+        var waterlevel_{{ watergate.pk }}= [{% for waterlevelreport in waterlevelreports %}{{ waterlevelreport.height }},{% endfor %}{% if waterlevelreports.count < now.hour|add:"1" %}{% subtract now.hour|add:"1" waterlevelreports.count as diff  %}{% for i in diff|loop %}'',{% endfor %}{% endif %}]
+        var times = [{% for i in now.hour|add:"1"|loop %}'{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00',{% endfor %}]          
+            
+    var trace_{{ watergate.pk }} = {
+                                    y: waterlevel_{{ watergate.pk }},
+                                    x: times,
+                                    mode: 'lines+markers',
+                                    name: '{{ watergate.name }}'
+                                   };
+ {% endfor %}
+  var data = [ {% for watergate in watergate_list %}trace_{{ watergate.pk }},{% endfor %}];  
+  var layout = {
+                title: 'Grafik Tinggi Muka Air',
+                xaxis: {
+                        title: 'WAKTU'
+                       },
+                yaxis: {
+                        title: 'KETINGGIAN (cm)'
+                       }
+                };
+Plotly.newPlot('chart', data, layout);
 
-       ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Bendung Katulampa'
-};
-
-var trace2 = {
-  y: [  {% get_waterlevelreportchart 2 0 %},
-        {% get_waterlevelreportchart 2 1 %},
-        {% get_waterlevelreportchart 2 2 %},
-        {% get_waterlevelreportchart 2 3 %},
-        {% get_waterlevelreportchart 2 4 %},
-        {% get_waterlevelreportchart 2 5 %},
-        {% get_waterlevelreportchart 2 6 %},
-        {% get_waterlevelreportchart 2 7 %},
-        {% get_waterlevelreportchart 2 8 %},
-        {% get_waterlevelreportchart 2 9 %},
-        {% get_waterlevelreportchart 2 10 %},
-        {% get_waterlevelreportchart 2 11 %},
-        {% get_waterlevelreportchart 2 12 %},
-        {% get_waterlevelreportchart 2 13 %},
-        {% get_waterlevelreportchart 2 14 %},
-        {% get_waterlevelreportchart 2 15 %},
-        {% get_waterlevelreportchart 2 16 %},
-        {% get_waterlevelreportchart 2 17 %},
-        {% get_waterlevelreportchart 2 18 %},
-        {% get_waterlevelreportchart 2 19 %},
-        {% get_waterlevelreportchart 2 20 %},
-        {% get_waterlevelreportchart 2 21 %},
-        {% get_waterlevelreportchart 2 22 %},
-        {% get_waterlevelreportchart 2 23 %}
-      ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Depok'
-
-};
-
-var trace3 = {
-    y: [{% get_waterlevelreportchart 3 0 %},
-        {% get_waterlevelreportchart 3 1 %},
-        {% get_waterlevelreportchart 3 2 %},
-        {% get_waterlevelreportchart 3 3 %},
-        {% get_waterlevelreportchart 3 4 %},
-        {% get_waterlevelreportchart 3 5 %},
-        {% get_waterlevelreportchart 3 6 %},
-        {% get_waterlevelreportchart 3 7 %},
-        {% get_waterlevelreportchart 3 8 %},
-        {% get_waterlevelreportchart 3 9 %},
-        {% get_waterlevelreportchart 3 10 %},
-        {% get_waterlevelreportchart 3 11 %},
-        {% get_waterlevelreportchart 3 12 %},
-        {% get_waterlevelreportchart 3 13 %},
-        {% get_waterlevelreportchart 3 14 %},
-        {% get_waterlevelreportchart 3 15 %},
-        {% get_waterlevelreportchart 3 16 %},
-        {% get_waterlevelreportchart 3 17 %},
-        {% get_waterlevelreportchart 3 18 %},
-        {% get_waterlevelreportchart 3 19 %},
-        {% get_waterlevelreportchart 3 20 %},
-        {% get_waterlevelreportchart 3 21 %},
-        {% get_waterlevelreportchart 3 22 %},
-        {% get_waterlevelreportchart 3 23 %}
-        ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'PA Manggarai'
-
-};
-
-var trace4 = {
-  y: [  {% get_waterlevelreportchart 4 0 %},
-        {% get_waterlevelreportchart 4 1 %},
-        {% get_waterlevelreportchart 4 2 %},
-        {% get_waterlevelreportchart 4 3 %},
-        {% get_waterlevelreportchart 4 4 %},
-        {% get_waterlevelreportchart 4 5 %},
-        {% get_waterlevelreportchart 4 6 %},
-        {% get_waterlevelreportchart 4 7 %},
-        {% get_waterlevelreportchart 4 8 %},
-        {% get_waterlevelreportchart 4 9 %},
-        {% get_waterlevelreportchart 4 10 %},
-        {% get_waterlevelreportchart 4 11 %},
-        {% get_waterlevelreportchart 4 12 %},
-        {% get_waterlevelreportchart 4 13 %},
-        {% get_waterlevelreportchart 4 14 %},
-        {% get_waterlevelreportchart 4 15 %},
-        {% get_waterlevelreportchart 4 16 %},
-        {% get_waterlevelreportchart 4 17 %},
-        {% get_waterlevelreportchart 4 18 %},
-        {% get_waterlevelreportchart 4 19 %},
-        {% get_waterlevelreportchart 4 20 %},
-        {% get_waterlevelreportchart 4 21 %},
-        {% get_waterlevelreportchart 4 22 %},
-        {% get_waterlevelreportchart 4 23 %}
-
-      ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'PA Karet'
-
-};
-
-var trace5 = {
-  y: [  {% get_waterlevelreportchart 5 0 %},
-        {% get_waterlevelreportchart 5 1 %},
-        {% get_waterlevelreportchart 5 2 %},
-        {% get_waterlevelreportchart 5 3 %},
-        {% get_waterlevelreportchart 5 4 %},
-        {% get_waterlevelreportchart 5 5 %},
-        {% get_waterlevelreportchart 5 6 %},
-        {% get_waterlevelreportchart 5 7 %},
-        {% get_waterlevelreportchart 5 8 %},
-        {% get_waterlevelreportchart 5 9 %},
-        {% get_waterlevelreportchart 5 10 %},
-        {% get_waterlevelreportchart 5 11 %},
-        {% get_waterlevelreportchart 5 12 %},
-        {% get_waterlevelreportchart 5 13 %},
-        {% get_waterlevelreportchart 5 14 %},
-        {% get_waterlevelreportchart 5 15 %},
-        {% get_waterlevelreportchart 5 16 %},
-        {% get_waterlevelreportchart 5 17 %},
-        {% get_waterlevelreportchart 5 18 %},
-        {% get_waterlevelreportchart 5 19 %},
-        {% get_waterlevelreportchart 5 20 %},
-        {% get_waterlevelreportchart 5 21 %},
-        {% get_waterlevelreportchart 5 22 %},
-        {% get_waterlevelreportchart 5 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Krukut Hulu'
-};
-
-var trace6 = {
-  y: [  {% get_waterlevelreportchart 6 0 %},
-        {% get_waterlevelreportchart 6 1 %},
-        {% get_waterlevelreportchart 6 2 %},
-        {% get_waterlevelreportchart 6 3 %},
-        {% get_waterlevelreportchart 6 4 %},
-        {% get_waterlevelreportchart 6 5 %},
-        {% get_waterlevelreportchart 6 6 %},
-        {% get_waterlevelreportchart 6 7 %},
-        {% get_waterlevelreportchart 6 8 %},
-        {% get_waterlevelreportchart 6 9 %},
-        {% get_waterlevelreportchart 6 10 %},
-        {% get_waterlevelreportchart 6 11 %},
-        {% get_waterlevelreportchart 6 12 %},
-        {% get_waterlevelreportchart 6 13 %},
-        {% get_waterlevelreportchart 6 14 %},
-        {% get_waterlevelreportchart 6 15 %},
-        {% get_waterlevelreportchart 6 16 %},
-        {% get_waterlevelreportchart 6 17 %},
-        {% get_waterlevelreportchart 6 18 %},
-        {% get_waterlevelreportchart 6 19 %},
-        {% get_waterlevelreportchart 6 20 %},
-        {% get_waterlevelreportchart 6 21 %},
-        {% get_waterlevelreportchart 6 22 %},
-        {% get_waterlevelreportchart 6 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Pesanggrahan'
-};
-
-var trace7 = {
-  y: [  {% get_waterlevelreportchart 7 0 %},
-        {% get_waterlevelreportchart 7 1 %},
-        {% get_waterlevelreportchart 7 2 %},
-        {% get_waterlevelreportchart 7 3 %},
-        {% get_waterlevelreportchart 7 4 %},
-        {% get_waterlevelreportchart 7 5 %},
-        {% get_waterlevelreportchart 7 6 %},
-        {% get_waterlevelreportchart 7 7 %},
-        {% get_waterlevelreportchart 7 8 %},
-        {% get_waterlevelreportchart 7 9 %},
-        {% get_waterlevelreportchart 7 10 %},
-        {% get_waterlevelreportchart 7 11 %},
-        {% get_waterlevelreportchart 7 12 %},
-        {% get_waterlevelreportchart 7 13 %},
-        {% get_waterlevelreportchart 7 14 %},
-        {% get_waterlevelreportchart 7 15 %},
-        {% get_waterlevelreportchart 7 16 %},
-        {% get_waterlevelreportchart 7 17 %},
-        {% get_waterlevelreportchart 7 18 %},
-        {% get_waterlevelreportchart 7 19 %},
-        {% get_waterlevelreportchart 7 20 %},
-        {% get_waterlevelreportchart 7 21 %},
-        {% get_waterlevelreportchart 7 22 %},
-        {% get_waterlevelreportchart 7 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Angke Hulu'
-};
-
-var trace8 = {
-  y: [  {% get_waterlevelreportchart 8 0 %},
-        {% get_waterlevelreportchart 8 1 %},
-        {% get_waterlevelreportchart 8 2 %},
-        {% get_waterlevelreportchart 8 3 %},
-        {% get_waterlevelreportchart 8 4 %},
-        {% get_waterlevelreportchart 8 5 %},
-        {% get_waterlevelreportchart 8 6 %},
-        {% get_waterlevelreportchart 8 7 %},
-        {% get_waterlevelreportchart 8 8 %},
-        {% get_waterlevelreportchart 8 9 %},
-        {% get_waterlevelreportchart 8 10 %},
-        {% get_waterlevelreportchart 8 11 %},
-        {% get_waterlevelreportchart 8 12 %},
-        {% get_waterlevelreportchart 8 13 %},
-        {% get_waterlevelreportchart 8 14 %},
-        {% get_waterlevelreportchart 8 15 %},
-        {% get_waterlevelreportchart 8 16 %},
-        {% get_waterlevelreportchart 8 17 %},
-        {% get_waterlevelreportchart 8 18 %},
-        {% get_waterlevelreportchart 8 19 %},
-        {% get_waterlevelreportchart 8 20 %},
-        {% get_waterlevelreportchart 8 21 %},
-        {% get_waterlevelreportchart 8 22 %},
-        {% get_waterlevelreportchart 8 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Waduk Pluit'
-};
-
-var trace9 = {
-  y: [  {% get_waterlevelreportchart 9 0 %},
-        {% get_waterlevelreportchart 9 1 %},
-        {% get_waterlevelreportchart 9 2 %},
-        {% get_waterlevelreportchart 9 3 %},
-        {% get_waterlevelreportchart 9 4 %},
-        {% get_waterlevelreportchart 9 5 %},
-        {% get_waterlevelreportchart 9 6 %},
-        {% get_waterlevelreportchart 9 7 %},
-        {% get_waterlevelreportchart 9 8 %},
-        {% get_waterlevelreportchart 9 9 %},
-        {% get_waterlevelreportchart 9 10 %},
-        {% get_waterlevelreportchart 9 11 %},
-        {% get_waterlevelreportchart 9 12 %},
-        {% get_waterlevelreportchart 9 13 %},
-        {% get_waterlevelreportchart 9 14 %},
-        {% get_waterlevelreportchart 9 15 %},
-        {% get_waterlevelreportchart 9 16 %},
-        {% get_waterlevelreportchart 9 17 %},
-        {% get_waterlevelreportchart 9 18 %},
-        {% get_waterlevelreportchart 9 19 %},
-        {% get_waterlevelreportchart 9 20 %},
-        {% get_waterlevelreportchart 9 21 %},
-        {% get_waterlevelreportchart 9 22 %},
-        {% get_waterlevelreportchart 9 23 %}
-
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pasar Ikan'
-};
-
-var trace10 = {
-  y: [  {% get_waterlevelreportchart 10 0 %},
-        {% get_waterlevelreportchart 10 1 %},
-        {% get_waterlevelreportchart 10 2 %},
-        {% get_waterlevelreportchart 10 3 %},
-        {% get_waterlevelreportchart 10 4 %},
-        {% get_waterlevelreportchart 10 5 %},
-        {% get_waterlevelreportchart 10 6 %},
-        {% get_waterlevelreportchart 10 7 %},
-        {% get_waterlevelreportchart 10 8 %},
-        {% get_waterlevelreportchart 10 9 %},
-        {% get_waterlevelreportchart 10 10 %},
-        {% get_waterlevelreportchart 10 11 %},
-        {% get_waterlevelreportchart 10 12 %},
-        {% get_waterlevelreportchart 10 13 %},
-        {% get_waterlevelreportchart 10 14 %},
-        {% get_waterlevelreportchart 10 15 %},
-        {% get_waterlevelreportchart 10 16 %},
-        {% get_waterlevelreportchart 10 17 %},
-        {% get_waterlevelreportchart 10 18 %},
-        {% get_waterlevelreportchart 10 19 %},
-        {% get_waterlevelreportchart 10 20 %},
-        {% get_waterlevelreportchart 10 21 %},
-        {% get_waterlevelreportchart 10 22 %},
-        {% get_waterlevelreportchart 10 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Cipinang Hulu'
-};
-
-var trace11 = {
-  y: [  {% get_waterlevelreportchart 11 0 %},
-        {% get_waterlevelreportchart 11 1 %},
-        {% get_waterlevelreportchart 11 2 %},
-        {% get_waterlevelreportchart 11 3 %},
-        {% get_waterlevelreportchart 11 4 %},
-        {% get_waterlevelreportchart 11 5 %},
-        {% get_waterlevelreportchart 11 6 %},
-        {% get_waterlevelreportchart 11 7 %},
-        {% get_waterlevelreportchart 11 8 %},
-        {% get_waterlevelreportchart 11 9 %},
-        {% get_waterlevelreportchart 11 10 %},
-        {% get_waterlevelreportchart 11 11 %},
-        {% get_waterlevelreportchart 11 12 %},
-        {% get_waterlevelreportchart 11 13 %},
-        {% get_waterlevelreportchart 11 14 %},
-        {% get_waterlevelreportchart 11 15 %},
-        {% get_waterlevelreportchart 11 16 %},
-        {% get_waterlevelreportchart 11 17 %},
-        {% get_waterlevelreportchart 11 18 %},
-        {% get_waterlevelreportchart 11 19 %},
-        {% get_waterlevelreportchart 11 20 %},
-        {% get_waterlevelreportchart 11 21 %},
-        {% get_waterlevelreportchart 11 22 %},
-        {% get_waterlevelreportchart 11 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'Pos Sunter Hulu'
-
-};
-
-var trace12 = {
-
- y: [   {% get_waterlevelreportchart 12 0 %},
-        {% get_waterlevelreportchart 12 1 %},
-        {% get_waterlevelreportchart 12 2 %},
-        {% get_waterlevelreportchart 12 3 %},
-        {% get_waterlevelreportchart 12 4 %},
-        {% get_waterlevelreportchart 12 5 %},
-        {% get_waterlevelreportchart 12 6 %},
-        {% get_waterlevelreportchart 12 7 %},
-        {% get_waterlevelreportchart 12 8 %},
-        {% get_waterlevelreportchart 12 9 %},
-        {% get_waterlevelreportchart 12 10 %},
-        {% get_waterlevelreportchart 12 11 %},
-        {% get_waterlevelreportchart 12 12 %},
-        {% get_waterlevelreportchart 12 13 %},
-        {% get_waterlevelreportchart 12 14 %},
-        {% get_waterlevelreportchart 12 15 %},
-        {% get_waterlevelreportchart 12 16 %},
-        {% get_waterlevelreportchart 12 17 %},
-        {% get_waterlevelreportchart 12 18 %},
-        {% get_waterlevelreportchart 12 19 %},
-        {% get_waterlevelreportchart 12 20 %},
-        {% get_waterlevelreportchart 12 21 %},
-        {% get_waterlevelreportchart 12 22 %},
-        {% get_waterlevelreportchart 12 23 %}
- ],
-  x: [  '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00',
-        '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
-        '21:00', '22:00', '23:00'
-     ],
-  mode: 'lines+markers',
-  name: 'PA Pulo Gadung'
-
-};
-
-var data = [trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8, trace9, trace10, trace11, trace12];
-
-var layout = {
-  title: 'Grafik Tinggi Muka Air',
-  xaxis: {
-    title: 'WAKTU'
-  },
-  yaxis: {
-    title: 'KETINGGIAN (cm)'
-  }
-};
-
-Plotly.newPlot('myDiv', data, layout);
-{% endfor %}
-  </script>
-
-  </div>
+ </script>
+ </div>
 </body>
+
+
+{% comment %}
 {% endcomment %}
 
 {% include 'opendims/includes/pagination.html' with page=page_obj %}
-{% endblock %}
+{% endblock %}  

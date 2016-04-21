@@ -113,6 +113,6 @@ class WaterLevelReport(CommonAbstractModel):
             threshold_level = 'SIAGA-3'
         elif self.height >= self.watergate.siaga_2_min and self.height <= self.watergate.siaga_2_max:
             threshold_level = 'SIAGA-2'
-        else:
+        elif self.height >= self.watergate.siaga_1_min and self.height <= self.watergate.siaga_1_max:
             threshold_level = 'SIAGA-1'
         return threshold_level

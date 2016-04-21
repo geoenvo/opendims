@@ -38,18 +38,14 @@ class WaterLevelSerializer(gis_serializers.GeoFeatureModelSerializer):
             try:
                 date = datetime.datetime.strptime(date, '%Y-%m-%d')
                 reports = reports.filter(
-                    created__year=date.year,
-                    created__month=date.month,
-                    created__day=date.day
+                    created__date=date.date()
                 )
             except ValueError:
-                return []
+                return WaterLevelReport.objects.none()
         else:
             now = timezone.localtime(timezone.now())
             reports = reports.filter(
-                created__year=now.year,
-                created__month=now.month,
-                created__day=now.day
+                created__date=now.date()
             )
         serializer = WaterLevelReportSerializer(instance=reports, many=True)
         return serializer.data
