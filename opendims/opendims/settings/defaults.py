@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'maps',
     'jaksafe',
     'django_crontab',
+    'contact',
 ]
 
 MIDDLEWARE_CLASSES = [
