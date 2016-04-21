@@ -1,15 +1,14 @@
-{% extends "opendims/layouts/col_2.html" %}
+{% extends "opendims/page_full.html" %}
+
+{% load staticfiles i18n %}
 
 {% block title %}{{ block.super }} - {{ flatpage.title }}{% endblock %}
 
-{% block main %}
+{% block crumbs %}
+<h6 class="page-active">{{ flatpage.title }}</h6>
+{% endblock %}
 
-<div class="page-header">
-    <h2>{{ flatpage.title }}</h2>
-</div>
-
-<div class="page-content">
-    {{ flatpage.content }}
-</div>
-
+{% block page_content %}
+<h3 class="page-header heading">{{ flatpage.title }}</h3>
+{{ flatpage.content }}
 {% endblock %}

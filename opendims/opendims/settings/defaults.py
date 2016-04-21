@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'maps',
     'jaksafe',
     'django_crontab',
+    'contact',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -176,7 +177,7 @@ BOWER_INSTALLED_APPS = (
     'leaflet.locatecontrol#0.43.0',
     'leaflet-groupedlayercontrol#0.3.0',
     'eonasdan-bootstrap-datetimepicker#4.17.37',
-    'animate.css#3.5.1',
+    'animate.css#3.1.0',
     'jquery-migrate#1.2.1',
     'modernizr#2.0.6',
 )
@@ -263,7 +264,7 @@ LEAFLET_CONFIG = {
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-ITEMS_PER_PAGE = 10
+ITEMS_PER_PAGE = 20
 
 CRONJOBS = [
     ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job')

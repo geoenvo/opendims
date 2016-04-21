@@ -31,13 +31,12 @@ from geolevels import urls as geolevels_urls
 from maps import urls as maps_urls
 from jaksafe import urls as jaksafe_urls
 from waterlevel import urls as waterlevel_urls
+from contact import urls as contact_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='opendims/page_about.html'), name='page_about'),
     url(r'^bootleaf_example/$', TemplateView.as_view(template_name='bootleaf_example/example.html'), name='bootleaf_example'),
     url(r'^bootleaf_test/$', TemplateView.as_view(template_name='bootleaf_example/test.html'), name='bootleaf_test'),
-    url(r'^opendims_new/$', TemplateView.as_view(template_name='opendims_new/index.html'), name='opendims_new'),
     url(r'^accounts/login/$', common_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
     url(r'^accounts/', include(registration_urls)),
@@ -50,6 +49,7 @@ urlpatterns = [
     url(r'^maps/', include(maps_urls, namespace='maps')),
     url(r'^jaksafe/', include(jaksafe_urls, namespace='jaksafe')),
     url(r'^waterlevel/', include(waterlevel_urls, namespace='waterlevel')),
+    url(r'^contact/', include(contact_urls, namespace='contact')),
 ]
 
 if settings.DEBUG:

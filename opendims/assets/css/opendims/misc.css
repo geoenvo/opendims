@@ -346,7 +346,7 @@ html[xmlns] .slides {
 }
 
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-  background-image: url("../../img/opendims_new/fancybox_sprite.png");
+  background-image: url("../../img/opendims/fancybox_sprite.png");
 }
 
 #fancybox-loading {
@@ -364,7 +364,7 @@ html[xmlns] .slides {
 #fancybox-loading div {
   width: 44px;
   height: 44px;
-  background: url("../../img/opendims_new/fancybox_loading.gif") center center no-repeat;
+  background: url("../../img/opendims/fancybox_loading.gif") center center no-repeat;
 }
 
 .fancybox-close {
@@ -384,7 +384,7 @@ html[xmlns] .slides {
   height: 100%;
   cursor: pointer;
   text-decoration: none;
-  background: transparent url("../../img/opendims_new/blank.gif");
+  background: transparent url("../../img/opendims/blank.gif");
   /* helps IE */
   -webkit-tap-highlight-color: transparent;
   z-index: 8040;
@@ -526,13 +526,13 @@ html[xmlns] .slides {
 /*Retina graphics!*/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-    background-image: url("../../img/opendims_new/fancybox_sprite@2x.png");
+    background-image: url("../../img/opendims/fancybox_sprite@2x.png");
     background-size: 44px 152px;
     /*The size of the normal image, half the size of the hi-res image*/
   }
 
   #fancybox-loading div {
-    background-image: url("../../img/opendims_new/fancybox_loading@2x.gif");
+    background-image: url("../../img/opendims/fancybox_loading@2x.gif");
     background-size: 24px 24px;
     /*The size of the normal image, half the size of the hi-res image*/
   }
