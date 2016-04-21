@@ -1,0 +1,34 @@
+{% extends "opendims/page.html" %}
+
+{% load staticfiles i18n %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-title clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                {% block breadcrumbs %}
+                {{ block.super }}
+                {% block crumbs %}{% endblock crumbs %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Here begin Main Content -->
+        <div class="col-md-12">
+            {% block page_content_upper %}
+            {% endblock page_content_upper %}
+            <div class="event-container clearfix">
+            {% block page_content %}
+            {% endblock page_content %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

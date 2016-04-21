@@ -1,0 +1,16 @@
+.heading {
+    margin: 10px 0 20px 0;
+}
+
+.pull-up {
+    margin-bottom: -30px;
+}
+
+.page-title a.active {
+    color: #999;
+}
+
+.event-container .blog-post-inner,
+.event-container .widget-main {
+    padding: 0;
+}

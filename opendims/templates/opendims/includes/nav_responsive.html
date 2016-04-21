@@ -1,0 +1,43 @@
+{% load staticfiles i18n %}
+
+<!-- This one in here is responsive menu for tablet and mobiles -->
+<div class="responsive-navigation visible-sm visible-xs">
+    <a href="#" class="menu-toggle-btn">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="responsive_menu">
+        <ul class="main_menu">
+            <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+            <li><a href="{% url 'reports:event_list' %}">{% trans "Events" %}</a></li>
+            <li><a href="#">{% trans "Maps" %}</a>
+                <ul>
+                    <li><a href="{% url 'maps:event_map' %}">{% trans "Events" %}</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'waterlevel:watergate_list' %}">{% trans "Water Level" %}</a></li>
+            <li><a href="#">{% trans "Geolevels" %}</a>
+                <ul>
+                    <li><a href="{% url 'geolevels:province_list' %}">{% trans "Provinces" %}</a></li>
+                    <li><a href="{% url 'geolevels:city_list' %}">{% trans "Cities" %}</a></li>
+                    <li><a href="{% url 'geolevels:subdistrict_list' %}">{% trans "Subdistricts" %}</a></li>
+                    <li><a href="{% url 'geolevels:village_list' %}">{% trans "Villages" %}</a></li>
+                </ul>
+            </li>
+            <li><a href="">{% trans "E-Library" %}</a>
+                <ul>
+                    <li><a href="archives.html">Archives</a></li>
+                    <li><a href="shortcodes.html">Shortcodes</a></li>
+                    <li><a href="gallery.html">Our Gallery</a></li>
+                </ul>
+            </li>
+            <li><a href="gallery.html">{% trans "Gallery" %}</a></li>
+        </ul> <!-- /.main_menu -->
+        <ul class="social_icons">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+        </ul> <!-- /.social_icons -->
+    </div> <!-- /.responsive_menu -->
+</div> <!-- /responsive_navigation -->

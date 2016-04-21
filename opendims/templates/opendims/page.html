@@ -1,0 +1,11 @@
+{% extends "opendims/base.html" %}
+
+{% load staticfiles i18n %}
+
+{% block content %}
+
+{% block breadcrumbs %}
+<h6><a href="{% url 'home' %}">{% trans "Home" %}</a></h6>
+{% endblock breadcrumbs %}
+
+{% endblock %}

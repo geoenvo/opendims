@@ -504,7 +504,7 @@ input, select {
 }
 
 .input-select select {
-  background-image: url("../../img/opendims_new/select-arrow.png");
+  background-image: url("../../img/opendims/select-arrow.png");
   background-repeat: no-repeat;
   background-position: right center;
   width: 100%;
@@ -1093,7 +1093,7 @@ input, select {
   font-size: 12px !important;
 }
 .course-search-form select {
-  background-image: url("../../img/opendims_new/select-arrow.png");
+  background-image: url("../../img/opendims/select-arrow.png");
   background-repeat: no-repeat;
   background-position: right center;
 }

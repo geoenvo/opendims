@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.conf import settings
 
-
 from dal import autocomplete
 from rest_framework import generics, filters
 

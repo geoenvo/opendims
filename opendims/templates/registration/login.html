@@ -1,31 +1,30 @@
-{% extends "opendims/layouts/col_1.html" %}
+{% extends "opendims/page_full.html" %}
 
-{% load i18n staticfiles crispy_forms_tags %}
+{% load staticfiles i18n crispy_forms_tags %}
 
 {% block title %}{{ block.super }} - {% trans "Login" %}{% endblock %}
 
-{% block main %}
+{% block crumbs %}
+<h6 class="page-active">{% trans "Login" %}</h6>
+{% endblock %}
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">{% trans "Login" %}</div>
-            <div class="panel-body">
-                {% if form.errors %}
-                    <div class="alert alert-danger" role="alert">{% trans "Invalid username or password." %}</div>
-                {% endif %}
-                <form method="post" action="">
-                    {{ form|crispy }}
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ next }}">
-                    <button class="btn btn-primary btn-block" type="submit">{% trans "Login" %}</button>
-                </form>
-                <br>
-                <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
-                <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p>
-            </div>
+{% block page_content %}
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">{% trans "Invalid username or password" %}.</div>
+            {% endif %}
+            <form method="post" action="">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <button class="btn btn-primary btn-block" type="submit">{% trans "Login" %}</button>
+            </form>
+            <br>
+            <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+            <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p>
         </div>
     </div>
 </div>
-
 {% endblock %}
