@@ -2,8 +2,9 @@ from __future__ import unicode_literals
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.core.urlresolvers import reverse
 from django.contrib.gis.db import models
+from django.core.urlresolvers import reverse
+
 from common.models import CommonAbstractModel
 
 verbose_created = _('Created')
@@ -15,8 +16,8 @@ verbose_message = _('Message')
 
 class Contact(CommonAbstractModel):
     SUBJECT_CHOICES = (
-        ('D', _('Disaster Information')),
-        ('W', _('Waterlevel Information')),
+        ('Disaster Information', _('Disaster Information')),
+        ('Waterlevel Information', _('Waterlevel Information')),
     )
     created = models.DateTimeField(
         default=timezone.now,
@@ -36,7 +37,7 @@ class Contact(CommonAbstractModel):
     subject = models.CharField(
         max_length=50,
         choices=SUBJECT_CHOICES,
-        default='D',
+        default='Disaster Information',
         verbose_name=verbose_subject
     )
     message = models.TextField(
@@ -46,6 +47,9 @@ class Contact(CommonAbstractModel):
     class Meta:
         ordering = ['-created']
         get_latest_by = 'created'
+
+    def get_absolute_url(self):
+        return reverse('contact:contact_detail', args=[self.pk])
 
     def __unicode__(self):
         return '[%s] - %s' % (self.subject, self.name)

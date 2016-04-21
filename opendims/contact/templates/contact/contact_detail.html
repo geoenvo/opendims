@@ -1,0 +1,42 @@
+{% extends "contact/contact.html" %}
+
+{% load i18n verbose_names %}
+
+{% block title %}{{ block.super }} - {{ contact }}{% endblock %}
+
+{% block main %}
+
+<div class="page-header">
+    <h2>{{ contact }}</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+    <tbody>
+        <tr>
+            <th class="col-md-2">{% get_verbose_field_name contact 'created' %}</th>
+            <td>{{ contact.created }}</td>
+        </tr>
+        <tr>
+            <th>{% get_verbose_field_name contact 'name' %}</th>
+            <td>{{ contact.name }}</td>
+        </tr>
+        <tr>
+            <th>{% get_verbose_field_name contact 'email' %}</th>
+            <td>{{ contact.email }}</td>
+        </tr>
+        <tr>
+            <th>{% get_verbose_field_name contact 'website' %}</th>
+            <td>{{ contact.website }}</td>
+        </tr>
+        <tr>
+            <th>{% get_verbose_field_name contact 'subject' %}</th>
+            <td>{{ contact.subject }}</td>
+        </tr>
+        <tr>
+            <th>{% get_verbose_field_name contact 'message' %}</th>
+            <td>{{ contact.message }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
