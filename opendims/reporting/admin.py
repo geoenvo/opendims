@@ -4,56 +4,64 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
 
 from .models import Template, Report, Attachment
+from .forms import ReportForm
 
-verbose_template_details = _('Template details')
+
 verbose_report_details = _('Report details')
-verbose_set_active = _('Set Template as Active')
-verbose_set_inactive = _('Set Template as Inactive')
+verbose_report_content = _('Report content')
+verbose_report_output = _('Report output')
+verbose_template_details = _('Template details')
+verbose_attachment_details = _('Report details')
+verbose_disaster_attached = _('Disaster attached')
 
 
-def set_inactive(modeladmin, request, queryset):
-    queryset.update(status='INACTIVE')
-
-set_inactive.short_description = verbose_set_inactive
-
-
-def set_active(modeladmin, request, queryset):
-    queryset.update(status='ACTIVE')
-
-set_active.short_description = verbose_set_active
+class AttachmentInline(admin.TabularInline):
+    model = Attachment
+    extra = 3
 
 
 class ReportAdmin(admin.ModelAdmin):
+    form = ReportForm
     fieldsets = [
-        (verbose_template_details, {
+        (verbose_report_details, {
             'fields': [
-                'template',
-                'type',
-                'status',
                 'created',
-                'content',
                 'author',
-                'text_author',
+                ('type', 'status'),
+                ('start', 'end')
+            ]
+        }),
+        (verbose_report_content, {
+            'fields': [
+                'replace_report_content',
+                'template',
+                'date',
+                'text_id',
                 'text_title',
+                'text_author',
+                'content'
+            ]
+        }),
+        (verbose_report_output, {
+            'fields': [
                 'file'
             ]
         })
     ]
     list_display = [
         'template',
+        'created',
+        'updated',
         'type',
         'status',
-        'updated',
-        'content',
         'author',
-        'text_author',
-        'text_title',
         'file'
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['content', 'template', 'created', 'updated']
-    search_fields = ['file', 'author']
+    list_filter = ['template', 'created', 'updated']
+    search_fields = ['author', 'file', 'template']
+    inlines = [AttachmentInline]
 
 
 class TemplateAdmin(admin.ModelAdmin):
@@ -71,17 +79,22 @@ class TemplateAdmin(admin.ModelAdmin):
         'name',
         'created',
         'updated',
-        'content',
+        'disaster_attached_list'
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['content', 'name', 'created', 'updated']
-    search_fields = ['type']
+    list_filter = ['name', 'created', 'updated']
+    search_fields = ['name']
+
+    def disaster_attached_list(self, obj):
+        return ", ".join([disaster.code for disaster in obj.disaster_attached.order_by('code')])
+
+    disaster_attached_list.short_description = verbose_disaster_attached
 
 
 class AttachmentAdmin(admin.ModelAdmin):
     fieldsets = [
-        (verbose_template_details, {
+        (verbose_attachment_details, {
             'fields': [
                 'report',
                 'created',
@@ -92,9 +105,9 @@ class AttachmentAdmin(admin.ModelAdmin):
     list_display = [
         'report',
         'created',
-        'file',
+        'file'
     ]
-    ordering = ['created']
+    ordering = ['-created']
     list_filter = ['created']
     search_fields = ['file']
 
