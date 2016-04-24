@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from datetime import date
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -14,11 +15,14 @@ from reports.models import Disaster
 
 
 verbose_name = _('Name')
+verbose_date = _('Date')
 verbose_created = _('Created')
 verbose_updated = _('Updated')
+verbose_start = _('Start')
+verbose_end = _('End')
 verbose_author = _('Author')
 verbose_content = _('Content')
-verbose_disaster_attached = _('Attached disaster')
+verbose_disaster_attached = _('Disaster attached')
 verbose_template = _('Template')
 verbose_text_id = _('Text ID')
 verbose_text_author = _('Text author')
@@ -76,6 +80,16 @@ class Report(CommonAbstractModel):
          default=timezone.now,
          verbose_name=verbose_created
      )
+    start = models.DateTimeField(
+         null=True,
+         blank=True,
+         verbose_name=verbose_start
+     )
+    end = models.DateTimeField(
+         null=True,
+         blank=True,
+         verbose_name=verbose_end
+     )
     type = models.CharField(
         max_length=100,
         choices=TYPE_CHOICES,
@@ -93,6 +107,10 @@ class Report(CommonAbstractModel):
         blank=True,
         verbose_name=verbose_content
     )
+    date = models.DateField(
+        default=date.today,
+        verbose_name=verbose_date
+    )
     text_id = models.TextField(
         blank=True,
         verbose_name=verbose_text_id
@@ -108,7 +126,7 @@ class Report(CommonAbstractModel):
     status = models.CharField(
         max_length=50,
         choices=STATUS_CHOICES,
-        default='ACTIVE',
+        default='INACTIVE',
         verbose_name=verbose_status
     )
     file = models.FileField(
@@ -126,15 +144,6 @@ class Report(CommonAbstractModel):
         return '[%s] - %s' % (self.template, timezone.localtime(self.created))
 
     def save(self, *args, **kwargs):
-        report_content = self.template.content
-        if self.text_id:
-            report_content = report_content.replace('[[id]]', self.text_id)
-        if self.text_title:
-            report_content = report_content.replace('[[title]]', self.text_title)
-        if self.text_author:
-            report_content = report_content.replace('[[author]]', self.text_author)
-        self.content = report_content
-
         # Write replaced html template to temp pdf file
         pdf_temp = NamedTemporaryFile()
         pisa.CreatePDF(
@@ -142,9 +151,9 @@ class Report(CommonAbstractModel):
             dest=pdf_temp,
             encoding='utf-8'
         )
-        # YYYYMMDD-template_name.pdf
+        # YYYYMMDD-HHMM__template_name.pdf
         pdf_filename = "{}__{}{}".format(
-            self.created.strftime('%Y%m%d-%H%M'),
+            timezone.localtime(timezone.now()).strftime('%Y%m%d-%H%M'),
             self.template.name.replace(' ', '_'),
             '.pdf'
         )

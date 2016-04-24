@@ -20,6 +20,23 @@
 .filter-info .table td {
   border: 0;
 }
+/** style for legend **/
+.legend {
+    line-height: 20px;
+    color: #000000;
+    font:helvetica;
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+.legend i {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 15px;
+    opacity: 1;
+}
 </style>
 {% endblock %}
 
@@ -120,6 +137,36 @@
 var filterInfoControl;
 var ABRSearch = [], CEKSearch = [], BJRSearch = [], ROBSearch = [], GMPSearch = [], KBKSearch = [], KLBSearch = [], SOSSearch = [], LAISearch = [], LSRSearch = [], PHTSearch = [], TERSearch = [], TSUSearch = [];
 var ABRLayer, ABR, ABRMarkers, CEKLayer, CEK, CEKMarkers, BJRLayer, BJR, BJRMarkers, ROBLayer, ROB, ROBMarkers, GMPLayer, GMP, GMPMarkers, KBKLayer, KBK, KBKMarkers, KLBLayer, KLB, KLBMarkers, SOSLayer, SOS, SOSMarkers, LAILayer, LAI, LAIMarkers, LSRLayer, LSR, LSRMarkers, PHTLayer, PHT, PHTMarkers, TERLayer, TER, TERMarkers, TSULayer, TSU, TSUMarkers;
+
+//Function defining colors for different ranges of height
+
+function getColor(height) {
+    return height > 150  ? '#e31a1c' :
+           height > 70   ? '#ff7f00' :
+           height > 10   ? '#ffff59' :
+                           '#BCC2F8' ;
+}
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (map) {
+
+var div = L.DomUtil.create('div', 'legend'),
+    values = [0, 10, 70, 150],
+    labels = ['<strong> Flood Heights </strong>'];
+
+// loop through height intervals and generate a label with a colored square for each interval
+
+    for (var i = 0; i < values.length; i++) {
+        labels.push(
+          '<i style="background:' + getColor(values[i] + 1) + '"></i> ' +
+          values[i]  + (values[i + 1]? ' &ndash; ' + values[i + 1] : ' +')+ ' (Cm)');
+         }
+
+          div.innerHTML = labels.join('<br>');
+          return div;
+};
+legend.addTo(map);
 
 $("#datetimepicker").datetimepicker({
   format: 'YYYY-MM-DD',
@@ -415,6 +462,7 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     var contentCreated = " - ";
     var contentDisaster = " - ";
     var contentStatus = " - ";
+    var contentHeight = " - ";
     var contentProvince = " - ";
     var contentCity = " - ";
     var contentSubdistrict = " - ";
@@ -433,6 +481,9 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     }
     if (feature.properties.status) {
       contentStatus = feature.properties.status;
+    }
+    if (feature.properties.height) {
+      contentHeight = feature.properties.height;
     }
     if (feature.properties.disaster_note) {
       contentDisaster = feature.properties.disaster_note;
@@ -482,6 +533,7 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
     content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
     content = content + "<tr><th>Status</th><td>" + contentStatus + "</td></tr>";
+    content = content + "<tr><th>Height</th><td>" + contentHeight + "</td></tr>";
     content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
     content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
     content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
@@ -649,9 +701,10 @@ function loadEvents(date, all) {
   BJR = L.geoJson(null, {
     style: function(feature) {
       return {
-        color: '#3759BF',
+        color: getColor(feature.properties.height),
         fill: true,
         opacity: 1,
+        fillOpacity: 1,
         clickable: true
       };
     },

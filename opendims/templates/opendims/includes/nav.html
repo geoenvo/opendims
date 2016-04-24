@@ -1,43 +1,46 @@
-{% load i18n active_url %}
+{% load staticfiles i18n active_url %}
 
-<nav class="navbar navbar-static">
+<div class="nav-bar-main" role="navigation">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'home' %}">{{ SITE_NAME }}</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="{% active_url request 'home' %}"><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
-                <li class="{% active_url request 'page_about' %}"><a href="{% url 'page_about' %}">{% trans 'About' %}</a></li>
-                <li class="{% active_url request 'reports:event_list' %}"><a href="{% url 'reports:event_list' %}">{% trans 'Events' %}</a></li>
-                <li class="{% active_url request 'reports:report_list' %}"><a href="{% url 'reports:report_list' %}">{% trans 'Reports' %}</a></li>
-                <li class="{% active_url request 'geolevels:province_list' %}"><a href="{% url 'geolevels:province_list' %}">{% trans 'Geolevels' %}</a></li>
-                <li class="{% active_url request 'waterlevel:watergate_list' %}"><a href="{% url 'waterlevel:watergate_list' %}">{% trans 'Water Level' %}</a></li>
-                <li class="{% active_url request 'maps:event_map' %}"><a href="{% url 'maps:event_map' %}">{% trans 'Map' %}</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
-                    <ul class="dropdown-menu" style="padding:12px;">
-                        <form class="form-inline">
-                            <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button>
-                            <input type="text" class="form-control pull-left" placeholder="Search">
-                        </form>
-                    </ul>
-                </li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;{% trans 'Logout' %}</a></li>
-                {% else %}
-                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;{% trans 'Login' %}</a></a></li>
-                {% endif %}
-            </ul>
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</nav>
+        <nav class="main-navigation clearfix visible-md visible-lg" role="navigation">
+                <ul class="main-menu sf-menu">
+                    <li class="{% active_url request 'home' %}"><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                    <li class="{% active_url request 'reports:event_list' %}"><a href="{% url 'reports:event_list' %}">{% trans "Events" %}</a>
+                        <ul class="sub-menu">
+                            <li class="{% active_url request 'reports:report_list' %}"><a href="{% url 'reports:report_list' %}">{% trans "Reports" %}</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">{% trans "Maps" %}</a>
+                        <ul class="sub-menu">
+                            <li class="{% active_url request 'maps:event_map' %}"><a href="{% url 'maps:event_map' %}">{% trans "Events" %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="{% active_url request 'waterlevel:watergate_list' %}"><a href="{% url 'waterlevel:watergate_list' %}">{% trans "Water Level" %}</a></li>
+                    <li><a href="#">{% trans "Geolevels" %}</a>
+                        <ul>
+                            <li class="{% active_url request 'geolevels:province_list' %}"><a href="{% url 'geolevels:province_list' %}">{% trans "Provinces" %}</a></li>
+                            <li class="{% active_url request 'geolevels:city_list' %}"><a href="{% url 'geolevels:city_list' %}">{% trans "Cities" %}</a></li>
+                            <li class="{% active_url request 'geolevels:subdistrict_list' %}"><a href="{% url 'geolevels:subdistrict_list' %}">{% trans "Subdistricts" %}</a></li>
+                            <li class="{% active_url request 'geolevels:village_list' %}"><a href="{% url 'geolevels:village_list' %}">{% trans "Villages" %}</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">{% trans "E-Library" %}</a>
+                        <ul class="sub-menu">
+                            <li><a href="archives.html">Archives</a></li>
+                            <li><a href="shortcodes.html">Shortcodes</a></li>
+                            <li><a href="gallery.html">Our Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">{% trans "Gallery" %}</a></li>
+                </ul> <!-- /.main-menu -->
+
+                <ul class="social-icons pull-right">
+                    <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="Google+"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
+                </ul> <!-- /.social-icons -->
+        </nav> <!-- /.main-navigation -->
+    </div> <!-- /.container -->
+</div> <!-- /.nav-bar-main -->

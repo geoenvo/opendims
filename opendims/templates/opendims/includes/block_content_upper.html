@@ -1,0 +1,17 @@
+{% load staticfiles i18n %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content_upper_left %}
+            {% include "opendims/includes/block_slideshow.html" %}
+            {% endblock content_upper_left %}
+        </div> <!-- /.col-md-8 -->
+
+        <div class="col-md-4">
+            {% block content_upper_right %}
+            {% include "opendims/includes/block_latest_updates.html" %}
+            {% endblock content_upper_right %}
+        </div> <!-- /.col-md-4 -->
+    </div>
+</div>

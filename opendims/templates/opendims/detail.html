@@ -1,0 +1,165 @@
+{% extends "opendims/page.html" %}
+
+{% load staticfiles i18n %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-title clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                {% block breadcrumbs %}
+                {{ block.super }}
+                {% block crumbs %}{% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Here begin Main Content -->
+        <div class="col-md-8">
+            {% block detail_left %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="blog-post-container">
+                        <div class="blog-post-image">
+                            <div class="blog-post-meta">
+                                <ul>
+                                    <li><i class="fa fa-calendar-o"></i>{% block detail_date %}{% endblock detail_date %}</li>
+                                    <li><a href="#blog-author"><i class="fa fa-user"></i>{% block detail_author %}{% endblock detail_author %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-post-inner">
+                            <h3 class="blog-post-title">{% block detail_title %}{% endblock detail_title %}</h3>
+                            {% block detail_content %}
+                            {% endblock detail_content %}
+                            <div class="tag-items">
+                                <span class="small-text">Tags:</span>
+                                {% block detail_tags %}{% endblock detail_tags %}
+                            </div>
+                        </div>
+                    </div> <!-- /.blog-post-container -->
+                </div> <!-- /.col-md-12 -->
+            </div> <!-- /.row -->
+            {% endblock detail_left %}
+        </div> <!-- /.col-md-8 -->
+
+        <!-- Here begin Sidebar -->
+        <div class="col-md-4">
+            {% block detail_sidebar %}
+            {% endblock detail_sidebar %}
+
+            <div class="widget-main">
+                <div class="widget-inner">
+                    <div class="search-form-widget">
+                        <form name="search_form" method="get" action="#" class="search_form">
+                            <input type="text" name="s" placeholder="Type and click enter to search..." title="Type and click enter to search..." class="field_search">
+                        </form>
+                    </div>
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Categories</h4>
+                </div>
+                <div class="widget-inner">
+                    <div class="blog-categories">
+                        <div class="row">
+                            <ul class="col-md-6">
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Famliy</a></li>
+                                <li><a href="#">Government</a></li>
+                                <li><a href="#">Health</a></li>
+                            </ul>
+                            <ul class="col-md-6">
+                                <li><a href="#">Science</a></li>
+                                <li><a href="#">Student Achievements</a></li>
+                                <li><a href="#">Tech & Engineering</a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /.blog-categories -->
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Our Gallery</h4>
+                </div>
+                <div class="widget-inner">
+                    <div class="gallery-small-thumbs clearfix">
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg" title="Gallery Tittle One">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg" title="Gallery Tittle Two">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                        <div class="thumb-small-gallery">
+                            <a class="fancybox" data-fancybox-group="gallery1" href="images/slide1.jpg">
+                                <img src="http://placehold.it/70x70" alt="" />
+                            </a>
+                        </div>
+                    </div> <!-- /.galler-small-thumbs -->
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+
+            <div class="widget-main">
+                <div class="widget-main-title">
+                    <h4 class="widget-title">Testimonial</h4>
+                </div>
+                <div class="widget-inner">
+                    <div id="slider-testimonials">
+                        <ul>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, quos, veniam optio voluptas hic delectus soluta odit nemo harum <strong class="dark-text">Shannon D. Edwards</strong></p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, quos, veniam optio voluptas hic delectus soluta odit nemo harum <strong class="dark-text">Shannon D. Edwards</strong></p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, quos, veniam optio voluptas hic delectus soluta odit nemo harum <strong class="dark-text">Shannon D. Edwards</strong></p>
+                            </li>
+                        </ul>
+                        <a class="prev fa fa-angle-left" href=""></a>
+                        <a class="next fa fa-angle-right" href=""></a>
+                    </div>
+                </div> <!-- /.widget-inner -->
+            </div> <!-- /.widget-main -->
+        </div> <!-- /.col-md-4 -->
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+
+{% endblock %}

@@ -64,10 +64,10 @@ class EventResource(resources.ModelResource):
 
         # Get request object for sending error messages
         request = kwargs.pop('request', None)
-        i = 0
-        row_count = i + 2
+        count = 0
+        row_count = count + 2
         last = dataset.height - 1
-        while i <= last:
+        while count <= last:
             # Get the top row
             row = dataset[0]
             """
@@ -94,6 +94,7 @@ class EventResource(resources.ModelResource):
             height = row[8]
             # Validate Geolevels relations
             valid_geolevels = True
+            error_messages = []
             if rw and not village:
                 valid_geolevels = False
             if rt and not rw:
@@ -103,32 +104,32 @@ class EventResource(resources.ModelResource):
                     Disaster.objects.get(pk=disaster)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('Invalid disaster code. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('Invalid disaster code. Skipping this row for import.')))
             if province and valid_geolevels:
                 try:
                     province_instance = Province.objects.get(name=province)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('Province not found. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('Province not found. Skipping this row for import.')))
             if city and valid_geolevels:
                 try:
                     city_instance = City.objects.get(name=city)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('City not found. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('City not found. Skipping this row for import.')))
             if subdistrict and valid_geolevels:
                 try:
                     subdistrict_instance = Subdistrict.objects.get(
                         name=subdistrict)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('Subdistrict not found. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('Subdistrict not found. Skipping this row for import.')))
             if village and valid_geolevels:
                 try:
                     village_instance = Village.objects.get(name=village)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('Village not found. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('Village not found. Skipping this row for import.')))
             if city_instance and province_instance and valid_geolevels:
                 try:
                     City.objects.get(
@@ -137,7 +138,7 @@ class EventResource(resources.ModelResource):
                     )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('City not found in the province. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('City not found in the province. Skipping this row for import.')))
             if subdistrict_instance and city_instance and valid_geolevels:
                 try:
                     Subdistrict.objects.get(
@@ -146,7 +147,7 @@ class EventResource(resources.ModelResource):
                     )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('Subdistrict not found in the city. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('Subdistrict not found in the city. Skipping this row for import.')))
             if village_instance and subdistrict_instance and valid_geolevels:
                 try:
                     Village.objects.get(
@@ -155,7 +156,7 @@ class EventResource(resources.ModelResource):
                     )
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('Village not found in the subdistrict. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('Village not found in the subdistrict. Skipping this row for import.')))
             if rw and village_instance and valid_geolevels:
                 try:
                     rw_instance = RW.objects.get(
@@ -165,14 +166,14 @@ class EventResource(resources.ModelResource):
                     rw = unicode(rw_instance.pk)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('RW not found in the village. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('RW not found in the village. Skipping this row for import.')))
             if rt and rw and valid_geolevels:
                 try:
                     rt_instance = RT.objects.get(name=rt, rw=rw_instance)
                     rt = unicode(rt_instance.pk)
                 except ObjectDoesNotExist:
                     valid_geolevels = False
-                    messages.error(request, "Error (row {}): {}".format(row_count, _('RT not found. Skipping this row for import.')))
+                    error_messages.append("Error (row {}): {}".format(row_count, _('RT not found. Skipping this row for import.')))
             new_row = (
                 id,
                 disaster,
@@ -190,9 +191,13 @@ class EventResource(resources.ModelResource):
             """
             if valid_geolevels:
                 dataset.rpush(new_row)
+            else:
+                if request and error_messages:
+                    for error_message in error_messages:
+                        messages.error(request, error_message)
             dataset.lpop()
-            i = i + 1
-            row_count = i + 2
+            count = count + 1
+            row_count = count + 2
         # print 'DEBUG AFTER'
         # print dataset
         for field in self.get_fields():
