@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 3271,
+        "model": "geolevels.City",
+        "fields": {
+            "name": "BOGOR",
+            "province": 32
+        }
+    },
+    {
+        "pk": 3275,
+        "model": "geolevels.City",
+        "fields": {
+            "name": "BEKASI",
+            "province": 32
+        }
+    },
+    {
+        "pk": 3276,
+        "model": "geolevels.City",
+        "fields": {
+            "name": "DEPOK",
+            "province": 32
+        }
+    },
+    {
+        "pk": 3671,
+        "model": "geolevels.City",
+        "fields": {
+            "name": "TANGERANG",
+            "province": 36
+        }
+    },
+    {
+        "pk": 3101,
+        "model": "geolevels.City",
+        "fields": {
+            "name": "KEPULAUAN SERIBU",
+            "province": 31
+        }
+    }
+]
