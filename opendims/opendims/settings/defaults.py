@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'django_crontab',
     'contact',
     'weatherforecast',
+    'smsblast',
+    'automaticweathersystem',
 ]
 
 MIDDLEWARE_CLASSES = [
