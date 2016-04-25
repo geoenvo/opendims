@@ -130,6 +130,58 @@
         {% endfor %}
     </tbody>
 </table>
+
+<h3>{% trans "Event Impacts" %}</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for eventimpact in eventimpacts|slice:'1' %}
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'event' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'province' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'city' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'subdistrict' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'village' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'rw' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'rt' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'rt_text' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'evac_point' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'evac_total' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'affected_death' %}</th>
+            <th class="col-md-1">{% get_verbose_field_name eventimpact 'affected_injury' %}</th>
+            <th class="col-md-1">{% get_verbose_field_name eventimpact 'loss_total' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'note' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for eventimpact in eventimpacts %}
+        <tr>
+            <td><a href="{{ event.get_absolute_url }}">{{ eventimpact.event }}</a></td>
+            <td><a href="{{ event.province.get_absolute_url }}">{{ eventimpact.province }}</a></td>
+            <td><a href="{{ event.city.get_absolute_url }}">{{ eventimpact.city }}</a></td>
+            <td><a href="{{ event.subdistrict.get_absolute_url }}">{{ eventimpact.subdistrict }}</a></td>
+            <td><a href="{{ event.village.get_absolute_url }}">{{ eventimpact.village }}</a></td>
+            <td><a href="{{ event.rw.get_absolute_url }}">{{ eventimpact.rw }}</a></td>
+            <td><a href="{{ event.rt.get_absolute_url }}">{{ eventimpact.rt }}</a></td>
+            <td>{{ eventimpact.rt_text }}</td>
+            <td>{{ eventimpact.evac_point }}</td>
+            <td>{{ eventimpact.evac_total }}</td>
+            <td>{{ eventimpact.affected_total }}</td>
+            <td>{{ eventimpact.affected_death }}</td>
+            <td>{{ eventimpact.affected_injury }}</td>
+            <td>{{ eventimpact.loss_total }}</td>
+            <td>{{ eventimpact.note }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">{% trans "No event impacts found for this event." %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
 
 {% block extra_js %}
