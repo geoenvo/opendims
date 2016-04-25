@@ -1,1 +1,13 @@
-{% extends "opendims/layouts/col_2.html" %}
+{% extends "opendims/page_full.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} - {% trans "Contact" %}{% endblock %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+{% endblock %}
+
+{% block crumbs %}
+<h6>{% trans "Contact" %}</h6>
+{% endblock %}

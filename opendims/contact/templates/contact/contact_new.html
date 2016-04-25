@@ -1,16 +1,18 @@
-{% extends "opendims/layouts/col_1.html" %}
+{% extends "contact/contact.html" %}
 
-{% load i18n staticfiles crispy_forms_tags %}
+{% load staticfiles i18n crispy_forms_tags %}
 
-{% block title %}{{ block.super }} - {% trans "Contact" %}{% endblock %}
+{% block crumbs %}
+<h6 class="page-active">{% trans "Contact" %}</h6>
+{% endblock %}
 
-{% block main %}
+{% block page_content %}
 
-<div class="row">
+<div class="row" >
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-heading">{% trans "Contact" %}</div>
-            <div class="panel-body">
+            <div class="panel-body" style="background-color:#D0D0D0">
                 <form method="post" action="">
                     {{ form|crispy }}
                     {% csrf_token %}

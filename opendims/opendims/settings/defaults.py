@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'jaksafe',
     'django_crontab',
     'contact',
+    'captcha',
 ]
 
 MIDDLEWARE_CLASSES = [
