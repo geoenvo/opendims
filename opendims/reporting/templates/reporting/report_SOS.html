@@ -1,0 +1,125 @@
+<html>
+<body>
+{% load i18n verbose_names %}
+
+{% block main %}
+<div class="page-header">
+    <h2>{% trans "Events" %}</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for event in events|slice:'1' %}
+            <th class="col-md-2">{% get_verbose_field_name event 'disaster' %}</th>
+            <th>{% get_verbose_field_name event 'created' %}</th>
+            <th>{% get_verbose_field_name event 'updated' %}</th>
+            <th>{% get_verbose_field_name event 'height' %}</th>
+            <th>{% get_verbose_field_name event 'magnitude' %}</th>
+            <th>{% get_verbose_field_name event 'note' %}</th>
+            <th>{% get_verbose_field_name event 'province' %}</th>
+            <th>{% get_verbose_field_name event 'city' %}</th>
+            <th>{% get_verbose_field_name event 'subdistrict' %}</th>
+            <th>{% get_verbose_field_name event 'village' %}</th>
+            <th>{% get_verbose_field_name event 'rw' %}</th>
+            <th>{% get_verbose_field_name event 'rt' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td>{{ event.disaster }}</a></td>
+            <td>{{ event.created }}</td>
+            <td>{{ event.updated }}</td>
+            <td>{{ event.height }}</td>
+            <td>{{ event.magnitude }}</td>
+            <td>{{ event.note }}</td>
+            <td>{{ event.province }}</td>
+            <td>{{ event.city }}</td>
+            <td>{{ event.subdistrict }}</td>
+            <td>{{ event.village }}</td>
+            <td>{{ event.rw }}</td>
+            <td>{{ event.rt }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<h3>{% trans "Reports" %}</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for report in event.reports.all %}
+            <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
+            <th>{% get_verbose_field_name report 'created' %}</th>
+            <th>{% get_verbose_field_name report 'updated' %}</th>
+            <th>{% get_verbose_field_name report 'source' %}</th>
+            <th>{% get_verbose_field_name report 'status' %}</th>
+            <th>{% get_verbose_field_name report 'note' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in event.reports.all %}
+        <tr>
+            <td>{{ report.event }}</td>
+            <td>{{ report.created }}</td>
+            <td>{{ report.updated }}</td>
+            <td>{{ report.source.note }}</td>
+            <td>{{ report.status }}</td>
+            <td>{{ report.note }}</td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<h3>{% trans "Event Impacts" %}</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            {% for eventimpact in event.eventimpacts.all %}
+            <th class="col-md-2">{% get_verbose_field_name eventimpact 'province' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'city' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'subdistrict' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'village' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'rw' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'rt' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'evac_point' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'evac_total' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'affected_injury' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'loss_total' %}</th>
+            <th>{% get_verbose_field_name eventimpact 'note' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for eventimpact in event.eventimpacts.all %}
+        <tr>
+            <td>{{ eventimpact.province }}</td>
+            <td>{{ eventimpact.city }}</td>
+            <td>{{ eventimpact.subdistrict }}</td>
+            <td>{{ eventimpact.village }}</td>
+            <td>{{ eventimpact.rw }}</td>
+            <td>{{ eventimpact.rt }}</td>
+            <td>{{ eventimpact.evac_point }}</td>
+            <td>{{ eventimpact.evac_total }}</td>
+            <td>{{ eventimpact.affected_total }}</td>
+            <td>{{ eventimpact.affected_death }}</td>
+            <td>{{ eventimpact.affected_injury }}</td>
+            <td>{{ eventimpact.loss_total }}</td>
+            <td>{{ eventimpact.note }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+{% endblock %}
+</html>
