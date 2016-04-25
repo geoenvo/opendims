@@ -5,7 +5,7 @@ from .serializers import EventSerializer, ReportSerializer
 from rest_framework import filters
 
 from common.views import CustomListAPIView
-from .models import Event, Report, EventImpact
+from .models import Event, Report, EventImpact, EventImage
 from .filters import EventFilter, ReportFilter
 
 
@@ -21,6 +21,7 @@ class EventDetailView(generic.DetailView):
         context = super(EventDetailView, self).get_context_data(**kwargs)
         context['reports'] = Report.objects.filter(event=self.get_object())
         context['eventimpacts'] = EventImpact.objects.filter(event=self.get_object())
+        context['eventimages'] = EventImage.objects.filter(event=self.get_object())
         return context
 
 
