@@ -199,9 +199,9 @@
         {% for eventimage in eventimages %}
         <tr>
             <td><a href="{{ event.get_absolute_url }}">{{ eventimage.event }}</a></td>
-            <td>{{ eventimpact.image }}</td>
-            <td>{{ eventimpact.order }}</td>
-            <td>{{ eventimpact.published }}</td>
+            <td><img src="{{ eventimage.image.url }}"></td>
+            <td>{{ eventimage.order }}</td>
+            <td>{{ eventimage.published }}</td>
         </tr>
         {% empty %}
         <tr>
@@ -411,49 +411,50 @@ function leaflet_map_evacuation_init(map, options) {
     var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.point %}
-    var pointLayer = L.geoJson({{ event.point.geojson|safe }}).addTo(map);
-    {% endif %}
+    var popupContent = `
+    <table class="table table-striped table-bordered">
+        <tbody>
+        {% for eventimpact in eventimpacts %}
+            <tr>
+                <th class="col-md-2">{% get_verbose_field_name eventimpact 'evac_total' %}</th>
+                <td>{{ eventimpact.evac_total }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
+                <td>{{ eventimpact.affected_death }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+                <td>{{ eventimpact.affected_death }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name eventimpact 'affected_injury' %}</th>
+                <td>{{ eventimpact.affected_injury }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name eventimpact 'loss_total' %}</th>
+                <td>{{ eventimpact.loss_total }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name eventimpact 'note' %}</th>
+                <td>{{ eventimpact.note }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    if (typeof pointLayer !== 'undefined') {
-        var pointBounds = pointLayer.getBounds();
-        var pointCenter = pointBounds.getCenter();
-        map.setZoom(16);
-        map.panTo(pointCenter);
+    `;
 
-    } else if (typeof rtLayer !== 'undefined') {
-        map.fitBounds(rtLayer);
+    var popupLayer;
 
-    } else if (typeof rwLayer !== 'undefined') {
-        map.fitBounds(rwLayer);
-
-    } else if (typeof villageLayer !== 'undefined') {
-        map.fitBounds(villageLayer);
-
-    } else if (typeof subdistrictLayer !== 'undefined') {
-        map.fitBounds(subdistrictLayer);
-
-    } else if (typeof cityLayer !== 'undefined') {
-        map.fitBounds(cityLayer);
-
-    } else if (typeof provinceLayer !== 'undefined') {
-        map.fitBounds(provinceLayer);
-    }
-
-
-
-    var popupContent;
     /* looping through event impact to get evac_point */
-
     {% for eventimpact in eventimpacts %}
 
-
-    var provinceLayer = L.geoJson({{ eventimpact.evac_point.geojson|safe }}).addTo(map);
-
+    var evacpointLayer = L.geoJson({{ eventimpact.evac_point.geojson|safe }}).addTo(map);
+        popupLayer = evacpointLayer
+        popupLayer.bindPopup(popupContent);
 
     {% endfor %}
-
-    var popup
 
 }
 </script>

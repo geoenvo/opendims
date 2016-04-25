@@ -21,7 +21,7 @@ class EventDetailView(generic.DetailView):
         context = super(EventDetailView, self).get_context_data(**kwargs)
         context['reports'] = Report.objects.filter(event=self.get_object())
         context['eventimpacts'] = EventImpact.objects.filter(event=self.get_object())
-        context['eventimages'] = EventImage.objects.filter(event=self.get_object())
+        context['eventimages'] = EventImage.objects.filter(event=self.get_object(), published=True)
         return context
 
 
