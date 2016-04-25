@@ -8,14 +8,6 @@ from .models import Contact
 from .forms import ContactForm
 
 
-class ContactListView(generic.ListView):
-    queryset = Contact.objects.order_by('-created')
-    paginate_by = settings.ITEMS_PER_PAGE
-
-
-class ContactDetailView(generic.DetailView):
-    model = Contact
-
 def Contact_new(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
