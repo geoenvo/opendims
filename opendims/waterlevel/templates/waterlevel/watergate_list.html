@@ -106,7 +106,7 @@ table.table1, table.table1 tr, table.table1 td {
         {% for watergate in watergate_list %}
             {% get_waterlevelreport watergate now as waterlevelreports %}
                 {% for waterlevelreport in waterlevelreports %}
-                    <td class="text-center {{ waterlevelreport.get_threshold_level }}">{% if forloop.counter0 = waterlevelreport.created|date:"H"|add:"0" %} {{ waterlevelreport.height }}{{ waterlevelreport.weather }}{% else %} 0{% endif %}</td>
+                    <td class="text-center {{ waterlevelreport.get_threshold_level }}">{% if forloop.counter0 = waterlevelreport.created|date:"H"|add:"0" %} {{ waterlevelreport.height }}{{ waterlevelreport.weather }}{% else %}-{% endif %}</td>
                 {% endfor %}
 
             {% if waterlevelreports.count < now.hour|add:"1" %}
@@ -166,7 +166,7 @@ table.table1, table.table1 tr, table.table1 td {
   <script>
    {% for watergate in watergate_list %}
       {% get_waterlevelreport watergate now as waterlevelreports %}
-        var waterlevel_{{ watergate.pk }}= [{% for waterlevelreport in waterlevelreports %}{{ waterlevelreport.height }},{% endfor %}{% if waterlevelreports.count < now.hour|add:"1" %}{% subtract now.hour|add:"1" waterlevelreports.count as diff  %}{% for i in diff|loop %}'',{% endfor %}{% endif %}]
+        var waterlevel_{{ watergate.pk }}= [{% for waterlevelreport in waterlevelreports %}{% if forloop.counter0 = waterlevelreport.created|date:"H"|add:"0" %}{{ waterlevelreport.height }},{% endif %}{% endfor %}{% if waterlevelreports.count < now.hour|add:"1" %}{% subtract now.hour|add:"1" waterlevelreports.count as diff  %}{% for i in diff|loop %}'',{% endfor %}{% endif %}]
         var times = [{% for i in now.hour|add:"1"|loop %}'{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00',{% endfor %}]          
             
     var trace_{{ watergate.pk }} = {
