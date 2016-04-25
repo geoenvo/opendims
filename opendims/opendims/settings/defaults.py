@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'jaksafe',
     'django_crontab',
     'contact',
+    'weatherforecast',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -180,6 +181,7 @@ BOWER_INSTALLED_APPS = (
     'animate.css#3.1.0',
     'jquery-migrate#1.2.1',
     'modernizr#2.0.6',
+    'weather-icons#2.0.10',
 )
 
 # App model reordering in /admin page

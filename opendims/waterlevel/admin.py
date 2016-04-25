@@ -9,7 +9,6 @@ from .models import WaterGate, WaterLevelReport
 
 
 verbose_watergate_details = _('Water Gate details')
-verbose_Location = _('Location')
 verbose_waterlevelreport_details = _('Water Level Report details')
 
 

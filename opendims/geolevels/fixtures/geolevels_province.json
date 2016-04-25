@@ -1,0 +1,16 @@
+[
+    {
+        "pk": 32,
+        "model": "geolevels.Province",
+        "fields": {
+            "name": "JAWA BARAT"
+        }
+    },
+    {
+        "pk": 36,
+        "model": "geolevels.Province",
+        "fields": {
+            "name": "BANTEN"
+        }
+    }
+]
