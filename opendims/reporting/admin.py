@@ -54,22 +54,18 @@ class ReportAdmin(admin.ModelAdmin):
             try:
                 template = get_template('reporting/report_' + disaster.code + '.html')
                 print disaster.code
-                created_start = datetime.datetime(
-                    obj.created.year,
-                    obj.created.month,
-                    obj.created.day,
-                    0
-                )
-                created_end = datetime.datetime(
-                    obj.created.year,
-                    obj.created.month,
-                    obj.created.day,
-                    24
-                )
-                events = Event.objects.filter(
-                    disaster__code=disaster.code,
-                    created__range=(created_start, created_end)
-                )
+                events = Event.objects.filter(disaster__code=disaster.code)
+
+                if obj.start and not obj.end:
+                    start = datetime.date(
+                        obj.start.year,
+                        obj.start.month,
+                        obj.start.day
+                    )
+                    events = events.filter(created__date=start)
+
+                if obj.start and obj.end:
+                    events = events.filter(created__range=(obj.start, obj.end))
                 print 'hello', '+', events
                 html = template.render({'events': events})
                 print html
