@@ -65,7 +65,10 @@ class ReportAdmin(admin.ModelAdmin):
                     events = events.filter(created__date=start)
 
                 if obj.start and obj.end:
-                    events = events.filter(created__range=(obj.start, obj.end))
+                    events = events.filter(
+                        created__range=(obj.start, obj.end)
+                    )
+
                 print 'hello', '+', events
                 html = template.render({'events': events})
                 print html
