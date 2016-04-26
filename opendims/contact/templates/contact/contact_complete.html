@@ -1,10 +1,14 @@
-{% extends "opendims/layouts/col_1.html" %}
+{% extends "contact/contact.html" %}
 
-{% load i18n staticfiles %}
+{% load staticfiles i18n crispy_forms_tags %}
 
-{% block title %}{{ block.super }} - {% trans "Message sent" %}{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Contact" %}{% endblock %}
 
-{% block main %}
+{% block crumbs %}
+<h6 class="page-active">{% trans "Contact" %}</h6>
+{% endblock %}
+
+{% block page_content %}
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">

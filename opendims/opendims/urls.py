@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^jaksafe/', include(jaksafe_urls, namespace='jaksafe')),
     url(r'^waterlevel/', include(waterlevel_urls, namespace='waterlevel')),
     url(r'^contact/', include(contact_urls, namespace='contact')),
+    url(r'^captcha/', include('captcha.urls')),
     url(r'^weatherforecast/', include(weatherforecast_urls, namespace='weatherforecast')),
 ]
 

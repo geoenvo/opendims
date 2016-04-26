@@ -47,6 +47,7 @@ verbose_created = _('Created')
 verbose_updated = _('Updated')
 verbose_status = _('Status')
 verbose_height = _('Height')
+verbose_height_min = _('Minimum Height')
 verbose_magnitude = _('Magnitude')
 verbose_province = _('Province')
 verbose_city = _('City')
@@ -86,6 +87,10 @@ class Event(CommonAbstractModel):
         blank=True,
         verbose_name=verbose_height
     )
+    height_min = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_height_min)
     magnitude = models.DecimalField(
         null=True,
         blank=True,

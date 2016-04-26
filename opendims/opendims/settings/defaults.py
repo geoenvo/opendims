@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'jaksafe',
     'django_crontab',
     'contact',
+    'captcha',
     'weatherforecast',
     'smsblast',
     'automaticweathersystem',
@@ -275,5 +276,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 ITEMS_PER_PAGE = 20
 
 CRONJOBS = [
-    ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job')
+    ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job'),
+    ('* 1 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job'),
 ]
+CAPTCHA_NOISE_FUNCTIONS = ('')
