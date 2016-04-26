@@ -1,4 +1,19 @@
 <html>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+    table-layout: fixed;
+}
+table#t01 {
+    width: 100%;
+    background-color: #f1f1c1;
+}
+</style>
 <body>
 {% load i18n verbose_names %}
 
@@ -7,40 +22,32 @@
     <h2>{% trans "Events" %}</h2>
 </div>
 
-<table class="table table-striped table-bordered">
+<table style="width=100%">
     <thead>
         <tr>
             {% for event in events|slice:'1' %}
             <th class="col-md-2">{% get_verbose_field_name event 'disaster' %}</th>
-            <th>{% get_verbose_field_name event 'created' %}</th>
-            <th>{% get_verbose_field_name event 'updated' %}</th>
             <th>{% get_verbose_field_name event 'height' %}</th>
             <th>{% get_verbose_field_name event 'magnitude' %}</th>
-            <th>{% get_verbose_field_name event 'note' %}</th>
-            <th>{% get_verbose_field_name event 'province' %}</th>
-            <th>{% get_verbose_field_name event 'city' %}</th>
             <th>{% get_verbose_field_name event 'subdistrict' %}</th>
             <th>{% get_verbose_field_name event 'village' %}</th>
             <th>{% get_verbose_field_name event 'rw' %}</th>
             <th>{% get_verbose_field_name event 'rt' %}</th>
+            <th>{% get_verbose_field_name event 'note' %}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
         {% for event in events %}
         <tr>
-            <td>{{ event.disaster }}</a></td>
-            <td>{{ event.created }}</td>
-            <td>{{ event.updated }}</td>
+            <td>{{ event.disaster.note }}</a></td>
             <td>{{ event.height }}</td>
             <td>{{ event.magnitude }}</td>
-            <td>{{ event.note }}</td>
-            <td>{{ event.province }}</td>
-            <td>{{ event.city }}</td>
             <td>{{ event.subdistrict }}</td>
             <td>{{ event.village }}</td>
             <td>{{ event.rw }}</td>
             <td>{{ event.rt }}</td>
+            <td>{{ event.note }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -49,13 +56,12 @@
 
 <h3>{% trans "Reports" %}</h3>
 
-<table class="table table-striped table-bordered">
+{% for event in events %}
+<table style="width=100%">
     <thead>
         <tr>
-            {% for report in event.reports.all %}
+            {% for report in event.reports.all|slice:'1' %}
             <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
-            <th>{% get_verbose_field_name report 'created' %}</th>
-            <th>{% get_verbose_field_name report 'updated' %}</th>
             <th>{% get_verbose_field_name report 'source' %}</th>
             <th>{% get_verbose_field_name report 'status' %}</th>
             <th>{% get_verbose_field_name report 'note' %}</th>
@@ -66,31 +72,28 @@
         {% for report in event.reports.all %}
         <tr>
             <td>{{ report.event }}</td>
-            <td>{{ report.created }}</td>
-            <td>{{ report.updated }}</td>
             <td>{{ report.source.note }}</td>
             <td>{{ report.status }}</td>
             <td>{{ report.note }}</td>
         </tr>
-
-        {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
 
+</table>
+<br></br>
+{% endfor %}
 
 <h3>{% trans "Event Impacts" %}</h3>
 
-<table class="table table-striped table-bordered">
+{% for event in events %}
+
+<table style="width=100%">
     <thead>
         <tr>
-            {% for eventimpact in event.eventimpacts.all %}
-            <th class="col-md-2">{% get_verbose_field_name eventimpact 'province' %}</th>
-            <th>{% get_verbose_field_name eventimpact 'city' %}</th>
-            <th>{% get_verbose_field_name eventimpact 'subdistrict' %}</th>
+            {% for eventimpact in event.eventimpacts.all|slice:'1' %}
             <th>{% get_verbose_field_name eventimpact 'village' %}</th>
             <th>{% get_verbose_field_name eventimpact 'rw' %}</th>
             <th>{% get_verbose_field_name eventimpact 'rt' %}</th>
-            <th>{% get_verbose_field_name eventimpact 'evac_point' %}</th>
             <th>{% get_verbose_field_name eventimpact 'evac_total' %}</th>
             <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
             <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
@@ -103,13 +106,9 @@
     <tbody>
         {% for eventimpact in event.eventimpacts.all %}
         <tr>
-            <td>{{ eventimpact.province }}</td>
-            <td>{{ eventimpact.city }}</td>
-            <td>{{ eventimpact.subdistrict }}</td>
             <td>{{ eventimpact.village }}</td>
             <td>{{ eventimpact.rw }}</td>
             <td>{{ eventimpact.rt }}</td>
-            <td>{{ eventimpact.evac_point }}</td>
             <td>{{ eventimpact.evac_total }}</td>
             <td>{{ eventimpact.affected_total }}</td>
             <td>{{ eventimpact.affected_death }}</td>
@@ -120,6 +119,8 @@
         {% endfor %}
     </tbody>
 </table>
+<br></br>
+{% endfor %}
 </body>
 {% endblock %}
 </html>

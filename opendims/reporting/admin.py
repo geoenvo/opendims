@@ -53,7 +53,6 @@ class ReportAdmin(admin.ModelAdmin):
 
             try:
                 template = get_template('reporting/report_' + disaster.code + '.html')
-                print disaster.code
                 events = Event.objects.filter(disaster__code=disaster.code)
 
                 if obj.start and not obj.end:
@@ -68,10 +67,7 @@ class ReportAdmin(admin.ModelAdmin):
                     events = events.filter(
                         created__range=(obj.start, obj.end)
                     )
-
-                print 'hello', '+', events
                 html = template.render({'events': events})
-                print html
                 pdf_disaster_temp = NamedTemporaryFile()
 
                 pisa.CreatePDF(
