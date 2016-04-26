@@ -17,3 +17,4 @@ django-filter==0.13.0
 python-magic==0.4.11
 django-crontab==0.7.1
 xhtml2pdf==0.0.6
+django-simple-captcha==0.5.1
