@@ -62,6 +62,10 @@ INSTALLED_APPS = [
     'weatherforecast',
     'smsblast',
     'automaticweathersystem',
+    'earlywarning',
+    'website',
+    'categories',
+    'categories.editor',
 ]
 
 MIDDLEWARE_CLASSES = [
