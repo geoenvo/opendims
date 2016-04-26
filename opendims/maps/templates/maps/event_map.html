@@ -579,7 +579,7 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     });
 
     layerGroupSearch.push({
-      name: featureName,
+      name: feature.properties.disaster_note,
       location: featureLocation,
       source: layerGroupSearchSource,
       id: L.stamp(layer),
