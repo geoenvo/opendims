@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from ckeditor.fields import RichTextField
 from common.models import CommonAbstractModel
+from django.core.validators import RegexValidator
 
 verbose_created = _('Created')
 verbose_updated = _('Updated')
@@ -16,6 +17,7 @@ verbose_group = _('Group')
 verbose_subject = _('Subject')
 verbose_contactnumber = _('Contact Number')
 verbose_contact = _('Contact')
+verbose_contacts = _('Contacts')
 
 
 class Template(CommonAbstractModel):
@@ -43,6 +45,31 @@ class Template(CommonAbstractModel):
         return '[%s] - %s' % (self.name, timezone.localtime(self.created))
 
 
+class Contact(CommonAbstractModel):
+    name = models.CharField(max_length=100, verbose_name=verbose_name)
+    created = models.DateTimeField(
+        default=timezone.now,
+        verbose_name=verbose_created
+    )
+    updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+    )
+    contact_number = models.CharField(
+        validators=[phone_regex],
+        max_length=15,
+        verbose_name=verbose_contactnumber
+    )  # validators should be a list
+
+    class Meta:
+        ordering = ['-updated', '-created']
+        get_latest_by = 'updated'
+
+    def __unicode__(self):
+        return '[%s] - %s ' % (self.name, timezone.localtime(self.created))
+
+
 class Group(CommonAbstractModel):
     name = models.CharField(
         max_length=100,
@@ -56,6 +83,12 @@ class Group(CommonAbstractModel):
         auto_now=True,
         verbose_name=verbose_updated)
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    contacts = models.ManyToManyField(
+        Contact,
+        blank=True,
+        related_name='contact_groups',
+        verbose_name=verbose_contacts
+    )
 
     class Meta:
         ordering = ['-updated', '-created']
@@ -76,19 +109,22 @@ class Message(CommonAbstractModel):
     template = models.ForeignKey(
         Template,
         null=True,
+        blank=True,
         verbose_name=verbose_template
     )
     group = models.ForeignKey(
         Group,
-        null=True,
+        blank=True,
         verbose_name=verbose_group
     )
     subject = models.CharField(
         max_length=100,
-        verbose_name=verbose_subject)
+        verbose_name=verbose_subject
+    )
     content = RichTextField(
         blank=True,
-        verbose_name=verbose_content)
+        verbose_name=verbose_content
+    )
 
     class Meta:
         ordering = ['-updated', '-created']
@@ -96,42 +132,3 @@ class Message(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.group, self.template, timezone.localtime(self.created))
-
-
-class Contact(CommonAbstractModel):
-    name = models.CharField(max_length=100, verbose_name=verbose_name)
-    created = models.DateTimeField(
-        default=timezone.now,
-        verbose_name=verbose_created
-    )
-    updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
-    contact_number = models.PositiveIntegerField(
-        default=0,
-        verbose_name=verbose_contactnumber
-    )
-
-    class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
-
-    def __unicode__(self):
-        return '[%s] - %s ' % (self.name, timezone.localtime(self.created))
-
-
-class ContactGroup(CommonAbstractModel):
-    contact = models.ForeignKey(
-        Contact,
-        null=True,
-        verbose_name=verbose_contact
-    )
-    group = models.ForeignKey(
-        Group,
-        null=True,
-        verbose_name=verbose_group
-    )
-
-    class Meta:
-        ordering = ['-group']
-
-    def __unicode__(self):
-        return '[%s] - %s' % (self.group, self.group)

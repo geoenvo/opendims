@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 from common.models import CommonAbstractModel
 
@@ -53,40 +55,64 @@ class AWSReport(CommonAbstractModel):
         AWSStation,
         verbose_name=verbose_awsstation
     )
-    temperature = models.PositiveIntegerField(
-        default=0,
+    temperature = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_temp
     )
     humidity = models.PositiveIntegerField(
-        default=0,
+        null=True,
+        blank=True,
         verbose_name=verbose_humid
     )
     pressure = models.PositiveIntegerField(
-        default=0,
+        null=True,
+        blank=True,
         verbose_name=verbose_pressure
     )
-    wind_speed = models.PositiveIntegerField(
-        default=0,
+    wind_speed = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_windspeed
     )
     wind_direction = models.PositiveIntegerField(
-        default=0,
+        null=True,
+        blank=True,
         verbose_name=verbose_winddir
     )
     day_rain = models.PositiveIntegerField(
-        default=0,
+        null=True,
+        blank=True,
         verbose_name=verbose_dayrain
     )
-    rain_rate = models.PositiveIntegerField(
-        default=0,
+    rain_rate = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_rainrate
     )
-    uv_index = models.PositiveIntegerField(
-        default=0,
+    uv_index = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_uvindex
     )
-    solar_radiation = models.PositiveIntegerField(
-        default=0,
+    solar_radiation = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_solarradiation
     )
 

@@ -4,6 +4,7 @@
 
 {% block title %}{{ block.super }} - {% trans "Water Gates" %}{% endblock %}
 
+
 {% block extra_css %}
 <style type="text/css">
 .SIAGA-1 {
@@ -51,7 +52,7 @@ table.table1, table.table1 tr, table.table1 td {
 </style>
 {% endblock extra_css %}
 
-{% block main %}
+{% block page_content %}
 
 <div class="col-xs-6">
     <div class="table-responsive">
@@ -162,7 +163,7 @@ table.table1, table.table1 tr, table.table1 td {
 
 <body>
 
-  <div id="chart" style="width: 900px; height: 400px;">
+  <div id="chart" style="width: 1100px; height: 400px;">
   <script>
    {% for watergate in watergate_list %}
       {% get_waterlevelreport watergate now as waterlevelreports %}

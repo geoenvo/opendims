@@ -158,8 +158,9 @@ class RTAdmin(RelatedFieldAdmin, LeafletGeoAdmin, GeolevelsAdmin):
         'name',
         'note'
     )
+    raw_id_fields = ['rw']
     search_fields = [
-        'rw__village__subdistrict__province__name',
+        'rw__village__subdistrict__city__province__name',
         'rw__village__subdistrict__city__name',
         'rw__village__subdistrict__name',
         'rw__village__name'
