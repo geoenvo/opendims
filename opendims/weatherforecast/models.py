@@ -67,11 +67,13 @@ class WeatherForecastReport(CommonAbstractModel):
     city = models.ForeignKey(
         City,
         null=True,
+        blank=True,
         verbose_name=verbose_city
     )
     province = models.ForeignKey(
         Province,
         null=True,
+        blank=True,
         verbose_name=verbose_province
     )
     temperature_min = models.PositiveIntegerField(

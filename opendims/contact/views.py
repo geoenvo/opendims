@@ -4,7 +4,6 @@ from django.conf import settings
 
 from rest_framework import generics, filters
 
-from .models import Contact
 from .forms import ContactForm
 
 
