@@ -3,14 +3,13 @@ from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
 
-from .models import Template, Group, Message, Contact, ContactGroup
+from .models import Template, Group, Message, Contact
 
 verbose_template_details = _('Template details')
 verbose_group_details = _('Group details')
 verbose_message_details = _('Message details')
 verbose_contact_details = _('Contact details')
 verbose_message_details = _('Message details')
-verbose_contactgroup_details = _('Contact Group details')
 
 
 class TemplateAdmin(admin.ModelAdmin):
@@ -36,6 +35,7 @@ class GroupAdmin(admin.ModelAdmin):
             'fields': [
                 'name',
                 'created',
+                'contacts',
                 'note'
             ]
         })
@@ -86,23 +86,7 @@ class ContactAdmin(admin.ModelAdmin):
     ]
 
 
-class ContactGroupAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_contactgroup_details, {
-            'fields': [
-                'group',
-                'contact'
-            ]
-        })
-    ]
-    list_display = [
-        'group',
-        'contact'
-    ]
-
-
 admin.site.register(Template, TemplateAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(Contact, ContactAdmin)
-admin.site.register(ContactGroup, ContactGroupAdmin)
