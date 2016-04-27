@@ -36,7 +36,7 @@ class WaterLevelSerializer(gis_serializers.GeoFeatureModelSerializer):
         date = self.context['request'].GET.get('date', None)
         if date:
             try:
-                date = datetime.datetime.strptime(date, '%Y-%m-%d')
+                date = timezone.make_aware(datetime.datetime.strptime(date, '%Y-%m-%d'))
                 reports = reports.filter(
                     created__date=date.date()
                 )

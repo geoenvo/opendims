@@ -82,7 +82,7 @@
                 </thead>
                 <tbody>
                     {% for watergate in watergate_list %}
-                    {% get_waterlevelreport watergate now as waterlevelreports %}
+                        {% get_waterlevelreport watergate now as waterlevelreports %}
                     <tr>
                         {% for waterlevelreport in waterlevelreports %}
                         <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{% if forloop.counter0 == waterlevelreport.created|date:"G"|add:"0" %}{{ waterlevelreport.height }} {{ waterlevelreport.weather }}{% else %}-{% endif %}</td>
@@ -94,6 +94,10 @@
                         <td class="text-center">-</td>
                         {% endfor %}
                         {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr>
+                       <td colspan="{{ now.hour|add:'1' }}" class="text-center">{% trans "No water gates found." %}</td>
                     </tr>
                     {% endfor  %}
                 </tbody>
