@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     'registration',
     'rest_framework',
     'rest_framework_gis',
+    'django_crontab',
+    'captcha',
+    'categories',
+    'categories.editor',
     'common',
     'reports',
     'reporting',
@@ -57,16 +61,12 @@ INSTALLED_APPS = [
     'waterlevel',
     'maps',
     'jaksafe',
-    'django_crontab',
     'contact',
-    'captcha',
     'weatherforecast',
     'smsblast',
     'automaticweathersystem',
     'earlywarning',
     'website',
-    'categories',
-    'categories.editor',
 ]
 
 MIDDLEWARE_CLASSES = [
