@@ -33,6 +33,7 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
     disaster_note = serializers.SerializerMethodField()
     created = DateTimeFieldTZ()
     updated = DateTimeFieldTZ()
+    closed = DateTimeFieldTZ()
     province_name = serializers.SerializerMethodField()
     city_name = serializers.SerializerMethodField()
     subdistrict_name = serializers.SerializerMethodField()
@@ -103,7 +104,9 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
             'created',
             'updated',
             'status',
+            'closed',
             'note',
+            'height_min',
             'height',
             'magnitude',
             'province',

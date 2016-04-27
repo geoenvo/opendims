@@ -103,8 +103,9 @@ class EventAdmin(ImportExportModelAdmin,
                 'created',
                 'disaster',
                 'status',
-                'height',
+                'closed',
                 'height_min',
+                'height',
                 'magnitude',
                 'note'
             ]
@@ -134,6 +135,7 @@ class EventAdmin(ImportExportModelAdmin,
         'village_admin_url',
         'rw_admin_url',
         'rt_admin_url',
+        'height_min',
         'height',
         'magnitude',
         'note'
@@ -380,7 +382,7 @@ class ReportAdmin(admin.ModelAdmin):
 
     def event_admin_url(self, obj):
         if not obj.event:
-            return '-'
+            return None
         return format_html(
             "<a href='{url}'>{event}</a>",
             url=obj.event.get_admin_url(),
