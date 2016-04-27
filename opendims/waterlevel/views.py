@@ -11,7 +11,7 @@ from .serializers import WaterLevelSerializer
 
 
 class WaterGateListView(generic.ListView):
-    queryset = WaterGate.objects.all().order_by('name')
+    queryset = WaterGate.objects.order_by('name')
 
     def get_context_data(self, **kwargs):
         context = super(WaterGateListView, self).get_context_data(**kwargs)
