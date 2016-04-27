@@ -1,7 +1,7 @@
 import datetime
 
 from django import template
-from django.utils import timezone
+
 from waterlevel.models import WaterLevelReport
 
 register = template.Library()

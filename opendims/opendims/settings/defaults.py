@@ -189,6 +189,7 @@ BOWER_INSTALLED_APPS = (
     'jquery-migrate#1.2.1',
     'modernizr#2.0.6',
     'weather-icons#2.0.10',
+    'plotly.js#1.10.0',
 )
 
 # App model reordering in /admin page
