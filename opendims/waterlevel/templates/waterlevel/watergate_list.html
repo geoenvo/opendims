@@ -1,201 +1,198 @@
 {% extends "waterlevel/waterlevel.html" %}
 
-{% load i18n verbose_names waterlevel_tags common_tags common_filters %}
-
-{% block title %}{{ block.super }} - {% trans "Water Gates" %}{% endblock %}
-
+{% load staticfiles i18n waterlevel_tags common_tags common_filters %}
 
 {% block extra_css %}
 <style type="text/css">
+.no-padding {
+    padding: 0;
+}
+.va-middle {
+    vertical-align: middle !important;
+}
+.table th {
+    text-align: center;
+}
+.table {
+    margin-bottom: 0;
+}
+.table.no-border td {
+    border: none;
+}
 .SIAGA-1 {
     background-color: #ff6666;
 }
-
 .SIAGA-2 {
     background-color: #ffcc00;
 }
-
 .SIAGA-3 {
     background-color: #ffff66;
 }
-
 .SIAGA-4 {
     background-color: #91ff66;
 }
-
-.floatedTable {
-    float:left;
-}
-
-.inlineTable {
-    display: inline-block;
-}
-
-table, th{
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
-}
-
-table.table1, table.table1 tr, table.table1 td {
-    border: 10px ;
-    border-collapse: collapse;
-    text-align: right;
-    
-    border-spacing: 5px;
-    padding: 0px;
-}
-
-.pull-left {
-  float: left !important;
+#chart {
+    margin-top: 0 !important;
 }
 </style>
 {% endblock extra_css %}
 
 {% block page_content %}
-
-<div class="col-xs-6">
-    <div class="table-responsive">
-    <table  class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            {% for watergate in watergate_list|slice:'1' %}
-            <th rowspan="2" >{% get_verbose_field_name watergate 'name' %}</th>
-            <th colspan="5" >BATAS SIAGA</th>
-        </tr>
-        <tr>
-            <th class="SIAGA-1">SIAGA 1</th>
-            <th class="SIAGA-2">SIAGA 2</th>
-            <th class="SIAGA-3">SIAGA 3</th>
-          </tr>
-            {% endfor %}
-    </thead>
-    
-    <tbody>
-        <tr>
-            {% for watergate in watergate_list %}
-            <td align="left"><a href="{{ watergate.get_absolute_url }}">{{ watergate.name }}</a></td>
-            <td class="SIAGA-1" align="center"> ≥{{ watergate.siaga_1_min }}</td>
-            <td class="SIAGA-2" align="center">{{ watergate.siaga_2_min }} ~ {{ watergate.siaga_2_max }}</td>
-            <td class="SIAGA-3" align="center">{{ watergate.siaga_3_min }} ~ {{ watergate.siaga_3_max }}</td>
-        </tr>
-            {% empty %}
-        <tr>
-           <td colspan="6" class="text-center">{% trans "No water gates found." %}</td>
-        </tr>
-            {% endfor %}
-    </tbody>
-    </table>
+<div class="row">
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="va-middle">{% trans "Water Gate" %}</th>
+                        <th colspan="3">{% trans "Threshold Level" %}</th>
+                    </tr>
+                    <tr>
+                      <th>Siaga III</th>
+                      <th>Siaga II</th>
+                      <th>Siaga I</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for watergate in watergate_list %}
+                    <tr>
+                        <td class="text-left"><a href="{{ watergate.get_absolute_url }}">{{ watergate.name }}</a></td>
+                        <td class="text-center SIAGA-3">{{ watergate.siaga_3_min }} ~ {{ watergate.siaga_3_max }}</td>
+                        <td class="text-center SIAGA-2">{{ watergate.siaga_2_min }} ~ {{ watergate.siaga_2_max }}</td>
+                        <td class="text-center SIAGA-1">&ge; {{ watergate.siaga_1_min }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                       <td colspan="4" class="text-center">{% trans "No water gates found." %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="table-waterlevel" class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="{{ now.hour|add:'1' }}" class="text-center">{% trans "Time" %}</th>
+                    </tr>
+                    <tr>
+                        {% for i in now.hour|add:"1"|loop %}
+                        <th class="text-center">{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for watergate in watergate_list %}
+                        {% get_waterlevelreport watergate now as waterlevelreports %}
+                    <tr>
+                        {% for waterlevelreport in waterlevelreports %}
+                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{% if forloop.counter0 == waterlevelreport.created|date:"G"|add:"0" %}{{ waterlevelreport.height }} {{ waterlevelreport.weather }}{% else %}-{% endif %}</td>
+                        {% endfor %}
+                        {% comment %}If the report count is less than the current hour slot, print the remaining empty hour slots{% endcomment %}
+                        {% if waterlevelreports.count < now.hour|add:"1" %}
+                        {% subtract now.hour|add:"1" waterlevelreports.count as diff  %}
+                        {% for i in diff|loop %}
+                        <td class="text-center">-</td>
+                        {% endfor %}
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr>
+                       <td colspan="{{ now.hour|add:'1' }}" class="text-center">{% trans "No water gates found." %}</td>
+                    </tr>
+                    {% endfor  %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-    <div class="table-responsive">
-    <table class="table table-striped table-bordered">
-    <thead>
-       <tr>
-            <th colspan="24" class="text-center">WAKTU</th>
-       </tr>
-       <tr>
-            {% for i in now.hour|add:"1"|loop %}
-            <th class="text-center">{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00</th>
-            {% endfor %}
-        </tr>
-    </thead>
-    
+<br>
+
+<table class="table no-border">
     <tbody>
-    <tr>
-        {% for watergate in watergate_list %}
-            {% get_waterlevelreport watergate now as waterlevelreports %}
-                {% for waterlevelreport in waterlevelreports %}
-                    <td class="text-center {{ waterlevelreport.get_threshold_level }}">{% if forloop.counter0 = waterlevelreport.created|date:"H"|add:"0" %} {{ waterlevelreport.height }}{{ waterlevelreport.weather }}{% else %}-{% endif %}</td>
-                {% endfor %}
-
-            {% if waterlevelreports.count < now.hour|add:"1" %}
-                {% subtract now.hour|add:"1" waterlevelreports.count as diff  %}
-                    {% for i in diff|loop %}
-                     <td class="text-center">-</td>
-                    {% endfor %}
-            {% endif %}
-     </tr>
-        {% endfor  %}
+        <tr>
+            <td class="text-center SIAGA-1"><strong>Siaga I</strong></td>
+            <td>{% trans "Disaster" %}</td>
+            <td class="text-center SIAGA-2"><strong>Siaga II</strong></td>
+            <td>{% trans "Critical" %}</td>
+            <td class="text-center SIAGA-3"><strong>Siaga III</strong></td>
+            <td>{% trans "Caution" %}</td>
+            <td class="text-center SIAGA-4"><strong>Siaga IV</strong></td>
+            <td>{% trans "Safe" %}</td>
+        </tr>
     </tbody>
-    </table>
-</div>
+</table>
 
-
-<div class="pull-left"><table  class="table1" width="500" cellspacing="0" cellpadding="4" >
+<table class="table no-border">
+    <tbody>
         <tr>
-            <td align="right" ><strong>Siaga I</strong></td>
-            <td>&nbsp;&nbsp;</td>
-            <td class="SIAGA-1">&nbsp;&nbsp;</td><td>Bencana</td>
-            <td align="right"><strong>Siaga II</strong></td>
-            <td>&nbsp;&nbsp;</td>
-            <td class="SIAGA-2">&nbsp;&nbsp;</td><td>Kritis</td>
-            <td align="right"><strong>Siaga III</strong></td>
-            <td>&nbsp;&nbsp;</td>
-            <td class="SIAGA-3">&nbsp;&nbsp;</td><td>Waspada</td>
-            <td align="right"><strong>Siaga IV</strong></td>
-            <td>&nbsp;&nbsp;</td>
-            <td class="SIAGA-4">&nbsp;&nbsp;</td><td>Aman</td>
+            <td class="text-right"><strong>T:</strong></td>
+            <td>{% trans "Clear" %}</td>
+            <td class="text-right"><strong>MT:</strong></td>
+            <td>{% trans "Slightly cloudy" %}</td>
+            <td class="text-right"><strong>M:</strong></td>
+            <td>{% trans "Cloudy" %}</td>
+            <td class="text-right"><strong>G:</strong></td>
+            <td>{% trans "Drizzle" %}</td>
+            <td class="text-right"><strong>H:</strong></td>
+            <td>{% trans "Rain" %}</td>
         </tr>
-    </table>
-	<table class="table1" width="500" cellspacing="0" cellpadding="4">
-        <tr>
-            <td align="left"><strong>T: </strong>Terang</td>
-            <td>&nbsp;</td>
-            <td align="left"><strong>MT: </strong>Mendung Tipis</td>
-            <td>&nbsp;</td>
-            <td align="left"><strong>M: </strong>Mendung</td>
-            <td>&nbsp;</td>
-            <td align="left"><strong>G: </strong>Gerimis</td>
-            <td>&nbsp;</td>
-            <td align="left"><strong>H: </strong>Hujan</td>
-        </tr>
-    </table>
+    </tbody>
+</table>
 
-<head>
-{% block extra_js_lib  %}
-  <!-- Plotly.js -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div id="chart"></div>
 {% endblock %}
-</head>
 
+{% block extra_js  %}
+<script src="{% static 'plotly.js/dist/plotly.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#table-waterlevel").scrollLeft($("#table-waterlevel table").width());
+});
 
-<body>
+var time = [{% for i in now.hour|add:"1"|loop %}'{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00',{% endfor %}]
+{% for watergate in watergate_list %}
+{% get_waterlevelreport watergate now as waterlevelreports %}
+var waterlevel_{{ watergate.pk }} = [{% for waterlevelreport in waterlevelreports %}{% if forloop.counter0 == waterlevelreport.created|date:"G"|add:"0" %}{{ waterlevelreport.height }},{% endif %}{% endfor %}{% if waterlevelreports.count < now.hour|add:"1" %}{% subtract now.hour|add:"1" waterlevelreports.count as diff  %}{% for i in diff|loop %}'',{% endfor %}{% endif %}]
+var trace_{{ watergate.pk }} = {
+    y: waterlevel_{{ watergate.pk }},
+    x: time,
+    mode: 'lines+markers',
+    name: '{{ watergate.name }}'
+};
+{% endfor %}
 
-  <div id="chart" style="width: 1100px; height: 400px;">
-  <script>
-   {% for watergate in watergate_list %}
-      {% get_waterlevelreport watergate now as waterlevelreports %}
-        var waterlevel_{{ watergate.pk }}= [{% for waterlevelreport in waterlevelreports %}{% if forloop.counter0 = waterlevelreport.created|date:"H"|add:"0" %}{{ waterlevelreport.height }},{% endif %}{% endfor %}{% if waterlevelreports.count < now.hour|add:"1" %}{% subtract now.hour|add:"1" waterlevelreports.count as diff  %}{% for i in diff|loop %}'',{% endfor %}{% endif %}]
-        var times = [{% for i in now.hour|add:"1"|loop %}'{% if forloop.counter0 < 10 %}0{% endif %}{{ forloop.counter0 }}:00',{% endfor %}]          
-            
-    var trace_{{ watergate.pk }} = {
-                                    y: waterlevel_{{ watergate.pk }},
-                                    x: times,
-                                    mode: 'lines+markers',
-                                    name: '{{ watergate.name }}'
-                                   };
- {% endfor %}
-  var data = [ {% for watergate in watergate_list %}trace_{{ watergate.pk }},{% endfor %}];  
-  var layout = {
-                title: 'Grafik Tinggi Muka Air',
-                xaxis: {
-                        title: 'WAKTU'
-                       },
-                yaxis: {
-                        title: 'KETINGGIAN (cm)'
-                       }
-                };
-Plotly.newPlot('chart', data, layout);
+var data = [{% for watergate in watergate_list %}trace_{{ watergate.pk }},{% endfor %}];
+var layout = {
+    title: '{% trans "Water Level Chart" %}',
+    xaxis: {
+        title: '{% trans "Time" %}'
+    },
+    yaxis: {
+        title: '{% trans "Height" %} (cm)'
+    },
+};
 
- </script>
- </div>
-</body>
+// Responsive chart https://plot.ly/javascript/responsive-fluid-layout/
+var d3 = Plotly.d3;
+var WIDTH_IN_PERCENT_OF_PARENT = 100,
+    HEIGHT_IN_PERCENT_OF_PARENT = 80;
+var gd3 = d3.select("div[id='chart']")
+    .style({
+        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+        'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%',
+        height: HEIGHT_IN_PERCENT_OF_PARENT + 'vh',
+        'margin-top': (100 - HEIGHT_IN_PERCENT_OF_PARENT) / 2 + 'vh'
+    });
+var chart = gd3.node();
 
+Plotly.plot(chart, data, layout);
 
-{% comment %}
-{% endcomment %}
-
-{% include 'opendims/includes/pagination.html' with page=page_obj %}
-{% endblock %}  
+window.onresize = function() {
+    Plotly.Plots.resize(chart);
+};
+</script>
+{% endblock %}

@@ -3,16 +3,26 @@
         "pk": 1,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Bendung Katulampa",
-            "point": "{ 'type': 'Point', 'coordinates': [ 106.83666, -6.63304 ] }"
+            "name": "Bendung Katulampa",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.83666, -6.63304 ] }",
+            "siaga_1_min": 200,
+            "siaga_2_max": 199,
+            "siaga_2_min": 150,
+            "siaga_3_max": 149,
+            "siaga_3_min": 80
         }
     },
     {
         "pk": 2,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Depok",
-            "point":"{ 'type': 'Point', 'coordinates': [ 106.81583, -6.42721 ] }"
+            "name": "Pos Depok",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.81583, -6.42721 ] }",
+            "siaga_1_min": 350,
+            "siaga_2_max": 349,
+            "siaga_2_min": 270,
+            "siaga_3_max": 269,
+            "siaga_3_min": 200
         }
     },
     {
@@ -20,7 +30,12 @@
         "model": "waterlevel.WaterGate",
         "fields": {
             "name": "Pintu Air Manggarai",
-            "point":"{ 'type': 'Point', 'coordinates': [ 106.848368346691, -6.2078583783917] }"
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.848368346691, -6.2078583783917] }",
+            "siaga_1_min": 950,
+            "siaga_2_max": 949,
+            "siaga_2_min": 850,
+            "siaga_3_max": 849,
+            "siaga_3_min": 750
         }
     },
     {
@@ -28,38 +43,58 @@
         "model": "waterlevel.WaterGate",
         "fields": {
             "name": "Pintu Air Karet",
-            "point":"{ 'type': 'Point', 'coordinates': [ 106.811324357986, -6.19980821099993] }"
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.811324357986, -6.19980821099993] }",
+            "siaga_1_min": 600,
+            "siaga_2_max": 599,
+            "siaga_2_min": 550,
+            "siaga_3_max": 549,
+            "siaga_3_min": 450
         }
     },
     {
         "pk": 5,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Krukut Hulu",
-            "point":"{ 'type': 'Point', 'coordinates': [ 106.79888, -6.34416 ] }"
+            "name": "Pos Krukut Hulu",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.79888, -6.34416 ] }",
+            "siaga_1_min": 300,
+            "siaga_2_max": 299,
+            "siaga_2_min": 250,
+            "siaga_3_max": 249,
+            "siaga_3_min": 150
         }
     },
     {
         "pk": 6,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Pesanggarahan",
-            "point":"{ 'type': 'Point', 'coordinates': [ 106.77221, -6.39694 ] }"
+            "name": "Pos Pesanggarahan",
+            "point":"{ 'type': 'Point', 'coordinates': [ 106.77221, -6.39694 ] }",
+            "siaga_1_min": 350,
+            "siaga_2_max": 349,
+            "siaga_2_min": 250,
+            "siaga_3_max": 249,
+            "siaga_3_min": 150
         }
     },
     {
         "pk": 7,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Angke Hulu",
-            "point": "{ 'type':'Point', 'coordinates': [ 106.69416, -6.21832 ] }"
+            "name": "Pos Angke Hulu",
+            "point": "{ 'type':'Point', 'coordinates': [ 106.69416, -6.21832 ] }",
+            "siaga_1_min": 300,
+            "siaga_2_max": 299,
+            "siaga_2_min": 250,
+            "siaga_3_max": 249,
+            "siaga_3_min": 150
         }
     },
     {
         "pk": 8,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Waduk Pluit",
+            "name": "Waduk Pluit",
             "point":"{ 'type': 'Point', 'coordinates': [ 106.79777, -6.11111 ] }"
         }
     },
@@ -67,32 +102,52 @@
         "pk": 9,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pasar Ikan",
-            "point": "{ 'type': 'Point', 'coordinates': [ 106.809339523315, -6.12685782002426] }"
+            "name": "Pasar Ikan",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.809339523315, -6.12685782002426] }",
+            "siaga_1_min": 250,
+            "siaga_2_max": 249,
+            "siaga_2_min": 200,
+            "siaga_3_max": 199,
+            "siaga_3_min": 170
         }
     },
     {
         "pk": 10,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Cipinang Hulu",
-            "point": "{ 'type': 'Point', 'coordinates': [ 106.87277, -6.33944 ] }"
+            "name": "Pos Cipinang Hulu",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.87277, -6.33944 ] }",
+            "siaga_1_min": 250,
+            "siaga_2_max": 249,
+            "siaga_2_min": 200,
+            "siaga_3_max": 199,
+            "siaga_3_min": 150
         }
     },
     {
         "pk": 11,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Sunter Hulu",
-            "point": "{ 'type': 'Point', 'coordinates': [ 106.92138, -6.31749 ] }"
+            "name": "Pos Sunter Hulu",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.92138, -6.31749 ] }",
+            "siaga_1_min": 250,
+            "siaga_2_max": 249,
+            "siaga_2_min": 200,
+            "siaga_3_max": 199,
+            "siaga_3_min": 140
         }
     },
     {
         "pk": 12,
         "model": "waterlevel.WaterGate",
         "fields": {
-            "name": "Pintu Air Pos Pulo Gadung",
-            "point": "{ 'type': 'Point', 'coordinates': [ 106.90416, -6.19055 ] }"
+            "name": "Pintu Air Pulo Gadung",
+            "point": "{ 'type': 'Point', 'coordinates': [ 106.90416, -6.19055 ] }",
+            "siaga_1_min": 770,
+            "siaga_2_max": 769,
+            "siaga_2_min": 700,
+            "siaga_3_max": 699,
+            "siaga_3_min": 550
         }
     }
 ]

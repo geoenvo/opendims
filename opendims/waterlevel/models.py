@@ -70,11 +70,11 @@ class WaterGate(CommonAbstractModel):
 
 class WaterLevelReport(CommonAbstractModel):
     WEATHER_CHOICES = (
-        ('T', _('Terang/Cerah')),
-        ('MT', _('Mendung Tipis')),
-        ('M', _('Mendung')),
-        ('G', _('Gerimis')),
-        ('H', _('Hujan')),
+        ('T', _('Clear')),
+        ('MT', _('Slightly cloudy')),
+        ('M', _('Cloudy')),
+        ('G', _('Drizzle')),
+        ('H', _('Rain')),
     )
 
     height = models.PositiveIntegerField(
@@ -113,6 +113,6 @@ class WaterLevelReport(CommonAbstractModel):
             threshold_level = 'SIAGA-3'
         elif self.height >= self.watergate.siaga_2_min and self.height <= self.watergate.siaga_2_max:
             threshold_level = 'SIAGA-2'
-        elif self.height >= self.watergate.siaga_1_min and self.height <= self.watergate.siaga_1_max:
+        elif self.height >= self.watergate.siaga_1_min:
             threshold_level = 'SIAGA-1'
         return threshold_level

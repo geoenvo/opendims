@@ -14,8 +14,8 @@ verbose_waterlevelreport_details = _('Water Level Report details')
 
 class WaterGateAdmin(LeafletGeoAdmin):
     settings_overrides = {
-            'DEFAULT_ZOOM': 13,
-        }
+        'DEFAULT_ZOOM': 13,
+    }
 
     fieldsets = [
         (verbose_watergate_details, {
@@ -31,10 +31,14 @@ class WaterGateAdmin(LeafletGeoAdmin):
     ]
     list_display = [
         'name',
+        'siaga_1_min',
         'siaga_1_max',
+        'siaga_2_min',
         'siaga_2_max',
+        'siaga_3_min',
         'siaga_3_max'
     ]
+    search_fields = ['note']
 
 
 class WaterLevelReportAdmin(admin.ModelAdmin):
@@ -58,7 +62,6 @@ class WaterLevelReportAdmin(admin.ModelAdmin):
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     list_filter = ['watergate', 'weather', 'created', 'updated']
-    search_fields = ['note']
 
 
 admin.site.register(WaterGate, WaterGateAdmin)

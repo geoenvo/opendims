@@ -45,6 +45,7 @@ verbose_disaster = _('Disaster')
 verbose_point = _('Point')
 verbose_created = _('Created')
 verbose_updated = _('Updated')
+verbose_closed = _('Closed')
 verbose_status = _('Status')
 verbose_height = _('Height')
 verbose_height_min = _('Minimum Height')
@@ -74,7 +75,11 @@ class Event(CommonAbstractModel):
         verbose_name=verbose_created
     )
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
-    closed = models.DateTimeField(null=True, blank=True)
+    closed = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_closed
+    )
     status = models.CharField(
         max_length=50,
         choices=STATUS_CHOICES,
