@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
 
+from image_cropping import ImageCroppingMixin
+
 from .models import Attachment, Post, SiteHeader
 
 
@@ -34,7 +36,7 @@ class AttachmentAdmin(admin.ModelAdmin):
     ]
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     fieldsets = [
         (verbose_post_details, {
             'fields': [
@@ -44,7 +46,9 @@ class PostAdmin(admin.ModelAdmin):
                 'categories',
                 'author_text',
                 'content',
-                ('slideshow_image', 'slideshow_enabled'),
+                'slideshow_image',
+                ('slideshow_image_crop', 'slideshow_image_thumb'),
+                'slideshow_enabled',
                 'published'
             ]
         })
