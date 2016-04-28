@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'automaticweathersystem',
     'earlywarning',
     'website',
+    'disasterrehabilitation',
 ]
 
 MIDDLEWARE_CLASSES = [
