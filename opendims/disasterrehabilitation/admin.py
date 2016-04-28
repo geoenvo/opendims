@@ -7,15 +7,16 @@ from django.utils.translation import gettext_lazy as _
 
 from import_export import forms
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
-from .models import Agency, PostAssesment, Activity, Reference, Location
+from .models import Agency, EventAssesment, Activity, Reference, Location
 from .forms import LocationForm
+
+
 verbose_province = _('Province')
 verbose_city = _('City')
 verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
-
 
 class ActivityLocationInline(admin.TabularInline):
     form = LocationForm
@@ -35,13 +36,13 @@ class ActivityLocationInline(admin.TabularInline):
     ]
     extra = 1
 
-class PostAssesmentLocationInline(admin.TabularInline):
+class EventAssesmentLocationInline(admin.TabularInline):
     form = LocationForm
     model = Location
     fieldsets = [
         ('LOCATION', {
             'fields': [
-                'postassesment',
+                'eventassesment',
                 'province',
                 'city',
                 'subdistrict',
@@ -136,8 +137,8 @@ class LocationAdmin(admin.ModelAdmin):
 
     rt_admin_url.short_description = verbose_rt
 
-class PostAssesmentAdmin(admin.ModelAdmin):
-    inlines = [PostAssesmentLocationInline]
+class EventAssesmentAdmin(admin.ModelAdmin):
+    inlines = [EventAssesmentLocationInline]
     exclude = ['rw']
     list_display = ['created', 'name','published', 'note']
     ordering = ['created']
@@ -165,7 +166,7 @@ class ActivityAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Agency, AgencyAdmin)
-admin.site.register(PostAssesment, PostAssesmentAdmin)
+admin.site.register(EventAssesment, EventAssesmentAdmin)
 admin.site.register(Reference, ReferenceAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Activity, ActivityAdmin)

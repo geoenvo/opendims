@@ -9,6 +9,7 @@ from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 from reports.models import Event
 
+
 verbose_created = _('Created')
 verbose_updated = _('Updated')
 verbose_name = _('Name')
@@ -23,7 +24,7 @@ verbose_agency = _('Agency')
 verbose_type = _('Type')
 verbose_funding = _('Funding')
 verbose_activity = _('Activity')
-verbose_postassesment = _('Post Assesment')
+verbose_eventassesment = _('Event Assesment')
 verbose_province = _('Province')
 verbose_city = _('City')
 verbose_subdistrict = _('Subdistrict')
@@ -45,7 +46,7 @@ class Agency(CommonAbstractModel):
     def __unicode__(self):
         return '%s' % self.name
 
-class PostAssesment(CommonAbstractModel):
+class EventAssesment(CommonAbstractModel):
     created = models.DateTimeField(
         default=timezone.now,
         verbose_name=verbose_created
@@ -62,7 +63,7 @@ class PostAssesment(CommonAbstractModel):
     file = models.FileField(
         null=True,
         blank=True,
-        upload_to='disasterrehabilitation/postassesment/',
+        upload_to='disasterrehabilitation/eventassesment/',
         verbose_name=verbose_file
     )
     published = models.BooleanField(
@@ -185,11 +186,11 @@ class Location(CommonAbstractModel):
         blank=True,
         verbose_name=verbose_activity
     )
-    postassesment = models.ForeignKey(
-        PostAssesment,
+    eventassesment = models.ForeignKey(
+        EventAssesment,
         null=True,
         blank=True,
-        verbose_name=verbose_postassesment
+        verbose_name=verbose_eventassesment
     )
     province = models.ForeignKey(
         Province,
