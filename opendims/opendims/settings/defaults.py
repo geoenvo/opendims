@@ -11,6 +11,8 @@ import os
 
 from django.core.urlresolvers import reverse_lazy
 
+from easy_thumbnails.conf import Settings as thumbnail_settings
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -54,6 +56,8 @@ INSTALLED_APPS = [
     'captcha',
     'categories',
     'categories.editor',
+    'easy_thumbnails',
+    'image_cropping',
     'common',
     'reports',
     'reporting',
@@ -197,7 +201,15 @@ ADMIN_REORDER = (
     ('geolevels', ('Province', 'City', 'Subdistrict', 'Village', 'RW', 'RT')),
     ('reports', ('Event', 'Report', 'Source', 'Disaster')),
     ('waterlevel', ('WaterGate', 'WaterLevelReport')),
+    ('earlywarning', ('EarlyWarningReport')),
+    ('automaticweathersystem', ('AWSStation', 'AWSReport')),
+    ('weatherforecast', ('WeatherForecastReport')),
+    ('jaksafe', ('ReportAutoSummary')),
     ('reporting', ('Report', 'Template', 'Attachment')),
+    ('smsblast', ('Message', 'Template', 'Group', 'Contact')),
+    ('categories', ('Category')),
+    ('website', ('Post', 'Attachment', 'SiteHeader')),
+    ('contact', ('Contact')),
 )
 
 SITE_NAME = 'Open-DiMS'
@@ -280,4 +292,11 @@ CRONJOBS = [
     ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job'),
     ('* 1 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job'),
 ]
+
 CAPTCHA_NOISE_FUNCTIONS = ('')
+
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_THUMB_SIZE = (300, 300)

@@ -3,7 +3,10 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
+
 from ckeditor.fields import RichTextField
+from image_cropping import ImageRatioField
+
 from common.models import CommonAbstractModel
 from common.validators import FileSizeValidator
 
@@ -15,10 +18,13 @@ verbose_content = _('Content')
 verbose_file = _('File')
 verbose_title = _('Title')
 verbose_attachment = _('Attachment')
-verbose_authortext = _('Author Text')
-verbose_slideshowimage = _('Slideshow Image')
+verbose_author_text = _('Author text')
+verbose_slideshow_image = _('Slideshow image')
+verbose_slideshow_image_crop = _('Slideshow image crop (770x400 px)')
+verbose_slideshow_image_post = _('Slideshow image post (750x390 px)')
+verbose_slideshow_image_thumb = _('Slideshow image thumb (70x70 px)')
 verbose_published = _('Published')
-verbose_slideshowenabled = _('Slideshow Enabled')
+verbose_slideshow_enabled = _('Slideshow enabled')
 verbose_image = _('Image')
 verbose_name = _('Name')
 verbose_categories = _('Categories')
@@ -36,7 +42,7 @@ class Post(CommonAbstractModel):
     )
     author_text = models.TextField(
         blank=True,
-        verbose_name=verbose_authortext)
+        verbose_name=verbose_author_text)
     title = models.CharField(
         max_length=100,
         verbose_name=verbose_title
@@ -52,21 +58,39 @@ class Post(CommonAbstractModel):
         validators=[
             FileSizeValidator(1)  # max MB
         ],
-        verbose_name=verbose_slideshowimage
+        verbose_name=verbose_slideshow_image
     )
     published = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=verbose_published
     )
     slideshow_enabled = models.BooleanField(
-        default=True,
-        verbose_name=verbose_slideshowenabled
+        default=False,
+        verbose_name=verbose_slideshow_enabled
     )
     categories = models.ManyToManyField(
         'categories.Category',
         blank=True,
         related_name='posts',
         verbose_name=verbose_categories
+    )
+    slideshow_image_crop = ImageRatioField(
+        'slideshow_image',
+        '770x400',
+        size_warning=True,
+        verbose_name=verbose_slideshow_image_crop
+    )
+    slideshow_image_post = ImageRatioField(
+        'slideshow_image',
+        '750x390',
+        size_warning=True,
+        verbose_name=verbose_slideshow_image_post
+    )
+    slideshow_image_thumb = ImageRatioField(
+        'slideshow_image',
+        '70x70',
+        size_warning=True,
+        verbose_name=verbose_slideshow_image_thumb
     )
 
     class Meta:
