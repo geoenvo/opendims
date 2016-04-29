@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 header-left">
-                <p><i class="fa fa-phone"></i> +62 21 382 2078</p>
+                <p><i class="fa fa-phone"></i> (021) 382 2078</p>
                 <p><i class="fa fa-envelope"></i> <a href="mailto:info@bpbd.jakarta.go.id">info@bpbd.jakarta.go.id</a></p>
             </div> <!-- /.header-left -->
 
@@ -21,7 +21,7 @@
             <div class="col-md-4 header-right">
                 <ul class="small-links">
                     <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{% url 'contact:index' %}">Contact</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;{% trans "Logout" %}</a></li>
                     {% endif %}

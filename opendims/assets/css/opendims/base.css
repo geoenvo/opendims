@@ -10,7 +10,6 @@
     color: #999;
 }
 
-.event-container .blog-post-inner,
-.event-container .widget-main {
-    padding: 0;
+.widget-inner h6 {
+    margin-top: 0;
 }

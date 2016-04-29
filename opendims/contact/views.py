@@ -1,19 +1,24 @@
-from django.shortcuts import render
-from django.views import generic
-from django.conf import settings
+from __future__ import unicode_literals
 
-from rest_framework import generics, filters
+from django.shortcuts import render, redirect
+from django.utils.translation import ugettext as _
+from django.contrib import messages
 
 from .forms import ContactForm
 
 
-def Contact_new(request):
+def index(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
             contact = form.save(commit=False)
             contact.save()
-            return render(request, 'contact/contact_complete.html')
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _("Message sent. Thank you for contacting us!")
+            )
+            return redirect('contact:index')
     else:
         form = ContactForm()
-    return render(request, 'contact/contact_new.html', {'form': form})
+    return render(request, 'contact/contact_index.html', {'form': form})
