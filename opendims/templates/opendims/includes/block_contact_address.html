@@ -1,0 +1,35 @@
+{% load staticfiles i18n %}
+
+<div class="widget-main">
+    <div class="widget-main-title">
+        <h4 class="widget-title">{% trans "Address" %}</h4>
+    </div>
+    <div class="widget-inner">
+        <h6>BADAN PENANGGULANGAN BENCANA DAERAH</h6>
+        <h6>PROVINSI DKI JAKARTA</h6>
+        <p>
+            Balaikota Blok F lt. 3<br>
+            Jl. Medan Merdeka Selatan no. 8-9<br>
+            Jakarta Pusat, 10110<br>
+            DKI Jakarta, Indonesia<br>
+        </p>
+        <table>
+          <tbody>
+              <tr>
+                  <th><i class="fa fa-phone" title="{% trans 'Phone' %}"></i></th>
+                  <td>&nbsp;</td>
+                  <td>021-3822078</td>
+              </tr>
+                  <th><i class="fa fa-fax" title="{% trans 'Fax' %}"></i></th>
+                  <td>&nbsp;</td>
+                  <td>021-3441355</td>
+              </tr>
+              <tr>
+                  <th><i class="fa fa-globe" title="{% trans 'Website' %}"></i></th>
+                  <td>&nbsp;</td>
+                  <td><a href="{% url 'home' %}">http://bpbd.jakarta.go.id</a></td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
