@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
@@ -154,6 +155,9 @@ class Activity(CommonAbstractModel):
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
         verbose_name_plural = 'activities'
+
+    def get_absolute_url(self):
+        return reverse('disasterrehabilitation:activity_detail', args=[self.pk])
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
