@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
@@ -38,7 +39,7 @@ class Agency(CommonAbstractModel):
         verbose_name=verbose_created
     )
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=verbose_name
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
@@ -51,12 +52,15 @@ class EventAssesment(CommonAbstractModel):
         default=timezone.now,
         verbose_name=verbose_created
     )
+    updated = models.DateTimeField(
+        auto_now=True,
+        verbose_name=verbose_updated)
     event = models.ForeignKey(
         Event,
         verbose_name=verbose_event
     )
     name = models.CharField(
-        max_length=50,
+        max_length=100,
         verbose_name=verbose_name
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
@@ -80,14 +84,15 @@ class EventAssesment(CommonAbstractModel):
 
 class Activity(CommonAbstractModel):
     TYPE_CHOICES = (
-        ('Physical', _('Physical')),
-        ('Non-Physical', _('Non-Physical')),
+        ('PHYSICAL', _('PHYSICAL')),
+        ('NON-PHYSICAL', _('NON-PHYSICAL')),
     )
     FUNDING_CHOICES = (
         ('APBN', _('APBN')),
         ('APBD', _('APBD')),
-        ('Society Funds', _('Society Funds')),
         ('CSR', _('CSR')),
+        ('PUBLIC', _('PUBLIC')),
+        ('OTHER', _('OTHER')),
     )
     created = models.DateTimeField(
         default=timezone.now,
@@ -98,6 +103,8 @@ class Activity(CommonAbstractModel):
         verbose_name=verbose_updated)
     event = models.ForeignKey(
         Event,
+        null=True,
+        blank=True,
         verbose_name=verbose_event
     )
     name = models.CharField(
@@ -107,7 +114,7 @@ class Activity(CommonAbstractModel):
     type = models.CharField(
         max_length=50,
         choices=TYPE_CHOICES,
-        default='Physical',
+        default='PHYSICAL',
         verbose_name=verbose_type
     )
     start = models.DateTimeField(
@@ -123,10 +130,11 @@ class Activity(CommonAbstractModel):
     funding = models.CharField(
         max_length=50,
         choices=FUNDING_CHOICES,
-        default='Physical',
+        default='APBD',
         verbose_name=verbose_funding
     )
     year = models.PositiveIntegerField(
+        validators=[MinValueValidator(1900), MaxValueValidator(2100)],
         verbose_name=verbose_year
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
