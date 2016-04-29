@@ -13,3 +13,7 @@
 .widget-inner h6 {
     margin-top: 0;
 }
+
+#div_id_captcha img.captcha {
+    margin-bottom: 10px;
+}
