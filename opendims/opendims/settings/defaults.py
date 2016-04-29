@@ -210,6 +210,7 @@ ADMIN_REORDER = (
     ('smsblast', ('Message', 'Template', 'Group', 'Contact')),
     ('categories', ('Category')),
     ('website', ('Post', 'Attachment', 'SiteHeader')),
+    ('disasterrehabilitation', ('Activity', 'EventAssessment', 'Location', 'Reference', 'Agency')),
     ('contact', ('Contact')),
 )
 

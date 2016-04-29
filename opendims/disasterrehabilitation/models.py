@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
-from django.core.urlresolvers import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from common.models import CommonAbstractModel
@@ -18,20 +17,21 @@ verbose_note = _('Note')
 verbose_event = _('Event')
 verbose_published = _('Published')
 verbose_file = _('File')
-verbose_start = _('Start Date')
-verbose_end = _('End Date')
+verbose_start = _('Start date')
+verbose_end = _('End date')
 verbose_year = _('Year')
 verbose_agency = _('Agency')
 verbose_type = _('Type')
 verbose_funding = _('Funding')
 verbose_activity = _('Activity')
-verbose_eventassesment = _('Event Assesment')
+verbose_eventassesment = _('Event assessment')
 verbose_province = _('Province')
 verbose_city = _('City')
 verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
+
 
 class Agency(CommonAbstractModel):
     created = models.DateTimeField(
@@ -44,17 +44,23 @@ class Agency(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'agencies'
+
     def __unicode__(self):
         return '%s' % self.name
 
-class EventAssesment(CommonAbstractModel):
+
+class EventAssessment(CommonAbstractModel):
     created = models.DateTimeField(
         default=timezone.now,
         verbose_name=verbose_created
     )
     updated = models.DateTimeField(
         auto_now=True,
-        verbose_name=verbose_updated)
+        verbose_name=verbose_updated
+    )
     event = models.ForeignKey(
         Event,
         verbose_name=verbose_event
@@ -67,7 +73,7 @@ class EventAssesment(CommonAbstractModel):
     file = models.FileField(
         null=True,
         blank=True,
-        upload_to='disasterrehabilitation/eventassesment/',
+        upload_to='disasterrehabilitation/eventassessment/',
         verbose_name=verbose_file
     )
     published = models.BooleanField(
@@ -82,6 +88,7 @@ class EventAssesment(CommonAbstractModel):
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
 
+
 class Activity(CommonAbstractModel):
     TYPE_CHOICES = (
         ('PHYSICAL', _('PHYSICAL')),
@@ -91,8 +98,8 @@ class Activity(CommonAbstractModel):
         ('APBN', _('APBN')),
         ('APBD', _('APBD')),
         ('CSR', _('CSR')),
-        ('PUBLIC', _('PUBLIC')),
-        ('OTHER', _('OTHER')),
+        ('PUBLIC', _('Public')),
+        ('OTHER', _('Other')),
     )
     created = models.DateTimeField(
         default=timezone.now,
@@ -146,9 +153,11 @@ class Activity(CommonAbstractModel):
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
+        verbose_name_plural = 'activities'
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
+
 
 class Reference(CommonAbstractModel):
     created = models.DateTimeField(
@@ -187,6 +196,7 @@ class Reference(CommonAbstractModel):
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
 
+
 class Location(CommonAbstractModel):
     activity = models.ForeignKey(
         Activity,
@@ -194,8 +204,8 @@ class Location(CommonAbstractModel):
         blank=True,
         verbose_name=verbose_activity
     )
-    eventassesment = models.ForeignKey(
-        EventAssesment,
+    eventassessment = models.ForeignKey(
+        EventAssessment,
         null=True,
         blank=True,
         verbose_name=verbose_eventassesment

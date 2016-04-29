@@ -1,13 +1,10 @@
 from __future__ import unicode_literals
 
 from django.contrib.gis import admin
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from import_export import forms
-from geolevels.models import Province, City, Subdistrict, Village, RW, RT
-from .models import Agency, EventAssesment, Activity, Reference, Location
+from .models import Agency, EventAssessment, Activity, Reference, Location
 from .forms import LocationForm
 
 
@@ -17,14 +14,17 @@ verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
+verbose_location_details = _('Location details')
+verbose_activity_details = _('Activity details')
+verbose_eventassessment_details = _('Event assessment details')
 
-class ActivityLocationInline(admin.TabularInline):
+
+class LocationInline(admin.TabularInline):
     form = LocationForm
     model = Location
     fieldsets = [
-        ('LOCATION', {
+        (verbose_location_details, {
             'fields': [
-                'activity',
                 'province',
                 'city',
                 'subdistrict',
@@ -36,40 +36,41 @@ class ActivityLocationInline(admin.TabularInline):
     ]
     extra = 1
 
-class EventAssesmentLocationInline(admin.TabularInline):
-    form = LocationForm
-    model = Location
-    fieldsets = [
-        ('LOCATION', {
-            'fields': [
-                'eventassesment',
-                'province',
-                'city',
-                'subdistrict',
-                'village',
-                'rw',
-                'rt'
-            ]
-        })
-    ]
-    extra = 1
 
 class ReferenceInline(admin.TabularInline):
     model = Reference
     extra = 1
 
+
 class AgencyAdmin(admin.ModelAdmin):
     list_display = ['created', 'name', 'note']
-    ordering = ['created']
+    ordering = ['name']
+
 
 class ReferenceAdmin(admin.ModelAdmin):
-    list_display = ['created', 'name', 'year']
+    list_display = [
+        'name',
+        'created',
+        'updated',
+        'activity',
+        'year',
+        'published'
+    ]
     ordering = ['-updated', '-created']
+
 
 class LocationAdmin(admin.ModelAdmin):
     form = LocationForm
-    list_display = ['province', 'city', 'subdistrict', 'village', 'rw', 'rt']
-    ordering = ['city']
+    list_display = [
+        'activity',
+        'eventassessment',
+        'province_admin_url',
+        'city_admin_url',
+        'subdistrict_admin_url',
+        'village_admin_url',
+        'rw_admin_url',
+        'rt_admin_url'
+    ]
 
     def province_admin_url(self, obj):
         if not obj.province:
@@ -137,21 +138,33 @@ class LocationAdmin(admin.ModelAdmin):
 
     rt_admin_url.short_description = verbose_rt
 
-class EventAssesmentAdmin(admin.ModelAdmin):
-    inlines = [EventAssesmentLocationInline]
-    exclude = ['rw']
-    list_display = ['created', 'name','published', 'note']
-    ordering = ['created']
 
-verbose_activity_details = _('ACTIVITY DETAILS')
+class EventAssessmentAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (verbose_eventassessment_details, {
+            'fields': [
+                'name',
+                'created',
+                'event',
+                'note',
+                'file',
+                'published'
+            ]
+        })
+    ]
+    inlines = [LocationInline]
+    list_display = ['name', 'created', 'updated', 'event', 'published']
+    ordering = ['-created', '-updated']
+    raw_id_fields = ['event']
+
 
 class ActivityAdmin(admin.ModelAdmin):
     fieldsets = [
         (verbose_activity_details, {
             'fields': [
+                'name',
                 'created',
                 'event',
-                'name',
                 'type',
                 ('start', 'end'),
                 ('agency', 'funding', 'year'),
@@ -160,13 +173,24 @@ class ActivityAdmin(admin.ModelAdmin):
             ]
         })
     ]
-    inlines = [ReferenceInline, ActivityLocationInline]
-    list_display = ['created', 'name', 'start', 'end', 'published', 'year']
-    ordering = ['-updated', '-created']
+    inlines = [ReferenceInline, LocationInline]
+    list_display = [
+        'name',
+        'created',
+        'updated',
+        'start',
+        'end',
+        'agency',
+        'funding',
+        'year',
+        'published'
+    ]
+    ordering = ['-created', '-updated']
+    raw_id_fields = ['event']
 
 
 admin.site.register(Agency, AgencyAdmin)
-admin.site.register(EventAssesment, EventAssesmentAdmin)
+admin.site.register(EventAssessment, EventAssessmentAdmin)
 admin.site.register(Reference, ReferenceAdmin)
 admin.site.register(Location, LocationAdmin)
 admin.site.register(Activity, ActivityAdmin)
