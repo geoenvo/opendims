@@ -32,6 +32,7 @@ from jaksafe import urls as jaksafe_urls
 from waterlevel import urls as waterlevel_urls
 from contact import urls as contact_urls
 from weatherforecast import urls as weatherforecast_urls
+from disasterrehabilitation import urls as disasterrehabilitation_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
@@ -52,6 +53,7 @@ urlpatterns = [
     url(r'^contact/', include(contact_urls, namespace='contact')),
     url(r'^captcha/', include('captcha.urls')),
     url(r'^weatherforecast/', include(weatherforecast_urls, namespace='weatherforecast')),
+    url(r'^disasterrehabilitation/', include(disasterrehabilitation_urls, namespace='disasterrehabilitation')),
 ]
 
 if settings.DEBUG:
