@@ -6,6 +6,7 @@ from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.urlresolvers import reverse
 
+
 from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 from reports.models import Event
@@ -47,7 +48,6 @@ class Agency(CommonAbstractModel):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'agency'
         verbose_name_plural = 'agencies'
 
     def __unicode__(self):
@@ -89,6 +89,9 @@ class EventAssessment(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
+
+    def get_absolute_url(self):
+        return reverse('disasterrehabilitation:eventassessment_detail', args=[self.pk])
 
 
 class Activity(CommonAbstractModel):
@@ -155,14 +158,13 @@ class Activity(CommonAbstractModel):
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
-        verbose_name = 'activity'
         verbose_name_plural = 'activities'
-
-    def get_absolute_url(self):
-        return reverse('disasterrehabilitation:activity_detail', args=[self.pk])
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
+
+    def get_absolute_url(self):
+        return reverse('disasterrehabilitation:activity_detail', args=[self.pk])
 
 
 class Reference(CommonAbstractModel):
@@ -201,6 +203,9 @@ class Reference(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
+
+    def get_absolute_url(self):
+        return reverse('disasterrehabilitation:event_detail', args=[self.pk])
 
 
 class Location(CommonAbstractModel):

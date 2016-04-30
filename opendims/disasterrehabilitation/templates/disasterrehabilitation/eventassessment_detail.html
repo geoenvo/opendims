@@ -1,0 +1,285 @@
+{% extends "disasterrehabilitation/eventassessment_list.html" %}
+
+{% load i18n leaflet_tags verbose_names %}
+
+{% block title %}{{ block.super }} - {{ eventassessment }}{% endblock %}
+
+{% block extra_css %}
+{% leaflet_css %}
+<style type="text/css">
+.tab-content > .tab-pane {
+    background-color: #fff;
+}
+</style>
+{% endblock %}
+
+{% block crumbs %}
+{{ block.super }}
+<h6 class="page-active">{{ eventassessment }}</h6>
+{% endblock %}
+
+{% block page_content_upper %}
+<div class="widget-main pull-up">
+    {% leaflet_map "leaflet_map" callback="window.leaflet_map_init" %}
+</div>
+{% endblock %}
+
+{% block page_content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#detail">{% trans "Detail" %}</a></li>
+    <li><a data-toggle="tab" href="#event">{% trans "Event" %}</a></li>
+    <li><a data-toggle="tab" href="#location">{% trans "Location" %}</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="detail" class="tab-pane fade in active">
+        <h3 class="page-header heading">{{ eventassessment }}</h3>
+
+        <table class="table table-striped table-bordered">
+            <tbody>
+                <tr>
+                    <th class="col-md-2">{% get_verbose_field_name eventassessment 'created' %}</th>
+                    <td>{{ eventassessment.created }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment 'event' %}</th>
+                    <td>{{ eventassessment.event }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment 'name' %}</th>
+                    <td>{{ eventassessment.name }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment 'published' %}</th>
+                    <td>{{ eventassessment.published }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment 'file' %}</th>
+                    <td>{{ eventassessment.file }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment 'note' %}</th>
+                    <td>{{ eventassessment.note }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="event" class="tab-pane fade in active">
+        <h3 class="page-header heading">{{ event }}</h3>
+
+        <table class="table table-striped table-bordered">
+            <tbody>
+                <tr>
+                    <th class="col-md-2">{% get_verbose_field_name eventassessment.event 'created' %}</th>
+                    <td>{{ eventassessment.event.created }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'updated' %}</th>
+                    <td>{{ eventassessment.event.updated }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'status' %}</th>
+                    <td>{{ eventassessment.event.status }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'disaster' %}</th>
+                    <td>{{ eventassessment.event.disaster.note }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'height' %}</th>
+                    <td>{{ eventassessment.event.height }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'magnitude' %}</th>
+                    <td>{{ eventassessment.event.magnitude }}</td>
+                </tr>
+
+                {% if eventassessment.event.province %}
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'province' %}</th>
+                    <td><a href="{{ event.province.get_absolute_url }}">{{ eventassessment.event.province }}</a></td>
+                </tr>
+                {% endif %}
+
+                {% if eventassessment.event.city %}
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'city' %}</th>
+                    <td><a href="{{ event.city.get_absolute_url }}">{{ eventassessment.event.city }}</a></td>
+                </tr>
+                {% endif %}
+
+                {% if eventassessment.event.subdistrict %}
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'subdistrict' %}</th>
+                    <td><a href="{{ event.subdistrict.get_absolute_url }}">{{ eventassessment.event.subdistrict }}</a></td>
+                </tr>
+                {% endif %}
+
+                {% if eventassessment.event.village %}
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'village' %}</th>
+                    <td><a href="{{ event.village.get_absolute_url }}">{{ eventassessment.event.village }}</a></td>
+                </tr>
+                {% endif %}
+
+                {% if event.rw %}
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'rw' %}</th>
+                    <td><a href="{{ event.rw.get_absolute_url }}">{{ eventassessment.event.rw }}</a></td>
+                </tr>
+                {% endif %}
+
+                {% if eventassessment.event.rt %}
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'rt' %}</th>
+                    <td><a href="{{ event.rt.get_absolute_url }}">{{ eventasssessment.event.rt }}</a></td>
+                </tr>
+                {% endif %}
+
+                <tr>
+                    <th>{% get_verbose_field_name eventassessment.event 'note' %}</th>
+                    <td>{{ eventassessment.event.note }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="locations" class="tab-pane fade">
+        <h3 class="page-header heading">{% trans "Locations" %}</h3>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    {% for location in locations|slice:'1' %}
+                    <th class="col-md-2">{% get_verbose_field_name location 'province' %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name location 'city' %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name location 'subdistrict' %}</th>
+                    <th class="col-md-1">{% get_verbose_field_name location 'village' %}</th>
+                    <th class="col-md-1">{% get_verbose_field_name location 'rw' %}</th>
+                    <th class="col-md-1">{% get_verbose_field_name location 'rt' %}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in locations %}
+                <tr>
+                    {% if location.province %}
+                    <td><a href="{% url 'geolevels:province_detail' location.province.pk %}">{{ location.province }}</td>
+                    {% endif %}
+                    {% if location.city %}
+                    <td><a href="{% url 'geolevels:city_detail' location.city.pk %}">{{ location.city }}</td>
+                    {% endif %}
+                    {% if location.subdistrict %}
+                    <td><a href="{% url 'geolevels:subdistrict_detail' location.subdistrict.pk %}">{{ location.subdistrict }}</td>
+                    {% endif %}
+                    {% if location.village %}
+                    <td><a href="{% url 'geolevels:village_detail' location.village.pk %}">{{ location.village }}</td>
+                    {% endif %}
+                    {% if location.rw %}
+                    <td><a href="{% url 'geolevels:rw_detail' location.rw.pk %}">{{ location.rw }}</td>
+                    {% endif %}
+                    {% if location.rt %}
+                    <td><a href="{% url 'geolevels:rt_detail' location.rt.pk %}">{{ location.rt }}</td>
+                    {% endif %}
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">{% trans "No locations found for this event assesment." %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+    {% block extra_js %}
+    {% leaflet_js %}
+    <script type="text/javascript">
+    // Global variables of all maps
+    var event_map,
+
+    /**
+     * Show the polygon of the affected area in the lowest defined
+     * administrative area and display a popup of the event details.
+     */
+    function leaflet_map_init(map, options) {
+        event_map = map;
+
+        {% if event.province %}
+        var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
+        {% endif %}
+
+        {% if event.city %}
+        if (typeof provinceLayer !== 'undefined') {
+            map.removeLayer(provinceLayer);
+        }
+        var cityLayer = L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
+        {% endif %}
+
+        {% if event.subdistrict %}
+        if (typeof cityLayer !== 'undefined') {
+            map.removeLayer(cityLayer);
+        }
+        var subdistrictLayer = L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
+        {% endif %}
+
+        {% if event.village %}
+        if (typeof subdistrictLayer !== 'undefined') {
+            map.removeLayer(subdistrictLayer);
+        }
+        var villageLayer = L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
+        {% endif %}
+
+        {% if event.rw %}
+        if (typeof villageLayer !== 'undefined') {
+            map.removeLayer(villageLayer);
+        }
+        var rwLayer = L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
+        {% endif %}
+
+        {% if event.rt %}
+        if (typeof rwLayer !== 'undefined') {
+            map.removeLayer(rwLayer);
+        }
+        var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
+        {% endif %}
+
+        {% if event.point %}
+        var pointLayer = L.geoJson({{ event.point.geojson|safe }}).addTo(map);
+        {% endif %}
+
+
+        if (typeof pointLayer !== 'undefined') {
+            var pointBounds = pointLayer.getBounds();
+            var pointCenter = pointBounds.getCenter();
+            map.setZoom(16);
+            map.panTo(pointCenter);
+            popupLayer = pointLayer;
+        } else if (typeof rtLayer !== 'undefined') {
+            map.fitBounds(rtLayer);
+
+        } else if (typeof rwLayer !== 'undefined') {
+            map.fitBounds(rwLayer);
+
+        } else if (typeof villageLayer !== 'undefined') {
+            map.fitBounds(villageLayer);
+
+        } else if (typeof subdistrictLayer !== 'undefined') {
+            map.fitBounds(subdistrictLayer);
+
+        } else if (typeof cityLayer !== 'undefined') {
+            map.fitBounds(cityLayer);
+
+        } else if (typeof provinceLayer !== 'undefined') {
+            map.fitBounds(provinceLayer);
+
+        }
+    }
+
+    </script>
+
+{% endblock %}
