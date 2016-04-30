@@ -1,6 +1,6 @@
 {% extends "website/website.html" %}
 
-{% load staticfiles i18n cropping %}
+{% load staticfiles i18n cropping common_tags %}
 
 {% block title %}{{ block.super }} {% if category %}- {% for category in category.get_ancestors.all %}{{ category.name }} -{% endfor %} {{ category.name }}{% endif %}{% endblock %}
 
@@ -17,7 +17,7 @@
 {% block page_content %}
 <div class="row" >
     <div class="col-md-12">
-        <h3 class="page-header heading">{% trans "Category" %}: {{ category.name }}</h3>
+        <h3 class="page-header heading">{% if gallery %}{% trans "Gallery" %}{% else %}{% trans "Category" %}{% endif %}{% if category.slug != 'gallery' %}: {{ category.name }}{% endif %}</h3>
         <div class="post-container">
             {% for post in post_list %}
             <div class="list-event-item">
@@ -26,6 +26,11 @@
                         <a href="{{ post.get_absolute_url }}" title="{{ post.title }}">
                             {% if post.slideshow_image %}
                             <img src="{% cropped_thumbnail post 'slideshow_image_list' %}" alt="{{ post.title }}">
+                            {% elif gallery and not post.slideshow_image %}
+                            {% query post.attachments.all published=True image__isnull=False file='' as images %}
+                            {% for image in images|slice:"1" %}
+                            <img src="{% cropped_thumbnail image 'image_list' %}" alt="{{ post.title }}">
+                            {% endfor %}
                             {% else %}
                             <img src="http://placehold.it/170x150" alt="{{ post.title }}">
                             {% endif %}
@@ -39,6 +44,8 @@
                     {{ post.content|striptags|truncatewords:35 }}
                 </div> <!-- /.box-content-inner -->
             </div>
+            {% empty %}
+            <div class="alert alert-info text-center">{% trans "No entries found in this category!" %}</div>
             {% endfor %}
         </div> <!-- /.post-container -->
         {% include 'opendims/includes/pagination.html' with page=page_obj %}
