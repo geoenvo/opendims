@@ -9,31 +9,45 @@ from .models import Attachment, Post, SiteHeader
 
 
 verbose_attachment_details = _('Attachment details')
+verbose_attachment_image = _('Attachment image')
 verbose_post_details = _('Post details')
-verbose_siteheader_details = _('Site Header details')
-verbose_categories = _('Categories')
+verbose_siteheader_details = _('Site header details')
+verbose_category = _('Category')
 
 
-class AttachmentInline(admin.TabularInline):
+class AttachmentInline(ImageCroppingMixin, admin.TabularInline):
     model = Attachment
-    extra = 1
+    extra = 3
 
 
-class AttachmentAdmin(admin.ModelAdmin):
+class AttachmentAdmin(ImageCroppingMixin, admin.ModelAdmin):
     fieldsets = [
         (verbose_attachment_details, {
             'fields': [
-                'name',
+                'title',
                 'created',
-                'file'
+                'published',
+                'file',
+            ]
+        }),
+        (verbose_attachment_image, {
+            'fields': [
+                'image',
+                'image_preview',
+                'image_list',
+                'image_thumb',
             ]
         })
     ]
     list_display = [
-        'name',
+        'title',
+        'post',
         'created',
-        'updated'
+        'updated',
+        'published',
     ]
+    ordering = ['-updated', '-created']
+    list_filter = ['created', 'published']
 
 
 class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
@@ -41,14 +55,16 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
         (verbose_post_details, {
             'fields': [
                 'title',
+                'slug',
                 'author',
                 'created',
-                'categories',
+                'category',
                 'author_text',
                 'content',
-                'slideshow_image',
-                ('slideshow_image_crop', 'slideshow_image_thumb'),
                 'slideshow_enabled',
+                'slideshow_image',
+                'slideshow_image_post',
+                ('slideshow_image_crop', 'slideshow_image_list', 'slideshow_image_thumb'),
                 'published'
             ]
         })
@@ -58,14 +74,15 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
         'created',
         'updated',
         'author',
-        'published',
-        'categories_list'
+        'category',
+        'slideshow_enabled',
+        'published'
     ]
-
-    def categories_list(self, obj):
-        return ", ".join([category.name for category in obj.categories.order_by('name')])
-
-    categories_list.short_description = verbose_categories
+    prepopulated_fields = {'slug': ('title',)}
+    ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'updated', 'published', 'slideshow_enabled']
+    search_fields = ['title']
     inlines = [AttachmentInline]
 
 
@@ -76,14 +93,16 @@ class SiteHeaderAdmin(admin.ModelAdmin):
                 'title',
                 'created',
                 'image',
-                'note'
+                'note',
+                'published'
             ]
         })
     ]
     list_display = [
         'title',
         'created',
-        'updated'
+        'updated',
+        'published'
     ]
 
 admin.site.register(Attachment, AttachmentAdmin)

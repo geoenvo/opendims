@@ -1,0 +1,47 @@
+{% extends "website/website.html" %}
+
+{% load staticfiles i18n cropping %}
+
+{% block title %}{{ block.super }} {% if category %}- {% for category in category.get_ancestors.all %}{{ category.name }} -{% endfor %} {{ category.name }}{% endif %}{% endblock %}
+
+{% block crumbs %}
+{{ block.super }}
+{% if category %}
+{% for category in category.get_ancestors.all %}
+<h6><a href="{% url 'website:post_list' category.slug %}">{{ category.name }}</a></h6>
+{% endfor %}
+<h6><a class="active">{{ category.name }}</a></h6>
+{% endif %}
+{% endblock %}
+
+{% block page_content %}
+<div class="row" >
+    <div class="col-md-12">
+        <h3 class="page-header heading">{% trans "Category" %}: {{ category.name }}</h3>
+        <div class="post-container">
+            {% for post in post_list %}
+            <div class="list-event-item">
+                <div class="box-content-inner clearfix">
+                    <div class="list-event-thumb">
+                        <a href="{{ post.get_absolute_url }}" title="{{ post.title }}">
+                            {% if post.slideshow_image %}
+                            <img src="{% cropped_thumbnail post 'slideshow_image_list' %}" alt="{{ post.title }}">
+                            {% else %}
+                            <img src="http://placehold.it/170x150" alt="{{ post.title }}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="list-event-header">
+                        <span class="event-date small-text"><i class="fa fa-calendar-o"></i>{{ post.created|date:"j F Y H:i" }}</span>
+                        <span class="event-place small-text"><i class="fa fa-user"></i>{% if post.author_text %}{{ post.author_text }}{% else %}{{ post.author }}{% endif %}</span>
+                    </div>
+                    <h5 class="event-title"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h5>
+                    {{ post.content|striptags|truncatewords:35 }}
+                </div> <!-- /.box-content-inner -->
+            </div>
+            {% endfor %}
+        </div> <!-- /.post-container -->
+        {% include 'opendims/includes/pagination.html' with page=page_obj %}
+    </div>
+</div>
+{% endblock %}

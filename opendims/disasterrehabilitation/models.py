@@ -47,6 +47,7 @@ class Agency(CommonAbstractModel):
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'agency'
         verbose_name_plural = 'agencies'
 
     def __unicode__(self):
@@ -154,6 +155,7 @@ class Activity(CommonAbstractModel):
     class Meta:
         ordering = ['-updated', '-created']
         get_latest_by = 'updated'
+        verbose_name = 'activity'
         verbose_name_plural = 'activities'
 
     def get_absolute_url(self):

@@ -33,6 +33,7 @@ from waterlevel import urls as waterlevel_urls
 from contact import urls as contact_urls
 from weatherforecast import urls as weatherforecast_urls
 from disasterrehabilitation import urls as disasterrehabilitation_urls
+from website import urls as website_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
@@ -54,6 +55,7 @@ urlpatterns = [
     url(r'^captcha/', include('captcha.urls')),
     url(r'^weatherforecast/', include(weatherforecast_urls, namespace='weatherforecast')),
     url(r'^disasterrehabilitation/', include(disasterrehabilitation_urls, namespace='disasterrehabilitation')),
+    url(r'^web/', include(website_urls, namespace='website')),
 ]
 
 if settings.DEBUG:
