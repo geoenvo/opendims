@@ -19,7 +19,7 @@ class PostListView(generic.ListView):
         category_tree = [category]
         if not category.is_leaf_node():
             category_tree = category.get_descendants(include_self=True)
-        queryset = Post.objects.filter(category__in=category_tree).order_by('-created')
+        queryset = Post.objects.filter(category__in=category_tree, published=True).order_by('-created')
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -27,6 +27,10 @@ class PostListView(generic.ListView):
         category_slug = self.kwargs.get('category_slug', None)
         category = get_object_or_404(Category, slug=category_slug, active=True)
         context['category'] = category
+        gallery = get_object_or_404(Category, slug='gallery', active=True)
+        gallery_subcategories = gallery.get_descendants(include_self=True)
+        if category in gallery_subcategories:
+            context['gallery'] = True
         return context
 
 
@@ -35,6 +39,11 @@ class PostDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
-        context['images'] = Attachment.objects.filter(post=self.get_object(), published=True, image__isnull=False, file='')
-        context['files'] = Attachment.objects.filter(post=self.get_object(), published=True, file__isnull=False, image='')
+        post = self.get_object()
+        gallery = get_object_or_404(Category, slug='gallery', active=True)
+        gallery_subcategories = gallery.get_descendants(include_self=True)
+        if post.category in gallery_subcategories:
+            context['gallery'] = True
+        context['images'] = Attachment.objects.filter(post=post, published=True, image__isnull=False, file='')
+        context['files'] = Attachment.objects.filter(post=post, published=True, file__isnull=False, image='')
         return context

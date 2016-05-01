@@ -111,3 +111,17 @@
 .post-container .box-content-inner {
     padding: 0;
 }
+
+.post-container .gallery.post-content {
+    margin-top: 20px;
+}
+
+.post-container .gallery .gallery-item {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.post-container .gallery .gallery-content {
+    padding: 10px;
+    background-color: #efefef;
+}

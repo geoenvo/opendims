@@ -41,9 +41,27 @@
             <i class="fa fa-user"></i>&nbsp;{% if post.author_text %}{{ post.author_text }}{% else %}{{ post.author }}{% endif %}
             </div>
             {% endif %}
+
             {{ post.content|safe }}
+
+            {% if gallery %}
+            <div class="gallery clearfix{% if post.content %} post-content{% endif %}">
+                {% for image in images %}
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <div class="gallery-thumb">
+                            <a class="fancybox" data-fancybox-group="gallery" href="{{ image.image.url }}" title="{{ image.title }}">
+                                <img src="{% cropped_thumbnail image 'image_preview' %}" alt="{{ image.title }}">
+                            </a>
+                        </div>
+                        <div class="gallery-content">{{ image.title }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <br>
-            {% if files %}
+            {% if files and not gallery %}
             <blockquote class="post-files">
                 <h5>{% trans "Files" %}</h5>
                 <ul class="link-icons">
@@ -53,7 +71,7 @@
                 </ul>
             </blockquote>
             {% endif %}
-            {% if images %}
+            {% if images and not gallery %}
             <blockquote class="post-images clearfix">
                 <h5>{% trans "Images" %}</h5>
                 {% for image in images %}
