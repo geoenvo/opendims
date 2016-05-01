@@ -1,0 +1,23 @@
+{% load staticfiles i18n website_tags %}
+
+{% if post %}
+<div class="widget-main">
+    <div class="widget-main-title">
+        <h4 class="widget-title">{% trans "More in" %} {{ post.category.name }}</h4>
+    </div>
+    <div class="widget-inner">
+        <div class="blog-categories">
+            {% get_posts_by_category post as category_posts %}
+            {% if category_posts %}
+            <ul>
+                {% for category_post in category_posts  %}
+                <li><a href="{{ category_post.get_absolute_url }}" title="{{ category_post.title }}">{{ category_post.title|truncatewords:"10" }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="text-left">{% trans "No entries found!" %}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -89,6 +89,6 @@
 {% endblock %}
 
 {% block page_sidebar %}
-{% include "opendims/includes/block_contact_location.html" %}
-{% include "opendims/includes/block_contact_address.html" %}
+{% include "opendims/includes/block_categories.html" %}
+{% include "opendims/includes/block_post_by_category.html" with post=post %}
 {% endblock %}

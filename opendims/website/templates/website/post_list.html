@@ -59,7 +59,7 @@
                         <span class="event-place small-text"><i class="fa fa-user"></i>{% if post.author_text %}{{ post.author_text }}{% else %}{{ post.author }}{% endif %}</span>
                     </div>
                     <h5 class="event-title"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h5>
-                    {{ post.content|striptags|truncatewords:35 }}
+                    {{ post.content|striptags|truncatewords:"35" }}
                 </div> <!-- /.box-content-inner -->
             </div>
             {% empty %}
@@ -69,4 +69,8 @@
         {% include 'opendims/includes/pagination.html' with page=page_obj q=q %}
     </div>
 </div>
+{% endblock %}
+
+{% block page_sidebar %}
+{% include "opendims/includes/block_categories.html" %}
 {% endblock %}

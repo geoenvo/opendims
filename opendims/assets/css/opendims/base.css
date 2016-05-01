@@ -129,3 +129,16 @@
     padding: 10px;
     background-color: #efefef;
 }
+
+/* nested category list */
+.blog-categories ul li ul {
+    padding-left: 20px;
+}
+
+.blog-categories ul li ul li ul {
+    padding-left: 20px;
+}
+
+.blog-categories ul li ul li ul li ul {
+    padding-left: 20px;
+}
