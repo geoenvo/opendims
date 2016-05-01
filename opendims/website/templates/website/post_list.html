@@ -1,8 +1,8 @@
 {% extends "website/website.html" %}
 
-{% load staticfiles i18n cropping common_tags %}
+{% load staticfiles i18n cropping crispy_forms_tags common_tags %}
 
-{% block title %}{{ block.super }} {% if category %}- {% for category in category.get_ancestors.all %}{{ category.name }} -{% endfor %} {{ category.name }}{% endif %}{% endblock %}
+{% block title %}{{ block.super }} {% if category %}- {% for category in category.get_ancestors.all %}{{ category.name }} -{% endfor %} {{ category.name }}{% elif search %}- {% trans "Search" %}{% endif %}{% if search and q %} - &quot;{{ q }}&quot;{% endif %}{% endblock %}
 
 {% block crumbs %}
 {{ block.super }}
@@ -11,13 +11,31 @@
 <h6><a href="{% url 'website:post_list' category.slug %}">{{ category.name }}</a></h6>
 {% endfor %}
 <h6><a class="active">{{ category.name }}</a></h6>
+{% elif search %}
+<h6><a class="active">{% trans "Search" %}</a></h6>
 {% endif %}
 {% endblock %}
+
+{% block page_content_upper %}
+{% if search %}
+<div class="widget-main">
+    <div class="widget-inner">
+        <div class="course-search">
+            <h3>{% trans "Search posts" %}</h3>
+            {% crispy form %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
 
 {% block page_content %}
 <div class="row" >
     <div class="col-md-12">
-        <h3 class="page-header heading">{% if gallery %}{% trans "Gallery" %}{% else %}{% trans "Category" %}{% endif %}{% if category.slug != 'gallery' %}: {{ category.name }}{% endif %}</h3>
+        <h3 class="page-header heading">
+            {% if gallery %}{% trans "Gallery" %}{% elif search %}{% trans "Search" %}{% else %}{% trans "Category" %}{% endif %}{% if search and q %}: &quot;{{ q }}&quot;{% elif category.slug != 'gallery' %}: {{ category.name }}{% endif %}
+        </h3>
         <div class="post-container">
             {% for post in post_list %}
             <div class="list-event-item">
@@ -45,10 +63,10 @@
                 </div> <!-- /.box-content-inner -->
             </div>
             {% empty %}
-            <div class="alert alert-info text-center">{% trans "No entries found in this category!" %}</div>
+            <div class="alert alert-info text-center">{% trans "No entries found!" %}</div>
             {% endfor %}
         </div> <!-- /.post-container -->
-        {% include 'opendims/includes/pagination.html' with page=page_obj %}
+        {% include 'opendims/includes/pagination.html' with page=page_obj q=q %}
     </div>
 </div>
 {% endblock %}

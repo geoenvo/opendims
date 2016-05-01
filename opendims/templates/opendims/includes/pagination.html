@@ -3,13 +3,13 @@
 <nav class="text-center">
     <ul class="pagination">
         <li{% if not page.has_previous %} class="disabled"{% endif %}>
-            <a href="{% if page.has_previous %}?page={{ page.previous_page_number }}{% else %}#{% endif %}" aria-label="{% trans 'Previous' %}">
+            <a href="{% if page.has_previous %}?{% if q %}q={{ q }}&{% endif %}page={{ page.previous_page_number }}{% else %}#{% endif %}" aria-label="{% trans 'Previous' %}">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li><a href="#">{% trans 'Page' %} {{ page.number }} {% trans 'of' %} {{ page.paginator.num_pages }}</a></li>
         <li{% if not page.has_next %} class="disabled"{% endif %}>
-            <a href="{% if page.has_next %}?page={{ page.next_page_number }}{% else %}#{% endif %}" aria-label="{% trans 'Next' %}">
+            <a href="{% if page.has_next %}?{% if q %}q={{ q }}&{% endif %}page={{ page.next_page_number }}{% else %}#{% endif %}" aria-label="{% trans 'Next' %}">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

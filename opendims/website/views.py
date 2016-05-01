@@ -5,6 +5,7 @@ from django.conf import settings
 from categories.models import Category
 
 from .models import Post, Attachment
+from .forms import PostSearchForm
 
 
 class PostListView(generic.ListView):
@@ -44,6 +45,34 @@ class PostListView(generic.ListView):
         """
         queryset = Post.objects.filter(category__in=self.category_tree, published=True).order_by('-created')
         return queryset
+
+
+class PostSearchView(generic.ListView):
+    paginate_by = settings.ITEMS_PER_PAGE
+
+    def get(self, request):
+        """
+        Search case-insensitive post title.
+        """
+        form = PostSearchForm(self.request.GET or None)
+        self.q = None
+        if form.is_valid():
+            self.q = form.cleaned_data.get('q')
+        self.object_list = self.get_queryset()
+        context = self.get_context_data(
+            object_list=self.object_list,
+            search=True,
+            form=form,
+            q=self.q
+        )
+        return self.render_to_response(context)
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(published=True).order_by('-created')
+        if self.q:
+            queryset = queryset.filter(title__icontains=self.q)
+        return queryset
+
 
 
 class PostDetailView(generic.DetailView):

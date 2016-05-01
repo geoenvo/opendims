@@ -27,8 +27,8 @@
                     {% endif %}
                 </ul>
                 <div class="search-form">
-                    <form name="search_form" method="get" action="#" class="search_form">
-                        <input type="text" name="s" placeholder="Search the site..." title="Search the site..." class="field_search">
+                    <form name="search_form" method="get" action="{% url 'website:post_search' %}" class="search_form">
+                        <input type="text" name="q" placeholder="Search the site..." title="Search the site..." class="field_search">
                     </form>
                 </div>
             </div> <!-- /.header-right -->
