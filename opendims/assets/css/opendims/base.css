@@ -1,3 +1,7 @@
+.pagination {
+    margin: 10px 0;
+}
+
 .heading {
     margin: 0 0 20px 0;
 }
@@ -105,7 +109,7 @@
 
 .post-container .list-event-item {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .post-container .box-content-inner {
@@ -124,4 +128,17 @@
 .post-container .gallery .gallery-content {
     padding: 10px;
     background-color: #efefef;
+}
+
+/* nested category list */
+.blog-categories ul li ul {
+    padding-left: 20px;
+}
+
+.blog-categories ul li ul li ul {
+    padding-left: 20px;
+}
+
+.blog-categories ul li ul li ul li ul {
+    padding-left: 20px;
 }

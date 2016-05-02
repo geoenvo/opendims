@@ -11,6 +11,11 @@ urlpatterns = [
         name='post_list'
     ),
     url(
+        r'^post/search/$',
+        views.PostSearchView.as_view(),
+        name='post_search'
+    ),
+    url(
         r'^post/(?P<pk>\d+)/(?P<slug>[-\w]+)/$',
         views.PostDetailView.as_view(),
         name='post_detail'

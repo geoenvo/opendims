@@ -1,0 +1,26 @@
+{% load staticfiles i18n category_tags %}
+
+<div class="widget-main">
+    <div class="widget-main-title">
+        <h4 class="widget-title">{% trans "Categories" %}</h4>
+    </div>
+    <div class="widget-inner">
+        <div class="blog-categories">
+            {% full_tree_for_category categories.Category as nodes %}
+            {% if nodes %}
+            <ul>
+            {% recursetree nodes %}
+                <li>
+                    <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
+                    {% if not node.is_leaf_node %}
+                        <ul class="children">
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endrecursetree %}
+          </ul>
+          {% endif %}
+        </div>
+    </div>
+</div>
