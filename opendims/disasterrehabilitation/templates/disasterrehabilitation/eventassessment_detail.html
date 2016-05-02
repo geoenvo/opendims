@@ -67,7 +67,7 @@
         </table>
     </div>
 
-    <div id="event" class="tab-pane fade in active">
+    <div id="event" class="tab-pane fade">
         <h3 class="page-header heading">{{ event }}</h3>
 
         <table class="table table-striped table-bordered">
@@ -164,11 +164,9 @@
                 </tr>
             </thead>
             <tbody>
-
-            <div class="widget-main pull-up">
-                {% leaflet_map "leaflet_locations_map" callback="window.leaflet_locations_map_init" %}
-            </div>
-
+                <div class="widget-main pull-up">
+                    {% leaflet_map "leaflet_locations_map" callback="window.leaflet_locations_map_init" %}
+                </div>
             {% for location in locations %}
                 <tr>
                     {% if location.province %}
