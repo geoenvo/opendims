@@ -55,6 +55,10 @@
                     <td>{{ event.disaster.note }}</td>
                 </tr>
                 <tr>
+                    <th>{% get_verbose_field_name event 'height_min' %}</th>
+                    <td>{{ event.height_min }}</td>
+                </tr>
+                <tr>
                     <th>{% get_verbose_field_name event 'height' %}</th>
                     <td>{{ event.height }}</td>
                 </tr>
@@ -306,6 +310,10 @@ function leaflet_map_init(map, options) {
                 <td>{{ event.disaster.note }}</td>
             </tr>
             <tr>
+                <th>{% get_verbose_field_name event 'height_min' %}</th>
+                <td>{{ event.height_min }}</td>
+            </tr>
+            <tr>
                 <th>{% get_verbose_field_name event 'height' %}</th>
                 <td>{{ event.height }}</td>
             </tr>
@@ -402,46 +410,6 @@ function leaflet_map_init(map, options) {
 function leaflet_map_evacuation_init(map, options) {
     evac_map = map;
 
-    {% if event.province %}
-    var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.city %}
-    if (typeof provinceLayer !== 'undefined') {
-        map.removeLayer(provinceLayer);
-    }
-    var cityLayer = L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.subdistrict %}
-    if (typeof cityLayer !== 'undefined') {
-        map.removeLayer(cityLayer);
-    }
-    var subdistrictLayer = L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.village %}
-    if (typeof subdistrictLayer !== 'undefined') {
-        map.removeLayer(subdistrictLayer);
-    }
-    var villageLayer = L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.rw %}
-    if (typeof villageLayer !== 'undefined') {
-        map.removeLayer(villageLayer);
-    }
-    var rwLayer = L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.rt %}
-    if (typeof rwLayer !== 'undefined') {
-        map.removeLayer(rwLayer);
-    }
-    var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    /* looping through event impact to get evac_point */
     {% for eventimpact in eventimpacts %}
     var popupContent = `
     <table class="table table-striped table-bordered">
@@ -451,11 +419,11 @@ function leaflet_map_evacuation_init(map, options) {
                 <td>{{ eventimpact.evac_total }}</td>
             </tr>
             <tr>
-                <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
-                <td>{{ eventimpact.affected_death }}</td>
+                <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+                <td>{{ eventimpact.affected_total }}</td>
             </tr>
             <tr>
-                <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+                <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
                 <td>{{ eventimpact.affected_death }}</td>
             </tr>
             <tr>
@@ -473,8 +441,57 @@ function leaflet_map_evacuation_init(map, options) {
         </tbody>
     </table>
     `;
+
+
+    {% if eventimpact.province %}
+    var provinceLayer = L.geoJson({{ eventimpact.province.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = provinceLayer;
+    {% endif %}
+
+    {% if eventimpact.city %}
+    if (typeof provinceLayer !== 'undefined') {
+        map.removeLayer(provinceLayer);
+    }
+    var cityLayer = L.geoJson({{ eventimpact.city.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = cityLayer;
+    {% endif %}
+
+    {% if eventimpact.subdistrict %}
+    if (typeof cityLayer !== 'undefined') {
+        map.removeLayer(cityLayer);
+    }
+    var subdistrictLayer = L.geoJson({{ eventimpact.subdistrict.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = subdistrictLayer;
+    {% endif %}
+
+    {% if eventimpact.village %}
+    if (typeof subdistrictLayer !== 'undefined') {
+        map.removeLayer(subdistrictLayer);
+    }
+    var villageLayer = L.geoJson({{ eventimpact.village.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = villageLayer;
+    {% endif %}
+
+    {% if eventimpact.rw %}
+    if (typeof villageLayer !== 'undefined') {
+        map.removeLayer(villageLayer);
+    }
+    var rwLayer = L.geoJson({{ eventimpact.rw.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = rwLayer;
+    {% endif %}
+
+    {% if eventimpact.rt %}
+    if (typeof rwLayer !== 'undefined') {
+        map.removeLayer(rwLayer);
+    }
+    var rtLayer = L.geoJson({{ eventimpact.rt.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = rtLayer;
+    {% endif %}
+
+    {% if eventimpact.evac_point %}
     var evacPointLayer = L.geoJson({{ eventimpact.evac_point.geojson|safe }}).addTo(map);
     var popupLayer = evacPointLayer;
+    {% endif %}
     popupLayer.bindPopup(popupContent);
     {% endfor %}
 }
