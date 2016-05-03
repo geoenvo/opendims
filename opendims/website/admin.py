@@ -27,7 +27,7 @@ class AttachmentAdmin(ImageCroppingMixin, admin.ModelAdmin):
                 'title',
                 'created',
                 'published',
-                'file',
+                'file'
             ]
         }),
         (verbose_attachment_image, {
@@ -35,7 +35,7 @@ class AttachmentAdmin(ImageCroppingMixin, admin.ModelAdmin):
                 'image',
                 'image_preview',
                 'image_list',
-                'image_thumb',
+                'image_thumb'
             ]
         })
     ]
@@ -44,7 +44,7 @@ class AttachmentAdmin(ImageCroppingMixin, admin.ModelAdmin):
         'post',
         'created',
         'updated',
-        'published',
+        'published'
     ]
     ordering = ['-updated', '-created']
     list_filter = ['created', 'published']

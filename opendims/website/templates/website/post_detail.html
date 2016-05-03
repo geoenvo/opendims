@@ -50,11 +50,11 @@
                 <div class="col-md-4">
                     <div class="gallery-item">
                         <div class="gallery-thumb">
-                            <a class="fancybox" data-fancybox-group="gallery" href="{{ image.image.url }}" title="{{ image.title }}">
-                                <img src="{% cropped_thumbnail image 'image_preview' %}" alt="{{ image.title }}">
+                            <a class="fancybox" data-fancybox-group="gallery" href="{{ image.image.url }}" title="{% if image.title %}{{ image.title }}{% else %}{{ image.image|filename }}{% endif %}">
+                                <img src="{% cropped_thumbnail image 'image_preview' %}" alt="{% if image.title %}{{ image.title }}{% else %}{{ image.image|filename }}{% endif %}">
                             </a>
                         </div>
-                        <div class="gallery-content">{{ image.title }}</div>
+                        <div class="gallery-content">{% if image.title %}{{ image.title }}{% else %}{{ image.image|filename }}{% endif %}</div>
                     </div>
                 </div>
                 {% endfor %}
@@ -76,8 +76,8 @@
                 <h5>{% trans "Images" %}</h5>
                 {% for image in images %}
                 <div class="thumb-small-gallery">
-                    <a class="fancybox" data-fancybox-group="gallery-post" href="{{ image.image.url }}" title="{{ image.title }}">
-                        <img src="{% cropped_thumbnail image 'image_thumb' %}" alt="{{ image.title }}">
+                    <a class="fancybox" data-fancybox-group="gallery-post" href="{{ image.image.url }}" title="{% if image.title %}{{ image.title }}{% else %}{{ image.image|filename }}{% endif %}">
+                        <img src="{% cropped_thumbnail image 'image_thumb' %}" alt="{% if image.title %}{{ image.title }}{% else %}{{ image.image|filename }}{% endif %}">
                     </a>
                 </div>
                 {% endfor %}
