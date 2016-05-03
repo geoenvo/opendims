@@ -12,6 +12,7 @@ from django.template.response import TemplateResponse
 
 from import_export import forms
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
+from image_cropping import ImageCroppingMixin
 
 from common.admin import LeafletGeoAdminMixin
 from .models import Source, Disaster, Event, Report, EventImage, EventImpact
@@ -54,7 +55,7 @@ class ReportInline(admin.TabularInline):
     extra = 1
 
 
-class EventImageInline(admin.TabularInline):
+class EventImageInline(ImageCroppingMixin, admin.TabularInline):
     model = EventImage
     extra = 1
 
@@ -293,12 +294,23 @@ verbose_report_details = _('Report details')
 verbose_event = _('Event')
 
 
-class EventImageAdmin(admin.ModelAdmin):
+class EventImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    fields = (
+        'event',
+        'title',
+        'order',
+        'image',
+        ('image_preview', 'image_thumb'),
+        'published'
+    )
     list_display = [
+        'event',
+        'title',
         'order',
         'image',
         'published'
     ]
+    raw_id_fields = ['event']
 
 
 verbose_impact_data = _('Impact data')
