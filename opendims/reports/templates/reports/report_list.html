@@ -29,8 +29,8 @@
         {% for report in report_list %}
         <tr>
             <td><a href="{{ report.get_absolute_url }}">{{ report.event }}</a></td>
-            <td>{{ report.created }}</td>
-            <td>{{ report.updated }}</td>
+            <td>{{ report.created|date:"j F Y H:i" }}</td>
+            <td>{{ report.updated|date:"j F Y H:i" }}</td>
             <td>{{ report.source }}</td>
             <td>{{ report.status }}</td>
             <td>{{ report.note }}</td>

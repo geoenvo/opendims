@@ -19,6 +19,7 @@
             <th class="col-md-2">{% get_verbose_field_name event 'disaster' %}</th>
             <th class="col-md-2">{% get_verbose_field_name event 'created' %}</th>
             <th class="col-md-2">{% get_verbose_field_name event 'updated' %}</th>
+            <th class="col-md-1">{% get_verbose_field_name event 'height_min' %}</th>
             <th class="col-md-1">{% get_verbose_field_name event 'height' %}</th>
             <th class="col-md-1">{% get_verbose_field_name event 'magnitude' %}</th>
             <th>{% get_verbose_field_name event 'note' %}</th>
@@ -29,8 +30,9 @@
         {% for event in event_list %}
         <tr>
             <td><a href="{{ event.get_absolute_url }}">{{ event.disaster }}</a></td>
-            <td>{{ event.created }}</td>
-            <td>{{ event.updated }}</td>
+            <td>{{ event.created|date:"j F Y H:i" }}</td>
+            <td>{{ event.updated|date:"j F Y H:i" }}</td>
+            <td>{{ event.height_min }}</td>
             <td>{{ event.height }}</td>
             <td>{{ event.magnitude }}</td>
             <td>{{ event.note }}</td>
