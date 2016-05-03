@@ -27,7 +27,7 @@ class Source(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     def __unicode__(self):
-        return '%s' % self.code
+        return '%s' % self.note
 
 
 class Disaster(CommonAbstractModel):
@@ -39,7 +39,7 @@ class Disaster(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     def __unicode__(self):
-        return '%s' % self.code
+        return '%s' % self.note
 
 
 verbose_disaster = _('Disaster')
@@ -133,14 +133,14 @@ class Event(CommonAbstractModel):
     rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def get_absolute_url(self):
         return reverse('reports:event_detail', args=[self.pk])
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
+        return '[%s] - %s' % (self.disaster, timezone.localtime(self.created).strftime('%Y-%m-%d %H:%M:%S %Z'))
 
 
 verbose_event = _('Event')
@@ -174,8 +174,8 @@ class Report(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def get_absolute_url(self):
         return reverse('reports:report_detail', args=[self.pk])
@@ -326,6 +326,7 @@ class EventImpact(CommonAbstractModel):
 
     class Meta:
         ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.event, self.note)

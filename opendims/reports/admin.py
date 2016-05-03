@@ -146,11 +146,13 @@ class EventAdmin(ImportExportModelAdmin,
     date_hierarchy = 'created'
     list_filter = ['disaster', 'status', 'created', 'updated']
     search_fields = [
+        'status',
+        'note',
+        'disaster__note',
         'province__name',
         'city__name',
         'subdistrict__name',
-        'village__name',
-        'note'
+        'village__name'
     ]
     actions = [set_active, set_inactive]
     inlines = [ReportInline, EventImageInline, EventImpactInline]
@@ -310,6 +312,8 @@ class EventImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
         'image',
         'published'
     ]
+    list_filter = ['published', 'event__disaster__note']
+    search_fields = ['title', 'event__disaster__note']
     raw_id_fields = ['event']
 
 
@@ -363,6 +367,17 @@ class EventImpactAdmin(LeafletGeoAdmin):
         'loss_total',
         'note'
     ]
+    list_filter = ['event__disaster__note']
+    search_fields = [
+        'rt_text',
+        'note',
+        'event__disaster__note',
+        'province__name',
+        'city__name',
+        'subdistrict__name',
+        'village__name'
+    ]
+    raw_id_fields = ['event']
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -388,8 +403,10 @@ class ReportAdmin(admin.ModelAdmin):
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
     list_filter = ['created', 'updated', 'source', 'status']
-    search_fields = ['note']
+    search_fields = ['status', 'note', 'source__note']
+    raw_id_fields = ['event']
     actions = [set_verified, set_unverified]
 
     def event_admin_url(self, obj):
