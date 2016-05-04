@@ -1,0 +1,67 @@
+{% load staticfiles i18n cropping weatherforecast_tags %}
+
+<div class="widget-main">
+    <div class="widget-main-title">
+        <h4 class="widget-title">Weather Forecast</h4>
+    </div> <!-- /.widget-main-title -->
+    <div class="widget-inner">
+        <div class="event-small-list clearfix">
+            <div class="calendar-small">
+                <span class="s-month">Apr</span>
+                <span class="s-date">24</span>
+            </div>
+
+            <div class="event-small-details">
+            {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
+                {% for weatherforecastreport_dki in weatherforecastreport_dki %}
+                <h3 class="widget-title text-right">{{ weatherforecastreport_dki.created.date }}</h3>
+                <h5 class="event-small-title text-right">JAKARTA</h5>
+                <h3 class="widget-title text-right">{{ weatherforecastreport_dki.forecast }}</h3>
+                <p class="event-small-meta small-text text-right">Temp : {{ weatherforecastreport_dki.temperature_min }} - {{ weatherforecastreport_dki.temperature_max }} °C</p>
+                <p class="event-small-meta small-text text-right">RH : {{ weatherforecastreport_dki.humidity_min }} - {{ weatherforecastreport_dki.humidity_max }} %</p>
+                <h5 class="event-small-title text-right"><a href="{{ weatherforecastreport.get_absolute_url }}"> >Selengkapnya </a></h5>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="event-small-list clearfix">
+            <div class="event-small-details">
+            {% get_latest_weatherforecastreport_by_city 3171 as weatherforecastreport %}
+                {% for weatherforecastreport in weatherforecastreport %}
+                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="event-small-list clearfix">
+            <div class="event-small-details">
+            {% get_latest_weatherforecastreport_by_city 3172 as weatherforecastreport %}
+                {% for weatherforecastreport in weatherforecastreport %}
+                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
+                {% endfor %}
+            </div>
+        </div>
+         <div class="event-small-list clearfix">
+            <div class="event-small-details">
+            {% get_latest_weatherforecastreport_by_city 3173 as weatherforecastreport %}
+                {% for weatherforecastreport in weatherforecastreport %}
+                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="event-small-list clearfix">
+            <div class="event-small-details">
+            {% get_latest_weatherforecastreport_by_city 3174 as weatherforecastreport %}
+                {% for weatherforecastreport in weatherforecastreport %}
+                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="event-small-list clearfix">
+            <div class="event-small-details">
+            {% get_latest_weatherforecastreport_by_city 3175 as weatherforecastreport %}
+                {% for weatherforecastreport in weatherforecastreport %}
+                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
+                {% endfor %}
+            </div>
+        </div>
+    </div> <!-- /.widget-inner -->
+</div> <!-- /.widget-main -->

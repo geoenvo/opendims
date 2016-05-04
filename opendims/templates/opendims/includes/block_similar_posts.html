@@ -1,16 +1,16 @@
 {% load staticfiles i18n website_tags %}
 
 {% if post %}
+{% get_similar_posts post as category_posts %}
 <div class="widget-main">
     <div class="widget-main-title">
         <h4 class="widget-title">{% trans "More in" %} {{ post.category.name }}</h4>
     </div>
     <div class="widget-inner">
         <div class="blog-categories">
-            {% get_posts_by_category post as category_posts %}
             {% if category_posts %}
             <ul>
-                {% for category_post in category_posts  %}
+                {% for category_post in category_posts|slice:"10" %}
                 <li><a href="{{ category_post.get_absolute_url }}" title="{{ category_post.title }}">{{ category_post.title|truncatewords:"10" }}</a></li>
                 {% endfor %}
             </ul>
@@ -18,6 +18,11 @@
             <div class="text-left">{% trans "No entries found!" %}</div>
             {% endif %}
         </div>
-    </div>
-</div>
+    </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'website:post_list' post.category.slug %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
+</div> <!-- /.widget-main -->
 {% endif %}

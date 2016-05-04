@@ -6,11 +6,13 @@ from django.contrib.gis.db import models
 from ckeditor.fields import RichTextField
 from common.models import CommonAbstractModel
 
+
+verbose_title = _('Title')
 verbose_created = _('Created')
 verbose_updated = _('Updated')
-verbose_note = _('Note')
 verbose_content = _('Content')
-verbose_title = _('Title')
+verbose_note = _('Note')
+verbose_published = _('Published')
 
 
 class EarlyWarningReport(CommonAbstractModel):
@@ -30,10 +32,14 @@ class EarlyWarningReport(CommonAbstractModel):
         verbose_name=verbose_content
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+    published = models.BooleanField(
+        default=False,
+        verbose_name=verbose_published
+    )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.title, timezone.localtime(self.created))

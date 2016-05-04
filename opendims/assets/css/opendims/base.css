@@ -18,6 +18,14 @@
     margin-top: 0;
 }
 
+.widget-footer {
+    padding: 0 20px 20px 20px;
+}
+
+.more-link {
+    text-align: right;
+}
+
 /* link icons */
 .link-icons a:before {
     clear: both;

@@ -1,28 +1,28 @@
 from __future__ import unicode_literals
 
-from django.utils.translation import gettext_lazy as _
-from django.contrib.gis import admin
+from django.contrib import admin
 
 from .models import EarlyWarningReport
 
-verbose_earlywarningreport_details = _('Early Warning Report details')
-
 
 class EarlyWarningReportAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_earlywarningreport_details, {
-            'fields': [
-                'title',
-                'created',
-                'content',
-                'note'
-            ]
-        })
-    ]
+    fields = (
+        'title',
+        'created',
+        'content',
+        'note',
+        'published'
+    )
     list_display = [
         'title',
         'created',
-        'updated'
+        'updated',
+        'published'
     ]
+    readonly_fields = ['updated']
+    ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'updated', 'published']
+    search_fields = ['title', 'note']
 
 admin.site.register(EarlyWarningReport, EarlyWarningReportAdmin)

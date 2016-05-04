@@ -20,7 +20,7 @@
         <img src="{% cropped_thumbnail post 'slideshow_image_post' %}" title="{{ post.title }}">
         <div class="blog-post-meta">
             <ul>
-                <li><i class="fa fa-calendar-o"></i>{{ post.created|date:"j F Y H:i" }}</li>
+                <li><i class="fa fa-calendar-o"></i>{{ post.created|date:"j F Y H:i T" }}</li>
                 <li><i class="fa fa-user"></i>{% if post.author_text %}{{ post.author_text }}{% else %}{{ post.author }}{% endif %}</li>
             </ul>
         </div>
@@ -36,7 +36,7 @@
         <div class="post-container">
             {% if not post.slideshow_image %}
             <div class="post-meta">
-            <i class="fa fa-calendar-o"></i>&nbsp;{{ post.created|date:"j F Y H:i" }}
+            <i class="fa fa-calendar-o"></i>&nbsp;{{ post.created|date:"j F Y H:i T" }}
             &nbsp;
             <i class="fa fa-user"></i>&nbsp;{% if post.author_text %}{{ post.author_text }}{% else %}{{ post.author }}{% endif %}
             </div>
@@ -90,5 +90,5 @@
 
 {% block page_sidebar %}
 {% include "opendims/includes/block_categories.html" %}
-{% include "opendims/includes/block_post_by_category.html" with post=post %}
+{% include "opendims/includes/block_similar_posts.html" with post=post %}
 {% endblock %}

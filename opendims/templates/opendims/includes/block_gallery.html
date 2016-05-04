@@ -1,19 +1,34 @@
-{% load staticfiles i18n verbose_names website_tags cropping %}
+{% load staticfiles i18n cropping website_tags common_tags %}
+
+{% get_posts_by_category 'gallery' as posts %}
 
 <div class="widget-main">
-{% get_latest_category_post 'Gallery' as posts %} 
     <div class="widget-main-title">
-        <h4 class="widget-title">Gallery</h4>
+        <h4 class="widget-title">{% trans "Gallery" %}</h4>
     </div>
     <div class="widget-inner">
         <div class="gallery-small-thumbs clearfix">
-         {% for post in posts %}
+            {% for post in posts|slice:"8" %}
             <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="{% cropped_thumbnail post "slideshow_image_crop" %}" title="{{ post.title }}">
-                    <img src="{% cropped_thumbnail post "slideshow_image_thumb" %}">
+                <a href="{{ post.get_absolute_url }}" title="{{ post.title }}">
+                    {% if post.slideshow_image %}
+                    <img src="{% cropped_thumbnail post "slideshow_image_thumb" %}" alt="{{ post.title }}">
+                    {% else %}
+                    {% query post.attachments.all published=True image__isnull=False file='' as images %}
+                    {% for image in images|slice:"1" %}
+                    <img src="{% cropped_thumbnail image 'image_thumb' %}" alt="{{ post.title }}">
+                    {% empty %}
+                    <img src="{% static 'img/opendims/default-thumb.jpg' %}" alt="{{ post.title }}">
+                    {% endfor %}
+                    {% endif %}
                 </a>
             </div>
-        {% endfor %}  
-        </div> <!-- /.galler-small-thumbs -->
+            {% endfor %}
+        </div> <!-- /.gallery-small-thumbs -->
     </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'website:post_list' 'gallery' %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
 </div> <!-- /.widget-main -->
