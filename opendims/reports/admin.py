@@ -12,6 +12,7 @@ from django.template.response import TemplateResponse
 
 from import_export import forms
 from import_export.admin import ImportExportModelAdmin, ExportActionModelAdmin
+from image_cropping import ImageCroppingMixin
 
 from common.admin import LeafletGeoAdminMixin
 from .models import Source, Disaster, Event, Report, EventImage, EventImpact
@@ -54,7 +55,7 @@ class ReportInline(admin.TabularInline):
     extra = 1
 
 
-class EventImageInline(admin.TabularInline):
+class EventImageInline(ImageCroppingMixin, admin.TabularInline):
     model = EventImage
     extra = 1
 
@@ -145,11 +146,13 @@ class EventAdmin(ImportExportModelAdmin,
     date_hierarchy = 'created'
     list_filter = ['disaster', 'status', 'created', 'updated']
     search_fields = [
+        'status',
+        'note',
+        'disaster__note',
         'province__name',
         'city__name',
         'subdistrict__name',
-        'village__name',
-        'note'
+        'village__name'
     ]
     actions = [set_active, set_inactive]
     inlines = [ReportInline, EventImageInline, EventImpactInline]
@@ -293,12 +296,25 @@ verbose_report_details = _('Report details')
 verbose_event = _('Event')
 
 
-class EventImageAdmin(admin.ModelAdmin):
+class EventImageAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    fields = (
+        'event',
+        'title',
+        'order',
+        'image',
+        ('image_preview', 'image_thumb'),
+        'published'
+    )
     list_display = [
+        'event',
+        'title',
         'order',
         'image',
         'published'
     ]
+    list_filter = ['published', 'event__disaster__note']
+    search_fields = ['title', 'event__disaster__note']
+    raw_id_fields = ['event']
 
 
 verbose_impact_data = _('Impact data')
@@ -351,6 +367,17 @@ class EventImpactAdmin(LeafletGeoAdmin):
         'loss_total',
         'note'
     ]
+    list_filter = ['event__disaster__note']
+    search_fields = [
+        'rt_text',
+        'note',
+        'event__disaster__note',
+        'province__name',
+        'city__name',
+        'subdistrict__name',
+        'village__name'
+    ]
+    raw_id_fields = ['event']
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -376,8 +403,10 @@ class ReportAdmin(admin.ModelAdmin):
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
     list_filter = ['created', 'updated', 'source', 'status']
-    search_fields = ['note']
+    search_fields = ['status', 'note', 'source__note']
+    raw_id_fields = ['event']
     actions = [set_verified, set_unverified]
 
     def event_admin_url(self, obj):

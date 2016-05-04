@@ -1,36 +1,33 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n verbose_names website_tags cropping %}
 
 <div class="widget-main">
+{% get_latest_category_post 'E-Library' as posts %} 
     <div class="widget-main-title">
         <h4 class="widget-title">E-Library</h4>
     </div>
     <div class="widget-inner">
+        {% for post in posts %}
+        {% if post.slideshow_image %}
         <div class="prof-list-item clearfix">
-           <div class="prof-thumb">
-                <img src="http://placehold.it/75x75" alt="">
+            <div class="prof-thumb">
+                <img src="{% cropped_thumbnail post "slideshow_image_thumb" %}">
             </div> <!-- /.prof-thumb -->
             <div class="prof-details">
-                <h5 class="prof-name-list">What to do in an Earthquake</h5>
-                <p class="small-text">Sed ut lectus ac lacus molestie posuere non tincidunt arcu.</p>
+                <h5 class="prof-name-list">{{ post.title }}</h5>
+                <p class="small-text">{{ post.content|striptags|truncatewords:35 }}</p>
             </div> <!-- /.prof-details -->
         </div> <!-- /.prof-list-item -->
+        {% else %}
         <div class="prof-list-item clearfix">
-           <div class="prof-thumb">
-                <img src="http://placehold.it/75x75" alt="">
+            <div class="prof-thumb">
+                <img src="{% static 'img/opendims/default-thumb.jpg' %}">
             </div> <!-- /.prof-thumb -->
             <div class="prof-details">
-                <h5 class="prof-name-list">What to do in an Earthquake</h5>
-                <p class="small-text">Nullam sollicitudin libero ut ullamcorper pretium.</p>
+                <h5 class="prof-name-list">{{ post.title }}</h5>
+                <p class="small-text">{{ post.content|striptags|truncatewords:35 }}</p>
             </div> <!-- /.prof-details -->
-        </div> <!-- /.prof-list-item -->
-        <div class="prof-list-item clearfix">
-           <div class="prof-thumb">
-                <img src="http://placehold.it/75x75" alt="">
-            </div> <!-- /.prof-thumb -->
-            <div class="prof-details">
-                <h5 class="prof-name-list">What to do in an Earthquake</h5>
-                <p class="small-text">Integer et nisl tincidunt, euismod orci eget, posuere nunc.</p>
-            </div> <!-- /.prof-details -->
-        </div> <!-- /.prof-list-item -->
+        </div> <!-- /.prof-list-item -->       
+        {% endif %}
+        {% endfor %}    
     </div> <!-- /.widget-inner -->
 </div> <!-- /.widget-main -->

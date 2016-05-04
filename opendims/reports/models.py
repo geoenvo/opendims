@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 from decimal import Decimal
 
 from django.utils import timezone
@@ -7,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
+
+from image_cropping import ImageRatioField
 
 from common.models import CommonAbstractModel
 from common.validators import FileSizeValidator
@@ -26,7 +27,7 @@ class Source(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     def __unicode__(self):
-        return '%s' % self.code
+        return '%s' % self.note
 
 
 class Disaster(CommonAbstractModel):
@@ -38,7 +39,7 @@ class Disaster(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     def __unicode__(self):
-        return '%s' % self.code
+        return '%s' % self.note
 
 
 verbose_disaster = _('Disaster')
@@ -48,7 +49,7 @@ verbose_updated = _('Updated')
 verbose_closed = _('Closed')
 verbose_status = _('Status')
 verbose_height = _('Height')
-verbose_height_min = _('Minimum Height')
+verbose_height_min = _('Minimum height')
 verbose_magnitude = _('Magnitude')
 verbose_province = _('Province')
 verbose_city = _('City')
@@ -132,14 +133,14 @@ class Event(CommonAbstractModel):
     rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def get_absolute_url(self):
         return reverse('reports:event_detail', args=[self.pk])
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.disaster, timezone.localtime(self.created))
+        return '[%s] - %s' % (self.disaster, timezone.localtime(self.created).strftime('%Y-%m-%d %H:%M:%S %Z'))
 
 
 verbose_event = _('Event')
@@ -173,8 +174,8 @@ class Report(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def get_absolute_url(self):
         return reverse('reports:report_detail', args=[self.pk])
@@ -186,6 +187,9 @@ class Report(CommonAbstractModel):
 verbose_image = _('Image')
 verbose_order = _('Order')
 verbose_published = _('Published')
+verbose_image_preview = _('Image preview (260x180 px)')
+verbose_image_thumb = _('Image thumb (70x70 px)')
+verbose_title = _('Title')
 
 
 class EventImage(CommonAbstractModel):
@@ -195,6 +199,11 @@ class EventImage(CommonAbstractModel):
         Event,
         related_name='eventimages',
         verbose_name=verbose_event
+    )
+    title = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=verbose_title
     )
     order = models.PositiveIntegerField(
         choices=ORDER_CHOICES,
@@ -210,6 +219,18 @@ class EventImage(CommonAbstractModel):
         ],
         verbose_name=verbose_image
     )
+    image_preview = ImageRatioField(
+        'image',
+        '260x180',
+        size_warning=True,
+        verbose_name=verbose_image_preview
+    )
+    image_thumb = ImageRatioField(
+        'image',
+        '70x70',
+        size_warning=True,
+        verbose_name=verbose_image_thumb
+    )
     published = models.BooleanField(
         default=True,
         verbose_name=verbose_published
@@ -217,6 +238,10 @@ class EventImage(CommonAbstractModel):
 
     class Meta:
         ordering = ['-pk']
+        get_latest_by = 'pk'
+
+    def __unicode__(self):
+        return '[%s] -  %s' % (self.event, self.title)
 
 
 verbose_rt_text = _('RT text')
@@ -301,6 +326,7 @@ class EventImpact(CommonAbstractModel):
 
     class Meta:
         ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.event, self.note)

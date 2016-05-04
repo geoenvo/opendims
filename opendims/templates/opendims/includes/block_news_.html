@@ -1,37 +1,41 @@
 {% load staticfiles i18n website_tags cropping weatherforecast_tags %}
 
 <div class="row">
-    {% get_latest_category_post 'News' as posts %} 
+{% get_latest_category_post 'News' as posts %} 
     <!-- Show Latest Blog News -->
+   
     <div class="col-md-6">
         <div class="widget-main">
             <div class="widget-main-title">
                 <h4 class="widget-title">Latest News</h4>
             </div> <!-- /.widget-main-title -->
             <div class="widget-inner">
+           
             {% for post in posts %}
-                {% if post.slideshow_image %}           
+                {% if post.slideshow_image %}
                 <div class="blog-list-post clearfix">
                     <div class="blog-list-thumb">
-                        <a href="blog-single.html"><img src="{% cropped_thumbnail post "slideshow_image_thumb" %}" alt=""></a>
+                        <a href="blog-single.html"><img src="{% cropped_thumbnail post "slideshow_image_thumb" %}"></a>
                     </div>
                     <div class="blog-list-details">
                         <h5 class="blog-list-title"><a href="blog-single.html">{{ post.title }}</a></h5>
                         <p class="blog-list-meta small-text"><span><a href="#">{{ post.created.date }}</a></span> with <span><a href="#">3 comments</a></span></p>
                     </div>
                 </div> <!-- /.blog-list-post -->
-                {% else %}
+                 {% else %}
+                 
                 <div class="blog-list-post clearfix">
                     <div class="blog-list-thumb">
-                        <a href="blog-single.html"><img src="{% static 'img/opendims/default-thumb.jpg' %}" alt=""></a>
+                        <a href="blog-single.html"><img src="{% static 'img/opendims/default-thumb.jpg' %}"></a>
                     </div>
                     <div class="blog-list-details">
-                        <h5 class="blog-list-title"><a href="blog-single.html">{{ post.title }}</a></h5>
-                        <p class="blog-list-meta small-text"><span><a href="#">{{ post.created.date }}</a></span> with <span><a href="#">3 comments</a></span></p>
+                        <h5 class="blog-list-title"><a href="blog-single.html">Lorem Ipsum Dolor Sit Amet</a></h5>
+                        <p class="blog-list-meta small-text"><span><a href="#">1 April 2016</a></span> with <span><a href="#">3 comments</a></span></p>
                     </div>
                 </div> <!-- /.blog-list-post -->
-                {% endif %}
-            {% endfor %}
+                   {% endif %}
+                {% endfor %}
+              
                 <div class="blog-list-post clearfix">
                     <div class="blog-list-thumb">
                         <a href="blog-single.html"><img src="http://placehold.it/65x65" alt=""></a>
@@ -46,20 +50,18 @@
     </div> <!-- /col-md-6 -->
 
     <!-- Show Latest Events List -->
-    <div class="col-md-6">
+     <div class="col-md-6">
         <div class="widget-main">
             <div class="widget-main-title">
                 <h4 class="widget-title">Weather Forecast</h4>
             </div> <!-- /.widget-main-title -->
             <div class="widget-inner">
+           
                 <div class="event-small-list clearfix">
-                    <div class="calendar-small">
-                        <span class="s-month">Apr</span>
-                        <span class="s-date">24</span>
+                    <div class="blog-list-thumb wi wi-day-sunny">
                     </div>
-                    
                     <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
+                        {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
                         {% for weatherforecastreport_dki in weatherforecastreport_dki %}
                         <h3 class="widget-title text-right">{{ weatherforecastreport_dki.created.date }}</h3>
                         <h5 class="event-small-title text-right">JAKARTA</h5>
@@ -67,49 +69,63 @@
                         <p class="event-small-meta small-text text-right">Temp : {{ weatherforecastreport_dki.temperature_min }} - {{ weatherforecastreport_dki.temperature_max }} °C</p>
                         <p class="event-small-meta small-text text-right">RH : {{ weatherforecastreport_dki.humidity_min }} - {{ weatherforecastreport_dki.humidity_max }} %</p>
                         <h5 class="event-small-title text-right"><a href="{{ weatherforecastreport.get_absolute_url }}"> >Selengkapnya </a></h5>
-                        {% endfor %}
                     </div>
-                </div>
+                    {% endfor %}
+                </div> 
+
                 <div class="event-small-list clearfix">
                     <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3171 as weatherforecastreport %}
+                     {% get_latest_weatherforecastreport_by_city 3171 as weatherforecastreport %}
                         {% for weatherforecastreport in weatherforecastreport %}
                             <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
                         {% endfor %}
                     </div>
                 </div>
-                <div class="event-small-list clearfix">
+                  <div class="event-small-list clearfix">
                     <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3172 as weatherforecastreport %}
+                     {% get_latest_weatherforecastreport_by_city 3172 as weatherforecastreport %}
                         {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
+                             <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
                         {% endfor %}
                     </div>
                 </div>
+                
                  <div class="event-small-list clearfix">
                     <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3173 as weatherforecastreport %}
+                     {% get_latest_weatherforecastreport_by_city 3173 as weatherforecastreport %}
+                        {% for weatherforecastreport in weatherforecastreport %}
+                             <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
+                        {% endfor %}
+                    </div>
+                </div>
+
+                 <div class="event-small-list clearfix">
+                    <div class="event-small-details">
+                     {% get_latest_weatherforecastreport_by_city 3174 as weatherforecastreport %}
                         {% for weatherforecastreport in weatherforecastreport %}
                             <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
                         {% endfor %}
                     </div>
                 </div>
-                <div class="event-small-list clearfix">
+                
+                 <div class="event-small-list clearfix">
                     <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3174 as weatherforecastreport %}
+                     {% get_latest_weatherforecastreport_by_city 3175 as weatherforecastreport %}
                         {% for weatherforecastreport in weatherforecastreport %}
                             <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
                         {% endfor %}
                     </div>
-                </div> 
+                </div>       
                 <div class="event-small-list clearfix">
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3175 as weatherforecastreport %}
-                        {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
-                        {% endfor %}
+                    <div class="calendar-small">
+                        <span class="s-month">Apr</span>
+                        <span class="s-date">26</span>
                     </div>
-                </div>                
+                    <div class="event-small-details">
+                        <h5 class="event-small-title"><a href="event-single.html">Weather Forecast For Today</a></h5>
+                        <p class="event-small-meta small-text">High precipitation lorem ipsum dolor sit amet</p>
+                    </div>
+                </div>
             </div> <!-- /.widget-inner -->
         </div> <!-- /.widget-main -->
     </div> <!-- /.col-md-6 -->

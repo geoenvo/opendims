@@ -1,29 +1,28 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n verbose_names website_tags cropping %}
 
 <div class="main-slideshow">
+{% get_latest_slideshow as posts %} 
     <div class="flexslider">
         <ul class="slides">
+        {% for post in posts %}
+          {% if post.slideshow_image %}
             <li>
-                <img src="http://placehold.it/770x400" alt="Slide 1"/>
+                <img src="{% cropped_thumbnail post "slideshow_image_crop" %}">
                 <div class="slider-caption">
-                    <h2><a href="blog-single.html">Lorem ipsum dolor sit amet</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <h2><a href="blog-single.html">{{ post.title }}</a></h2>
+                    <p>{{ post.content|striptags|truncatewords:35 }}</p>
                 </div>
             </li>
+          {% else %}
             <li>
-                <img src="http://placehold.it/770x400" alt="Slide 1"/>
+                <img src="{% static 'img/opendims/default-image.jpg' %}">
                 <div class="slider-caption">
-                    <h2><a href="blog-single.html">Lorem ipsum dolor sit amet</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                    <h2><a href="blog-single.html">{{ post.title }}</a></h2>
+                    <p>{{ post.content|striptags|truncatewords:35 }}</p>
                 </div>
             </li>
-            <li>
-                <img src="http://placehold.it/770x400" alt="Slide 1"/>
-                <div class="slider-caption">
-                    <h2><a href="blog-single.html">Lorem ipsum dolor sit amet</a></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                </div>
-            </li>
+          {% endif %}
+      {% endfor %}
         </ul> <!-- /.slides -->
-    </div> <!-- /.flexslider -->
+    </div> <!-- /.flexslider -->    
 </div> <!-- /.main-slideshow -->

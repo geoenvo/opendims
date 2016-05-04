@@ -1,51 +1,19 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n verbose_names website_tags cropping %}
 
 <div class="widget-main">
+{% get_latest_category_post 'Gallery' as posts %} 
     <div class="widget-main-title">
         <h4 class="widget-title">Gallery</h4>
     </div>
     <div class="widget-inner">
         <div class="gallery-small-thumbs clearfix">
+         {% for post in posts %}
             <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400" title="Gallery Tittle One">
-                    <img src="http://placehold.it/70x70" alt="" />
+                <a class="fancybox" data-fancybox-group="gallery1" href="{% cropped_thumbnail post "slideshow_image_crop" %}" title="{{ post.title }}">
+                    <img src="{% cropped_thumbnail post "slideshow_image_thumb" %}">
                 </a>
             </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400" title="Gallery Tittle Two">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
-            <div class="thumb-small-gallery">
-                <a class="fancybox" data-fancybox-group="gallery1" href="http://placehold.it/770x400">
-                    <img src="http://placehold.it/70x70" alt="" />
-                </a>
-            </div>
+        {% endfor %}  
         </div> <!-- /.galler-small-thumbs -->
     </div> <!-- /.widget-inner -->
 </div> <!-- /.widget-main -->
