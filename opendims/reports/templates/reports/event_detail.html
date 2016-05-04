@@ -1,6 +1,6 @@
 {% extends "reports/event_list.html" %}
 
-{% load i18n leaflet_tags verbose_names %}
+{% load i18n leaflet_tags cropping verbose_names common_filters %}
 
 {% block title %}{{ block.super }} - {{ event }}{% endblock %}
 
@@ -40,11 +40,11 @@
             <tbody>
                 <tr>
                     <th class="col-md-2">{% get_verbose_field_name event 'created' %}</th>
-                    <td>{{ event.created }}</td>
+                    <td>{{ event.created|date:"j F Y H:i" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name event 'updated' %}</th>
-                    <td>{{ event.updated }}</td>
+                    <td>{{ event.updated|date:"j F Y H:i" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name event 'status' %}</th>
@@ -53,6 +53,10 @@
                 <tr>
                     <th>{% get_verbose_field_name event 'disaster' %}</th>
                     <td>{{ event.disaster.note }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name event 'height_min' %}</th>
+                    <td>{{ event.height_min }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name event 'height' %}</th>
@@ -133,8 +137,8 @@
                 {% for report in reports %}
                 <tr>
                     <td><a href="{{ report.get_absolute_url }}">{{ report.event }}</a></td>
-                    <td>{{ report.created }}</td>
-                    <td>{{ report.updated }}</td>
+                    <td>{{ report.created|date:"j F Y H:i" }}</td>
+                    <td>{{ report.updated|date:"j F Y H:i" }}</td>
                     <td>{{ report.source.note }}</td>
                     <td>{{ report.status }}</td>
                     <td>{{ report.note }}</td>
@@ -202,34 +206,20 @@
     <div id="images" class="tab-pane fade">
         <h3 class="page-header heading">{% trans "Images" %}</h3>
 
-        <table class="table table-striped table-bordered">
-            <thead>
-
-                <tr>
-                    {% for eventimage in eventimages|slice:'1' %}
-                    <th class="col-md-2">{% get_verbose_field_name eventimage 'event' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name eventimage 'image' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name eventimage 'order' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name eventimage 'published' %}</th>
-                    {% endfor %}
-                </tr>
-
-            </thead>
-            <tbody>
-                {% for eventimage in eventimages %}
-                <tr>
-                    <td><a href="{{ event.get_absolute_url }}">{{ eventimage.event }}</a></td>
-                    <td><img src="{{ eventimage.image.url }}"></td>
-                    <td>{{ eventimage.order }}</td>
-                    <td>{{ eventimage.published }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="6" class="text-center">{% trans "No images found for this event." %}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="gallery">
+            {% for eventimage in eventimages %}
+            <div class="col-md-4">
+                <div class="gallery-item">
+                    <div class="gallery-thumb">
+                        <a class="fancybox" data-fancybox-group="gallery" href="{{ eventimage.image.url }}" title="{% if eventimage.title %}{{ eventimage.title }}{% else %}{{ eventimage.image|filename }}{% endif %}">
+                            <img src="{% cropped_thumbnail eventimage 'image_preview' %}" alt="{% if eventimage.title %}{{ eventimage.title }}{% else %}{{ eventimage.image|filename }}{% endif %}">
+                        </a>
+                    </div>
+                    <div class="gallery-content">{% if eventimage.title %}{{ eventimage.title }}{% else %}{{ eventimage.image|filename }}{% endif %}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -295,7 +285,11 @@ function leaflet_map_init(map, options) {
         <tbody>
             <tr>
                 <th class="col-md-2">{% get_verbose_field_name event 'created' %}</th>
-                <td>{{ event.created }}</td>
+                <td>{{ event.created|date:'j F Y H:i' }}</td>
+            </tr>
+            <tr>
+                <th class="col-md-2">{% get_verbose_field_name event 'updated' %}</th>
+                <td>{{ event.updated|date:'j F Y H:i' }}</td>
             </tr>
             <tr>
                 <th>{% get_verbose_field_name event 'status' %}</th>
@@ -304,6 +298,10 @@ function leaflet_map_init(map, options) {
             <tr>
                 <th>{% get_verbose_field_name event 'disaster' %}</th>
                 <td>{{ event.disaster.note }}</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'height_min' %}</th>
+                <td>{{ event.height_min }}</td>
             </tr>
             <tr>
                 <th>{% get_verbose_field_name event 'height' %}</th>
@@ -402,46 +400,6 @@ function leaflet_map_init(map, options) {
 function leaflet_map_evacuation_init(map, options) {
     evac_map = map;
 
-    {% if event.province %}
-    var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.city %}
-    if (typeof provinceLayer !== 'undefined') {
-        map.removeLayer(provinceLayer);
-    }
-    var cityLayer = L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.subdistrict %}
-    if (typeof cityLayer !== 'undefined') {
-        map.removeLayer(cityLayer);
-    }
-    var subdistrictLayer = L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.village %}
-    if (typeof subdistrictLayer !== 'undefined') {
-        map.removeLayer(subdistrictLayer);
-    }
-    var villageLayer = L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.rw %}
-    if (typeof villageLayer !== 'undefined') {
-        map.removeLayer(villageLayer);
-    }
-    var rwLayer = L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    {% if event.rt %}
-    if (typeof rwLayer !== 'undefined') {
-        map.removeLayer(rwLayer);
-    }
-    var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
-    {% endif %}
-
-    /* looping through event impact to get evac_point */
     {% for eventimpact in eventimpacts %}
     var popupContent = `
     <table class="table table-striped table-bordered">
@@ -451,11 +409,11 @@ function leaflet_map_evacuation_init(map, options) {
                 <td>{{ eventimpact.evac_total }}</td>
             </tr>
             <tr>
-                <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
-                <td>{{ eventimpact.affected_death }}</td>
+                <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+                <td>{{ eventimpact.affected_total }}</td>
             </tr>
             <tr>
-                <th>{% get_verbose_field_name eventimpact 'affected_total' %}</th>
+                <th>{% get_verbose_field_name eventimpact 'affected_death' %}</th>
                 <td>{{ eventimpact.affected_death }}</td>
             </tr>
             <tr>
@@ -473,8 +431,57 @@ function leaflet_map_evacuation_init(map, options) {
         </tbody>
     </table>
     `;
+
+
+    {% if eventimpact.province %}
+    var provinceLayer = L.geoJson({{ eventimpact.province.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = provinceLayer;
+    {% endif %}
+
+    {% if eventimpact.city %}
+    if (typeof provinceLayer !== 'undefined') {
+        map.removeLayer(provinceLayer);
+    }
+    var cityLayer = L.geoJson({{ eventimpact.city.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = cityLayer;
+    {% endif %}
+
+    {% if eventimpact.subdistrict %}
+    if (typeof cityLayer !== 'undefined') {
+        map.removeLayer(cityLayer);
+    }
+    var subdistrictLayer = L.geoJson({{ eventimpact.subdistrict.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = subdistrictLayer;
+    {% endif %}
+
+    {% if eventimpact.village %}
+    if (typeof subdistrictLayer !== 'undefined') {
+        map.removeLayer(subdistrictLayer);
+    }
+    var villageLayer = L.geoJson({{ eventimpact.village.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = villageLayer;
+    {% endif %}
+
+    {% if eventimpact.rw %}
+    if (typeof villageLayer !== 'undefined') {
+        map.removeLayer(villageLayer);
+    }
+    var rwLayer = L.geoJson({{ eventimpact.rw.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = rwLayer;
+    {% endif %}
+
+    {% if eventimpact.rt %}
+    if (typeof rwLayer !== 'undefined') {
+        map.removeLayer(rwLayer);
+    }
+    var rtLayer = L.geoJson({{ eventimpact.rt.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = rtLayer;
+    {% endif %}
+
+    {% if eventimpact.evac_point %}
     var evacPointLayer = L.geoJson({{ eventimpact.evac_point.geojson|safe }}).addTo(map);
     var popupLayer = evacPointLayer;
+    {% endif %}
     popupLayer.bindPopup(popupContent);
     {% endfor %}
 }

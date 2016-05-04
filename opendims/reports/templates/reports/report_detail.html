@@ -38,11 +38,11 @@
             <tbody>
                 <tr>
                     <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
-                    <td>{{ report.created }}</td>
+                    <td>{{ report.created|date:"j F Y H:i" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report 'updated' %}</th>
-                    <td>{{ report.updated }}</td>
+                    <td>{{ report.updated|date:"j F Y H:i" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report 'source' %}</th>
@@ -66,11 +66,11 @@
             <tbody>
                 <tr>
                     <th class="col-md-2">{% get_verbose_field_name report.event 'created' %}</th>
-                    <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created }}</a></td>
+                    <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created|date:"j F Y H:i" }}</a></td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report.event 'updated' %}</th>
-                    <td>{{ report.event.updated }}</td>
+                    <td>{{ report.event.updated|date:"j F Y H:i" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report.event 'disaster' %}</th>
@@ -197,11 +197,11 @@ function leaflet_map_init(map, options) {
         <tbody>
             <tr>
                 <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
-                <td>{{ report.created }}</td>
+                <td>{{ report.created|date:'j F Y H:i' }}</td>
             </tr>
             <tr>
                 <th>{% get_verbose_field_name report 'updated' %}</th>
-                <td>{{ report.updated }}</td>
+                <td>{{ report.updated|date:'j F Y H:i' }}</td>
             </tr>
             <tr>
                 <th>{% get_verbose_field_name report 'source' %}</th>

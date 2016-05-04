@@ -120,11 +120,13 @@
     margin-top: 20px;
 }
 
+.tab-content .gallery .gallery-item,
 .post-container .gallery .gallery-item {
     margin-top: 0;
     margin-bottom: 30px;
 }
 
+.tab-content .gallery .gallery-content,
 .post-container .gallery .gallery-content {
     padding: 10px;
     background-color: #efefef;
