@@ -60,7 +60,6 @@ class AWSReport(CommonAbstractModel):
         blank=True,
         max_digits=4,
         decimal_places=2,
-        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_temp
     )
     humidity = models.PositiveIntegerField(
