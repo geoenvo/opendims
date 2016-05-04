@@ -4,8 +4,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from geolevels.models import City, Province
-from django.core.validators import MinValueValidator
-from decimal import Decimal
 from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
