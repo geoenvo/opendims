@@ -2,35 +2,35 @@ from __future__ import unicode_literals
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.contrib.gis.db import models
-from geolevels.models import City, Province
-from django.core.urlresolvers import reverse
+from django.db import models
 
+from geolevels.models import City, Province
 from common.models import CommonAbstractModel
+
 
 verbose_created = _('Created')
 verbose_updated = _('Updated')
 verbose_note = _('Note')
-verbose_forecastmorning = _('Morning Forecast')
-verbose_forecastnoon = _('Noon Forecast')
-verbose_forecastnight = _('Night Forecast')
+verbose_forecastmorning = _('Morning forecast')
+verbose_forecastnoon = _('Noon forecast')
+verbose_forecastnight = _('Night forecast')
 verbose_forecast = _('Forecast')
 verbose_city = _('City')
 verbose_province = _('Province')
-verbose_tempmin = _('Temperature Min')
-verbose_tempmax = _('Temperature Max')
-verbose_humidmin = _('Humidity Min')
-verbose_humidmax = _('Humidity Max')
+verbose_tempmin = _('Temperature min')
+verbose_tempmax = _('Temperature max')
+verbose_humidmin = _('Humidity min')
+verbose_humidmax = _('Humidity max')
 
 
 class WeatherForecastReport(CommonAbstractModel):
     FORECAST_CHOICES = (
-        ('CERAH', _('Cerah')),
-        ('CERAH BERAWAN', _('Cerah Berawan')),
-        ('BERAWAN', _('Berawan')),
-        ('HUJAN RINGAN', _('Hujan Ringan')),
-        ('HUJAN SEDANG', _('Hujan Sedang')),
-        ('HUJAN DERAS', _('Hujan Deras')),
+        ('CERAH', _('Clear')),
+        ('CERAH BERAWAN', _('Partly cloudy')),
+        ('BERAWAN', _('Cloudy')),
+        ('HUJAN RINGAN', _('Light rain')),
+        ('HUJAN SEDANG', _('Moderate rain')),
+        ('HUJAN DERAS', _('Heavy rain')),
     )
     created = models.DateTimeField(
         default=timezone.now,
@@ -100,11 +100,8 @@ class WeatherForecastReport(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] - %s - %s' % (self.city, self.province, timezone.localtime(self.created))
-
-    def get_absolute_url(self):
-        return reverse('weatherforecast:weatherforecastreport_list')
+        return '[%s] - %s - %s' % (self.province, self.city, timezone.localtime(self.created))

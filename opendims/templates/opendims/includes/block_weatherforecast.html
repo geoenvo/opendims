@@ -1,67 +1,196 @@
-{% load staticfiles i18n cropping weatherforecast_tags %}
+{% load staticfiles i18n weatherforecast_tags %}
+
+<link rel="stylesheet" href="{% static 'weather-icons/css/weather-icons.min.css' %}">
 
 <div class="widget-main">
     <div class="widget-main-title">
-        <h4 class="widget-title">Weather Forecast</h4>
+        <h4 class="widget-title">{% trans "Weather Forecast" %}</h4>
     </div> <!-- /.widget-main-title -->
     <div class="widget-inner">
+        {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
+        {% if weatherforecastreport_dki  %}
+        {% get_forecast_details weatherforecastreport_dki.first.forecast as forecast_details %}
         <div class="event-small-list clearfix">
-            <div class="calendar-small">
-                <span class="s-month">Apr</span>
-                <span class="s-date">24</span>
-            </div>
+            <div class="event-small-details">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="big-icons">
+                            <i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans forecast_details.forecast_text %}"></i>
+                        </div>
+                    </div> <!-- /.col-md-6 -->
+                    <div class="col-md-6">
+                        <div>{{ weatherforecastreport_dki.first.created|date:"j F Y" }}</div>
+                        <h4>DKI JAKARTA</h5>
+                        <h5>{% trans forecast_details.forecast_text %}</h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Temp</th>
+                                    <td>&nbsp;</td>
+                                    <td>{{ weatherforecastreport_dki.first.temperature_min }} - {{ weatherforecastreport_dki.first.temperature_max }} °C</td>
+                                </tr>
+                                <tr>
+                                    <th>RH</th>
+                                    <td>&nbsp;</td>
+                                    <td>{{ weatherforecastreport_dki.first.humidity_min }} - {{ weatherforecastreport_dki.first.humidity_max }}&#37;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-right"><a href="{% url 'weatherforecast:weatherforecastreport_list' %}">{% trans "More" %}</a></div>
+                    </div> <!-- /.col-md-6 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.event-small-details -->
+        </div> <!-- /.event-small-list -->
+        {% endif %}
 
-            <div class="event-small-details">
-            {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
-                {% for weatherforecastreport_dki in weatherforecastreport_dki %}
-                <h3 class="widget-title text-right">{{ weatherforecastreport_dki.created.date }}</h3>
-                <h5 class="event-small-title text-right">JAKARTA</h5>
-                <h3 class="widget-title text-right">{{ weatherforecastreport_dki.forecast }}</h3>
-                <p class="event-small-meta small-text text-right">Temp : {{ weatherforecastreport_dki.temperature_min }} - {{ weatherforecastreport_dki.temperature_max }} °C</p>
-                <p class="event-small-meta small-text text-right">RH : {{ weatherforecastreport_dki.humidity_min }} - {{ weatherforecastreport_dki.humidity_max }} %</p>
-                <h5 class="event-small-title text-right"><a href="{{ weatherforecastreport.get_absolute_url }}"> >Selengkapnya </a></h5>
-                {% endfor %}
-            </div>
-        </div>
+        {% get_latest_weatherforecastreport_by_city 'Jakarta Selatan' as weatherforecastreport_city %}
+        {% if weatherforecastreport_city %}
+        {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
         <div class="event-small-list clearfix">
             <div class="event-small-details">
-            {% get_latest_weatherforecastreport_by_city 3171 as weatherforecastreport %}
-                {% for weatherforecastreport in weatherforecastreport %}
-                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
-                {% endfor %}
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="event-small-title">{{ weatherforecastreport_city.first.city }}</h5>
+                    </div>
+                </div> <!-- /.row -->
+                <div class="row">
+                  <div class="small-icons">
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_morning as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Morning' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Noon' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Night' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                  </div>
+                </div> <!-- /.row -->
+            </div> <!-- /.event-small-details -->
+        </div> <!-- /.event-small-list -->
+        {% endif %}
+
+        {% get_latest_weatherforecastreport_by_city 'Jakarta Timur' as weatherforecastreport_city %}
+        {% if weatherforecastreport_city %}
+        {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
         <div class="event-small-list clearfix">
             <div class="event-small-details">
-            {% get_latest_weatherforecastreport_by_city 3172 as weatherforecastreport %}
-                {% for weatherforecastreport in weatherforecastreport %}
-                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
-                {% endfor %}
-            </div>
-        </div>
-         <div class="event-small-list clearfix">
-            <div class="event-small-details">
-            {% get_latest_weatherforecastreport_by_city 3173 as weatherforecastreport %}
-                {% for weatherforecastreport in weatherforecastreport %}
-                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
-                {% endfor %}
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="event-small-title">{{ weatherforecastreport_city.first.city }}</h5>
+                    </div>
+                </div> <!-- /.row -->
+                <div class="row">
+                  <div class="small-icons">
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_morning as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Morning' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Noon' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Night' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                  </div>
+                </div> <!-- /.row -->
+            </div> <!-- /.event-small-details -->
+        </div> <!-- /.event-small-list -->
+        {% endif %}
+
+        {% get_latest_weatherforecastreport_by_city 'Jakarta Pusat' as weatherforecastreport_city %}
+        {% if weatherforecastreport_city %}
+        {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
         <div class="event-small-list clearfix">
             <div class="event-small-details">
-            {% get_latest_weatherforecastreport_by_city 3174 as weatherforecastreport %}
-                {% for weatherforecastreport in weatherforecastreport %}
-                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
-                {% endfor %}
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="event-small-title">{{ weatherforecastreport_city.first.city }}</h5>
+                    </div>
+                </div> <!-- /.row -->
+                <div class="row">
+                  <div class="small-icons">
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_morning as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Morning' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Noon' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Night' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                  </div>
+                </div> <!-- /.row -->
+            </div> <!-- /.event-small-details -->
+        </div> <!-- /.event-small-list -->
+        {% endif %}
+
+        {% get_latest_weatherforecastreport_by_city 'Jakarta Barat' as weatherforecastreport_city %}
+        {% if weatherforecastreport_city %}
+        {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
         <div class="event-small-list clearfix">
             <div class="event-small-details">
-            {% get_latest_weatherforecastreport_by_city 3175 as weatherforecastreport %}
-                {% for weatherforecastreport in weatherforecastreport %}
-                    <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5>
-                {% endfor %}
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="event-small-title">{{ weatherforecastreport_city.first.city }}</h5>
+                    </div>
+                </div> <!-- /.row -->
+                <div class="row">
+                  <div class="small-icons">
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_morning as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Morning' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Noon' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Night' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                  </div>
+                </div> <!-- /.row -->
+            </div> <!-- /.event-small-details -->
+        </div> <!-- /.event-small-list -->
+        {% endif %}
+
+        {% get_latest_weatherforecastreport_by_city 'Jakarta Utara' as weatherforecastreport_city %}
+        {% if weatherforecastreport_city %}
+        {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
+        <div class="event-small-list clearfix">
+            <div class="event-small-details">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="event-small-title">{{ weatherforecastreport_city.first.city }}</h5>
+                    </div>
+                </div> <!-- /.row -->
+                <div class="row">
+                  <div class="small-icons">
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_morning as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Morning' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Noon' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                      {% get_forecast_details weatherforecastreport_city.first.forecast_noon as forecast_details %}
+                      <div class="col-md-4">
+                          <div class="text-center"><i class="wi {{ forecast_details.weather_icon_class }}" title="{% trans 'Night' %}: {% trans forecast_details.forecast_text %}"></i></div>
+                      </div> <!-- /.col-md-4 -->
+                  </div>
+                </div> <!-- /.row -->
+            </div> <!-- /.event-small-details -->
+        </div> <!-- /.event-small-list -->
+        {% endif %}
     </div> <!-- /.widget-inner -->
 </div> <!-- /.widget-main -->

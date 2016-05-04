@@ -26,6 +26,19 @@
     text-align: right;
 }
 
+/* weather forecast block icons */
+.big-icons i.wi {
+    font-size: 135px;
+}
+
+.small-icons i.wi {
+    font-size: 20px;
+}
+
+.row .small-icons {
+    margin-top: 10px;
+}
+
 /* link icons */
 .link-icons a:before {
     clear: both;
