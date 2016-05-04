@@ -6,6 +6,7 @@ from django.contrib.gis.db import models
 from geolevels.models import City, Province
 from django.core.validators import MinValueValidator
 from decimal import Decimal
+from django.core.urlresolvers import reverse
 
 from common.models import CommonAbstractModel
 
@@ -79,7 +80,6 @@ class WeatherForecastReport(CommonAbstractModel):
         blank=True,
         max_digits=4,
         decimal_places=2,
-        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_tempmin
     )
     temperature_max = models.DecimalField(
@@ -87,7 +87,6 @@ class WeatherForecastReport(CommonAbstractModel):
         blank=True,
         max_digits=4,
         decimal_places=2,
-        validators=[MinValueValidator(Decimal('0'))],
         verbose_name=verbose_tempmax
     )
     humidity_min = models.PositiveIntegerField(
@@ -108,3 +107,6 @@ class WeatherForecastReport(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.city, self.province, timezone.localtime(self.created))
+
+    def get_absolute_url(self):
+        return reverse('weatherforecast:weatherforecastreport_list')
