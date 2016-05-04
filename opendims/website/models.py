@@ -118,7 +118,7 @@ class Post(CommonAbstractModel):
         return reverse('website:post_detail', args=[self.pk, self.slug])
 
     def __unicode__(self):
-        return '[%s] - %s ' % (self.title, timezone.localtime(self.created))
+        return '[%s] - %s - %s' % (self.title, timezone.localtime(self.created), self.category)
 
 
 class Attachment(CommonAbstractModel):
