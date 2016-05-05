@@ -46,3 +46,10 @@ def get_posts_by_category(category):
         category__in=category_tree
     ).order_by('-created')
     return posts
+
+
+@register.simple_tag
+def get_category_tree(category):
+    category = Category.objects.get(slug=category)
+    category_tree = category.get_descendants(include_self=True)
+    return category_tree

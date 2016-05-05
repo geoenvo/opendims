@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n category_tags website_tags %}
 
 <!-- This one in here is responsive menu for tablet and mobiles -->
 <div class="responsive-navigation visible-sm visible-xs">
@@ -27,14 +27,39 @@
                     <li><a href="{% url 'geolevels:village_list' %}">{% trans "Villages" %}</a></li>
                 </ul>
             </li>
-            <li><a href="">{% trans "E-Library" %}</a>
-                <ul>
-                    <li><a href="archives.html">Archives</a></li>
-                    <li><a href="shortcodes.html">Shortcodes</a></li>
-                    <li><a href="gallery.html">Our Gallery</a></li>
+            {% get_category_tree 'news' as nodes %}
+            {% recursetree nodes %}
+            <li>
+                <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                {% if not node.is_leaf_node %}
+                <ul class="sub-menu">
+                    {{ children }}
                 </ul>
+                {% endif %}
             </li>
-            <li><a href="gallery.html">{% trans "Gallery" %}</a></li>
+            {% endrecursetree %}
+            {% get_category_tree 'e-library' as nodes %}
+            {% recursetree nodes %}
+            <li>
+                <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                {% if not node.is_leaf_node %}
+                <ul class="sub-menu">
+                    {{ children }}
+                </ul>
+                {% endif %}
+            </li>
+            {% endrecursetree %}
+            {% get_category_tree 'gallery' as nodes %}
+            {% recursetree nodes %}
+            <li>
+                <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                {% if not node.is_leaf_node %}
+                <ul class="sub-menu">
+                    {{ children }}
+                </ul>
+                {% endif %}
+            </li>
+            {% endrecursetree %}
         </ul> <!-- /.main_menu -->
         <ul class="social_icons">
             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
