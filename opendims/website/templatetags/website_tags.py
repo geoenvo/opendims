@@ -2,7 +2,7 @@ from django import template
 
 from categories.models import Category
 
-from website.models import Post
+from website.models import Post, Welcome
 
 register = template.Library()
 
@@ -50,6 +50,20 @@ def get_posts_by_category(category):
 
 @register.simple_tag
 def get_category_tree(category):
+    """
+    Return a category's tree structure. Render the tree using recursetree.
+    """
     category = Category.objects.get(slug=category)
     category_tree = category.get_descendants(include_self=True)
     return category_tree
+
+
+@register.simple_tag
+def get_latest_welcome():
+    """
+    Return the latest welcome text.
+    """
+    welcomes = Welcome.objects.filter(
+        published=True
+    ).order_by('-created')[:1]
+    return welcomes

@@ -1,0 +1,11 @@
+[
+    {
+        "model": "website.welcome",
+        "pk": 1,
+        "fields": {
+            "title": "Default welcome text",
+            "content": "<h2>Selamat datang di BPBD Provinsi DKI Jakarta!</h2>",
+            "published": true
+          }
+    }
+]
