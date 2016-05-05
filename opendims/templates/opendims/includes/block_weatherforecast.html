@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="{% static 'weather-icons/css/weather-icons.min.css' %}">
 
-<div class="widget-main">
+<div class="widget-main block-weatherforecast">
     <div class="widget-main-title">
         <h4 class="widget-title">{% trans "Weather Forecast" %}</h4>
     </div> <!-- /.widget-main-title -->
@@ -10,7 +10,7 @@
         {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
         {% if weatherforecastreport_dki  %}
         {% get_forecast_details weatherforecastreport_dki.first.forecast as forecast_details %}
-        <div class="event-small-list clearfix">
+        <div class="event-small-list main-forecast clearfix">
             <div class="event-small-details">
                 <div class="row">
                     <div class="col-md-6">
@@ -46,7 +46,7 @@
         {% get_latest_weatherforecastreport_by_city 'Jakarta Selatan' as weatherforecastreport_city %}
         {% if weatherforecastreport_city %}
         {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
-        <div class="event-small-list clearfix">
+        <div class="event-small-list mini-forecast clearfix">
             <div class="event-small-details">
                 <div class="row">
                     <div class="col-md-12">
@@ -76,7 +76,7 @@
         {% get_latest_weatherforecastreport_by_city 'Jakarta Timur' as weatherforecastreport_city %}
         {% if weatherforecastreport_city %}
         {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
-        <div class="event-small-list clearfix">
+        <div class="event-small-list mini-forecast clearfix">
             <div class="event-small-details">
                 <div class="row">
                     <div class="col-md-12">
@@ -106,7 +106,7 @@
         {% get_latest_weatherforecastreport_by_city 'Jakarta Pusat' as weatherforecastreport_city %}
         {% if weatherforecastreport_city %}
         {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
-        <div class="event-small-list clearfix">
+        <div class="event-small-list mini-forecast clearfix">
             <div class="event-small-details">
                 <div class="row">
                     <div class="col-md-12">
@@ -136,7 +136,7 @@
         {% get_latest_weatherforecastreport_by_city 'Jakarta Barat' as weatherforecastreport_city %}
         {% if weatherforecastreport_city %}
         {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
-        <div class="event-small-list clearfix">
+        <div class="event-small-list mini-forecast clearfix">
             <div class="event-small-details">
                 <div class="row">
                     <div class="col-md-12">
@@ -166,7 +166,7 @@
         {% get_latest_weatherforecastreport_by_city 'Jakarta Utara' as weatherforecastreport_city %}
         {% if weatherforecastreport_city %}
         {% get_forecast_details weatherforecastreport_city.first.forecast as forecast_details %}
-        <div class="event-small-list clearfix">
+        <div class="event-small-list mini-forecast clearfix">
             <div class="event-small-details">
                 <div class="row">
                     <div class="col-md-12">

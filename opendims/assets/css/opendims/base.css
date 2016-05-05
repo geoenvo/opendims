@@ -39,6 +39,27 @@
     margin-top: 10px;
 }
 
+/* desktop layout */
+@media (max-width: 1200px) {
+    .block-weatherforecast .big-icons i.wi {
+        font-size: 120px;
+    }
+}
+
+/* mobile layout */
+@media (max-width: 990px) {
+    .block-weatherforecast .main-forecast {
+        text-align: center;
+    }
+    .block-weatherforecast .main-forecast table {
+        width: 20%;
+        margin: 0 auto;
+    }
+    .block-weatherforecast .mini-forecast .event-small-title {
+        text-align: center;
+    }
+}
+
 /* link icons */
 .link-icons a:before {
     clear: both;
