@@ -26,6 +26,7 @@ class WeatherForecastReportAdmin(admin.ModelAdmin):
     list_display = [
         'created',
         'updated',
+        'province',
         'city',
         'forecast_morning',
         'forecast_noon',
