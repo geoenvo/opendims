@@ -1,10 +1,14 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n website_tags %}
 
+{% get_latest_welcome as welcome %}
+{% if welcome %}
 <div class="row">
     <div class="col-md-12">
         <div class="widget-item">
-            <h2 class="welcome-text">Selamat datang di BPBD Provinsi DKI Jakarta!</h2>
-            <p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, adipisci, quibusdam, ad ab quisquam esse aspernatur exercitationem aliquam at fugit omnis vitae recusandae eveniet.</strong><br><br>Inventore, aliquam sequi nisi velit magnam accusamus reprehenderit nemo necessitatibus doloribus molestiae fugit repellat repudiandae dolor. Incidunt, nulla quidem illo suscipit nihil!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, dolorem, fugiat, commodi totam accusantium illo incidunt quis eius eum iure et fugit voluptas atque ratione nobis sed omnis quod ipsa.<br><br>Vivamus mattis nibh vitae dui egestas posuere. Maecenas a est at enim blandit interdum. Cras eget ipsum ac nunc tristique tincidunt sit amet nec quam. Vivamus sed suscipit enim, et dignissim tellus.</p>
+            <div class="welcome-container">
+            {{ welcome.first.content|safe }}
+            </div>
         </div> <!-- /.widget-item -->
     </div> <!-- /.col-md-12 -->
 </div> <!-- /.row -->
+{% endif %}

@@ -1,4 +1,4 @@
-{% load staticfiles i18n active_url %}
+{% load staticfiles i18n category_tags active_url website_tags %}
 
 <div class="nav-bar-main" role="navigation">
     <div class="container">
@@ -24,14 +24,46 @@
                             <li class="{% active_url request 'geolevels:village_list' %}"><a href="{% url 'geolevels:village_list' %}">{% trans "Villages" %}</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">{% trans "E-Library" %}</a>
+                    {% get_category_tree 'news' as nodes %}
+                    {% recursetree nodes %}
+                    <li>
+                        <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                        {% if not node.is_leaf_node %}
+                        <ul class="sub-menu">
+                            {{ children }}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endrecursetree %}
+                    {% get_category_tree 'e-library' as nodes %}
+                    {% recursetree nodes %}
+                    <li>
+                        <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                        {% if not node.is_leaf_node %}
+                        <ul class="sub-menu">
+                            {{ children }}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endrecursetree %}
+                    {% get_category_tree 'gallery' as nodes %}
+                    {% recursetree nodes %}
+                    <li>
+                        <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                        {% if not node.is_leaf_node %}
+                        <ul class="sub-menu">
+                            {{ children }}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endrecursetree %}
+                    <li><a href="#">{% trans "Layouts" %}</a>
                         <ul class="sub-menu">
                             <li><a href="archives.html">Archives</a></li>
                             <li><a href="shortcodes.html">Shortcodes</a></li>
                             <li><a href="gallery.html">Our Gallery</a></li>
                         </ul>
                     </li>
-                    <li><a href="gallery.html">{% trans "Gallery" %}</a></li>
                 </ul> <!-- /.main-menu -->
 
                 <ul class="social-icons pull-right">

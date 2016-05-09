@@ -48,17 +48,16 @@ urlpatterns = [
     url(r'^pages/', include(flatpages_urls)),
     url(r'^ckeditor/', include(ckeditor_uploader_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^captcha/', include('captcha.urls')),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
     url(r'^maps/', include(maps_urls, namespace='maps')),
     url(r'^jaksafe/', include(jaksafe_urls, namespace='jaksafe')),
     url(r'^waterlevel/', include(waterlevel_urls, namespace='waterlevel')),
     url(r'^contact/', include(contact_urls, namespace='contact')),
-    url(r'^captcha/', include('captcha.urls')),
     url(r'^weatherforecast/', include(weatherforecast_urls, namespace='weatherforecast')),
     url(r'^disasterrehabilitation/', include(disasterrehabilitation_urls, namespace='disasterrehabilitation')),
     url(r'^web/', include(website_urls, namespace='website')),
-
 ]
 
 if settings.DEBUG:

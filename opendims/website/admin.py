@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
 
 from django.utils.translation import gettext_lazy as _
-from django.contrib.gis import admin
+from django.contrib import admin
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Attachment, Post, SiteHeader
+from .models import Attachment, Post, SiteHeader, Welcome
 
 
 verbose_attachment_details = _('Attachment details')
@@ -79,6 +79,7 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
         'published'
     ]
     prepopulated_fields = {'slug': ('title',)}
+    readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     date_hierarchy = 'created'
     list_filter = ['created', 'updated', 'published', 'slideshow_enabled']
@@ -105,6 +106,25 @@ class SiteHeaderAdmin(admin.ModelAdmin):
         'published'
     ]
 
+
+class WelcomeAdmin(admin.ModelAdmin):
+    fields = (
+        'title',
+        'created',
+        'content',
+        'published'
+    )
+    list_display = [
+        'title',
+        'created',
+        'published'
+    ]
+    date_hierarchy = 'created'
+    list_filter = ['created', 'published']
+    search_fields = ['title']
+
+
 admin.site.register(Attachment, AttachmentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(SiteHeader, SiteHeaderAdmin)
+admin.site.register(Welcome, WelcomeAdmin)
