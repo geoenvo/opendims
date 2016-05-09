@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'earlywarning',
     'website',
     'disasterrehabilitation',
+    'reportaggregator',
 ]
 
 MIDDLEWARE_CLASSES = [
