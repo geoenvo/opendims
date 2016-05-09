@@ -47,6 +47,8 @@ pip install -r requirements.txt
 nodeenv -p --prebuilt
 workon opendims
 npm install -g bower
+npm install -g phantomjs-prebuilt@2.1.7
+npm install -g casperjs@1.1.1
 
 echo "---------------------------------------------"
 echo "Provisioning complete"
