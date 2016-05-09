@@ -1,117 +1,33 @@
-{% load staticfiles i18n website_tags cropping weatherforecast_tags %}
+{% load staticfiles i18n cropping website_tags %}
 
-<div class="row">
-    {% get_latest_category_post 'News' as posts %} 
-    <!-- Show Latest Blog News -->
-    <div class="col-md-6">
-        <div class="widget-main">
-            <div class="widget-main-title">
-                <h4 class="widget-title">Latest News</h4>
-            </div> <!-- /.widget-main-title -->
-            <div class="widget-inner">
-            {% for post in posts %}
-                {% if post.slideshow_image %}           
-                <div class="blog-list-post clearfix">
-                    <div class="blog-list-thumb">
-                        <a href="blog-single.html"><img src="{% cropped_thumbnail post "slideshow_image_thumb" %}" alt=""></a>
-                    </div>
-                    <div class="blog-list-details">
-                        <h5 class="blog-list-title"><a href="blog-single.html">{{ post.title }}</a></h5>
-                        <p class="blog-list-meta small-text"><span><a href="#">{{ post.created.date }}</a></span> with <span><a href="#">3 comments</a></span></p>
-                    </div>
-                </div> <!-- /.blog-list-post -->
-                {% else %}
-                <div class="blog-list-post clearfix">
-                    <div class="blog-list-thumb">
-                        <a href="blog-single.html"><img src="{% static 'img/opendims/default-thumb.jpg' %}" alt=""></a>
-                    </div>
-                    <div class="blog-list-details">
-                        <h5 class="blog-list-title"><a href="blog-single.html">{{ post.title }}</a></h5>
-                        <p class="blog-list-meta small-text"><span><a href="#">{{ post.created.date }}</a></span> with <span><a href="#">3 comments</a></span></p>
-                    </div>
-                </div> <!-- /.blog-list-post -->
-                {% endif %}
-            {% endfor %}
-                <div class="blog-list-post clearfix">
-                    <div class="blog-list-thumb">
-                        <a href="blog-single.html"><img src="http://placehold.it/65x65" alt=""></a>
-                    </div>
-                    <div class="blog-list-details">
-                        <h5 class="blog-list-title"><a href="blog-single.html">Lorem Ipsum Dolor Sit Amet</a></h5>
-                        <p class="blog-list-meta small-text"><span><a href="#">1 April 2016</a></span> with <span><a href="#">3 comments</a></span></p>
-                    </div>
-                </div> <!-- /.blog-list-post -->
-            </div> <!-- /.widget-inner -->
-        </div> <!-- /.widget-main -->
-    </div> <!-- /col-md-6 -->
+{% get_posts_by_category 'news' as posts %}
 
-    <!-- Show Latest Events List -->
-    <div class="col-md-6">
-        <div class="widget-main">
-            <div class="widget-main-title">
-                <h4 class="widget-title">Weather Forecast</h4>
-            </div> <!-- /.widget-main-title -->
-            <div class="widget-inner">
-                <div class="event-small-list clearfix">
-                    <div class="calendar-small">
-                        <span class="s-month">Apr</span>
-                        <span class="s-date">24</span>
-                    </div>
-                    
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_dki as weatherforecastreport_dki %}
-                        {% for weatherforecastreport_dki in weatherforecastreport_dki %}
-                        <h3 class="widget-title text-right">{{ weatherforecastreport_dki.created.date }}</h3>
-                        <h5 class="event-small-title text-right">JAKARTA</h5>
-                        <h3 class="widget-title text-right">{{ weatherforecastreport_dki.forecast }}</h3>
-                        <p class="event-small-meta small-text text-right">Temp : {{ weatherforecastreport_dki.temperature_min }} - {{ weatherforecastreport_dki.temperature_max }} °C</p>
-                        <p class="event-small-meta small-text text-right">RH : {{ weatherforecastreport_dki.humidity_min }} - {{ weatherforecastreport_dki.humidity_max }} %</p>
-                        <h5 class="event-small-title text-right"><a href="{{ weatherforecastreport_dki.get_absolute_url }}"> >Selengkapnya </a></h5>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="event-small-list clearfix">
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3171 as weatherforecastreport %}
-                        {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="event-small-list clearfix">
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3172 as weatherforecastreport %}
-                        {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
-                        {% endfor %}
-                    </div>
-                </div>
-                 <div class="event-small-list clearfix">
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3173 as weatherforecastreport %}
-                        {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="event-small-list clearfix">
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3174 as weatherforecastreport %}
-                        {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
-                        {% endfor %}
-                    </div>
-                </div> 
-                <div class="event-small-list clearfix">
-                    <div class="event-small-details">
-                    {% get_latest_weatherforecastreport_by_city 3175 as weatherforecastreport %}
-                        {% for weatherforecastreport in weatherforecastreport %}
-                            <h5 class="event-small-title">{{ weatherforecastreport.city }} <span style="float: right"> <strong> {{ weatherforecastreport.forecast_morning}} </strong> </span> </h5> 
-                        {% endfor %}
-                    </div>
-                </div>                
-            </div> <!-- /.widget-inner -->
-        </div> <!-- /.widget-main -->
-    </div> <!-- /.col-md-6 -->
-
-</div> <!-- /.row -->
+<div class="widget-main">
+    <div class="widget-main-title">
+        <h4 class="widget-title">{% trans "Latest News" %}</h4>
+    </div> <!-- /.widget-main-title -->
+    <div class="widget-inner">
+        {% for post in posts|slice:"3" %}
+        <div class="blog-list-post clearfix">
+            <div class="blog-list-thumb">
+                <a href="{{ post.get_absolute_url }}" title="{{ post.title }}">
+                    {% if post.slideshow_image %}
+                    <img src="{% cropped_thumbnail post "slideshow_image_thumb" %}" alt="{{ post.title }}"></a>
+                    {% else %}
+                    <img src="{% static 'img/opendims/default-thumb.jpg' %}" alt="{{ post.title }}">
+                    {% endif %}
+                </a>
+            </div>
+            <div class="blog-list-details">
+                <h5 class="blog-list-title"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h5>
+                <p class="blog-list-meta small-text">{{ post.created|date:"j F Y H:i T" }}</p>
+            </div>
+        </div> <!-- /.blog-list-post -->
+        {% endfor %}
+    </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'website:post_list' 'news' %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
+</div> <!-- /.widget-main -->

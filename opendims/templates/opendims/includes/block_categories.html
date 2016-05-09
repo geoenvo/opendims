@@ -11,7 +11,11 @@
             <ul>
             {% recursetree nodes %}
                 <li>
+                    {% if post and post.category.slug == node.slug or category and category.slug == node.slug %}
+                    <strong><a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a></strong>
+                    {% else %}
                     <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
+                    {% endif %}
                     {% if not node.is_leaf_node %}
                         <ul class="children">
                             {{ children }}

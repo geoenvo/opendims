@@ -48,14 +48,16 @@
                             {% query post.attachments.all published=True image__isnull=False file='' as images %}
                             {% for image in images|slice:"1" %}
                             <img src="{% cropped_thumbnail image 'image_list' %}" alt="{{ post.title }}">
+                            {% empty %}
+                            <img src="{% static 'img/opendims/default-list.jpg' alt="{{ post.title }}" %}">
                             {% endfor %}
                             {% else %}
-                            <img src="http://placehold.it/170x150" alt="{{ post.title }}">
+                            <img src="{% static 'img/opendims/default-list.jpg' alt="{{ post.title }}" %}">
                             {% endif %}
                         </a>
                     </div>
                     <div class="list-event-header">
-                        <span class="event-date small-text"><i class="fa fa-calendar-o"></i>{{ post.created|date:"j F Y H:i" }}</span>
+                        <span class="event-date small-text"><i class="fa fa-calendar-o"></i>{{ post.created|date:"j F Y H:i T" }}</span>
                         <span class="event-place small-text"><i class="fa fa-user"></i>{% if post.author_text %}{{ post.author_text }}{% else %}{{ post.author }}{% endif %}</span>
                     </div>
                     <h5 class="event-title"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h5>

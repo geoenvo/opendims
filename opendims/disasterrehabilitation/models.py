@@ -187,8 +187,6 @@ class Reference(CommonAbstractModel):
         verbose_name=verbose_year
     )
     file = models.FileField(
-        null=True,
-        blank=True,
         upload_to='disasterrehabilitation/reference/',
         verbose_name=verbose_file
     )

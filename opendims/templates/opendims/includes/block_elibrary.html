@@ -1,33 +1,33 @@
-{% load staticfiles i18n verbose_names website_tags cropping %}
+{% load staticfiles i18n website_tags cropping %}
+
+{% get_posts_by_category 'e-library' as posts %}
 
 <div class="widget-main">
-{% get_latest_category_post 'E-Library' as posts %} 
     <div class="widget-main-title">
-        <h4 class="widget-title">E-Library</h4>
+        <h4 class="widget-title">{% trans "E-Library" %}</h4>
     </div>
     <div class="widget-inner">
-        {% for post in posts %}
-        {% if post.slideshow_image %}
+        {% for post in posts|slice:"3" %}
         <div class="prof-list-item clearfix">
             <div class="prof-thumb">
-                <img src="{% cropped_thumbnail post "slideshow_image_thumb" %}">
+                <a href="{{ post.get_absolute_url }}" title="{{ post.title }}">
+                    {% if post.slideshow_image %}
+                    <img src="{% cropped_thumbnail post 'slideshow_image_thumb' %}" alt="{{ post.title }}">
+                    {% else %}
+                    <img src="{% static 'img/opendims/default-thumb.jpg' %}" alt="{{ post.title }}">
+                    {% endif %}
+                </a>
             </div> <!-- /.prof-thumb -->
             <div class="prof-details">
-                <h5 class="prof-name-list">{{ post.title }}</h5>
-                <p class="small-text">{{ post.content|striptags|truncatewords:35 }}</p>
+                <h5 class="prof-name-list"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h5>
+                <p class="small-text">{{ post.content|striptags|truncatewords:15 }}</p>
             </div> <!-- /.prof-details -->
         </div> <!-- /.prof-list-item -->
-        {% else %}
-        <div class="prof-list-item clearfix">
-            <div class="prof-thumb">
-                <img src="{% static 'img/opendims/default-thumb.jpg' %}">
-            </div> <!-- /.prof-thumb -->
-            <div class="prof-details">
-                <h5 class="prof-name-list">{{ post.title }}</h5>
-                <p class="small-text">{{ post.content|striptags|truncatewords:35 }}</p>
-            </div> <!-- /.prof-details -->
-        </div> <!-- /.prof-list-item -->       
-        {% endif %}
-        {% endfor %}    
+        {% endfor %}
     </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'website:post_list' 'e-library' %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
 </div> <!-- /.widget-main -->

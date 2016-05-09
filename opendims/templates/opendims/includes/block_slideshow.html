@@ -1,28 +1,25 @@
-{% load staticfiles i18n verbose_names website_tags cropping %}
+{% load staticfiles i18n cropping website_tags %}
+
+{% get_slideshow_posts as posts %}
 
 <div class="main-slideshow">
-{% get_latest_slideshow as posts %} 
     <div class="flexslider">
         <ul class="slides">
-        {% for post in posts %}
-          {% if post.slideshow_image %}
+            {% for post in posts|slice:"5" %}
             <li>
-                <img src="{% cropped_thumbnail post "slideshow_image_crop" %}">
+                {% if post.slideshow_image %}
+                <img src="{% cropped_thumbnail post "slideshow_image_crop" %}" alt="{{ post.title }}">
+                {% else %}
+                <img src="{% static 'img/opendims/default-crop.jpg' %}" alt="{{ post.title }}">
+                {% endif %}
                 <div class="slider-caption">
-                    <h2><a href="blog-single.html">{{ post.title }}</a></h2>
-                    <p>{{ post.content|striptags|truncatewords:35 }}</p>
+                    <h2><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+                    <p>{{ post.content|striptags|truncatewords:30 }}</p>
                 </div>
             </li>
-          {% else %}
-            <li>
-                <img src="{% static 'img/opendims/default-image.jpg' %}">
-                <div class="slider-caption">
-                    <h2><a href="blog-single.html">{{ post.title }}</a></h2>
-                    <p>{{ post.content|striptags|truncatewords:35 }}</p>
-                </div>
-            </li>
-          {% endif %}
-      {% endfor %}
+            {% empty %}
+            <li><img src="{% static 'img/opendims/default-crop.jpg' %}" alt="{{ post.title }}"></li>
+            {% endfor %}
         </ul> <!-- /.slides -->
-    </div> <!-- /.flexslider -->    
+    </div> <!-- /.flexslider -->
 </div> <!-- /.main-slideshow -->
