@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'categories.editor',
     'easy_thumbnails',
     'image_cropping',
+    'screamshot',
     'common',
     'reports',
     'reporting',

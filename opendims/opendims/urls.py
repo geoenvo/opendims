@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^ckeditor/', include(ckeditor_uploader_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^captcha/', include('captcha.urls')),
+    url(r'^capture/', include('screamshot.urls', namespace='screamshot')),
     url(r'^reports/', include(reports_urls, namespace='reports')),
     url(r'^geolevels/', include(geolevels_urls, namespace='geolevels')),
     url(r'^maps/', include(maps_urls, namespace='maps')),
