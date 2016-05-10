@@ -26,6 +26,10 @@
     text-align: right;
 }
 
+.block-twitter .widget-inner {
+    padding-top: 13px;
+}
+
 /* weather forecast block icons */
 .block-weatherforecast .big-icon i.wi {
     font-size: 135px;
