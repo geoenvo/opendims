@@ -191,3 +191,27 @@
 .blog-categories ul li ul li ul li ul {
     padding-left: 20px;
 }
+
+.block-earlywarning .glyphicon {
+    margin-right: 4px !important;
+}
+
+.block-earlywarning .pagination .glyphicon {
+    margin-right: 0px !important;
+}
+
+.block-earlywarning .pagination a {
+
+}
+
+.block-earlywarning .panel ul {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+.block-earlywarning .news-item {
+    padding: 4px 4px;
+    margin: 0px;
+    border-bottom: 1px dashed #d5dbe0;
+}
