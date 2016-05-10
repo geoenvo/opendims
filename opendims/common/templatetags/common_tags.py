@@ -19,3 +19,16 @@ def query(qs, **kwargs):
         {% endfor %}
     """
     return qs.filter(**kwargs)
+
+
+@register.simple_tag
+def to_list(*args):
+    """Template tag for creating a list.
+
+    Usage:
+        {% to_list 'a' 1 2 3 as my_list %}
+        {% for list_item in my_list %}
+        ...
+        {% endfor %}
+    """
+    return args

@@ -27,21 +27,22 @@
 }
 
 /* weather forecast block icons */
-.big-icons i.wi {
+.block-weatherforecast .big-icon i.wi {
     font-size: 135px;
 }
 
-.small-icons i.wi {
+.block-weatherforecast .small-icon i.wi {
     font-size: 20px;
 }
 
-.row .small-icons {
+.block-weatherforecast .row .small-icon {
     margin-top: 10px;
+    text-align: center;
 }
 
 /* desktop layout */
 @media (max-width: 1200px) {
-    .block-weatherforecast .big-icons i.wi {
+    .block-weatherforecast .big-icon i.wi {
         font-size: 120px;
     }
 }
