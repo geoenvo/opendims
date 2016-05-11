@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'screamshot',
+    'absoluteuri',
     'common',
     'reports',
     'reporting',
