@@ -90,6 +90,13 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
+# Custom middleware for errors in debug mode
+MIDDLEWARE_CLASSES += [
+    'common.middleware.AdminOnly404Middleware',
+    'common.middleware.AdminOnly500Middleware',
+    'common.middleware.AdminOnly403Middleware',
+]
+
 # Sites framework
 SITE_ID = 1
 
