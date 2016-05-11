@@ -33,7 +33,7 @@ from waterlevel import urls as waterlevel_urls
 from contact import urls as contact_urls
 from weatherforecast import urls as weatherforecast_urls
 from disasterrehabilitation import urls as disasterrehabilitation_urls
-
+from reporting import urls as reporting_urls
 from website import urls as website_urls
 
 
@@ -58,7 +58,8 @@ urlpatterns = [
     url(r'^contact/', include(contact_urls, namespace='contact')),
     url(r'^weatherforecast/', include(weatherforecast_urls, namespace='weatherforecast')),
     url(r'^disasterrehabilitation/', include(disasterrehabilitation_urls, namespace='disasterrehabilitation')),
-    url(r'^web/', include(website_urls, namespace='website')),
+    url(r'^reporting/', include(reporting_urls, namespace='reporting')),
+    url(r'^web/', include(website_urls, namespace='website'))
 ]
 
 if settings.DEBUG:

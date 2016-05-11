@@ -9,6 +9,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^event/$', views.EventListView.as_view(), name='event_list'),
+    url(r'^event_map/(?P<pk>\d+)/$', views.event_map, name='event_map'),
     url(
         r'^event/(?P<pk>\d+)/$',
         views.EventDetailView.as_view(),

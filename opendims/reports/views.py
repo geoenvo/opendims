@@ -1,5 +1,6 @@
 from django.views import generic
 from django.conf import settings
+from django.shortcuts import render, get_object_or_404
 
 from .serializers import EventSerializer, ReportSerializer
 from rest_framework import filters
@@ -12,6 +13,14 @@ from .filters import EventFilter, ReportFilter
 class EventListView(generic.ListView):
     queryset = Event.objects.order_by('-created')
     paginate_by = settings.ITEMS_PER_PAGE
+
+
+def event_map(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    context = {
+        'event': event
+    }
+    return render(request, 'reports/event_map.html', context)
 
 
 class EventDetailView(generic.DetailView):
