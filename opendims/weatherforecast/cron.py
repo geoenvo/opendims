@@ -10,12 +10,14 @@ def weatherforecast_scheduled_job():
     """
     Cron job for gathering daily weather forecast from BMKG.
     """
-    logger = logging.getLogger('django_crontab.crontab')
+    logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh = logging.FileHandler('/tmp/' + __name__ + '.log')
     fh.setFormatter(formatter)
     logger.addHandler(fh)
+
+    logger.debug('START get Jabodetabek weather forecast')
 
     # Weather forecast for Jabodetabek cities
     path_city = urllib2.urlopen('http://data.bmkg.go.id/cuaca_jabodetabek_2.xml')
@@ -35,6 +37,10 @@ def weatherforecast_scheduled_job():
             forecast_night=night
         )
         weather_forecast_city.save()
+
+    logger.debug('END get Jabodetabek weather forecast')
+
+    logger.debug('START get DKI Jakarta weather forecast')
 
     # Weather forecast for DKI Jakarta province
     path_province = urllib2.urlopen('http://data.bmkg.go.id/cuaca_indo_2.xml')
@@ -59,3 +65,5 @@ def weatherforecast_scheduled_job():
                 humidity_max=humidity_max
             )
             weather_forecast_province.save()
+
+    logger.debug('END get DKI Jakarta weather forecast')
