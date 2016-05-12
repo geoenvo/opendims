@@ -1,5 +1,8 @@
 import urllib2
 import xml.etree.ElementTree as ET
+import datetime
+
+from django.utils import timezone
 
 from .models import WeatherForecastReport
 from geolevels.models import City, Province
@@ -7,9 +10,13 @@ from geolevels.models import City, Province
 
 def weatherforecast_scheduled_job():
     """
-    Cron job for gathering daily weather forecast from BMKG.
+    Cron job for gathering weather forecast from BMKG.
+    Run job before midnight to gather tomorrow's weather forecast.
     """
     # Weather forecast for Jabodetabek cities
+    today = timezone.localtime(timezone.now())
+    tomorrow = today + datetime.timedelta(days=1)
+    tomorrow = tomorrow.replace(hour=0, minute=0, second=0, microsecond=0)
     path_city = urllib2.urlopen('http://data.bmkg.go.id/cuaca_jabodetabek_2.xml')
     tree_city = ET.parse(path_city)
     root_city = tree_city.getroot()
@@ -21,6 +28,7 @@ def weatherforecast_scheduled_job():
         noon = forecast_city.find('Siang').text.upper()
         night = forecast_city.find('Malam').text.upper()
         weather_forecast_city = WeatherForecastReport(
+            created=tomorrow,
             city=City.objects.get(name=city),
             forecast_morning=morning,
             forecast_noon=noon,
@@ -43,6 +51,7 @@ def weatherforecast_scheduled_job():
             humidity_min = forecast_province.find('KelembapanMin').text.upper()
             humidity_max = forecast_province.find('KelembapanMax').text.upper()
             weather_forecast_province = WeatherForecastReport(
+                created=tomorrow,
                 province=Province.objects.get(id=31),
                 forecast=forecast,
                 temperature_min=temperature_min,
