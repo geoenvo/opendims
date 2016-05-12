@@ -1,6 +1,6 @@
 {% extends "disasterrehabilitation/disasterrehabilitation.html" %}
 
-{% load i18n active_url verbose_names %}
+{% load i18n active_url verbose_names common_filters %}
 
 {% block title %}{{ block.super }} - {% trans "Disaster Rehabilitation" %}{% endblock %}
 
@@ -16,6 +16,7 @@
     <thead>
         <tr>
             {% for eventassessment in eventassessment_list|slice:'1' %}
+            <th width='5%'>{% trans "No." %}</th>
             <th class="col-md-2">{% get_verbose_field_name eventassessment 'created' %}</th>
             <th class="col-md-2">{% get_verbose_field_name eventassessment 'event' %}</th>
             <th class="col-md-2">{% get_verbose_field_name eventassessment 'name' %}</th>
@@ -28,11 +29,12 @@
     <tbody>
         {% for eventassessment in eventassessment_list %}
         <tr>
+            <th>{{ forloop.counter }}</th>
             <td><a href="{{ eventassessment.get_absolute_url }}">{{ eventassessment.created }}</a></td>
             <td>{{ eventassessment.event }}</td>
             <td>{{ eventassessment.name }}</td>
             <td>{{ eventassesment.published }}</td>
-            <td>{{ eventassessment.file }}</td>
+            <td><a href='{{ reference.file.url }}' download>{{ eventassessment.file|filename }}</td>
             <td>{{ eventassessment.note }}</td>
         </tr>
         {% empty %}

@@ -16,6 +16,7 @@
     <thead>
         <tr>
             {% for activity in activity_list|slice:'1' %}
+            <th width='5%'>{% trans "No." %}</th>
             <th class="col-md-2">{% get_verbose_field_name activity 'created' %}</th>
             <th>{% get_verbose_field_name activity 'name' %}</th>
             <th>{% get_verbose_field_name activity 'type' %}</th>
@@ -27,6 +28,7 @@
     <tbody>
         {% for activity in activity_list %}
         <tr>
+            <td>{{ forloop.counter }}</td>
             <td><a href="{{ activity.get_absolute_url }}">{{ activity.created }}</a></td>
             <td>{{ activity.name }}</td>
             <td>{{ activity.type }}</td>

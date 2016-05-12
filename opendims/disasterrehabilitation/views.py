@@ -116,7 +116,6 @@ def disasterrehabilitation_index(request):
         context['eventassessments'] = eventassessments
         context['activities'] = activities
 
-
     return render(
         request,
         'disasterrehabilitation/disasterrehabilitation_index.html',
