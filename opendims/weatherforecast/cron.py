@@ -10,7 +10,7 @@ def weatherforecast_scheduled_job():
     """
     Cron job for gathering daily weather forecast from BMKG.
     """
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger('django_crontab.crontab')
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh = logging.FileHandler('/tmp/' + __name__ + '.log')
