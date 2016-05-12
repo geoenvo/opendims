@@ -1,22 +1,12 @@
-import logging
 import requests
-from decimal import Decimal
 import time
-
-from django.conf import settings
+from decimal import Decimal
 
 from .models import ReportAutoSummary
 from geolevels.models import Village
 
 
 def jaksafe_scheduled_job():
-    logger = logging.getLogger('django_crontab.crontab')
-    logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh = logging.FileHandler('/tmp/' + __name__ + '.log')
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-
     r = requests.get('http://jaksafe.bpbd.jakarta.go.id/report/auto_report_json/' + time.strftime('%Y%m%d') + '/all')
     json = r.json()
     for report in json:
