@@ -26,7 +26,17 @@ def get_latest_weatherforecastreport_by_city(city):
     ).order_by('-created')[:1]
     return weatherforecastreport
 
+    
+@register.simple_tag
+def get_latest_weatherforecastreport():
+    now = timezone.localtime(timezone.now())
+    weatherforecastreports = WeatherForecastReport.objects.filter(
+        created__date=now.date(),
+        province__isnull=True
+    ).order_by('-created')
+    return weatherforecastreports
 
+    
 @register.simple_tag
 def get_forecast_details(forecast):
     forecast_details = {}

@@ -105,3 +105,51 @@ class WeatherForecastReport(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.province, self.city, timezone.localtime(self.created))
+
+    def get_morningweather_iconclass(self):
+        weather_icon_class = ''
+        if self.forecast_morning == 'CERAH':
+            weather_icon_class = 'wi wi-day-sunny'
+        elif self.forecast_morning == 'CERAH BERAWAN':
+            weather_icon_class = 'wi wi-day-cloudy'
+        elif self.forecast_morning == 'BERAWAN':
+            weather_icon_class = 'wi wi-cloudy'
+        elif self.forecast_morning == 'HUJAN RINGAN':
+            weather_icon_class = 'wi wi-day-rain-mix'
+        elif self.forecast_morning == 'HUJAN SEDANG':
+            weather_icon_class = 'wi wi-rain'
+        elif self.forecast_morning == 'HUJAN DERAS':
+            weather_icon_class = 'wi wi-thunderstorm'
+        return weather_icon_class
+
+    def get_noonweather_iconclass(self):
+        weather_icon_class = ''
+        if self.forecast_noon == 'CERAH':
+            weather_icon_class = 'wi wi-day-sunny'
+        elif self.forecast_noon == 'CERAH BERAWAN':
+            weather_icon_class = 'wi wi-day-cloudy'
+        elif self.forecast_noon == 'BERAWAN':
+            weather_icon_class = 'wi wi-cloudy'
+        elif self.forecast_noon == 'HUJAN RINGAN':
+            weather_icon_class = 'wi wi-day-rain-mix'
+        elif self.forecast_noon == 'HUJAN SEDANG':
+            weather_icon_class = 'wi wi-rain'
+        elif self.forecast_noon == 'HUJAN DERAS':
+            weather_icon_class = 'wi wi-thunderstorm'
+        return weather_icon_class
+
+    def get_nightweather_iconclass(self):
+        weather_icon_class = ''
+        if self.forecast_night == 'CERAH':
+            weather_icon_class = 'wi wi-night-clear'
+        elif self.forecast_night == 'CERAH BERAWAN':
+            weather_icon_class = 'wi wi-night-alt-cloudy'
+        elif self.forecast_night == 'BERAWAN':
+            weather_icon_class = 'wi wi-cloudy'
+        elif self.forecast_night == 'HUJAN RINGAN':
+            weather_icon_class = 'wi wi-night-alt-sleet'
+        elif self.forecast_night == 'HUJAN SEDANG':
+            weather_icon_class = 'wi wi-rain'
+        elif self.forecast_night == 'HUJAN DERAS':
+            weather_icon_class = 'wi wi-thunderstorm'
+        return weather_icon_class
