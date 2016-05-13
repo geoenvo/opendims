@@ -57,7 +57,7 @@ def get_forecast_details(forecast):
     elif forecast == 'HUJAN SEDANG':
         forecast_text = 'Moderate rain'
         weather_icon_class = 'wi-showers'
-    elif forecast == 'HUJAN DERAS':
+    elif forecast == 'HUJAN LEBAT':
         forecast_text = 'Heavy rain'
         weather_icon_class = 'wi-rain'
     forecast_details['forecast_text'] = forecast_text

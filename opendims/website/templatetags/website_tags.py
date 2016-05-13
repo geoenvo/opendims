@@ -1,4 +1,5 @@
 from django import template
+from django.core.exceptions import MultipleObjectsReturned
 
 from categories.models import Category
 
@@ -37,7 +38,11 @@ def get_posts_by_category(category):
     """
     Return all posts that are part of the category's tree.
     """
-    category = Category.objects.get(slug=category)
+    try:
+        category = Category.objects.get(slug=category)
+    except MultipleObjectsReturned:
+        category = Category.objects.filter(slug=category)[:1]
+        category = category[0]
     category_tree = [category]
     if not category.is_leaf_node():
         category_tree = category.get_descendants(include_self=True)
@@ -53,7 +58,11 @@ def get_category_tree(category):
     """
     Return a category's tree structure. Render the tree using recursetree.
     """
-    category = Category.objects.get(slug=category)
+    try:
+        category = Category.objects.get(slug=category)
+    except MultipleObjectsReturned:
+        category = Category.objects.filter(slug=category)[:1]
+        category = category[0]
     category_tree = category.get_descendants(include_self=True)
     return category_tree
 

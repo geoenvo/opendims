@@ -1,0 +1,92 @@
+{% load i18n leaflet_tags %}
+<html>
+<head>
+{% leaflet_css %}
+<style type="text/css">
+.leaflet-container {
+    width: 400px;
+    height: 300px;
+}
+</style>
+</head>
+<body>
+{% leaflet_map "leaflet_map" callback="window.leaflet_map_init" %}
+{% leaflet_js %}
+<script type="text/javascript">
+function leaflet_map_init(map, options) {
+    map.options.zoomAnimation = false;
+    map.options.fadeAnimation = false;
+    map.options.markerZoomAnimation = false;
+
+    {% if event.province %}
+    var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    {% if event.city %}
+    if (typeof provinceLayer !== 'undefined') {
+        map.removeLayer(provinceLayer);
+    }
+    var cityLayer = L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    {% if event.subdistrict %}
+    if (typeof cityLayer !== 'undefined') {
+        map.removeLayer(cityLayer);
+    }
+    var subdistrictLayer = L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    {% if event.village %}
+    if (typeof subdistrictLayer !== 'undefined') {
+        map.removeLayer(subdistrictLayer);
+    }
+    var villageLayer = L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    {% if event.rw %}
+    if (typeof villageLayer !== 'undefined') {
+        map.removeLayer(villageLayer);
+    }
+    var rwLayer = L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    {% if event.rt %}
+    if (typeof rwLayer !== 'undefined') {
+        map.removeLayer(rwLayer);
+    }
+    var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    {% if event.point %}
+    var pointLayer = L.geoJson({{ event.point.geojson|safe }}).addTo(map);
+    {% endif %}
+
+    if (typeof pointLayer !== 'undefined') {
+        var pointBounds = pointLayer.getBounds();
+        var pointCenter = pointBounds.getCenter();
+        map.setZoom(16);
+        map.panTo(pointCenter);
+        popupLayer = pointLayer;
+    } else if (typeof rtLayer !== 'undefined') {
+        map.fitBounds(rtLayer);
+        popupLayer = rtLayer;
+    } else if (typeof rwLayer !== 'undefined') {
+        map.fitBounds(rwLayer);
+        popupLayer = rwLayer;
+    } else if (typeof villageLayer !== 'undefined') {
+        map.fitBounds(villageLayer);
+        popupLayer = villageLayer;
+    } else if (typeof subdistrictLayer !== 'undefined') {
+        map.fitBounds(subdistrictLayer);
+        popupLayer = subdistrictLayer;
+    } else if (typeof cityLayer !== 'undefined') {
+        map.fitBounds(cityLayer);
+        popupLayer = cityLayer;
+    } else if (typeof provinceLayer !== 'undefined') {
+        map.fitBounds(provinceLayer);
+        popupLayer = provinceLayer;
+    }
+}
+</script>
+</body>
+</html>

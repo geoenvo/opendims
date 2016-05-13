@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'categories.editor',
     'easy_thumbnails',
     'image_cropping',
+    'screamshot',
+    'absoluteuri',
     'common',
     'reports',
     'reporting',
@@ -86,6 +88,13 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+]
+
+# Custom middleware for errors in debug mode
+MIDDLEWARE_CLASSES += [
+    'common.middleware.AdminOnly404Middleware',
+    'common.middleware.AdminOnly500Middleware',
+    'common.middleware.AdminOnly403Middleware',
 ]
 
 # Sites framework
@@ -303,6 +312,8 @@ ITEMS_PER_PAGE = 20
 CRONJOBS = [
     ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job'),
     ('* 1 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job'),
+    ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job', '>> /tmp/jaksafe_scheduled_job.log'),
+    ('* 23 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job', '>> /tmp/weatherforecast_scheduled_job.log'),
     ('0 * * * *', 'reportaggregator.cron.report_scheduled_job'),
 ]
 

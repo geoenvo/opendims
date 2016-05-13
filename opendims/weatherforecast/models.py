@@ -30,7 +30,7 @@ class WeatherForecastReport(CommonAbstractModel):
         ('BERAWAN', _('Cloudy')),
         ('HUJAN RINGAN', _('Light rain')),
         ('HUJAN SEDANG', _('Moderate rain')),
-        ('HUJAN DERAS', _('Heavy rain')),
+        ('HUJAN LEBAT', _('Heavy rain')),
     )
     created = models.DateTimeField(
         default=timezone.now,

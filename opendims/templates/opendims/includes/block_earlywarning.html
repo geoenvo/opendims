@@ -2,23 +2,28 @@
 
 {% get_earlywarningreports as earlywarningreports %}
 
-<div class="widget-main">
+<div class="widget-main block-earlywarning">
     <div class="widget-main-title">
         <h4 class="widget-title">{% trans "Early Warning" %}</h4>
     </div>
     <div class="widget-inner">
-        <div id="slider-testimonials">
-            <ul>
-                {% for earlywarningreport in earlywarningreports|slice:"5" %}
-                <li>
-                    {{ earlywarningreport.content|safe }}<p><strong class="dark-text">{{ earlywarningreport.created|date:"j F Y H:i T" }}</strong></p>
-                </li>
-                {% empty %}
-                <li><p>{% trans "No entries found!" %}</p></li>
-                {% endfor %}
-            </ul>
-            <a class="prev fa fa-angle-left" href=""></a>
-            <a class="next fa fa-angle-right" href=""></a>
+        {%if earlywarningreports %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="ticker">
+                            {% for earlywarningreport in earlywarningreports|slice:"5" %}
+                            <li class="news-item">
+                            {{ earlywarningreport.content|safe }}<p><strong class="dark-text">{{ earlywarningreport.created|date:"j F Y H:i T" }}</strong></p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer"></div>
         </div>
+        {% endif %}
     </div> <!-- /.widget-inner -->
 </div> <!-- /.widget-main -->

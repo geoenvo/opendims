@@ -5,15 +5,28 @@
 {% block content %}
 
 {% block content_upper %}
-
 {% include "opendims/includes/block_content_upper.html" %}
-
 {% endblock content_upper %}
 
 {% block content_lower %}
-
 {% include "opendims/includes/block_content_lower.html" %}
-
 {% endblock content_lower %}
 
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/opendims/jquery.bootstrap.newsbox.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.ticker').bootstrapNews({
+        newsPerPage: 1,
+        autoplay: true,
+        pauseOnHover: true,
+        direction: 'up',
+        newsTickerInterval: 5000,
+        onToDo: function() {
+        }
+    });
+});
+</script>
 {% endblock %}
