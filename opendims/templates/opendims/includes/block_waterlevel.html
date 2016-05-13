@@ -1,0 +1,60 @@
+{% load staticfiles i18n cropping waterlevel_tags common_tags common_filters %}
+
+{% block extra_css %}
+<style type="text/css">
+.no-padding {
+    padding: 0;
+}
+.va-middle {
+    vertical-align: middle !important;
+}
+.SIAGA-1 {
+    background-color: #ff6666;
+}
+.SIAGA-2 {
+    background-color: #ffcc00;
+}
+.SIAGA-3 {
+    background-color: #ffff66;
+}
+.SIAGA-4 {
+    background-color: #91ff66;
+}
+</style>
+{% endblock extra_css %}
+
+{% get_watergate as watergates %}
+
+<div class="widget-main">
+    <div class="widget-main-title">
+        <h4 class="widget-title">{% trans "Water Level Information" %}</h4>
+    </div> <!-- /.widget-main-title -->
+    <div class="widget-inner">
+        <table class="table table-condensed table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">Pintu Air</th>
+                    <th class="text-center">TMA</th>
+                    <th class="text-center">Siaga</th>
+                </tr>
+            </thead>
+            <tbody>
+                   {% for watergate in watergates|slice:"5" %}
+                        {% get_waterlevelreport_block watergate as waterlevelreports %}
+                    <tr>
+                        {% for waterlevelreport in waterlevelreports %}
+                        <td class="{{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ watergate.name }}</a></td>               
+                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ waterlevelreport.height }}</td>
+                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ waterlevelreport.get_threshold_level }}</td>
+                    </tr>
+                        {% endfor %}
+                {% endfor %}
+            </tbody>           
+        </table>
+    </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'waterlevel:watergate_list' %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
+</div> <!-- /.widget-main -->
