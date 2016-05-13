@@ -62,6 +62,7 @@ class Source(CommonAbstractModel):
 class Keyword(CommonAbstractModel):
     source = models.ForeignKey(
             Source,
+            related_name='keywords',
             verbose_name=verbose_source
     )
     keyword = models.CharField(

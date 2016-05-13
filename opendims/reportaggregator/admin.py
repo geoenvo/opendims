@@ -10,6 +10,11 @@ verbose_source_details = _('Source details')
 verbose_keyword_details = _('Keyword details')
 
 
+class KeywordInline(admin.TabularInline):
+    model = Keyword
+    extra = 3
+
+
 class SourceAdmin(admin.ModelAdmin):
     fieldsets = [
         (verbose_source_details, {
@@ -33,6 +38,7 @@ class SourceAdmin(admin.ModelAdmin):
 
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
+    inlines = [KeywordInline]
 
 
 class KeywordAdmin(admin.ModelAdmin):
