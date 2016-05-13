@@ -67,48 +67,52 @@
           attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
         });
 
+        // Time is WIB (GMT+7) based
         var today_date = new Date();
+        var wibOffset = 7 * 60 * 60000;
+        var userOffset = today_date.getTimezoneOffset() * 60000;
+
+        today_date = new Date(today_date.getTime() + wibOffset + userOffset);
         var yyyy = today_date.getFullYear().toString();
-        var mm = (today_date.getMonth()+1).toString();
+        var mm = (today_date.getMonth() + 1).toString();
         var dd  = today_date.getDate().toString();
         var todaydate = yyyy + '-' + mm + '-' + dd;
 
-        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        var yesterday = new Date(today_date.setDate(today_date.getDate() - 1));
         var yesterdayyyyy = yesterday.getFullYear().toString();
-        var yesterdaymm = (yesterday.getMonth()+1).toString();
+        var yesterdaymm = (yesterday.getMonth() + 1).toString();
         var yesterdaydd  = yesterday.getDate().toString();
         var yesterdaydate = yesterdayyyyy + '-' + yesterdaymm + '-' + yesterdaydd;
 
-        var past2 = new Date(new Date().setDate(new Date().getDate()-2));
+        var past2 = new Date(yesterday.setDate(yesterday.getDate() - 1));
         var past2yyyy = past2.getFullYear().toString();
-        var past2mm = (past2.getMonth()+1).toString();
+        var past2mm = (past2.getMonth() + 1).toString();
         var past2dd  = past2.getDate().toString();
         var past2date = past2yyyy + '-' + past2mm + '-' + past2dd;
 
-        var past3 = new Date(new Date().setDate(new Date().getDate()-3));
+        var past3 = new Date(past2.setDate(past2.getDate() - 1));
         var past3yyyy = past3.getFullYear().toString();
-        var past3mm = (past3.getMonth()+1).toString();
+        var past3mm = (past3.getMonth() + 1).toString();
         var past3dd  = past3.getDate().toString();
         var past3date = past3yyyy + '-' + past3mm + '-' + past3dd;
 
-        var past4 = new Date(new Date().setDate(new Date().getDate()-4));
+        var past4 = new Date(past3.setDate(past3.getDate() - 1));
         var past4yyyy = past4.getFullYear().toString();
-        var past4mm = (past4.getMonth()+1).toString();
+        var past4mm = (past4.getMonth() + 1).toString();
         var past4dd  = past4.getDate().toString();
         var past4date = past4yyyy + '-' + past4mm + '-' + past4dd;
 
-        var past5 = new Date(new Date().setDate(new Date().getDate()-5));
+        var past5 = new Date(past4.setDate(past4.getDate() - 1));
         var past5yyyy = past5.getFullYear().toString();
-        var past5mm = (past5.getMonth()+1).toString();
+        var past5mm = (past5.getMonth() + 1).toString();
         var past5dd  = past5.getDate().toString();
         var past5date = past5yyyy + '-' + past5mm + '-' + past5dd;
 
-        var past6 = new Date(new Date().setDate(new Date().getDate()-6));
+        var past6 = new Date(past5.setDate(past5.getDate() - 1));
         var past6yyyy = past6.getFullYear().toString();
-        var past6mm = (past6.getMonth()+1).toString();
+        var past6mm = (past6.getMonth() + 1).toString();
         var past6dd  = past6.getDate().toString();
         var past6date = past6yyyy + '-' + past6mm + '-' + past6dd;
-
 
         var today_layer = L.geoJson(null, {
           style: function(feature) {
@@ -320,7 +324,6 @@
 
             var featureName = featureVillage + ' - ' + featureCreated;
 
-
             var content = "<table class='table table-striped table-bordered table-condensed'>";
             content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
             content = content + "<tr><th>Village</th><td>" + contentVillage + "</td></tr>";
@@ -346,24 +349,22 @@
                 $("#featureModal").modal("show");
               }
             });
-
           }
         }
 
         var groupedOverlays = {
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #3759BF;background:rgba(55, 89, 191, 0.2)'></span>Today's DaLA Summary Report": today_layer,
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #fd1900;background:rgba(253, 25, 0, 0.2)'></span>Yesterday": yesterday_layer,
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #22fd00;background:rgba(34, 253, 0, 0.2)'></span>Two Days Ago": past2_layer,
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #00f6fd;background:rgba(0, 246, 253, 0.2)'></span>Three Days Ago": past3_layer,
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #fd00f2;background:rgba(253, 0, 242, 0.2)'></span>Four Days Ago": past4_layer,
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #fda600;background:rgba(253, 166, 0, 0.2)'></span>Five Days Ago": past5_layer,
-            "<span style='margin-right:4px;padding-left:15px;border:3px solid #575865;background:rgba(87, 88, 101, 0.2)'></span>Six Days": past6_layer
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #3759BF;background:rgba(55, 89, 191, 0.2)'></span>Today's DaLA summary report": today_layer,
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #fd1900;background:rgba(253, 25, 0, 0.2)'></span>Yesterday": yesterday_layer,
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #22fd00;background:rgba(34, 253, 0, 0.2)'></span>2 days ago": past2_layer,
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #00f6fd;background:rgba(0, 246, 253, 0.2)'></span>3 days ago": past3_layer,
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #fd00f2;background:rgba(253, 0, 242, 0.2)'></span>4 days ago": past4_layer,
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #fda600;background:rgba(253, 166, 0, 0.2)'></span>5 days ago": past5_layer,
+          "<span style='margin-right:4px;padding-left:15px;border:3px solid #575865;background:rgba(87, 88, 101, 0.2)'></span>6 days ago": past6_layer
         };
 
         L.control.layers(null, groupedOverlays, {
           collapsed: false
         }).addTo(map);
-
     });
     </script>
   </body>

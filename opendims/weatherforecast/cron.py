@@ -13,10 +13,12 @@ def weatherforecast_scheduled_job():
     Cron job for gathering weather forecast from BMKG.
     Run job before midnight to gather tomorrow's weather forecast.
     """
-    # Weather forecast for Jabodetabek cities
+    # Available forecast for today+1
     today = timezone.localtime(timezone.now())
     tomorrow = today + datetime.timedelta(days=1)
     tomorrow = tomorrow.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    # Weather forecast for Jabodetabek cities
     path_city = urllib2.urlopen('http://data.bmkg.go.id/cuaca_jabodetabek_2.xml')
     tree_city = ET.parse(path_city)
     root_city = tree_city.getroot()
