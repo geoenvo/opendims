@@ -1,11 +1,9 @@
-from django.conf import settings
 import requests
+import time
+from decimal import Decimal
 
 from .models import ReportAutoSummary
-
-from decimal import Decimal
 from geolevels.models import Village
-import time
 
 
 def jaksafe_scheduled_job():

@@ -1,11 +1,8 @@
 {% extends "weatherforecast/weatherforecast.html" %}
 
-{% load i18n verbose_names %}
-
-{% load staticfiles %}
+{% load staticfiles i18n verbose_names weatherforecast_tags %}
 
 {% block title %}{{ block.super }} - {% trans "Weather Forecast Report" %}{% endblock %}
-
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'weather-icons/css/weather-icons.min.css' %}">
@@ -15,17 +12,71 @@
 
 font-size: 20pt;
 text-align: center;
-color: #0000FF;
+color: #FFD700;
 }
+
+.wi.wi-day-cloudy {
+
+font-size: 20pt;
+text-align: center;
+color: #FFD700;
+}
+
+.wi.wi-cloudy {
+
+font-size: 20pt;
+text-align: center;
+color: #1E90FF;
+}
+
+.wi.wi-day-rain-mix {
+
+font-size: 20pt;
+text-align: center;
+color: #1E90FF;
+}
+
+.wi.wi-rain {
+
+font-size: 20pt;
+text-align: center;
+color: #0000CD;
+}
+
+.wi.wi-thunderstorm {
+
+font-size: 20pt;
+text-align: center;
+color: #191970;
+}
+
+.wi.wi-night-alt-cloudy{
+
+font-size: 20pt;
+text-align: center;
+color: #696969;
+}
+
+.wi.wi-night-alt-sleet{
+
+font-size: 20pt;
+text-align: center;
+color: #696969;
+}
+
+.wi.wi-night-clear {
+
+font-size: 20pt;
+text-align: center;
+color: #696969;
+}
+
 </style>
 {% endblock extra_css %}
 
 
 
 {% block page_content %}
-
-
-
  <div class="container-fluid">
   <div class="row">
    <div class="col-md-6 col-sm-6 col-xs-12">
@@ -52,88 +103,34 @@ color: #0000FF;
  </div>
 </div>
 
-
-          
     <div class="table-responsive">
-    <table  class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            {% for weatherforecastreport in weatherforecastreport_list|slice:'1' %}
-            <th class="text-center">Daerah</th>
-            <th class="text-center">Pagi</th>
-            <th class="text-center">Siang</th>
-            <th class="text-center">Malam</th>
-        </tr>
-            {% endfor %}
-    </thead>
-    
-    <tbody>
-        <tr>
-            {% for weatherforecastreport in weatherforecastreport_list %}
-            <td align="center">{{ weatherforecastreport.city }}</td>
-             {% if weatherforecastreport.forecast_morning = 'CERAH' %}
-            <td align="center" ><i class="wi wi-day-sunny" ></i><br><br>{{ weatherforecastreport.forecast_morning }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'CERAH BERAWAN' %}
-             <td align="center"><i class="wi wi-day-cloudy"></i><br><br>{{ weatherforecastreport.forecast_morning }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'BERAWAN' %}
-             <td align="center"><i class="wi wi-cloudy"></i><br><br>{{ weatherforecastreport.forecast_morning }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN RINGAN' %}
-             <td align="center"><i class="wi wi-day-rain-mix"></i><br><br>{{ weatherforecastreport.forecast_morning }}</td> 
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN SEDANG' %}
-             <td align="center"><i class="wi wi-rain"></i><br><br>{{ weatherforecastreport.forecast_morning }}</td>             
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN DERAS' %}
-             <td align="center"><i class="wi wi-thunderstorm"></i><br><br>{{ weatherforecastreport.forecast_morning }}</td>            
-  {% endif %}
-             {% if weatherforecastreport.forecast_morning = 'CERAH' %}
-            <td align="center"><i class="wi wi-day-sunny"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'CERAH BERAWAN' %}
-             <td align="center"><i class="wi wi-day-cloudy"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'BERAWAN' %}
-             <td align="center"><i class="wi wi-cloudy"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN RINGAN' %}
-             <td align="center"><i class="wi wi-day-rain-mix"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td> 
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN SEDANG' %}
-             <td align="center"><i class="wi wi-rain"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td>             
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN DERAS' %}
-             <td align="center"><i class="wi wi-thunderstorm"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td>            
-  {% endif %}
-              {% if weatherforecastreport.forecast_morning = 'CERAH' %}
-            <td align="center"><i class="wi wi-night-clear"></i><br><br>{{ weatherforecastreport.forecast_night }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'CERAH BERAWAN' %}
-             <td align="center"><i class="wi wi-night-alt-cloudy"></i><br><br>{{ weatherforecastreport.forecast_night }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'BERAWAN' %}
-             <td align="center"><i class="wi wi-cloudy"></i><br><br>{{ weatherforecastreport.forecast_night }}</td>
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN RINGAN' %}
-             <td align="center"><i class="wi wi-night-alt-sleet"></i><br><br>{{ weatherforecastreport.forecast_night }}</td> 
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN SEDANG' %}
-             <td align="center"><i class="wi wi-rain"></i><br><br>{{ weatherforecastreport.forecast_night }}</td>             
-            {% elif weatherforecastreport.forecast_morning = 'HUJAN DERAS' %}
-             <td align="center"><i class="wi wi-thunderstorm"></i><br><br>{{ weatherforecastreport.forecast_night }}</td>                        
-       {% endif %}      
-           
-        </tr>
-            {% empty %}
-        <tr>
-           <td colspan="6" class="text-center">{% trans "No weather forecast found." %}</td>
-        </tr>
-            {% endfor %}
-    </tbody>
-    
-    </table>
-    </div>
-
-{% block extra_js_lib  %}
-
-{% endblock %}
-
-
-    
+        <table  class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">Daerah</th>
+                    <th class="text-center">Pagi</th>
+                    <th class="text-center">Siang</th>
+                    <th class="text-center">Malam</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>{% get_latest_weatherforecastreport as weatherforecastreports %}
+                    {% for weatherforecastreport in weatherforecastreports %}
+                        <td align="center"><br>{{ weatherforecastreport.city }}</td>
+                        <td align="center" ><i class="{{ weatherforecastreport.get_morningweather_iconclass }}" ></i><br><br>{{ weatherforecastreport.forecast_morning }}</td>
+                        <td align="center"><i class="{{ weatherforecastreport.get_noonweather_iconclass }}"></i><br><br>{{ weatherforecastreport.forecast_noon }}</td>
+                        <td align="center"><i class="{{ weatherforecastreport.get_nightweather_iconclass }}"></i><br><br>{{ weatherforecastreport.forecast_night }}</td>
+                </tr>
+                    {% empty %}
+                <tr>
+                        <td colspan="6" class="text-center">{% trans "No weather forecast found." %}</td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>    
 {% comment %}
 {% endcomment %}
-
-{% include 'opendims/includes/pagination.html' with page=page_obj %}
-{% endblock %}  
-
 
 {% block extra_js  %}
 <script src="{% static 'moment/min/moment.min.js' %}"></script>
@@ -149,3 +146,6 @@ $("#datetimepicker").datetimepicker({
 
 {% endblock %}
 
+
+{% include 'opendims/includes/pagination.html' with page=page_obj %}
+{% endblock %}  
