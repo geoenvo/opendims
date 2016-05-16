@@ -124,11 +124,12 @@
             <thead>
                 <tr>
                     {% for report in reports|slice:'1' %}
-                    <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name report 'updated' %}</th>
-                    <th class="col-md-1">{% get_verbose_field_name report 'source' %}</th>
-                    <th class="col-md-1">{% get_verbose_field_name report 'status' %}</th>
+                    <th width="5%">{% trans 'No.' %}</th>
+                    <th class="col-md-2" align="center">{% get_verbose_field_name report 'event' %}</th>
+                    <th class="col-md-2" align="center">{% get_verbose_field_name report 'created' %}</th>
+                    <th class="col-md-2" align="center">{% get_verbose_field_name report 'updated' %}</th>
+                    <th class="col-md-1" align="center">{% get_verbose_field_name report 'source' %}</th>
+                    <th class="col-md-1" align="center">{% get_verbose_field_name report 'status' %}</th>
                     <th>{% get_verbose_field_name report 'note' %}</th>
                     {% endfor %}
                 </tr>
@@ -136,6 +137,7 @@
             <tbody>
                 {% for report in reports %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td><a href="{{ report.get_absolute_url }}">{{ report.event }}</a></td>
                     <td>{{ report.created|date:"j F Y H:i" }}</td>
                     <td>{{ report.updated|date:"j F Y H:i" }}</td>
@@ -165,6 +167,7 @@
             <thead>
                 <tr>
                     {% for eventimpact in eventimpacts|slice:'1' %}
+                    <th width="5%">{% trans 'No.' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name eventimpact 'event' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name eventimpact 'village' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name eventimpact 'rw' %}</th>
@@ -182,6 +185,7 @@
             <tbody>
                 {% for eventimpact in eventimpacts %}
                 <tr>
+                    <td>{{ forloop.counter }}
                     <td><a href="{{ event.get_absolute_url }}">{{ eventimpact.event }}</a></td>
                     <td><a href="{{ event.village.get_absolute_url }}">{{ eventimpact.village }}</a></td>
                     <td><a href="{{ event.rw.get_absolute_url }}">{{ eventimpact.rw }}</a></td>
