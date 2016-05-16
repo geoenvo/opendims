@@ -1,0 +1,30 @@
+{% extends "earlywarning/earlywarningreport_list.html" %}
+
+{% load staticfiles i18n verbose_names cropping common_filters %}
+
+{% block title %}{{ block.super }} - {{ earlywarningreport.title }}{% endblock %}
+
+{% block crumbs %}
+{{ block.super }}
+<h6 class="page-active">{{ earlywarningreport.title }}</h6>
+{% endblock %}
+
+{% block page_content %}
+<div class="row" >
+    <div class="col-md-12">
+        <h3 class="page-header heading">{{ earlywarningreport.title }}</h3>
+        <div class="post-container">
+            <div class="post-meta">
+            <i class="fa fa-calendar-o"></i>&nbsp;{{ earlywarningreport.created|date:"j F Y H:i T" }}
+            &nbsp;
+            </div>
+            {{ earlywarningreport.content|safe }}
+            <br>
+        </div> <!-- /.post-container -->
+    </div>
+</div>
+{% endblock %}
+
+{% block page_sidebar %}
+{% include "opendims/includes/block_similar_earlywarnings.html" %}
+{% endblock %}

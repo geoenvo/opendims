@@ -35,6 +35,7 @@ from weatherforecast import urls as weatherforecast_urls
 from disasterrehabilitation import urls as disasterrehabilitation_urls
 from reporting import urls as reporting_urls
 from website import urls as website_urls
+from earlywarning import urls as earlywarning_urls
 
 
 urlpatterns = [
@@ -59,7 +60,8 @@ urlpatterns = [
     url(r'^weatherforecast/', include(weatherforecast_urls, namespace='weatherforecast')),
     url(r'^disasterrehabilitation/', include(disasterrehabilitation_urls, namespace='disasterrehabilitation')),
     url(r'^reporting/', include(reporting_urls, namespace='reporting')),
-    url(r'^web/', include(website_urls, namespace='website'))
+    url(r'^web/', include(website_urls, namespace='website')),
+    url(r'^earlywarning/', include(earlywarning_urls, namespace='earlywarning'))
 ]
 
 if settings.DEBUG:

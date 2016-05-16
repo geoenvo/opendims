@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
+from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 from common.models import CommonAbstractModel
 
@@ -43,3 +44,6 @@ class EarlyWarningReport(CommonAbstractModel):
 
     def __unicode__(self):
         return '[%s] - %s' % (self.title, timezone.localtime(self.created))
+
+    def get_absolute_url(self):
+        return reverse('earlywarning:earlywarningreport_detail', args=[self.pk])
