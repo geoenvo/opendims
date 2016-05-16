@@ -156,6 +156,8 @@ class Report(CommonAbstractModel):
 
     event = models.ForeignKey(
         Event,
+        null=True,
+        blank=True,
         related_name='reports',
         verbose_name=verbose_event
     )
