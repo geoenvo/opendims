@@ -10,7 +10,7 @@ from rest_framework import generics, filters
 from common.views import CustomListAPIView
 from .models import ReportAutoSummary
 from .filters import ReportAutoSummaryFilter
-from .serializer import JaksafeSerializer
+from .serializer import ReportAutoSummarySerializer
 
 
 class ReportAutoSummaryListView(generic.ListView):
@@ -23,7 +23,13 @@ class ReportAutoSummaryDetailView(generic.DetailView):
 
 
 class APIReportAutoSummaryList(CustomListAPIView):
-    serializer_class = JaksafeSerializer
+    """
+    Return JakSAFE auto summary reports on a given day based on the date
+    parameter. If not returns the latest available report.
+    JakSAFE auto summary reports are retrieved peridocally by cron from
+    http://jaksafe.bpbd.jakarta.go.id/report/auto_report_json/.
+    """
+    serializer_class = ReportAutoSummarySerializer
     filter_class = ReportAutoSummaryFilter
 
     def get_queryset(self):
