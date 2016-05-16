@@ -1,0 +1,12 @@
+[
+    {
+        "model": "reportaggregator.source",
+        "pk": 1,
+        "fields": {
+          "name": "Twitter #banjirjkt",
+          "type": "TWITTER",
+          "disaster": "BJR",
+          "status": "ACTIVE"
+        }
+    }
+]
