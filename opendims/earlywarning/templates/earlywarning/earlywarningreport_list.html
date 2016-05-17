@@ -1,0 +1,33 @@
+{% extends "earlywarning/earlywarning.html" %}
+
+{% load staticfiles i18n %}
+
+{% block page_content %}
+<div class="row" >
+    <div class="col-md-12">
+        <div class="post-container">
+            <h3 class="page-header heading">
+                {% trans "Early Warning" %}
+            </h3>
+            {% for earlywarningreport in earlywarningreport_list %}
+            <div class="list-event-item">
+                <div class="box-content-inner clearfix">
+                    <div class="list-event-header">
+                        <span class="event-date small-text"><i class="fa fa-calendar-o"></i>{{ earlywarningreport.created|date:"j F Y H:i T" }}</span>
+                    </div>
+                    <h5 class="event-title"><a href="{{ earlywarningreport.get_absolute_url }}" title="{{ earlywarningreport.title }}">{{ earlywarningreport.title }}</a></h5>
+                    {{ earlywarningreport.content|striptags|truncatewords:"35" }}
+                </div> <!-- /.box-content-inner -->
+            </div>
+            {% empty %}
+            <div class="alert alert-info text-center">{% trans "No entries found!" %}</div>
+            {% endfor %}
+        </div> <!-- /.post-container -->
+        {% include 'opendims/includes/pagination.html' with page=page_obj q=q %}
+    </div>
+</div>
+{% endblock %}
+
+{% block page_sidebar %}
+{% include "opendims/includes/block_latest_earlywarningreports.html" %}
+{% endblock %}

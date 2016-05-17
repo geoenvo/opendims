@@ -18,6 +18,9 @@ verbose_source = _('Source')
 
 
 class Source(CommonAbstractModel):
+    TYPE_CHOICES = (
+        ('TWITTER', _('Twitter')),
+    )
     name = models.CharField(
         max_length=100,
         verbose_name=verbose_name
@@ -27,9 +30,6 @@ class Source(CommonAbstractModel):
         verbose_name=verbose_created
     )
     updated = models.DateTimeField(auto_now=True, verbose_name=verbose_updated)
-    TYPE_CHOICES = (
-        ('TWITTER', _('Twitter')),
-    )
     type = models.CharField(
         max_length=50,
         choices=TYPE_CHOICES,

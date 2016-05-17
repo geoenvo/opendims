@@ -1,31 +1,7 @@
-{% load staticfiles i18n cropping waterlevel_tags common_tags common_filters %}
+{% load staticfiles i18n waterlevel_tags %}
 
-{% block extra_css %}
-<style type="text/css">
-.no-padding {
-    padding: 0;
-}
-.va-middle {
-    vertical-align: middle !important;
-}
-.SIAGA-1 {
-    background-color: #ff6666;
-}
-.SIAGA-2 {
-    background-color: #ffcc00;
-}
-.SIAGA-3 {
-    background-color: #ffff66;
-}
-.SIAGA-4 {
-    background-color: #91ff66;
-}
-</style>
-{% endblock extra_css %}
-
-{% get_watergate as watergates %}
-
-<div class="widget-main">
+{% get_watergates as watergates %}
+<div class="widget-main block-waterlevel">
     <div class="widget-main-title">
         <h4 class="widget-title">{% trans "Water Level Information" %}</h4>
     </div> <!-- /.widget-main-title -->
@@ -33,23 +9,23 @@
         <table class="table table-condensed table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center">Pintu Air</th>
-                    <th class="text-center">TMA</th>
-                    <th class="text-center">Siaga</th>
+                    <th class="text-center va-middle">{% trans "Water Gate" %}</th>
+                    <th class="text-center va-middle">{% trans "Height" %} (cm)</th>
+                    <th class="text-center va-middle">{% trans "Threshold Level" %}</th>
                 </tr>
             </thead>
             <tbody>
-                   {% for watergate in watergates|slice:"5" %}
-                        {% get_waterlevelreport_block watergate as waterlevelreports %}
-                    <tr>
-                        {% for waterlevelreport in waterlevelreports %}
-                        <td class="{{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ watergate.name }}</a></td>               
-                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ waterlevelreport.height }}</td>
-                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ waterlevelreport.get_threshold_level }}</td>
-                    </tr>
-                        {% endfor %}
+                {% for watergate in watergates|slice:"5" %}
+                {% get_waterlevelreports_block watergate as waterlevelreports %}
+                {% for waterlevelreport in waterlevelreports|slice:"1" %}
+                <tr>
+                    <td class="{{ waterlevelreport.get_threshold_level }}" title="{{ waterlevelreport.created|date:'j F Y H:i T' }}"><a href="{{ watergate.get_absolute_url }}">{{ watergate.name }}</a></td>
+                    <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ waterlevelreport.created|date:'j F Y H:i T' }}">{{ waterlevelreport.height }}</td>
+                    <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ waterlevelreport.created|date:'j F Y H:i T' }}">{{ waterlevelreport.get_threshold_level }}</td>
+                </tr>
                 {% endfor %}
-            </tbody>           
+                {% endfor %}
+            </tbody>
         </table>
     </div> <!-- /.widget-inner -->
     <div class="widget-footer">

@@ -10,6 +10,14 @@
     margin-bottom: -30px;
 }
 
+.no-padding {
+    padding: 0;
+}
+
+.va-middle {
+    vertical-align: middle !important;
+}
+
 .page-title a.active {
     color: #999;
 }
@@ -214,4 +222,21 @@
     padding: 4px 4px;
     margin: 0px;
     border-bottom: 1px dashed #d5dbe0;
+}
+
+/* water level threshold levels */
+.SIAGA-1 {
+    background-color: #ff6666;
+}
+
+.SIAGA-2 {
+    background-color: #ffcc00;
+}
+
+.SIAGA-3 {
+    background-color: #ffff66;
+}
+
+.SIAGA-4 {
+    background-color: #91ff66;
 }

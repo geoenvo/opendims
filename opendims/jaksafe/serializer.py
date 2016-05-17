@@ -5,7 +5,7 @@ from .models import ReportAutoSummary
 from common.serializers import DateTimeFieldTZ
 
 
-class JaksafeSerializer(gis_serializers.GeoFeatureModelSerializer):
+class ReportAutoSummarySerializer(gis_serializers.GeoFeatureModelSerializer):
     created = DateTimeFieldTZ()
     geometry = gis_serializers.GeometrySerializerMethodField()
     village_name = serializers.SerializerMethodField()

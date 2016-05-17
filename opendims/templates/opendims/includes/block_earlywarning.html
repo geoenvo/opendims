@@ -1,4 +1,4 @@
-{% load staticfiles i18n earlywarning_tags %}
+{% load staticfiles i18n verbose_names earlywarning_tags %}
 
 {% get_earlywarningreports as earlywarningreports %}
 
@@ -26,4 +26,9 @@
         </div>
         {% endif %}
     </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'earlywarning:earlywarningreport_list' %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
 </div> <!-- /.widget-main -->

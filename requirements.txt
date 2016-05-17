@@ -22,3 +22,5 @@ django-categories==1.4.2
 django-image-cropping==1.0.3
 easy-thumbnails==2.3
 tweepy==3.5.0
+-e git+https://github.com/geoenvo/django-screamshot#egg=django_screamshot
+django-absoluteuri==1.2.0

@@ -310,11 +310,9 @@ ACCOUNT_ACTIVATION_DAYS = 7
 ITEMS_PER_PAGE = 20
 
 CRONJOBS = [
-    ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job'),
-    ('* 1 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job'),
     ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job', '>> /tmp/jaksafe_scheduled_job.log'),
     ('* 23 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job', '>> /tmp/weatherforecast_scheduled_job.log'),
-    ('0 * * * *', 'reportaggregator.cron.report_scheduled_job'),
+    ('0 * * * *', 'reportaggregator.cron.report_scheduled_job', '>> /tmp/report_scheduled_job.log'),
 ]
 
 CAPTCHA_NOISE_FUNCTIONS = ('')
@@ -325,8 +323,9 @@ THUMBNAIL_PROCESSORS = (
 
 IMAGE_CROPPING_THUMB_SIZE = (300, 300)
 
-#Twitter API
+# Twitter API
 CONSUMER_KEY = 'blUYa3qxm2SwqvuErHsjJmi0t'
 CONSUMER_SECRET = 'U0JTayjzpv7DspEREQ1uqKowj0CUgn2waYV7bteFnsBcrJlDr9'
 ACCESS_TOKEN = '714659320047095808-I3YIUUq29mMHWZwlDOwpyKY43XkwxYV'
 ACCESS_SECRET = 'TBjrusWZs7DeHoqTFclqqDLPNDcbcsY27NGTZXljn8Hws'
+MAX_TWEETS = 100
