@@ -6,13 +6,9 @@ from .models import EarlyWarningReport
 
 
 class EarlyWarningReportListView(generic.ListView):
+    queryset = EarlyWarningReport.objects.filter(published=True).order_by('-created')
     paginate_by = settings.ITEMS_PER_PAGE
-    queryset = EarlyWarningReport.objects.all().order_by('-created')
 
 
 class EarlyWarningReportDetailView(generic.DetailView):
     model = EarlyWarningReport
-
-    def get_context_data(self, **kwargs):
-        context = super(EarlyWarningReportDetailView, self).get_context_data(**kwargs)
-        return context

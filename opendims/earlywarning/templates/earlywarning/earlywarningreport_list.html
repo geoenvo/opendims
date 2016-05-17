@@ -1,36 +1,17 @@
 {% extends "earlywarning/earlywarning.html" %}
 
-{% load staticfiles i18n verbose_names crispy_forms_tags %}
-
-{% block title %}{{ block.super }} - {% trans "Early Warning" %}{% endblock %}
-
-{% block crumbs %}
-<h6><a href="{% url 'earlywarning:earlywarningreport_list' %}">{% trans "EARLY WARNING REPORTS" %}</a></h6>
-{% endblock %}
-
-{% block page_content_upper %}
-{% if search %}
-<div class="widget-main">
-    <div class="widget-inner">
-        <div class="course-search">
-            <h3>{% trans "Search Early Warning Report" %}</h3>
-            {% crispy form %}
-        </div>
-    </div>
-</div>
-{% endif %}
-{% endblock %}
+{% load staticfiles i18n %}
 
 {% block page_content %}
 <div class="row" >
     <div class="col-md-12">
         <div class="post-container">
+            <h3 class="page-header heading">
+                {% trans "Early Warning" %}
+            </h3>
             {% for earlywarningreport in earlywarningreport_list %}
             <div class="list-event-item">
                 <div class="box-content-inner clearfix">
-                    
-                        <a href="{{ earlywarningreport.get_absolute_url }}" title="{{ earlywarningreport.title }}"></a>
-                   
                     <div class="list-event-header">
                         <span class="event-date small-text"><i class="fa fa-calendar-o"></i>{{ earlywarningreport.created|date:"j F Y H:i T" }}</span>
                     </div>
@@ -48,5 +29,5 @@
 {% endblock %}
 
 {% block page_sidebar %}
-{% include "opendims/includes/block_similar_earlywarnings.html" %}
+{% include "opendims/includes/block_latest_earlywarningreports.html" %}
 {% endblock %}

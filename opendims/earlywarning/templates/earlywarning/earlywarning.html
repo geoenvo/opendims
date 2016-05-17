@@ -1,1 +1,13 @@
 {% extends "opendims/page_sidebar.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} - {% trans "Early Warning" %}{% endblock %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+{% endblock %}
+
+{% block crumbs %}
+<h6>{% trans "Early Warning" %}</h6>
+{% endblock %}

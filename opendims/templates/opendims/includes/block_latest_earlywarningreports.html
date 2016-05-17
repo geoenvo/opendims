@@ -4,16 +4,16 @@
 {% if earlywarningreports %}
 <div class="widget-main block-similar-posts">
     <div class="widget-main-title">
-        <h4 class="widget-title">{% trans "More in Early Warning Reports" %}</h4>
+        <h4 class="widget-title">{% trans "Latest Early Warning Reports" %}</h4>
     </div>
     <div class="widget-inner">
- 
+        <div class="blog-categories">
             <ul>
                 {% for earlywarningreport in earlywarningreports|slice:"10" %}
                 <li><a href="{{ earlywarningreport.get_absolute_url }}" title="{{ earlywarningreport.title }}">{{ earlywarningreport.title|truncatewords:"10" }}</a></li>
                 {% endfor %}
             </ul>
-
+        </div>
     </div> <!-- /.widget-inner -->
     <div class="widget-footer">
         <div class="text-right">
