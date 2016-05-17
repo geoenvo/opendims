@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n common_tags %}
 
 <!-- begin The Footer -->
 <footer class="site-footer">
@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
-                    <h4 class="footer-widget-title">Links</h4>
+                    <h4 class="footer-widget-title">{% trans "Links" %}</h4>
                     <ul class="list-links">
                         <li><a href="#">Lorem Ipsum</a></li>
                         <li><a href="#">Dolor Sit</a></li>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
-                    <h4 class="footer-widget-title">Resources</h4>
+                    <h4 class="footer-widget-title">{% trans "Resources" %}</h4>
                     <ul class="list-links">
                         <li><a href="#">Lorem Ipsum</a></li>
                         <li><a href="#">Dolor Sit</a></li>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
-                    <h4 class="footer-widget-title">Partners</h4>
+                    <h4 class="footer-widget-title">{% trans "Partners" %}</h4>
                     <ul class="list-links">
                         <li><a href="#">BNPB</a></li>
                         <li><a href="#">BMKG</a></li>
@@ -51,14 +51,16 @@
             <div class="col-md-3">
                 <div class="footer-widget">
                     <ul class="footer-media-icons">
-                        <li><a href="#" class="fa fa-facebook"></a></li>
-                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="{% settings_value 'URL_FACEBOOK' %}" target="_blank" class="fa fa-facebook"></a></li>
+                        <li><a href="{% settings_value 'URL_TWITTER' %}" target="_blank" class="fa fa-twitter"></a></li>
+                        <!--
                         <li><a href="#" class="fa fa-google-plus"></a></li>
                         <li><a href="#" class="fa fa-youtube"></a></li>
                         <li><a href="#" class="fa fa-linkedin"></a></li>
                         <li><a href="#" class="fa fa-instagram"></a></li>
                         <li><a href="#" class="fa fa-apple"></a></li>
                         <li><a href="#" class="fa fa-rss"></a></li>
+                        -->
                     </ul>
                 </div>
             </div>
@@ -71,12 +73,10 @@
                 </div> <!-- /.col-md-5 -->
                 <div class="col-md-7">
                     <ul class="footer-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="courses.html">Events</a></li>
-                        <li><a href="events-list.html">Maps</a></li>
-                        <li><a href="blog.html">Water Level</a></li>
-                        <li><a href="shortcodes.html">E-Library</a></li>
-                        <li><a href="contact.html">Gallery</a></li>
+                        <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'geolevels:province_list' %}">{% trans "Geolevels" %}</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="{% url 'contact:index' %}">{% trans "Contact" %}</a></li>
                     </ul>
                 </div> <!-- /.col-md-7 -->
             </div> <!-- /.row -->

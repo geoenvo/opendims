@@ -1,4 +1,4 @@
-{% load staticfiles i18n category_tags website_tags %}
+{% load staticfiles i18n category_tags website_tags common_tags %}
 
 <!-- This one in here is responsive menu for tablet and mobiles -->
 <div class="responsive-navigation visible-sm visible-xs">
@@ -18,7 +18,7 @@
                     <li><a href="{% url 'maps:event_map' %}">{% trans "Events" %}</a></li>
                 </ul>
             </li>
-            <li><a href="{% url 'waterlevel:watergate_list' %}">{% trans "Water Level" %}</a></li>
+            <!--
             <li><a href="#">{% trans "Geolevels" %}</a>
                 <ul>
                     <li><a href="{% url 'geolevels:province_list' %}">{% trans "Provinces" %}</a></li>
@@ -27,6 +27,8 @@
                     <li><a href="{% url 'geolevels:village_list' %}">{% trans "Villages" %}</a></li>
                 </ul>
             </li>
+            -->
+            <li><a href="{% url 'disasterrehabilitation:disasterrehabilitation_index' %}">{% trans "Rehabilitation" %}</a></li>
             {% get_category_tree 'news' as nodes %}
             {% recursetree nodes %}
             <li>
@@ -62,11 +64,13 @@
             {% endrecursetree %}
         </ul> <!-- /.main_menu -->
         <ul class="social_icons">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="{% settings_value 'URL_FACEBOOK' %}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="{% settings_value 'URL_TWITTER' %}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <!--
             <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
             <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
             <li><a href="#"><i class="fa fa-rss"></i></a></li>
+            -->
         </ul> <!-- /.social_icons -->
     </div> <!-- /.responsive_menu -->
 </div> <!-- /responsive_navigation -->

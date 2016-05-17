@@ -240,3 +240,12 @@
 .SIAGA-4 {
     background-color: #91ff66;
 }
+
+/* Partner logos */
+.our-campus ul li {
+    margin: 0 10px 10px 0;
+}
+
+.our-campus ul li:nth-child(4n+0) {
+    margin-right: 0;
+}

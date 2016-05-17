@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 
 register = template.Library()
 
@@ -32,3 +33,13 @@ def to_list(*args):
         {% endfor %}
     """
     return args
+
+
+@register.simple_tag
+def settings_value(name):
+    """Get a value from the settings file.
+
+    Usage:
+        {% settings_value "SETTINGS_NAME" %}
+    """
+    return getattr(settings, name, '')
