@@ -1,7 +1,7 @@
 {% load staticfiles i18n waterlevel_tags %}
 
 {% get_watergates as watergates %}
-<div class="widget-main">
+<div class="widget-main block-waterlevel">
     <div class="widget-main-title">
         <h4 class="widget-title">{% trans "Water Level Information" %}</h4>
     </div> <!-- /.widget-main-title -->
@@ -9,9 +9,9 @@
         <table class="table table-condensed table-striped table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center">{% trans "Water Gate" %}</th>
-                    <th class="text-center">{% trans "Height" %} (cm)</th>
-                    <th class="text-center">{% trans "Threshold Level" %}</th>
+                    <th class="text-center va-middle">{% trans "Water Gate" %}</th>
+                    <th class="text-center va-middle">{% trans "Height" %} (cm)</th>
+                    <th class="text-center va-middle">{% trans "Threshold Level" %}</th>
                 </tr>
             </thead>
             <tbody>
