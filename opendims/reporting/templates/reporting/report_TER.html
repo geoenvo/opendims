@@ -1,23 +1,33 @@
+{% load i18n verbose_names staticfiles reporting_tags screamshot absoluteuri common_filters %}
 <html>
+<head>
 <style>
+@page {
+size:a4 ;
+margin: 1cm;
+@frame footer {
+    -pdf-frame-content: footerblock;
+    bottom: 2cm;
+    margin-left: 2cm;
+    margin-right: 2cm;
+    margin-top: 2cm;
+    height: 2cm;
+}
+}
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: center;
 }
 th, td {
     padding: 5px;
     text-align: center;
     table-layout: fixed;
 }
-table#t01 {
-    width: 100%;
-    background-color: #f1f1c1;
-}
 </style>
+</head>
 <body>
-{% load i18n verbose_names %}
 
-{% block main %}
 <div class="page-header">
     <h2>{% trans "Events" %}</h2>
 </div>
@@ -26,6 +36,7 @@ table#t01 {
     <thead>
         <tr>
             {% for event in events|slice:'1' %}
+            <th style="width=5%">{% trans 'No.' %}</th>
             <th class="col-md-2">{% get_verbose_field_name event 'disaster' %}</th>
             <th>{% get_verbose_field_name event 'height' %}</th>
             <th>{% get_verbose_field_name event 'magnitude' %}</th>
@@ -39,7 +50,9 @@ table#t01 {
     </thead>
     <tbody>
         {% for event in events %}
+        {% absoluteuri  'reports:event_map' pk=event.pk as event_map_url %}
         <tr>
+            <td style="width=5%">{{ forloop.counter }}</a></td>
             <td>{{ event.disaster.note }}</a></td>
             <td>{{ event.height }}</td>
             <td>{{ event.magnitude }}</td>
@@ -49,10 +62,10 @@ table#t01 {
             <td>{{ event.rt }}</td>
             <td>{{ event.note }}</td>
         </tr>
+        <td colspan="9"><img src="data:{% base64capture event_map_url '#leaflet_map' wait=0 %}"></td>
         {% endfor %}
     </tbody>
 </table>
-
 
 <h3>{% trans "Reports" %}</h3>
 
@@ -60,6 +73,7 @@ table#t01 {
 <table style="width=100%">
     <thead>
         <tr>
+            <th style="width=5%">{% trans 'No.' %}</th>
             {% for report in event.reports.all|slice:'1' %}
             <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
             <th>{% get_verbose_field_name report 'source' %}</th>
@@ -71,6 +85,7 @@ table#t01 {
     <tbody>
         {% for report in event.reports.all %}
         <tr>
+            <td style="width=5%">{{ forloop.counter }}</a></td>
             <td>{{ report.event }}</td>
             <td>{{ report.source.note }}</td>
             <td>{{ report.status }}</td>
@@ -78,7 +93,6 @@ table#t01 {
         </tr>
     {% endfor %}
     </tbody>
-
 </table>
 <br></br>
 {% endfor %}
@@ -86,11 +100,12 @@ table#t01 {
 <h3>{% trans "Event Impacts" %}</h3>
 
 {% for event in events %}
-
+{% absoluteuri  'reports:eventimpact_map' pk=event.pk as eventimpact_map_url %}
 <table style="width=100%">
     <thead>
         <tr>
             {% for eventimpact in event.eventimpacts.all|slice:'1' %}
+            <th style="width=5%">{% trans 'No.' %}</th>
             <th>{% get_verbose_field_name eventimpact 'village' %}</th>
             <th>{% get_verbose_field_name eventimpact 'rw' %}</th>
             <th>{% get_verbose_field_name eventimpact 'rt' %}</th>
@@ -106,6 +121,7 @@ table#t01 {
     <tbody>
         {% for eventimpact in event.eventimpacts.all %}
         <tr>
+            <td style="width=5%">{{ forloop.counter }}</a></td>
             <td>{{ eventimpact.village }}</td>
             <td>{{ eventimpact.rw }}</td>
             <td>{{ eventimpact.rt }}</td>
@@ -117,10 +133,36 @@ table#t01 {
             <td>{{ eventimpact.note }}</td>
         </tr>
         {% endfor %}
+        <td colspan="10"><img src="data:{% base64capture eventimpact_map_url '#leaflet_map' wait=0 %}"></td>
     </tbody>
 </table>
 <br></br>
 {% endfor %}
+
+<h3>{% trans "Event images" %}</h3>
+
+{% for event in events %}
+<table style="width=100%">
+    <thead>
+        <tr>
+            {% for eventimage in event.eventimages.all|slice:'1' %}
+            <th style="width=5%">{% trans 'No.' %}</th>
+            <th>{% get_verbose_field_name eventimage 'title' %}</th>
+            <th>{% get_verbose_field_name eventimage 'image' %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for eventimage in event.eventimages.all %}
+        <tr>
+            <td style="width=5%">{{ forloop.counter }}</a></td>
+            <td>{{ eventimage.title }}</td>
+            <td><img src="{{ get.absolute.url }}{{ eventimage.image.url|slice:'1:' }}"  width="200"></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br></br>
+{% endfor%}
 </body>
-{% endblock %}
 </html>
