@@ -18,67 +18,69 @@ function leaflet_map_init(map, options) {
     map.options.fadeAnimation = false;
     map.options.markerZoomAnimation = false;
 
-    {% if event.province %}
-    var provinceLayer = L.geoJson({{ event.province.polygon.geojson|safe }}).addTo(map);
+    {% for eventimpact in eventimpacts %}
+    {% if eventimpact.province %}
+    var provinceLayer = L.geoJson({{ eventimpact.province.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.city %}
+    {% if eventimpact.city %}
     if (typeof provinceLayer !== 'undefined') {
         map.removeLayer(provinceLayer);
     }
-    var cityLayer = L.geoJson({{ event.city.polygon.geojson|safe }}).addTo(map);
+    var cityLayer = L.geoJson({{ eventimpact.city.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.subdistrict %}
+    {% if eventimpact.subdistrict %}
     if (typeof cityLayer !== 'undefined') {
         map.removeLayer(cityLayer);
     }
-    var subdistrictLayer = L.geoJson({{ event.subdistrict.polygon.geojson|safe }}).addTo(map);
+    var subdistrictLayer = L.geoJson({{ eventimpact.subdistrict.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.village %}
+    {% if eventimpact.village %}
     if (typeof subdistrictLayer !== 'undefined') {
         map.removeLayer(subdistrictLayer);
     }
-    var villageLayer = L.geoJson({{ event.village.polygon.geojson|safe }}).addTo(map);
+    var villageLayer = L.geoJson({{ eventimpact.village.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.rw %}
+    {% if eventimpact.rw %}
     if (typeof villageLayer !== 'undefined') {
         map.removeLayer(villageLayer);
     }
-    var rwLayer = L.geoJson({{ event.rw.polygon.geojson|safe }}).addTo(map);
+    var rwLayer = L.geoJson({{ eventimpact.rw.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.rt %}
+    {% if eventimpact.rt %}
     if (typeof rwLayer !== 'undefined') {
         map.removeLayer(rwLayer);
     }
-    var rtLayer = L.geoJson({{ event.rt.polygon.geojson|safe }}).addTo(map);
+    var rtLayer = L.geoJson({{ eventimpact.rt.polygon.geojson|safe }}).addTo(map);
     {% endif %}
 
-    {% if event.point %}
-    var pointLayer = L.geoJson({{ event.point.geojson|safe }}).addTo(map);
+    {% if eventimpact.evac_point %}
+    var evacPointLayer = L.geoJson({{ eventimpact.evac_point.geojson|safe }}).addTo(map);
     {% endif %}
 
     if (typeof pointLayer !== 'undefined') {
-        var pointBounds = pointLayer.getBounds();
-        var pointCenter = pointBounds.getCenter();
         map.setZoom(16);
         map.panTo(pointCenter);
     } else if (typeof rtLayer !== 'undefined') {
-        map.fitBounds(rtLayer);
+
     } else if (typeof rwLayer !== 'undefined') {
-        map.fitBounds(rwLayer);
+
     } else if (typeof villageLayer !== 'undefined') {
         map.fitBounds(villageLayer);
     } else if (typeof subdistrictLayer !== 'undefined') {
         map.fitBounds(subdistrictLayer);
+
     } else if (typeof cityLayer !== 'undefined') {
         map.fitBounds(cityLayer);
+
     } else if (typeof provinceLayer !== 'undefined') {
         map.fitBounds(provinceLayer);
     }
+    {% endfor %}
 }
 </script>
 </body>

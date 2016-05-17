@@ -88,6 +88,7 @@
             <thead>
                 <tr>
                     {% for location in locations|slice:'1' %}
+                    <th width='5%'>{% trans "No." %}</th>
                     <th class="col-md-2">{% get_verbose_field_name location 'province' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name location 'city' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name location 'subdistrict' %}</th>
@@ -100,6 +101,7 @@
             <tbody>
                 {% for location in locations %}
                     <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{% if location.province %}<a href="{{ location.province.get_absolute_url }}">{{ location.province }}</a>{% else %}{% endif %}</td>
                         <td>{% if location.city %}<a href="{{ location.city.get_absolute_url }}">{{ location.city }}</a>{% else %}{% endif %}</td>
                         <td>{% if location.subdistrict %}<a href="{{ location.subdistrict.get_absolute_url }}">{{ location.subdistrict }}</a>{% else %}{% endif %}</td>

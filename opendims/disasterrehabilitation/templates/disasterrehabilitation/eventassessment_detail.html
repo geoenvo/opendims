@@ -1,6 +1,6 @@
 {% extends "disasterrehabilitation/eventassessment_list.html" %}
 
-{% load i18n leaflet_tags verbose_names %}
+{% load i18n leaflet_tags verbose_names common_filters %}
 
 {% block title %}{{ block.super }} - {{ eventassessment }}{% endblock %}
 
@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name eventassessment 'file' %}</th>
-                    <td>{{ eventassessment.file }}</td>
+                    <td><a href='{{ reference.file.url }}' download>{{ eventassessment.file|filename }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name eventassessment 'note' %}</th>
@@ -151,12 +151,14 @@
         <div class="widget-main pull-up">
             {% leaflet_map "leaflet_locations_map" callback="window.leaflet_locations_map_init" %}
         </div>
+
         <h3 class="page-header heading">{% trans "Locations" %}</h3>
 
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     {% for location in locations|slice:'1' %}
+                    <th width='5%'>{% trans "No." %}</th>
                     <th class="col-md-2">{% get_verbose_field_name location 'province' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name location 'city' %}</th>
                     <th class="col-md-2">{% get_verbose_field_name location 'subdistrict' %}</th>
@@ -170,6 +172,7 @@
 
             {% for location in locations %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{% if location.province %}<a href="{{ location.province.get_absolute_url }}">{{ location.province }}</a>{% else %}{% endif %}</td>
                     <td>{% if location.city %}<a href="{{ location.city.get_absolute_url }}">{{ location.city }}</a>{% else %}{% endif %}</td>
                     <td>{% if location.subdistrict %}<a href="{{ location.subdistrict.get_absolute_url }}">{{ location.subdistrict }}</a>{% else %}{% endif %}</td>

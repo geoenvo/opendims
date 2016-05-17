@@ -16,6 +16,7 @@
     <thead>
         <tr>
             {% for report in report_list|slice:'1' %}
+            <th width="5%">{% trans 'No.' %}</th>
             <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
             <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
             <th class="col-md-2">{% get_verbose_field_name report 'updated' %}</th>
@@ -28,6 +29,7 @@
     <tbody>
         {% for report in report_list %}
         <tr>
+            <td>{{ forloop.counter }}</td>
             <td><a href="{{ report.get_absolute_url }}">{{ report.event }}</a></td>
             <td>{{ report.created|date:"j F Y H:i" }}</td>
             <td>{{ report.updated|date:"j F Y H:i" }}</td>
