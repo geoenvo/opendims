@@ -10,6 +10,37 @@ from .models import Event, Report, EventImpact, EventImage
 from .filters import EventFilter, ReportFilter
 
 
+def statistics(request):
+    events = Event.objects.order_by('-created')
+    eventimpacts = EventImpact.objects.order_by('-pk')
+    context = {'events': events, 'eventimpacts': eventimpacts}
+
+    total = 0
+    for event in events:
+        total = total + 1
+    print total
+
+    total_evac_value = 0
+    total_affected_total = 0
+
+    for eventimpact in eventimpacts:
+        total_evac_value += eventimpact.evac_total
+        total_affected_total += eventimpact.affected_total
+
+    print total_evac_value
+    print total_affected_total
+
+    """if event.disaster.code == 'ABR':
+            return sum(event.disaster.code)
+
+        if event.disaster.code == 'BJR':
+            return sum(event.disaster.code)
+        else:
+            print "I'm the others"""
+
+    return render(request, 'reports/statistics.html', context)
+
+
 class EventListView(generic.ListView):
     queryset = Event.objects.order_by('-created')
     paginate_by = settings.ITEMS_PER_PAGE
@@ -18,9 +49,18 @@ class EventListView(generic.ListView):
 def event_map(request, pk):
     event = get_object_or_404(Event, pk=pk)
     context = {
-        'event': event
-    }
+        'event': event,
+        }
     return render(request, 'reports/event_map.html', context)
+
+
+def eventimpact_map(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    eventimpacts = EventImpact.objects.filter(event=event)
+    context = {
+        'eventimpacts': eventimpacts
+    }
+    return render(request, 'reports/eventimpact_map.html', context)
 
 
 class EventDetailView(generic.DetailView):
