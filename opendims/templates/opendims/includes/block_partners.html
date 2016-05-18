@@ -1,4 +1,6 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n  common_filters cropping website_tags %}
+
+{% get_partners as partners %}
 
 <div class="row">
     <div class="col-md-12">
@@ -9,14 +11,9 @@
             <div class="widget-inner">
                 <div class="our-campus clearfix">
                     <ul>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
-                        <li><img src="http://placehold.it/170x120" alt=""></li>
+                        {% for partner in partners %}
+                        <li><a href="{{ partner.url }}"><img src="{% cropped_thumbnail partner 'logo_crop' %}"></a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-{% load staticfiles i18n common_tags %}
+{% load staticfiles i18n common_tags website_tags %}
 
 <!-- begin The Footer -->
 <footer class="site-footer">
@@ -7,44 +7,39 @@
             <div class="col-md-3">
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">Contact Us</h4>
-                    <p>Lorem ipsum dolor sit amet. <br><br>Mailing address:<br>Jl. Kebon Sirih<br> Jakarta Pusat, DKI Jakarta</p>
+                    <p>BPBD Provinsi DKI Jakarta<br>Jl. Kebon Sirih<br> Jakarta Pusat, DKI Jakarta</p>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">{% trans "Links" %}</h4>
+                    {% get_links as links %}
                     <ul class="list-links">
-                        <li><a href="#">Lorem Ipsum</a></li>
-                        <li><a href="#">Dolor Sit</a></li>
-                        <li><a href="#">Amet Constectuer</a></li>
-                        <li><a href="#">Sed Do Eiusmod</a></li>
-                        <li><a href="#">Tempor Incididunt</a></li>
-                        <li><a href="#">Ut Labore Magna</a></li>
+                        {% for link in links|slice:'8' %}
+                        <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">{% trans "Resources" %}</h4>
+                    {% get_resources as resources %}
                     <ul class="list-links">
-                        <li><a href="#">Lorem Ipsum</a></li>
-                        <li><a href="#">Dolor Sit</a></li>
-                        <li><a href="#">Amet Constectuer</a></li>
-                        <li><a href="#">Sed Do Eiusmod</a></li>
-                        <li><a href="#">Tempor Incididunt</a></li>
-                        <li><a href="#">Ut Labore Magna</a></li>
+                        {% for resource in resources|slice:'8' %}
+                        <li><a href="{{ resource.url }}">{{ resource.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">{% trans "Partners" %}</h4>
+                    {% get_partners as partners %}
                     <ul class="list-links">
-                        <li><a href="#">BNPB</a></li>
-                        <li><a href="#">BMKG</a></li>
-                        <li><a href="#">Dinas PMK</a></li>
-                        <li><a href="#">Dinas PU</a></li>
-                        <li><a href="#">Peta Jakarta</a></li>
+                        {% for partner in partners|slice:'8' %}
+                        <li><a href="{{ partner.url }}">{{ partner.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
