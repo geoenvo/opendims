@@ -273,8 +273,8 @@ class Partner(models.Model):
     )
 
     class Meta:
-        ordering = ['name']
-        get_latest_by = 'name'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, self.url)
@@ -295,7 +295,8 @@ class Link(models.Model):
     )
 
     class Meta:
-        ordering = ['order']
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, self.url)
@@ -316,7 +317,8 @@ class Resource(models.Model):
     )
 
     class Meta:
-        ordering = ['order']
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, self.url)

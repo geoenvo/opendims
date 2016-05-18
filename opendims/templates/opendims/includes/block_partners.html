@@ -10,11 +10,13 @@
             </div> <!-- /.widget-main-title -->
             <div class="widget-inner">
                 <div class="our-campus clearfix">
+                    {% if partners %}
                     <ul>
                         {% for partner in partners %}
-                        <li><a href="{{ partner.url }}"><img src="{% cropped_thumbnail partner 'logo_crop' %}"></a></li>
+                        <li><a href="{% if partner.url %}{{ partner.url }}{% else %}#{% endif %}"><img src="{% cropped_thumbnail partner 'logo_crop' %}"></a></li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
             </div>
         </div> <!-- /.widget-main -->

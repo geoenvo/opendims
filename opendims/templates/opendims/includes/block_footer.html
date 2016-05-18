@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="footer-widget">
-                    <h4 class="footer-widget-title">Contact Us</h4>
+                    <h4 class="footer-widget-title">{% trans "Contact Us" %}</h4>
                     <p>BPBD Provinsi DKI Jakarta<br>Jl. Kebon Sirih<br> Jakarta Pusat, DKI Jakarta</p>
                 </div>
             </div>
@@ -14,33 +14,39 @@
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">{% trans "Links" %}</h4>
                     {% get_links as links %}
+                    {% if links %}
                     <ul class="list-links">
                         {% for link in links|slice:'8' %}
                         <li><a href="{{ link.url }}">{{ link.name }}</a></li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">{% trans "Resources" %}</h4>
                     {% get_resources as resources %}
+                    {% if resources %}
                     <ul class="list-links">
                         {% for resource in resources|slice:'8' %}
                         <li><a href="{{ resource.url }}">{{ resource.name }}</a></li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="footer-widget">
                     <h4 class="footer-widget-title">{% trans "Partners" %}</h4>
                     {% get_partners as partners %}
+                    {% if partners %}
                     <ul class="list-links">
                         {% for partner in partners|slice:'8' %}
                         <li><a href="{{ partner.url }}">{{ partner.name }}</a></li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-3">
