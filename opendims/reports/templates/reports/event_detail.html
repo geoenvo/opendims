@@ -371,8 +371,8 @@ function leaflet_map_init(map, options) {
     if (typeof pointLayer !== 'undefined') {
         var pointBounds = pointLayer.getBounds();
         var pointCenter = pointBounds.getCenter();
-        map.setZoom(16);
         map.panTo(pointCenter);
+        map.setZoom(16);
         popupLayer = pointLayer;
     } else if (typeof rtLayer !== 'undefined') {
         map.fitBounds(rtLayer);

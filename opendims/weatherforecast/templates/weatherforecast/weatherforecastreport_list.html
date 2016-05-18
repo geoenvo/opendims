@@ -24,7 +24,7 @@
 <div class="widget-main">
     <div class="widget-inner">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <form class="form-inline" action="" method="get">
                     <div class="form-group">
                         <label for="filter-date">{% trans "Date" %}:</label>
@@ -46,6 +46,8 @@
 {% endblock %}
 
 {% block page_content %}
+<h3 class="page-header heading">{% trans "Weather Forecast" %}{% if date %}: {{ date }}{% endif %}</h3>
+
 <div class="row">
     <div class="col-md-12">
         <div id="table-weatherforecast" class="table-responsive">
@@ -73,7 +75,7 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5" class="text-center">{% trans "No weather forecast found." %}</td>
+                        <td colspan="5" class="text-center">{% trans "No weather forecast reports found." %}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -83,15 +85,17 @@
 </div>
 {% endblock %}
 
-{% block extra_js  %}
+{% block extra_js %}
 <script src="{% static 'moment/min/moment.min.js' %}"></script>
 <script src="{% static 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
 
 <script type="text/javascript">
-$("#datetimepicker").datetimepicker({
-    format: 'YYYY-MM-DD',
-    showTodayButton: true,
-    ignoreReadonly: true,
+$(document).ready(function() {
+    $("#datetimepicker").datetimepicker({
+        format: 'YYYY-MM-DD',
+        showTodayButton: true,
+        ignoreReadonly: true,
+    });
 });
 </script>
 {% endblock %}

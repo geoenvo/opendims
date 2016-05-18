@@ -10,12 +10,62 @@
     margin-bottom: -30px;
 }
 
+.no-mb {
+    margin-bottom: 0;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.table.no-border td {
+    border: none;
+}
+
 .no-padding {
     padding: 0;
 }
 
 .va-middle {
     vertical-align: middle !important;
+}
+
+.header-left {
+    margin-top: 60px;
+}
+
+.header-right {
+    margin: 42px auto;
+}
+
+.logo {
+    margin: 30px auto;
+}
+
+.logo-with-text {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.logo-with-text div {
+    float: left;
+}
+
+.logo-text {
+    text-align: left;
+    font-family: 'Raleway', serif;
+    font-weight: bold;
+    font-size: 16pt;
+    color: #fff;
+    margin: 30px 0 0 10px;
+}
+
+.logo-text .upper {
+    font-size: 24pt;
 }
 
 .page-title a.active {
@@ -52,24 +102,46 @@
     text-align: center;
 }
 
-/* desktop layout */
+/* lesser desktop layout */
 @media (max-width: 1200px) {
     .block-weatherforecast .big-icon i.wi {
         font-size: 120px;
     }
+
+    .logo-text {
+        font-size: 12pt;
+    }
+
+    .logo-text .upper {
+        font-size: 20pt;
+    }
 }
 
 /* mobile layout */
-@media (max-width: 990px) {
+@media (max-width: 992px) {
     .block-weatherforecast .main-forecast {
         text-align: center;
     }
+
     .block-weatherforecast .main-forecast table {
         width: 20%;
         margin: 0 auto;
     }
+
     .block-weatherforecast .mini-forecast .event-small-title {
         text-align: center;
+    }
+
+    .logo-with-text {
+        width: 50%;
+    }
+
+    .logo-text {
+        font-size: 16pt;
+    }
+
+    .logo-text .upper {
+        font-size: 24pt;
     }
 }
 

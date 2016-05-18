@@ -62,7 +62,7 @@ class WaterGate(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     def __unicode__(self):
-        return '[%s]' % (self.name)
+        return '%s' % self.name
 
     def get_absolute_url(self):
         return reverse('waterlevel:watergate_detail', args=[self.pk])

@@ -1,10 +1,10 @@
 [
-  {
-    "model": "reportaggregator.keyword",
-    "pk": 1,
-    "fields": {
-      "source": 1,
-      "keyword": "#banjirjkt"
+    {
+        "model": "reportaggregator.keyword",
+        "pk": 1,
+        "fields": {
+            "source": 1,
+            "keyword": "#banjirjkt"
+        }
     }
-  }
 ]

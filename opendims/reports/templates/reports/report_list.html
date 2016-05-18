@@ -16,8 +16,8 @@
     <thead>
         <tr>
             {% for report in report_list|slice:'1' %}
-            <th width="5%">{% trans 'No.' %}</th>
-            <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
+            <th style="width: 1%;">{% trans 'No.' %}</th>
+            <th class="col-md-3">{% get_verbose_field_name report 'event' %}</th>
             <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
             <th class="col-md-2">{% get_verbose_field_name report 'updated' %}</th>
             <th class="col-md-1">{% get_verbose_field_name report 'source' %}</th>
@@ -31,15 +31,15 @@
         <tr>
             <td>{{ forloop.counter }}</td>
             <td><a href="{{ report.get_absolute_url }}">{{ report.event }}</a></td>
-            <td>{{ report.created|date:"j F Y H:i" }}</td>
-            <td>{{ report.updated|date:"j F Y H:i" }}</td>
+            <td>{{ report.created|date:"j F Y H:i T" }}</td>
+            <td>{{ report.updated|date:"j F Y H:i T" }}</td>
             <td>{{ report.source }}</td>
             <td>{{ report.status }}</td>
             <td>{{ report.note }}</td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="6" class="text-center">{% trans "No reports found." %}</td>
+            <td colspan="7" class="text-center">{% trans "No reports found." %}</td>
         </tr>
         {% endfor %}
     </tbody>

@@ -75,7 +75,7 @@ class EventDetailView(generic.DetailView):
 
 
 class ReportListView(generic.ListView):
-    queryset = Report.objects.order_by('-created')
+    queryset = Report.objects.filter(status='VERIFIED', event__isnull=False).order_by('-created')
     paginate_by = settings.ITEMS_PER_PAGE
 
 

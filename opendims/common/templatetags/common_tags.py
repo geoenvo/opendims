@@ -1,3 +1,5 @@
+import datetime
+
 from django import template
 from django.conf import settings
 
@@ -43,3 +45,14 @@ def settings_value(name):
         {% settings_value "SETTINGS_NAME" %}
     """
     return getattr(settings, name, '')
+
+
+@register.simple_tag
+def copyright_years(start_year):
+    """
+    """
+    current_year = datetime.datetime.now().year
+    if start_year < current_year:
+        return "{} - {}".format(str(start_year), str(current_year))
+    else:
+        return start_year
