@@ -13,12 +13,13 @@ class WeatherForecastReportListView(generic.ListView):
             try:
                 self.date = timezone.make_aware(datetime.datetime.strptime(self.date, '%Y-%m-%d'))
             except:
-                pass
+                self.date = None
         self.object_list = self.get_queryset()
         context = self.get_context_data(
-            object_list=self.object_list,
-            date=self.date.strftime('%d %B %Y')
+            object_list=self.object_list
         )
+        if self.date:
+            context['date'] = self.date.strftime('%d %B %Y')
         return self.render_to_response(context)
 
     def get_queryset(self):

@@ -1,6 +1,6 @@
 {% extends "opendims/page_full.html" %}
 
-{% load i18n %}
+{% load i18n active_url %}
 
 {% block title %}{{ block.super }} - {% trans "Weather Forecast" %}{% endblock %}
 
@@ -9,5 +9,5 @@
 {% endblock %}
 
 {% block crumbs %}
-<h6>{% trans "Weather Forecast" %}</h6>
+<h6><a class="{% active_url request 'weatherforecast:weatherforecastreport_list' %}" href="{% url 'weatherforecast:weatherforecastreport_list' %}">{% trans "Weather Forecast" %}</a></h6>
 {% endblock %}
