@@ -19,15 +19,19 @@
 {% endblock %}
 
 {% block page_content_upper %}
+{% if report.event %}
 <div class="widget-main pull-up">
     {% leaflet_map "leaflet_map" callback="window.leaflet_map_init" %}
 </div>
+{% endif %}
 {% endblock %}
 
 {% block page_content %}
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#detail">{% trans "Detail" %}</a></li>
+    {% if report.event %}
     <li><a data-toggle="tab" href="#event">{% trans "Event" %}</a></li>
+    {% endif %}
 </ul>
 
 <div class="tab-content">
@@ -38,11 +42,11 @@
             <tbody>
                 <tr>
                     <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
-                    <td>{{ report.created|date:"j F Y H:i" }}</td>
+                    <td>{{ report.created|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report 'updated' %}</th>
-                    <td>{{ report.updated|date:"j F Y H:i" }}</td>
+                    <td>{{ report.updated|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report 'source' %}</th>
@@ -59,6 +63,7 @@
             </tbody>
         </table>
     </div>
+    {% if report.event %}
     <div id="event" class="tab-pane fade">
         <h3 class="page-header heading">{% trans "Event" %}</h3>
 
@@ -66,11 +71,11 @@
             <tbody>
                 <tr>
                     <th class="col-md-2">{% get_verbose_field_name report.event 'created' %}</th>
-                    <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created|date:"j F Y H:i" }}</a></td>
+                    <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created|date:"j F Y H:i T" }}</a></td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report.event 'updated' %}</th>
-                    <td>{{ report.event.updated|date:"j F Y H:i" }}</td>
+                    <td>{{ report.event.updated|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name report.event 'disaster' %}</th>
@@ -138,12 +143,14 @@
             </tbody>
         </table>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
 {% block extra_js %}
 {% leaflet_js %}
 <script type="text/javascript">
+{% if report.event %}
 /**
  * Show the polygon of the affected area in the lowest defined
  * administrative area and display a popup of the event details.
@@ -292,5 +299,6 @@ function leaflet_map_init(map, options) {
 
     popupLayer.bindPopup(popupContent);
 }
+{% endif %}
 </script>
 {% endblock %}
