@@ -50,7 +50,7 @@
             <td>{{ eventassessment.event }}</td>
             <td>{{ eventassessment.name }}</td>
             <td>{{ eventassesment.published }}</td>
-            <td><a href='{{ reference.file.url }}' download>{{ eventassessment.file|filename }}</td>
+            <td><a href='{{ eventassessment.file.url }}' download>{{ eventassessment.file|filename }}</td>
             <td>{{ eventassessment.note }}</td>
         </tr>
         {% empty %}
