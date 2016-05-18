@@ -43,7 +43,7 @@
                     {% if partners %}
                     <ul class="list-links">
                         {% for partner in partners|slice:'8' %}
-                        <li><a href="{{ partner.url }}">{{ partner.name }}</a></li>
+                        <li><a href="{% if partner.url %}{{ partner.url }}{% else %}#{% endif %}" target="_blank">{{ partner.name }}</a></li>
                         {% endfor %}
                     </ul>
                     {% endif %}
