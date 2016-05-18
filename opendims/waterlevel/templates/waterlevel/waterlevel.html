@@ -1,6 +1,6 @@
 {% extends "opendims/page_full.html" %}
 
-{% load i18n %}
+{% load i18n active_url %}
 
 {% block title %}{{ block.super }} - {% trans "Water Level" %}{% endblock %}
 
@@ -9,5 +9,6 @@
 {% endblock %}
 
 {% block crumbs %}
-<h6>{% trans "Water Level" %}</h6>
+{{ block.super }}
+<h6><a class="{% active_url request 'waterlevel:watergate_list' %}" href="{% url 'waterlevel:watergate_list' %}">{% trans "Water Level" %}</a></h6>
 {% endblock %}

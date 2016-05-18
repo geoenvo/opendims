@@ -10,6 +10,14 @@
     margin-bottom: -30px;
 }
 
+.no-mb {
+    margin-bottom: 0;
+}
+
+.table.no-border td {
+    border: none;
+}
+
 .no-padding {
     padding: 0;
 }
