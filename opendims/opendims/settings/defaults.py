@@ -228,7 +228,7 @@ ADMIN_REORDER = (
     ('reporting', ('Report', 'Template', 'Attachment')),
     ('smsblast', ('Message', 'Template', 'Group', 'Contact')),
     ('categories', ('Category')),
-    ('website', ('Post', 'Attachment', 'Welcome', 'SiteHeader')),
+    ('website', ('Post', 'Attachment', 'Welcome', 'SiteHeader', 'Partner', 'Link', 'Resource')),
     ('reportaggregator', ('Source', 'Keyword')),
     ('disasterrehabilitation', ('Activity', 'EventAssessment', 'Location', 'Reference', 'Agency')),
     ('contact', ('Contact')),
