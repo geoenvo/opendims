@@ -36,7 +36,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="text-right"><a href="{% url 'weatherforecast:weatherforecastreport_list' %}">{% trans "More" %}</a></div>
                     </div> <!-- /.col-md-6 -->
                 </div> <!-- /.row -->
             </div> <!-- /.event-small-details -->
@@ -75,4 +74,9 @@
         {% endif %}
         {% endfor %}
     </div> <!-- /.widget-inner -->
+    <div class="widget-footer">
+        <div class="text-right">
+            <a href="{% url 'weatherforecast:weatherforecastreport_list' %}">{% trans "More" %}</a>
+        </div>
+    </div> <!-- /.widget-footer -->
 </div> <!-- /.widget-main -->

@@ -14,6 +14,14 @@
     margin-bottom: 0;
 }
 
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
 .table.no-border td {
     border: none;
 }

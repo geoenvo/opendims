@@ -23,6 +23,7 @@ class WaterGateListView(generic.ListView):
             try:
                 now = timezone.make_aware(datetime.datetime.strptime(date, '%Y-%m-%d'))
                 if now.date() < context['now'].date():
+                    context['date'] = now.strftime('%d %B %Y')
                     context['now'] = now.replace(hour=23, minute=59, second=59)
             except:
                 pass
