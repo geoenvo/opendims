@@ -3,7 +3,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 from categories.models import Category
 
-from website.models import Post, Welcome
+from website.models import Post, Welcome, Partner, Link, Resource
 
 register = template.Library()
 
@@ -76,3 +76,27 @@ def get_latest_welcome():
         published=True
     ).order_by('-created')[:1]
     return welcomes
+
+
+@register.simple_tag
+def get_partners():
+    partners = Partner.objects.filter(
+        published=True
+    ).order_by('name')
+    return partners
+
+
+@register.simple_tag
+def get_links():
+    links = Link.objects.filter(
+        published=True
+    ).order_by('order')
+    return links
+
+
+@register.simple_tag
+def get_resources():
+    resources = Resource.objects.filter(
+        published=True
+    ).order_by('order')
+    return resources

@@ -34,6 +34,11 @@ verbose_post = _('Post')
 verbose_image_thumb = _('Image thumb (70x70 px)')
 verbose_image_preview = _('Image preview (260x180 px)')
 verbose_image_list = _('Image list (170x150 px)')
+verbose_order = _('Order')
+verbose_url = _('Url')
+verbose_logo = _('Logo')
+verbose_logo_crop = _('Logo crop')
+verbose_name = _('Name')
 
 
 class Post(CommonAbstractModel):
@@ -244,3 +249,74 @@ class Welcome(models.Model):
 
     def __unicode__(self):
         return '[%s] - %s' % (self.title, timezone.localtime(self.created))
+
+
+class Partner(models.Model):
+    name = models.CharField(max_length=100, verbose_name=verbose_name)
+    url = models.URLField(blank=True, verbose_name=verbose_url)
+    logo = models.ImageField(
+        upload_to='website/partner/',
+        validators=[
+            FileSizeValidator(1)  # max MB
+        ],
+        verbose_name=verbose_logo
+    )
+    logo_crop = ImageRatioField(
+        'logo',
+        '170x120',
+        size_warning=True,
+        verbose_name=verbose_logo_crop
+    )
+    published = models.BooleanField(
+        default=False,
+        verbose_name=verbose_published
+    )
+
+    class Meta:
+        ordering = ['name']
+        get_latest_by = 'name'
+
+    def __unicode__(self):
+        return '[%s] - %s' % (self.name, self.url)
+
+
+class Link(models.Model):
+    ORDER_CHOICES = [(i, i) for i in range(11)]
+    name = models.CharField(max_length=100, verbose_name=verbose_name)
+    url = models.CharField(max_length=200, verbose_name=verbose_url)
+    order = models.PositiveIntegerField(
+        choices=ORDER_CHOICES,
+        default=0,
+        verbose_name=verbose_order
+    )
+    published = models.BooleanField(
+        default=False,
+        verbose_name=verbose_published
+    )
+
+    class Meta:
+        ordering = ['order']
+
+    def __unicode__(self):
+        return '[%s] - %s' % (self.name, self.url)
+
+
+class Resource(models.Model):
+    ORDER_CHOICES = [(i, i) for i in range(11)]
+    name = models.CharField(max_length=100, verbose_name=verbose_name)
+    url = models.CharField(max_length=200, verbose_name=verbose_url)
+    order = models.PositiveIntegerField(
+        choices=ORDER_CHOICES,
+        default=0,
+        verbose_name=verbose_order
+    )
+    published = models.BooleanField(
+        default=False,
+        verbose_name=verbose_published
+    )
+
+    class Meta:
+        ordering = ['order']
+
+    def __unicode__(self):
+        return '[%s] - %s' % (self.name, self.url)

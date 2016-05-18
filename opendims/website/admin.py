@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Attachment, Post, SiteHeader, Welcome
+from .models import Attachment, Post, SiteHeader, Welcome, Partner, Link, Resource
 
 
 verbose_attachment_details = _('Attachment details')
@@ -124,7 +124,60 @@ class WelcomeAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
+class PartnerAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    fields = (
+        'name',
+        'url',
+        'logo',
+        'logo_crop',
+        'published'
+    )
+    list_display = [
+        'name',
+        'url',
+        'published'
+    ]
+    list_filter = ['name', 'published']
+    search_fields = ['name']
+
+
+class LinkAdmin(admin.ModelAdmin):
+    fields = (
+        'name',
+        'order',
+        'url',
+        'published'
+    )
+    list_display = [
+        'name',
+        'order',
+        'url',
+        'published'
+    ]
+    list_filter = ['order', 'published']
+    search_fields = ['name']
+
+
+class ResourceAdmin(admin.ModelAdmin):
+    fields = (
+        'name',
+        'order',
+        'url',
+        'published'
+    )
+    list_display = [
+        'name',
+        'order',
+        'url',
+        'published'
+    ]
+    list_filter = ['order', 'published']
+    search_fields = ['name']
+
 admin.site.register(Attachment, AttachmentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(SiteHeader, SiteHeaderAdmin)
 admin.site.register(Welcome, WelcomeAdmin)
+admin.site.register(Partner, PartnerAdmin)
+admin.site.register(Link, LinkAdmin)
+admin.site.register(Resource, ResourceAdmin)
