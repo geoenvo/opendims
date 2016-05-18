@@ -311,8 +311,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 ITEMS_PER_PAGE = 20
 
 CRONJOBS = [
-    ('* 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job', '>> /tmp/jaksafe_scheduled_job.log'),
-    ('* 23 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job', '>> /tmp/weatherforecast_scheduled_job.log'),
+    ('0 1,7,13,19 * * *', 'jaksafe.cron.jaksafe_scheduled_job', '>> /tmp/jaksafe_scheduled_job.log'),
+    ('0 23 * * *', 'weatherforecast.cron.weatherforecast_scheduled_job', '>> /tmp/weatherforecast_scheduled_job.log'),
     ('0 * * * *', 'reportaggregator.cron.report_scheduled_job', '>> /tmp/report_scheduled_job.log'),
 ]
 
