@@ -51,7 +51,7 @@
 }
 
 .logo-with-text {
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -113,11 +113,11 @@
     }
 
     .logo-text {
-        font-size: 12pt;
+        font-size: 14pt;
     }
 
     .logo-text .upper {
-        font-size: 20pt;
+        font-size: 22pt;
     }
 
     .siteheader img {
