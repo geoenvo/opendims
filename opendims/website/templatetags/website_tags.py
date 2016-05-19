@@ -68,13 +68,13 @@ def get_category_tree(category):
 
 
 @register.simple_tag
-def get_latest_welcome():
+def get_welcomes():
     """
-    Return the latest welcome text.
+    Return the welcome text.
     """
     welcomes = Welcome.objects.filter(
         published=True
-    ).order_by('-created')[:1]
+    ).order_by('-created')
     return welcomes
 
 

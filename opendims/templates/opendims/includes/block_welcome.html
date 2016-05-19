@@ -1,13 +1,15 @@
 {% load staticfiles i18n website_tags %}
 
-{% get_latest_welcome as welcome %}
+{% get_welcomes as welcomes %}
 
-{% if welcome %}
+{% if welcomes %}
 <div class="row">
     <div class="col-md-12">
         <div class="widget-item block-welcome">
             <div class="welcome-container">
-            {{ welcome.first.content|safe }}
+            {% for welcome in welcomes|slice:'1' %}
+            {{ welcome.content|safe }}
+            {% endfor %}
             </div>
         </div> <!-- /.widget-item -->
     </div> <!-- /.col-md-12 -->
