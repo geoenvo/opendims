@@ -1,27 +1,37 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n website_tags %}
 
 {% include "opendims/includes/nav_responsive.html" %}
+
+{% get_siteheaders as siteheaders %}
 
 <header class="site-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 header-left">
+            <div class="col-md-3 header-left">
                 <p><i class="fa fa-phone"></i> (021) 382 2078</p>
                 <p><i class="fa fa-envelope"></i> <a href="mailto:info@bpbd.jakarta.go.id">info@bpbd.jakarta.go.id</a></p>
             </div> <!-- /.header-left -->
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="logo">
                     <a href="{% url 'home' %}" title="BPBD Provinsi DKI Jakarta" rel="home">
+                    {% if siteheaders %}
+                        {% for siteheader in siteheaders|slice:'1' %}
+                        <div class="siteheader">
+                            <img src="{{ siteheader.image.url }}" title="{{ siteheader.title }}">
+                        </div>
+                        {% endfor %}
+                        {% else %}
                         <div class="logo-with-text clearfix">
                             <div class="logo-image"><img src="{% static 'img/opendims/logo-120.png' %}" alt="logo"></div>
                             <div class="logo-text"><span class="upper">BPBD</span><br>Provinsi DKI Jakarta</div>
                         </div>
+                    {% endif %}
                     </a>
                 </div> <!-- /.logo -->
             </div> <!-- /.col-md-4 -->
 
-            <div class="col-md-4 header-right">
+            <div class="col-md-3 header-right">
                 <ul class="small-links">
                     <li><a href="{% url 'contact:index' %}">{% trans "Contact" %}</a></li>
                     {% if user.is_authenticated %}

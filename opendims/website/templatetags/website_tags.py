@@ -1,11 +1,26 @@
 from django import template
 from django.core.exceptions import MultipleObjectsReturned
+from django.utils import timezone
 
 from categories.models import Category
 
-from website.models import Post, Welcome, Partner, Link, Resource
+from website.models import Post, Welcome, SiteHeader, Partner, Link, Resource
 
 register = template.Library()
+
+
+@register.simple_tag
+def get_siteheaders():
+    """
+    Return site headers valid for today.
+    """
+    today = timezone.localtime(timezone.now()).date()
+    siteheaders = SiteHeader.objects.filter(
+        published=True,
+        start__lte=today,
+        end__gte=today
+    ).order_by('pk')
+    return siteheaders
 
 
 @register.simple_tag

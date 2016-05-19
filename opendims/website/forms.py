@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
@@ -20,3 +21,16 @@ class PostSearchForm(forms.Form):
             'q',
             Submit('', _('Search')),
         )
+
+
+class SiteHeaderForm(forms.ModelForm):
+    def clean_image(self):
+        image = self.cleaned_data.get('image', None)
+        if image:
+            from django.core.files.images import get_image_dimensions
+            w, h = get_image_dimensions(image)
+            if w > settings.MAX_WIDTH_SITEHEADER_IMAGE:
+                raise forms.ValidationError("{}: {}{}".format(_('Maximum image width is'), settings.MAX_WIDTH_SITEHEADER_IMAGE, 'px'))
+            if h > settings.MAX_HEIGHT_SITEHEADER_IMAGE:
+                raise forms.ValidationError("{}: {}{}".format(_('Maximum image height is'), settings.MAX_HEIGHT_SITEHEADER_IMAGE, 'px'))
+        return image

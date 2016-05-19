@@ -13,6 +13,8 @@ from common.validators import FileSizeValidator
 
 
 verbose_created = _('Created')
+verbose_start = _('Start')
+verbose_end = _('End')
 verbose_updated = _('Updated')
 verbose_note = _('Note')
 verbose_content = _('Content')
@@ -195,9 +197,11 @@ class SiteHeader(models.Model):
         max_length=100,
         verbose_name=verbose_title
     )
-    created = models.DateTimeField(
-        default=timezone.now,
-        verbose_name=verbose_created
+    start = models.DateField(
+        verbose_name=verbose_start
+    )
+    end = models.DateField(
+        verbose_name=verbose_end
     )
     updated = models.DateTimeField(
         auto_now=True,
@@ -222,7 +226,7 @@ class SiteHeader(models.Model):
         get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.title, timezone.localtime(self.created))
+        return '[%s] - %s ~ %s' % (self.title, self.start, self.end)
 
 
 class Welcome(models.Model):

@@ -1,6 +1,6 @@
 from django import template
-
 from django.utils import timezone
+
 from waterlevel.models import WaterLevelReport, WaterGate
 
 register = template.Library()

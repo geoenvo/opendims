@@ -6,6 +6,7 @@ from django.contrib import admin
 from image_cropping import ImageCroppingMixin
 
 from .models import Attachment, Post, SiteHeader, Welcome, Partner, Link, Resource
+from .forms import SiteHeaderForm
 
 
 verbose_attachment_details = _('Attachment details')
@@ -88,11 +89,13 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 
 class SiteHeaderAdmin(admin.ModelAdmin):
+    form = SiteHeaderForm
     fieldsets = [
         (verbose_siteheader_details, {
             'fields': [
                 'title',
-                'created',
+                'start',
+                'end',
                 'image',
                 'note',
                 'published'
@@ -101,10 +104,12 @@ class SiteHeaderAdmin(admin.ModelAdmin):
     ]
     list_display = [
         'title',
-        'created',
+        'start',
+        'end',
         'updated',
         'published'
     ]
+    readonly_fields = ['updated']
 
 
 class WelcomeAdmin(admin.ModelAdmin):
