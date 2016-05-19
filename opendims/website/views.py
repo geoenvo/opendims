@@ -74,7 +74,6 @@ class PostSearchView(generic.ListView):
         return queryset
 
 
-
 class PostDetailView(generic.DetailView):
     model = Post
 
@@ -85,6 +84,6 @@ class PostDetailView(generic.DetailView):
         gallery_subcategories = gallery.get_descendants(include_self=True)
         if post.category in gallery_subcategories:
             context['gallery'] = True
-        context['images'] = Attachment.objects.filter(post=post, published=True, image__isnull=False, file='')
-        context['files'] = Attachment.objects.filter(post=post, published=True, file__isnull=False, image='')
+        context['images'] = Attachment.objects.filter(post=post, published=True, file='').exclude(image='')
+        context['files'] = Attachment.objects.filter(post=post, published=True, image='').exclude(file='')
         return context
