@@ -27,9 +27,8 @@ def get_slideshow_posts():
     """
     posts = Post.objects.filter(
         published=True,
-        slideshow_enabled=True,
-        slideshow_image__isnull=False
-    ).order_by('-created')
+        slideshow_enabled=True
+    ).exclude(slideshow_image='').order_by('-created')
     return posts
 
 
