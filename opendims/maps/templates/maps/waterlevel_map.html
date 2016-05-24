@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}
+{% load staticfiles i18n %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -106,7 +106,6 @@
 
     function drawLayerFeature(feature, layer) {
         if (feature.geometry.type === 'Point') {
-            center = layer.getLatLng();
           }
           if (feature.properties) {
             var name = " - ";
@@ -114,20 +113,20 @@
             if (feature.properties.reports) {
                 reports = feature.properties.reports;
               if (reports.length > 0) {
-                 contentReports = "<tr style='margin-bottom: 0;'>";
+                contentReports = "<table class='table'><thead><tr><th>{% trans 'Time' %}</th><th>{% trans 'Height' %} (cm)</th><th>{% trans 'Weather' %}</th></tr></thead>";
+                contentReports = contentReports + "<tbody>";
                 for (var i = 0; i < reports.length; i++) {
-                  contentReports = contentReports + "<li>" + reports[i].created.slice(11,16) + reports[i].height + reports[i].weather + "</li>";
+                  contentReports = contentReports + "<tr>";
+                  contentReports = contentReports + "<td>" + reports[i].created.slice(11,16) + "</td><td>" + reports[i].height + "</td><td>" + reports[i].weather + "</td>";
+                  contentReports = contentReports + "</tr>";
                 }
-                contentReports = contentReports + "</ol>";
+                contentReports = contentReports + "</tbody></table>";
               }
             }
-            var content = "<table border ='0' cellpadding='2' widhth='100%' cellspacing='0'>";
-            content = content +  contentReports ;
-            content = content + "</table>";
             layer.on({
               click: function() {
                 $("#feature-title").html(feature.properties.name);
-                $("#feature-info").html(content);
+                $("#feature-info").html(contentReports);
                 $("#featureModal").modal("show");
               }
             });
@@ -137,4 +136,3 @@
     </script>
   </body>
 </html>
-YYYYYYYYYYYYYYYYYYYYYYYYyy
