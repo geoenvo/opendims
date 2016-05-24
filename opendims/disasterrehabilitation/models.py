@@ -37,10 +37,6 @@ verbose_status = _('Status')
 
 
 class Agency(CommonAbstractModel):
-    created = models.DateTimeField(
-        default=timezone.now,
-        verbose_name=verbose_created
-    )
     name = models.CharField(
         max_length=100,
         verbose_name=verbose_name

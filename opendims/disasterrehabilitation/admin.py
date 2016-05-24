@@ -43,7 +43,7 @@ class ReferenceInline(admin.TabularInline):
 
 
 class AgencyAdmin(admin.ModelAdmin):
-    list_display = ['created', 'name', 'note']
+    list_display = ['name', 'note']
     ordering = ['name']
 
 
