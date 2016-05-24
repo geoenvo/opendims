@@ -144,7 +144,7 @@ class EventAdmin(ImportExportModelAdmin,
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     date_hierarchy = 'created'
-    list_filter = ['disaster', 'status', 'created', 'updated']
+    list_filter = ['disaster', 'status', 'created', 'updated', 'city__name']
     search_fields = [
         'status',
         'note',
