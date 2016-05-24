@@ -10,4 +10,5 @@ def jaksafe_map(request):
 
 
 def waterlevel_map(request):
-    return render(request, 'maps/waterlevel_map.html')
+    date = request.GET.get('date', None)
+    return render(request, 'maps/waterlevel_map.html', {'date': date})

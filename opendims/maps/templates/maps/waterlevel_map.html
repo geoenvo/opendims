@@ -11,17 +11,17 @@
     <meta name="theme-color" content="#000000">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Waterlevel Map</title>
+    <title>Water Level Map</title>
 
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
 
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'bootleaf_example/assets/img/favicon-76.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'bootleaf_example/assets/img/favicon-120.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'bootleaf_example/assets/img/favicon-152.png' %}">
-    <link rel="icon" sizes="196x196" href="{% static 'bootleaf_example/assets/img/favicon-196.png' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'bootleaf_example/assets/img/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon-152x152.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'favicon-196x196.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <style>
     html, body {
       height: 100%;
@@ -68,32 +68,32 @@
                                'max-height':'50%'});
         });
     $(document).ready(function(){
-        var map;
-        var mapquestOSM = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
-          attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
-        });
 
-        // Time is WIB (GMT+7) based
+    var map;
+    var mapquestOSM = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
+      attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+    });
 
-        var waterlevel_layer = L.geoJson(null, {
-          style: function(feature) {
-            return {
-              color: '#3759BF',
-              fill: true,
-              opacity: 1,
-              clickable: true
-            };
-          },
-          onEachFeature: function(feature, layer) {
+    var waterlevel_layer = L.geoJson(null, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {
+              icon: L.icon({
+                  iconUrl: "{% static 'img/markers/watergate.png' %}",
+                  clickable: true
+              }),
+              title: feature.properties.name,
+              riseOnHover: true
+          });
+      },
+        onEachFeature: function(feature, layer) {
             drawLayerFeature(feature, layer);
           },
         });
-        $.getJSON("{% url "waterlevel:waterlevel_api" %}?format=json", function(data) {
+        $.getJSON("{% url "waterlevel:waterlevel_api" %}?format=json{% if date %}&date={{ date }}{% endif %}", function(data) {
           waterlevel_layer.addData(data);
         });
-
 
         map = L.map("map", {
           zoom: {{ DEFAULT_ZOOM }},
@@ -103,27 +103,22 @@
           attributionControl: false
         });
 
-        function drawLayerFeature(feature, layer) {
+    function drawLayerFeature(feature, layer) {
         if (feature.geometry.type === 'Point') {
             center = layer.getLatLng();
           }
-
           if (feature.properties) {
-            var name = " - ";
-            var contentReports = " - ";
-
             if (feature.properties.reports) {
-              if (feature.properties.reports.length > 0) {
-                contentReports = "<ul style='margin-bottom: 0;'>";
-                for (var i = 0; i < feature.properties.reports.length; i++) {
-                  contentReports = contentReports + "<li>"  + feature.properties.reports[i].created.slice(11,16) + ' - '+ feature.properties.reports[i].height  + ' - ' + feature.properties.reports[i].weather  + "</li>";
+                reports = feature.properties.reports;
+              if (reports.length > 0) {
+                 contentReports = "<tr style='margin-bottom: 0;'>";
+                for (var i = 0; i < reports.length; i++) {
+                  contentReports = contentReports + "<li>" + reports[i].created.slice(11,16) + '==' + reports[i].height +  '==' + reports[i].weather + "</li>";
                 }
-                contentReports = contentReports + "</ul>";
+                contentReports = contentReports + "</tr>";
               }
             }
-
             var content = "<table border ='0' cellpadding='2' widhth='100%' cellspacing='0'>";
-
             content = content +  contentReports ;
             content = content + "</table>";
             layer.on({
