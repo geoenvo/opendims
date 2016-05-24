@@ -167,6 +167,7 @@ class ActivityAdmin(admin.ModelAdmin):
                 'event',
                 'type',
                 ('start', 'end'),
+                'status',
                 ('agency', 'funding', 'year'),
                 'note',
                 'published'
@@ -180,14 +181,19 @@ class ActivityAdmin(admin.ModelAdmin):
         'updated',
         'start',
         'end',
+        'cities',
         'agency',
         'funding',
         'year',
         'published'
     ]
+
     ordering = ['-created', '-updated']
     raw_id_fields = ['event']
+    list_filter = ['created', 'published', 'agency', 'funding', 'location__city__name']
 
+    def cities(self, obj):
+        return ', '.join(location.city.name for location in obj.location_set.order_by('city__name'))
 
 admin.site.register(Agency, AgencyAdmin)
 admin.site.register(EventAssessment, EventAssessmentAdmin)

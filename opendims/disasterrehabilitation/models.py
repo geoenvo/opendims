@@ -33,6 +33,7 @@ verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
+verbose_status = _('Status')
 
 
 class Agency(CommonAbstractModel):
@@ -106,6 +107,11 @@ class Activity(CommonAbstractModel):
         ('PUBLIC', _('Public')),
         ('OTHER', _('Other')),
     )
+    STATUS_CHOICES = (
+        ('PENDING', _('PENDING')),
+        ('IN-PROGRESS', _('IN-PROGRESS')),
+        ('COMPLETED', _('COMPLETED')),
+    )
     created = models.DateTimeField(
         default=timezone.now,
         verbose_name=verbose_created
@@ -129,10 +135,10 @@ class Activity(CommonAbstractModel):
         default='PHYSICAL',
         verbose_name=verbose_type
     )
-    start = models.DateTimeField(
+    start = models.DateField(
         verbose_name=verbose_start
     )
-    end = models.DateTimeField(
+    end = models.DateField(
         verbose_name=verbose_end
     )
     agency = models.ForeignKey(
@@ -144,6 +150,12 @@ class Activity(CommonAbstractModel):
         choices=FUNDING_CHOICES,
         default='APBD',
         verbose_name=verbose_funding
+    )
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default='PENDING',
+        verbose_name=verbose_status
     )
     year = models.PositiveIntegerField(
         validators=[MinValueValidator(1900), MaxValueValidator(2100)],
