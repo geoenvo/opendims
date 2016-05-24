@@ -81,10 +81,11 @@
           return L.marker(latlng, {
               icon: L.icon({
                   iconUrl: "{% static 'img/markers/watergate.png' %}",
+                  iconAnchor: [12, 28],
+                  popupAnchor: [0, -25],
                   clickable: true
               }),
-              title: feature.properties.name,
-              riseOnHover: true
+              title: feature.properties.name
           });
       },
         onEachFeature: function(feature, layer) {
@@ -108,14 +109,16 @@
             center = layer.getLatLng();
           }
           if (feature.properties) {
+            var name = " - ";
+            var contentReports = " - ";
             if (feature.properties.reports) {
                 reports = feature.properties.reports;
               if (reports.length > 0) {
                  contentReports = "<tr style='margin-bottom: 0;'>";
                 for (var i = 0; i < reports.length; i++) {
-                  contentReports = contentReports + "<li>" + reports[i].created.slice(11,16) + '==' + reports[i].height +  '==' + reports[i].weather + "</li>";
+                  contentReports = contentReports + "<li>" + reports[i].created.slice(11,16) + reports[i].height + reports[i].weather + "</li>";
                 }
-                contentReports = contentReports + "</tr>";
+                contentReports = contentReports + "</ol>";
               }
             }
             var content = "<table border ='0' cellpadding='2' widhth='100%' cellspacing='0'>";
@@ -134,3 +137,4 @@
     </script>
   </body>
 </html>
+YYYYYYYYYYYYYYYYYYYYYYYYyy
