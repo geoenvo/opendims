@@ -2,6 +2,7 @@ import sys
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from django.utils.encoding import smart_str
 
 import tweepy
 from tweepy import OAuthHandler
@@ -36,7 +37,7 @@ def report_scheduled_job():
                 diff_hours = diff.total_seconds() / 3600
                 if diff_hours <= 1:
                     note = status.text.translate(non_bmp_map)
-                    note = "[{}] {}".format(active_source.disaster, note)
+                    note = "[{}] {}".format(active_source.disaster, smart_str(note))
                     new_report = Report(
                         note=note,
                         source=source
