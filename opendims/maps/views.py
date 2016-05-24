@@ -7,3 +7,8 @@ def event_map(request):
 
 def jaksafe_map(request):
     return render(request, 'maps/jaksafe_map.html')
+
+
+def waterlevel_map(request):
+    date = request.GET.get('date', None)
+    return render(request, 'maps/waterlevel_map.html', {'date': date})

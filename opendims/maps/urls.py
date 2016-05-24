@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     url(r'^event/$', views.event_map, name='event_map'),
+    url(r'^waterlevel/$', views.waterlevel_map, name='waterlevel_map'),
     url(r'^report_auto_summary/$', views.jaksafe_map, name='jaksafe_map'),
     ]

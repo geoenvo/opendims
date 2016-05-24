@@ -6,6 +6,8 @@ def resource_urls(request):
         SITE_NAME=settings.SITE_NAME,
         DEFAULT_CENTER=settings.LEAFLET_CONFIG['DEFAULT_CENTER'],
         DEFAULT_ZOOM=settings.LEAFLET_CONFIG['DEFAULT_ZOOM'],
+        DEFAULT_CENTER_WATERLEVEL=settings.DEFAULT_CENTER_WATERLEVEL,
+        DEFAULT_ZOOM_WATERLEVEL=settings.DEFAULT_ZOOM_WATERLEVEL,
     )
 
     return resources_urls

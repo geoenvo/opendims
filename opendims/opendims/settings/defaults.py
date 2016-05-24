@@ -338,3 +338,7 @@ MAX_TWEETS = 100
 # External URLs
 URL_FACEBOOK = 'https://www.facebook.com/BPBD-DKI-Jakarta-331934126896908/'
 URL_TWITTER = 'https://twitter.com/BPBDJakarta'
+
+# Water level map settings
+DEFAULT_CENTER_WATERLEVEL = (-6.359658, 106.827621)
+DEFAULT_ZOOM_WATERLEVEL = 10

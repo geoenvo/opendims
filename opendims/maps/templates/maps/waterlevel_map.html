@@ -1,0 +1,127 @@
+{% load staticfiles i18n %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Water Level Map</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon-152x152.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'favicon-196x196.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style type="text/css">
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+
+    <div class="modal fade" id="featureModal" tabindex="1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-primary" id="feature-title"></h4>
+          </div>
+          <div class="modal-body" id="feature-info"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var map;
+      var mapquestOSM = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
+        attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+      });
+
+      var waterlevel_layer = L.geoJson(null, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {
+            icon: L.icon({
+              iconUrl: "{% static 'img/markers/watergate.png' %}",
+              iconAnchor: [12, 28],
+              popupAnchor: [0, -25],
+              clickable: true
+            }),
+            title: feature.properties.name
+          });
+        },
+        onEachFeature: function(feature, layer) {
+          drawLayerFeature(feature, layer);
+        }
+      });
+      $.getJSON("{% url 'waterlevel:waterlevel_api' %}?format=json{% if date %}&date={{ date }}{% endif %}", function(data) {
+        waterlevel_layer.addData(data);
+      });
+
+      map = L.map("map", {
+        zoom: {{ DEFAULT_ZOOM_WATERLEVEL }},
+        center: [{{ DEFAULT_CENTER_WATERLEVEL.0 }}, {{ DEFAULT_CENTER_WATERLEVEL.1 }}],
+        layers: [mapquestOSM, waterlevel_layer],
+        zoomControl: true,
+        attributionControl: false
+      });
+
+      function drawLayerFeature(feature, layer) {
+        if (feature.properties && feature.geometry.type === "Point") {
+          var contentReports = "-";
+          if (feature.properties.reports) {
+              reports = feature.properties.reports;
+            if (reports.length > 0) {
+              contentReports = "<table class='table table-striped table-bordered table-condensed'><thead><tr><th>{% trans 'Time' %} (WIB)</th><th>{% trans 'Height' %} (cm)</th><th>{% trans 'Weather' %}</th></tr></thead>";
+              contentReports = contentReports + "<tbody>";
+              for (var i = 0; i < reports.length; i++) {
+                contentReports = contentReports + "<tr>";
+                contentReports = contentReports + "<td>" + reports[i].created.slice(11,16) + "</td><td>" + reports[i].height + "</td><td>" + reports[i].weather + "</td>";
+                contentReports = contentReports + "</tr>";
+              }
+              contentReports = contentReports + "</tbody></table>";
+            }
+          }
+          layer.on({
+            click: function() {
+              $("#feature-title").html(feature.properties.name);
+              $("#feature-info").html(contentReports);
+              $("#featureModal").modal("show");
+            }
+          });
+        }
+      } // end drawLayerFeature()
+    }); // end ready()
+    </script>
+  </body>
+</html>
