@@ -1,6 +1,7 @@
+{% load staticfiles i18n %}
+
 <!DOCTYPE html>
 
-{% load staticfiles %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -11,7 +12,7 @@
     <meta name="theme-color" content="#000000">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>JakSAFE Report Auto Summary</title>
+    <title>JakSAFE Report Auto Summary Map</title>
 
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
@@ -22,7 +23,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon-152x152.png' %}">
     <link rel="icon" sizes="196x196" href="{% static 'favicon-196x196.png' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-    <style>
+    <style type="text/css">
     html, body {
       height: 100%;
       width: 100%;
@@ -37,11 +38,11 @@
   </head>
 
   <body>
-    <div id='map'></div>
+    <div id="map"></div>
+
     <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'leaflet/leaflet.js' %}"></script>
-
 
     <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
@@ -237,41 +238,41 @@
           zoom: {{ DEFAULT_ZOOM }},
           center: [{{ DEFAULT_CENTER.0 }}, {{ DEFAULT_CENTER.1 }}],
           layers: [mapquestOSM, today_layer],
-          zoomControl: false,
+          zoomControl: true,
           attributionControl: false
         });
 
         function drawLayerFeature(feature, layer) {
           var center;
           // Event geometry can be either a MultiPolygon or Point
-          if (feature.geometry.type === 'MultiPolygon') {
+          if (feature.geometry.type === "MultiPolygon") {
             // Get bounds and center of polygon
             var bounds = layer.getBounds();
             center = bounds.getCenter();
           }
-          else if (feature.geometry.type === 'Point') {
+          else if (feature.geometry.type === "Point") {
             center = layer.getLatLng();
           }
 
           if (feature.properties) {
-            var featureCreated = " - ";
-            var featureVillage = " - ";
-            var featuresource = " - ";
-            var contentCreated = " - ";
-            var contentVillage = " - ";
-            var contentrw = " - ";
-            var contentsource = " - ";
-            var contentnote = " - ";
-            var contentdamage_infrastruktur = " - ";
-            var contentloss_infrastruktur = " - ";
-            var contentdamage_lintas_sektor = " - ";
-            var contentloss_lintas_sektor = " - ";
-            var contentdamage_produktif = " - ";
-            var contentloss_produktif = " - ";
-            var contentdamage_sosial_perumahan = " - ";
-            var contentloss_sosial_perumahan = " - ";
-            var contentdamage_total = " - ";
-            var contentloss_total = " - ";
+            var featureCreated = "-";
+            var featureVillage = "-";
+            var featuresource = "-";
+            var contentCreated = "-";
+            var contentVillage = "-";
+            var contentrw = "-";
+            var contentsource = "-";
+            var contentnote = "-";
+            var contentdamage_infrastruktur = "-";
+            var contentloss_infrastruktur = "-";
+            var contentdamage_lintas_sektor = "-";
+            var contentloss_lintas_sektor = "-";
+            var contentdamage_produktif = "-";
+            var contentloss_produktif = "-";
+            var contentdamage_sosial_perumahan = "-";
+            var contentloss_sosial_perumahan = "-";
+            var contentdamage_total = "-";
+            var contentloss_total = "-";
 
             if (feature.properties.created) {
               featureCreated = feature.properties.created;
@@ -325,21 +326,21 @@
             var featureName = featureVillage + ' - ' + featureCreated;
 
             var content = "<table class='table table-striped table-bordered table-condensed'>";
-            content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
-            content = content + "<tr><th>Village</th><td>" + contentVillage + "</td></tr>";
-            content = content + "<tr><th>RW</th><td>" + contentrw + "</td></tr>";
-            content = content + "<tr><th>Source</th><td>" + contentsource  + "</td></tr>";
-            content = content + "<tr><th>Note</th><td>" + contentnote  + "</td></tr>";
-            content = content + "<tr><th>Infrastructure Damage</th><td>" + contentdamage_infrastruktur  + "</td></tr>";
-            content = content + "<tr><th>Infrastructure Loss</th><td>" + contentloss_infrastruktur  + "</td></tr>";
-            content = content + "<tr><th>Trans-sector Damage</th><td>" + contentdamage_lintas_sektor  + "</td></tr>";
-            content = content + "<tr><th>Trans-sector Loss</th><td>" + contentloss_lintas_sektor  + "</td></tr>";
-            content = content + "<tr><th>Productive Damage</th><td>" + contentdamage_produktif  + "</td></tr>";
-            content = content + "<tr><th>Productive Loss</th><td>" + contentloss_produktif  + "</td></tr>";
-            content = content + "<tr><th>Social Estate Damage</th><td>" + contentdamage_sosial_perumahan  + "</td></tr>";
-            content = content + "<tr><th>Social Estate Loss</th><td>" + contentloss_sosial_perumahan  + "</td></tr>";
-            content = content + "<tr><th>Total Damage</th><td>" + contentdamage_total  + "</td></tr>";
-            content = content + "<tr><th>Total Loss</th><td>" + contentloss_total + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Created' %}</th><td>" + contentCreated + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Village' %}</th><td>" + contentVillage + "</td></tr>";
+            content = content + "<tr><th>{% trans 'RW' %}</th><td>" + contentrw + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Source' %}</th><td>" + contentsource  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Note' %}</th><td>" + contentnote  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Infrastructure Damage' %}</th><td>" + contentdamage_infrastruktur  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Infrastructure Loss' %}</th><td>" + contentloss_infrastruktur  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Cross-sector Damage' %}</th><td>" + contentdamage_lintas_sektor  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Cross-sector Loss' %}</th><td>" + contentloss_lintas_sektor  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Productive Damage' %}</th><td>" + contentdamage_produktif  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Productive Loss' %}</th><td>" + contentloss_produktif  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Social-Housing Damage' %}</th><td>" + contentdamage_sosial_perumahan  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Social-Housing Loss' %}</th><td>" + contentloss_sosial_perumahan  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Total Damage' %}</th><td>" + contentdamage_total  + "</td></tr>";
+            content = content + "<tr><th>{% trans 'Total Loss' %}</th><td>" + contentloss_total + "</td></tr>";
             content = content + "</table>";
 
             layer.on({
@@ -350,7 +351,7 @@
               }
             });
           }
-        }
+        } // end drawLayerFeature()
 
         var groupedOverlays = {
           "<span style='margin-right:4px;padding-left:15px;border:3px solid #3759BF;background:rgba(55, 89, 191, 0.2)'></span>Today's DaLA summary report": today_layer,
@@ -365,7 +366,7 @@
         L.control.layers(null, groupedOverlays, {
           collapsed: false
         }).addTo(map);
-    });
+    }); // end ready()
     </script>
   </body>
 </html>
