@@ -93,7 +93,8 @@
                         {% get_waterlevelreport watergate now as waterlevelreports %}
                     <tr>
                         {% for waterlevelreport in waterlevelreports %}
-                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{% if forloop.counter0 == waterlevelreport.created|date:"G"|add:"0" %}{{ waterlevelreport.height }} {{ waterlevelreport.weather }}{% else %}-{% endif %}</td>
+                        {% if forloop.counter0 == waterlevelreport.created|date:"G"|add:"0" %}
+                        <td class="text-center {{ waterlevelreport.get_threshold_level }}" title="{{ watergate.name }}">{{ waterlevelreport.height }} {{ waterlevelreport.weather }}{% else %}-{% endif %}</td>
                         {% endfor %}
                         {% comment %}If the report count is less than the current hour slot, print the remaining empty hour slots{% endcomment %}
                         {% if waterlevelreports.count < now.hour|add:"1" %}

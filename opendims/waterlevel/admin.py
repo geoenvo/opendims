@@ -38,7 +38,7 @@ class WaterGateAdmin(LeafletGeoAdmin):
         'siaga_3_min',
         'siaga_3_max'
     ]
-    search_fields = ['note']
+    search_fields = ['note', 'name']
 
 
 class WaterLevelReportAdmin(admin.ModelAdmin):
@@ -62,6 +62,7 @@ class WaterLevelReportAdmin(admin.ModelAdmin):
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     list_filter = ['watergate', 'weather', 'created', 'updated']
+    search_fields = ['created', 'watergate', 'weather']
 
 
 admin.site.register(WaterGate, WaterGateAdmin)

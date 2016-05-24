@@ -11,9 +11,8 @@ def get_waterlevelreport(watergate, now):
     waterlevelreports = WaterLevelReport.objects.filter(
         watergate=watergate,
         created__date=(now.date())
-    ).order_by('-created')
-    return waterlevelreports
-
+    ).order_by('created')
+    return waterlevelreports    
 
 @register.simple_tag
 def get_watergates():
