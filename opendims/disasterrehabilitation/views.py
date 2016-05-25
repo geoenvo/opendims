@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.views import generic
 from django.conf import settings
 
-
-from .forms import SearchByLocationForm
+from rest_framework import filters, generics
 
 from reports.models import Event
+from .forms import SearchByLocationForm
 from .models import EventAssessment, Activity, Location, Reference
+from .serializers import ActivityLocationSerializer
 
 
 def disasterrehabilitation_index(request):
@@ -158,3 +159,23 @@ class ActivityDetailView(generic.DetailView):
             published=True
             )
         return context
+
+
+class APIActivityLocationList(generics.ListAPIView):
+    serializer_class = ActivityLocationSerializer
+
+    def get_queryset(self):
+        """
+        Show only published activity to non authenticated users.
+        """
+        authenticated = self.request.user.is_authenticated()
+        id = self.request.query_params.get('id', None)
+        if not id.isnumeric():
+            id = None
+        activity = Activity.objects.filter(pk=id)
+        if activity and not authenticated:
+            activity = activity.filter(published=True)
+        if activity:
+            queryset = Location.objects.filter(activity=activity[0])
+            return queryset
+        return Location.objects.none()
