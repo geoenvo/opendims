@@ -1,9 +1,13 @@
 {% extends "opendims/page_full.html" %}
 
-{% load i18n %}
+{% load i18n active_url %}
 
-{% block title %}{{ block.super }} - {% trans "Reports" %}{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Disaster Rehabilitation" %}{% endblock %}
 
 {% block breadcrumbs %}
 {{ block.super }}
+{% endblock %}
+
+{% block crumbs %}
+<h6><a class="{% active_url request 'disasterrehabilitation:disasterrehabilitation_index' %}" href="{% url 'disasterrehabilitation:disasterrehabilitation_index' %}">{% trans "Disaster Rehabilitation" %}</a></h6>
 {% endblock %}
