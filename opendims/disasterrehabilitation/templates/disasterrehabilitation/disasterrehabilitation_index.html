@@ -102,7 +102,7 @@ Suspendisse eleifend ligula lorem, id blandit augue varius vel. Mauris bibendum 
             <th class="col-count">{% trans "No." %}</th>
             <th class="col-md-2">{% get_verbose_field_name eventassessment 'name' %}</th>
             <th class="col-md-2">{% get_verbose_field_name eventassessment 'created' %}</th>
-            <th>{% get_verbose_field_name eventassessment 'file' %}</th>
+            <th class="col-md-2">{% get_verbose_field_name eventassessment 'file' %}</th>
             <th>{% get_verbose_field_name eventassessment 'note' %}</th>
             {% endfor %}
         </tr>
