@@ -1,9 +1,11 @@
-{% load staticfiles i18n  verbose_names waterlevel_tags reports_tags %}
-
+{% load staticfiles i18n reports_tags common_tags %}
+{% now "Y" as current_year %}
+{% now "n" as current_month %}
+{% now "M" as name_month %}
 
 <div class="widget-main block-waterlevel">
     <div class="widget-main-title text-center va-middle">
-        <h4 class="widget-title">{% trans "Disaster Statistics" %} {{ month|date:'M' }} {{ year }} </h4>
+        <h4 class="widget-title">{% trans "Disaster Statistics" %} - {{ name_month }} {{ current_year }} </h4>
     </div> <!-- /.widget-main-title -->
     <div class="widget-inner">
         <table class="table table-condensed table-striped table-bordered">
@@ -18,11 +20,13 @@
                     <th class="text-center va-middle">{% trans "Loss Total" %}</th>
                 </tr>
             </thead>
+            {% to_list 'BJR' 'CEK' 'KBK' 'SOS' as disasters %} <!-- please see common_tags file for further information -->
+            {% for disaster in disasters %}
             <tbody>
-                {% get_event_statistics 'ABR' month year as disaster_statistics %}
+                {% get_event_statistics disaster current_month current_year as disaster_statistics %}
                 {% if disaster_statistics %}
                 {% get_eventimpact_total disaster_statistics as eventimpact_total %}
-                <td>{% trans 'Abrasi' %}</td>
+                <td>{{ disaster_statistics.first.disaster.note }}</td>
                 <td class="text-center va-middle">{{ disaster_statistics|length }}</td>
                 <td class="text-center va-middle">{{ eventimpact_total.evac_total }}</td>
                 <td class="text-center va-middle">{{ eventimpact_total.affected_total }}</td>
@@ -31,58 +35,7 @@
                 <td class="text-center va-middle">{{ eventimpact_total.loss_total }}</td>
                 {% endif %}
             </tbody>
-            <tbody>
-                {% get_event_statistics 'BJR' month year as disaster_statistics %}
-                {% if disaster_statistics %}
-                {% get_eventimpact_total disaster_statistics as eventimpact_total %}
-                <td>{% trans 'Banjir' %}</td>
-                <td class="text-center va-middle">{{ disaster_statistics|length }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.evac_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_death }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_injury }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.loss_total }}</td>
-                {% endif %}
-            </tbody>
-            <tbody>
-                {% get_event_statistics 'CEK' month year as disaster_statistics %}
-                {% if disaster_statistics %}
-                {% get_eventimpact_total disaster_statistics as eventimpact_total %}
-                <td>{% trans 'Cuaca Ekstrim' %}</td>
-                <td class="text-center va-middle">{{ disaster_statistics|length }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.evac_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_death }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_injury }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.loss_total }}</td>
-                {% endif %}
-            </tbody>
-            <tbody>
-                {% get_event_statistics 'KBK' month year as disaster_statistics %}
-                {% if disaster_statistics %}
-                {% get_eventimpact_total disaster_statistics as eventimpact_total %}
-                <td>{% trans 'Kebakaran' %}</td>
-                <td class="text-center va-middle">{{ disaster_statistics|length }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.evac_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_death }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_injury }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.loss_total }}</td>
-                {% endif %}
-            </tbody>
-            <tbody>
-                {% get_event_statistics 'SOS' month year as disaster_statistics %}
-                {% if disaster_statistics %}
-                {% get_eventimpact_total disaster_statistics as eventimpact_total %}
-                <td>{% trans 'Konflik Sosial' %}</td>
-                <td class="text-center va-middle">{{ disaster_statistics|length }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.evac_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_total }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_death }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.affected_injury }}</td>
-                <td class="text-center va-middle">{{ eventimpact_total.loss_total }}</td>
-                {% endif %}
-            </tbody>
+            {% endfor %}
         </table>
     </div> <!-- /.widget-inner -->
     <div class="widget-footer">

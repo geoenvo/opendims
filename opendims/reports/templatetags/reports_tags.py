@@ -1,28 +1,13 @@
 from django import template
-from django.template import Library
-from django.utils import timezone
-
-from reports.models import Event
 from django.db.models import Sum
 
+from reports.models import Event
 
-register = Library()
 register = template.Library()
-
-
-@register.filter
-def eventimpacts_total(eventimpacts):
-    return sum([d.evac_total for d in eventimpacts])
-
-
-def total_event(events):
-    return sum([event.height for event in events])
 
 
 @register.simple_tag
 def get_event_statistics(disaster, month, year):
-    month = timezone.localtime(timezone.now()).month
-    year = timezone.localtime(timezone.now()).year
     events_with_impacts = Event.objects.filter(
         eventimpacts__isnull=False, disaster=disaster,
         created__month=month, created__year=year
