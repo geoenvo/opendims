@@ -2,28 +2,29 @@
 
 {% load i18n leaflet_tags verbose_names common_filters %}
 
-{% block title %}{{ block.super }} - {{ activity }}{% endblock %}
+{% block title %}{{ block.super }} - {{ activity.name }}{% endblock %}
 
 {% block extra_css %}
-
 {% leaflet_css %}
+
 <style type="text/css">
 .tab-content > .tab-pane {
     background-color: #fff;
 }
 </style>
-
-{% endblock %}
-
-{% block page_content_upper %}
-    <div class="widget-main pull-up">
-        {% leaflet_map "leaflet_map" callback="window.leaflet_map_init" %}
-    </div>
 {% endblock %}
 
 {% block crumbs %}
 {{ block.super }}
-<h6 class="page-active">{{ activity }}</h6>
+<h6 class="page-active">{{ activity.name }}</h6>
+{% endblock %}
+
+{% block page_content_upper %}
+{% if activity.event %}
+<div class="widget-main pull-up">
+    {% leaflet_map "leaflet_event_map" callback="window.leaflet_event_map_init" %}
+</div>
+{% endif %}
 {% endblock %}
 
 {% block page_content %}
@@ -35,20 +36,16 @@
 
 <div class="tab-content">
     <div id="detail" class="tab-pane fade in active">
-        <h3 class="page-header heading">{{ activity }}</h3>
+        <h3 class="page-header heading">{{ activity.name }}</h3>
         <table class="table table-striped table-bordered">
             <tbody>
                 <tr>
-                    <th class="col-md-2">{% get_verbose_field_name activity 'created' %}</th>
-                    <td>{{ activity.created }}</td>
-                </tr>
-                <tr>
-                    <th>{% get_verbose_field_name activity 'name' %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name activity 'name' %}</th>
                     <td>{{ activity.name }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'type' %}</th>
-                    <td>{{ activity.type }}</td>
+                    <th>{% get_verbose_field_name activity 'created' %}</th>
+                    <td>{{ activity.created|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name activity 'start' %}</th>
@@ -57,6 +54,10 @@
                 <tr>
                     <th>{% get_verbose_field_name activity 'end' %}</th>
                     <td>{{ activity.end }}</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name activity 'type' %}</th>
+                    <td>{{ activity.type }}</td>
                 </tr>
                 <tr>
                     <th>{% get_verbose_field_name activity 'agency' %}</th>
@@ -79,40 +80,41 @@
     </div>
 
     <div id="locations" class="tab-pane fade">
-        <div class="widget-main pull-up">
-            {% leaflet_map "leaflet_locations_map" callback="window.leaflet_locations_map_init" %}
-        </div>
         <h3 class="page-header heading">{% trans "Locations" %}</h3>
+
+        <div class="mb-20">
+        {% leaflet_map "leaflet_locations_map" callback="window.leaflet_locations_map_init" %}
+        </div>
 
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     {% for location in locations|slice:'1' %}
-                    <th width='5%'>{% trans "No." %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name location 'province' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name location 'city' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name location 'subdistrict' %}</th>
-                    <th class="col-md-1">{% get_verbose_field_name location 'village' %}</th>
-                    <th class="col-md-1">{% get_verbose_field_name location 'rw' %}</th>
-                    <th class="col-md-1">{% get_verbose_field_name location 'rt' %}</th>
+                    <th class="col-count">{% trans "No." %}</th>
+                    <th>{% get_verbose_field_name location 'province' %}</th>
+                    <th>{% get_verbose_field_name location 'city' %}</th>
+                    <th>{% get_verbose_field_name location 'subdistrict' %}</th>
+                    <th>{% get_verbose_field_name location 'village' %}</th>
+                    <th>{% get_verbose_field_name location 'rw' %}</th>
+                    <th>{% get_verbose_field_name location 'rt' %}</th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 {% for location in locations %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{% if location.province %}<a href="{{ location.province.get_absolute_url }}">{{ location.province }}</a>{% else %}{% endif %}</td>
-                        <td>{% if location.city %}<a href="{{ location.city.get_absolute_url }}">{{ location.city }}</a>{% else %}{% endif %}</td>
-                        <td>{% if location.subdistrict %}<a href="{{ location.subdistrict.get_absolute_url }}">{{ location.subdistrict }}</a>{% else %}{% endif %}</td>
-                        <td>{% if location.village %}<a href="{{ location.village.get_absolute_url }}">{{ location.village }}</a>{% else %}{% endif %}</td>
-                        <td>{% if location.rw %}<a href="{{ location.rw.get_absolute_url }}">{{ location.rw }}</a>{% else %}{% endif %}</td>
-                        <td>{% if location.rt %}<a href="{{ location.rt.get_absolute_url }}">{{ location.rt }}</a>{% else %}{% endif %}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="6" class="text-center">{% trans "No locations found for this event assesment." %}</td>
-                    </tr>
+                <tr>
+                    <td>{{ forloop.counter }}.</td>
+                    <td>{% if location.province %}<a href="{{ location.province.get_absolute_url }}">{{ location.province }}</a>{% else %}{% endif %}</td>
+                    <td>{% if location.city %}<a href="{{ location.city.get_absolute_url }}">{{ location.city }}</a>{% else %}{% endif %}</td>
+                    <td>{% if location.subdistrict %}<a href="{{ location.subdistrict.get_absolute_url }}">{{ location.subdistrict }}</a>{% else %}{% endif %}</td>
+                    <td>{% if location.village %}<a href="{{ location.village.get_absolute_url }}">{{ location.village }}</a>{% else %}{% endif %}</td>
+                    <td>{% if location.rw %}<a href="{{ location.rw.get_absolute_url }}">{{ location.rw }}</a>{% else %}{% endif %}</td>
+                    <td>{% if location.rt %}<a href="{{ location.rt.get_absolute_url }}">{{ location.rt }}</a>{% else %}{% endif %}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="text-center">{% trans "No locations found for this activity." %}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -125,24 +127,26 @@
             <thead>
                 <tr>
                     {% for reference in references|slice:'1' %}
-                    <th class="col-md-2">{% get_verbose_field_name reference 'created' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name reference 'name' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name reference 'year' %}</th>
-                    <th class="col-md-2">{% get_verbose_field_name reference 'file' %}</th>
+                    <th class="col-count">{% trans "No." %}</th>
+                    <th>{% get_verbose_field_name reference 'name' %}</th>
+                    <th>{% get_verbose_field_name reference 'created' %}</th>
+                    <th>{% get_verbose_field_name reference 'year' %}</th>
+                    <th>{% get_verbose_field_name reference 'file' %}</th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 {% for reference in references %}
                 <tr>
-                    <td>{{ reference.created }}</a></td>
-                    <td>{{ reference.name}}</td>
+                    <td>{{ forloop.counter }}.</td>
+                    <td>{{ reference.name }}</td>
+                    <td>{{ reference.created|date:"j F Y H:i T" }}</td>
                     <td>{{ reference.year }}</td>
                     <td><a href='{{ reference.file.url }}' download> {{ reference.file|filename }}</td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="6" class="text-center">{% trans "No references found for this activity." %}</td>
+                    <td class="text-center">{% trans "No references found for this activity." %}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -153,166 +157,177 @@
 
 {% block extra_js %}
 {% leaflet_js %}
+
 <script type="text/javascript">
 // Global variables of all maps
+var event_map, locations_map;
+
 /**
  * Show the polygon of the affected area in the lowest defined
  * administrative area and display a popup of the event details.
  */
- function leaflet_map_init(map, options) {
+function leaflet_event_map_init(map, options) {
+    {% if activity.event %}
+    event_map = map;
 
-     {% if activity.event.province %}
-     var provinceLayer = L.geoJson({{ activity.event.province.polygon.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.province %}
+    var provinceLayer = L.geoJson({{ activity.event.province.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
 
-     {% if activity.event.city %}
-     if (typeof provinceLayer !== 'undefined') {
-         map.removeLayer(provinceLayer);
-     }
-     var cityLayer = L.geoJson({{ activity.event.city.polygon.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.city %}
+    if (typeof provinceLayer !== 'undefined') {
+        map.removeLayer(provinceLayer);
+    }
+    var cityLayer = L.geoJson({{ activity.event.city.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
 
-     {% if activity.event.subdistrict %}
-     if (typeof cityLayer !== 'undefined') {
-         map.removeLayer(cityLayer);
-     }
-     var subdistrictLayer = L.geoJson({{ activity.event.subdistrict.polygon.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.subdistrict %}
+    if (typeof cityLayer !== 'undefined') {
+        map.removeLayer(cityLayer);
+    }
+    var subdistrictLayer = L.geoJson({{ activity.event.subdistrict.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
 
-     {% if activity.event.village %}
-     if (typeof subdistrictLayer !== 'undefined') {
-         map.removeLayer(subdistrictLayer);
-     }
-     var villageLayer = L.geoJson({{ activity.event.village.polygon.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.village %}
+    if (typeof subdistrictLayer !== 'undefined') {
+        map.removeLayer(subdistrictLayer);
+    }
+    var villageLayer = L.geoJson({{ activity.event.village.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
 
-     {% if activity.event.rw %}
-     if (typeof villageLayer !== 'undefined') {
-         map.removeLayer(villageLayer);
-     }
-     var rwLayer = L.geoJson({{ activity.event.rw.polygon.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.rw %}
+    if (typeof villageLayer !== 'undefined') {
+        map.removeLayer(villageLayer);
+    }
+    var rwLayer = L.geoJson({{ activity.event.rw.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
 
-     {% if activity.event.rt %}
-     if (typeof rwLayer !== 'undefined') {
-         map.removeLayer(rwLayer);
-     }
-     var rtLayer = L.geoJson({{ activity.event.rt.polygon.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.rt %}
+    if (typeof rwLayer !== 'undefined') {
+        map.removeLayer(rwLayer);
+    }
+    var rtLayer = L.geoJson({{ activity.event.rt.polygon.geojson|safe }}).addTo(map);
+    {% endif %}
 
-     {% if activity.event.point %}
-     var pointLayer = L.geoJson({{ activity.event.point.geojson|safe }}).addTo(map);
-     {% endif %}
+    {% if activity.event.point %}
+    var pointLayer = L.geoJson({{ activity.event.point.geojson|safe }}).addTo(map);
+    {% endif %}
 
-         var popupContent = `
-         <table class="table table-striped table-bordered">
-             <tbody>
-                 <tr>
-                     <th class="col-md-2">{% get_verbose_field_name activity.event 'created' %}</th>
-                     <td>{{ activity.event.created }}</td>
-                 </tr>
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'status' %}</th>
-                     <td>{{ activity.event.status }}</td>
-                 </tr>
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'disaster' %}</th>
-                     <td>{{ activity.event.disaster.note }}</td>
-                 </tr>
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'height' %}</th>
-                     <td>{{ activity.event.height }}</td>
-                 </tr>
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'magnitude' %}</th>
-                     <td>{{ activity.event.magnitude }}</td>
-                 </tr>
+    var popupContent = `
+    <table class="table table-striped table-bordered">
+       <tbody>
+           <tr>
+               <th class="col-md-2">{% get_verbose_field_name activity.event 'created' %}</th>
+               <td>{{ activity.event.created|date:"j F Y H:i T" }}</td>
+           </tr>
+           <tr>
+               <th class="col-md-2">{% get_verbose_field_name activity.event 'updated' %}</th>
+               <td>{{ activity.event.updated|date:"j F Y H:i T" }}</td>
+           </tr>
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'status' %}</th>
+               <td>{{ activity.event.status }}</td>
+           </tr>
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'disaster' %}</th>
+               <td>{{ activity.event.disaster.note }}</td>
+           </tr>
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'height_min' %}</th>
+               <td>{{ activity.event.height_min }}</td>
+           </tr>
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'height' %}</th>
+               <td>{{ activity.event.height }}</td>
+           </tr>
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'magnitude' %}</th>
+               <td>{{ activity.event.magnitude }}</td>
+           </tr>
 
-                 {% if activity.event.province %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'province' %}</th>
-                     <td><a href={% url 'geolevels:province_detail' activity.event.province.pk %}>{{ activity.event.province }}</a></td>
-                 </tr>
-                 {% endif %}
+           {% if activity.event.province %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'province' %}</th>
+               <td><a href={% url 'geolevels:province_detail' activity.event.province.pk %}>{{ activity.event.province }}</a></td>
+           </tr>
+           {% endif %}
 
-                 {% if activity.event.city %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'city' %}</th>
-                     <td><a href={% url 'geolevels:city_detail' activity.event.city.pk %}>{{ activity.event.city }}</a></td>
-                 </tr>
-                 {% endif %}
+           {% if activity.event.city %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'city' %}</th>
+               <td><a href={% url 'geolevels:city_detail' activity.event.city.pk %}>{{ activity.event.city }}</a></td>
+           </tr>
+           {% endif %}
 
-                 {% if activity.event.subdistrict %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'subdistrict' %}</th>
-                     <td><a href="{% url 'geolevels:subdistrict_detail' activity.event.subdistrict.pk %}">{{ activity.event.subdistrict }}</a></td>
-                 </tr>
-                 {% endif %}
+           {% if activity.event.subdistrict %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'subdistrict' %}</th>
+               <td><a href="{% url 'geolevels:subdistrict_detail' activity.event.subdistrict.pk %}">{{ activity.event.subdistrict }}</a></td>
+           </tr>
+           {% endif %}
 
-                 {% if activity.event.village %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'village' %}</th>
-                     <td><a href="{% url 'geolevels:village_detail' activity.event.village.pk %}">{{ activity.event.village }}</a></td>
-                 </tr>
-                 {% endif %}
+           {% if activity.event.village %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'village' %}</th>
+               <td><a href="{% url 'geolevels:village_detail' activity.event.village.pk %}">{{ activity.event.village }}</a></td>
+           </tr>
+           {% endif %}
 
-                 {% if activity.event.rw %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'rw' %}</th>
-                     <td><a href="{% url 'geolevels:rw_detail' activity.event.rw.pk %}">{{ activity.event.rw }}</a></td>
-                 </tr>
-                 {% endif %}
+           {% if activity.event.rw %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'rw' %}</th>
+               <td><a href="{% url 'geolevels:rw_detail' activity.event.rw.pk %}">{{ activity.event.rw }}</a></td>
+           </tr>
+           {% endif %}
 
-                 {% if activity.event.rt %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'rt' %}</th>
-                     <td><a href="{% url 'geolevels:rt_detail' activity.event.rt.pk %}">{{ activity.event.rt }}</a></td>
-                 </tr>
-                 {% endif %}
-                 <tr>
-                     <th>{% get_verbose_field_name activity.event 'note' %}</th>
-                     <td>{{ activity.event.note }}</td>
-                 </tr>
-             </tbody>
-         </table>
-         `;
+           {% if activity.event.rt %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'rt' %}</th>
+               <td><a href="{% url 'geolevels:rt_detail' activity.event.rt.pk %}">{{ activity.event.rt }}</a></td>
+           </tr>
+           {% endif %}
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'note' %}</th>
+               <td>{{ activity.event.note }}</td>
+           </tr>
+       </tbody>
+    </table>
+    `;
 
-         var popupLayer;
+    var popupLayer;
 
-     if (typeof pointLayer !== 'undefined') {
-         var pointBounds = pointLayer.getBounds();
-         var pointCenter = pointBounds.getCenter();
-         map.setZoom(16);
-         map.panTo(pointCenter);
-         popupLayer = pointLayer;
-     } else if (typeof rtLayer !== 'undefined') {
-         map.fitBounds(rtLayer);
-         var popupLayer = rtLayer;
+    if (typeof pointLayer !== 'undefined') {
+        var pointBounds = pointLayer.getBounds();
+        var pointCenter = pointBounds.getCenter();
+        map.panTo(pointCenter);
+        map.setZoom(16);
+        popupLayer = pointLayer;
+    } else if (typeof rtLayer !== 'undefined') {
+        map.fitBounds(rtLayer);
+        popupLayer = rtLayer;
+    } else if (typeof rwLayer !== 'undefined') {
+        map.fitBounds(rwLayer);
+        popupLayer = rwLayer;
+    } else if (typeof villageLayer !== 'undefined') {
+        map.fitBounds(villageLayer);
+        popupLayer = villageLayer;
+    } else if (typeof subdistrictLayer !== 'undefined') {
+        map.fitBounds(subdistrictLayer);
+        popupLayer = subdistrictLayer;
+    } else if (typeof cityLayer !== 'undefined') {
+        map.fitBounds(cityLayer);
+        popupLayer = cityLayer;
+    } else if (typeof provinceLayer !== 'undefined') {
+        map.fitBounds(provinceLayer);
+        popupLayer = provinceLayer;
+    }
 
-     } else if (typeof rwLayer !== 'undefined') {
-         map.fitBounds(rwLayer);
-         var popupLayer = rwLayer;
-
-     } else if (typeof villageLayer !== 'undefined') {
-         map.fitBounds(villageLayer);
-         var popupLayer = villageLayer;
-
-     } else if (typeof subdistrictLayer !== 'undefined') {
-         map.fitBounds(subdistrictLayer);
-         var popupLayer = subdistrictLayer;
-
-     } else if (typeof cityLayer !== 'undefined') {
-         map.fitBounds(cityLayer);
-         var popupLayer = cityLayer;
-
-     } else if (typeof provinceLayer !== 'undefined') {
-         map.fitBounds(provinceLayer);
-         var popupLayer = provinceLayer;
-     }
-     popupLayer.bindPopup(popupContent);
+    popupLayer.bindPopup(popupContent);
+    {% endif %}
  }
 
 function leaflet_locations_map_init(map, options) {
+    {% if locations %}
     locations_map = map;
 
     {% for location in locations %}
@@ -359,58 +374,58 @@ function leaflet_locations_map_init(map, options) {
     </table>
     `;
 
-        {% if location.province %}
-        var provinceLayer = L.geoJson({{ location.province.polygon.geojson|safe }}).addTo(map);
-        var popupLayer = provinceLayer;
-        {% endif %}
+    {% if location.province %}
+    var provinceLayer = L.geoJson({{ location.province.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = provinceLayer;
+    {% endif %}
 
-        {% if location.city %}
-        if (typeof provinceLayer !== 'undefined') {
-            map.removeLayer(provinceLayer);
-        }
-        var cityLayer = L.geoJson({{ location.city.polygon.geojson|safe }}).addTo(map);
-        var popupLayer = cityLayer;
-        {% endif %}
+    {% if location.city %}
+    if (typeof provinceLayer !== 'undefined') {
+        map.removeLayer(provinceLayer);
+    }
+    var cityLayer = L.geoJson({{ location.city.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = cityLayer;
+    {% endif %}
 
-        {% if location.subdistrict %}
-        if (typeof cityLayer !== 'undefined') {
-            map.removeLayer(cityLayer);
-        }
-        var subdistrictLayer = L.geoJson({{ location.subdistrict.polygon.geojson|safe }}).addTo(map);
-        var popupLayer = subdistrictLayer;
-        {% endif %}
+    {% if location.subdistrict %}
+    if (typeof cityLayer !== 'undefined') {
+        map.removeLayer(cityLayer);
+    }
+    var subdistrictLayer = L.geoJson({{ location.subdistrict.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = subdistrictLayer;
+    {% endif %}
 
-        {% if location.village %}
-        if (typeof subdistrictLayer !== 'undefined') {
-            map.removeLayer(subdistrictLayer);
-        }
-        var villageLayer = L.geoJson({{ location.village.polygon.geojson|safe }}).addTo(map);
-        var popupLayer = villageLayer;
-        {% endif %}
+    {% if location.village %}
+    if (typeof subdistrictLayer !== 'undefined') {
+        map.removeLayer(subdistrictLayer);
+    }
+    var villageLayer = L.geoJson({{ location.village.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = villageLayer;
+    {% endif %}
 
-        {% if location.rw %}
-        if (typeof villageLayer !== 'undefined') {
-            map.removeLayer(villageLayer);
-        }
-        var rwLayer = L.geoJson({{ location.rw.polygon.geojson|safe }}).addTo(map);
-        var popupLayer = rwLayer;
-        {% endif %}
+    {% if location.rw %}
+    if (typeof villageLayer !== 'undefined') {
+        map.removeLayer(villageLayer);
+    }
+    var rwLayer = L.geoJson({{ location.rw.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = rwLayer;
+    {% endif %}
 
-        {% if location.rt %}
-        if (typeof rwLayer !== 'undefined') {
-            map.removeLayer(rwLayer);
-        }
-        var rtLayer = L.geoJson({{ location.rt.polygon.geojson|safe }}).addTo(map);
-        var popupLayer = rtLayer;
-        {% endif %}
-        popupLayer.bindPopup(popupContent);
+    {% if location.rt %}
+    if (typeof rwLayer !== 'undefined') {
+        map.removeLayer(rwLayer);
+    }
+    var rtLayer = L.geoJson({{ location.rt.polygon.geojson|safe }}).addTo(map);
+    var popupLayer = rtLayer;
+    {% endif %}
+
+    popupLayer.bindPopup(popupContent);
     {% endfor %}
+    {% endif %}
 }
 
 $("a[href='#locations']").on('shown.bs.tab', function(e) {
     locations_map.invalidateSize();
 });
-
 </script>
-
 {% endblock %}

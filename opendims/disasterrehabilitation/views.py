@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.conf import settings
 
-from rest_framework import filters, generics
+from rest_framework import generics
 
 from reports.models import Event
 from .forms import SearchByLocationForm
@@ -11,29 +11,28 @@ from .serializers import ActivityLocationSerializer
 
 
 def disasterrehabilitation_index(request):
-    events = Event.objects.order_by('-created')[:10]
-    eventassessments = EventAssessment.objects.order_by('-created')[:10]
-    activities = Activity.objects.order_by('-created')[:10]
-
+    events = Event.objects.order_by('-created')
+    eventassessments = EventAssessment.objects.filter(published=True).order_by('-created')
+    activities = Activity.objects.filter(published=True).order_by('-created')
     form = SearchByLocationForm(request.GET or None)
+
     context = {
         'events': events,
         'eventassessments': eventassessments,
         'activities': activities,
-        'form': form
+        'form': form,
+        'search': False
     }
-    if form.is_valid():
-        events = Event.objects.order_by('-created')
-        eventassessments = EventAssessment.objects.order_by('-created')
-        activities = Activity.objects.order_by('-created')
-        locations = Location.objects.all()
 
+    if form.is_valid():
         province = form.cleaned_data.get('province', None)
         city = form.cleaned_data.get('city', None)
         subdistrict = form.cleaned_data.get('subdistrict', None)
         village = form.cleaned_data.get('village', None)
         rw = form.cleaned_data.get('rw', None)
         rt = form.cleaned_data.get('rt', None)
+
+        locations = Location.objects.all()
 
         if province:
             events = events.filter(province=province)
@@ -113,6 +112,7 @@ def disasterrehabilitation_index(request):
             eventassessments = eventassessments.filter(id__in=eventassessments_id)
             activities = activities.filter(id__in=activities_id)
 
+        context['search'] = True
         context['events'] = events
         context['eventassessments'] = eventassessments
         context['activities'] = activities
@@ -121,11 +121,11 @@ def disasterrehabilitation_index(request):
         request,
         'disasterrehabilitation/disasterrehabilitation_index.html',
         context
-        )
+    )
 
 
 class EventAssessmentListView(generic.ListView):
-    queryset = EventAssessment.objects.order_by('-created')
+    queryset = EventAssessment.objects.filter(published=True).order_by('-created')
     paginate_by = settings.ITEMS_PER_PAGE
 
 
@@ -133,16 +133,15 @@ class EventAssessmentDetailView(generic.DetailView):
     model = EventAssessment
 
     def get_context_data(self, **kwargs):
-        context = super(
-            EventAssessmentDetailView, self).get_context_data(**kwargs)
+        context = super(EventAssessmentDetailView, self).get_context_data(**kwargs)
         context['locations'] = Location.objects.filter(
             eventassessment=self.get_object()
-            )
+        )
         return context
 
 
 class ActivityListView(generic.ListView):
-    queryset = Activity.objects.order_by('-created')
+    queryset = Activity.objects.filter(published=True).order_by('-created')
     paginate_by = settings.ITEMS_PER_PAGE
 
 
@@ -153,11 +152,11 @@ class ActivityDetailView(generic.DetailView):
         context = super(ActivityDetailView, self).get_context_data(**kwargs)
         context['locations'] = Location.objects.filter(
             activity=self.get_object()
-            )
+        )
         context['references'] = Reference.objects.filter(
             activity=self.get_object(),
             published=True
-            )
+        )
         return context
 
 

@@ -22,6 +22,14 @@
     margin-bottom: 40px;
 }
 
+.main-menu li.active a {
+    color: inherit;
+}
+
+.main-menu li.active > a {
+	color: #fecd0b;
+}
+
 .table.no-border td {
     border: none;
 }

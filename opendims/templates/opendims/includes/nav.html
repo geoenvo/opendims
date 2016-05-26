@@ -17,7 +17,7 @@
                     </li>
                     <!--
                     <li><a href="#">{% trans "Geolevels" %}</a>
-                        <ul>
+                        <ul class="sub-menu">
                             <li class="{% active_url request 'geolevels:province_list' %}"><a href="{% url 'geolevels:province_list' %}">{% trans "Provinces" %}</a></li>
                             <li class="{% active_url request 'geolevels:city_list' %}"><a href="{% url 'geolevels:city_list' %}">{% trans "Cities" %}</a></li>
                             <li class="{% active_url request 'geolevels:subdistrict_list' %}"><a href="{% url 'geolevels:subdistrict_list' %}">{% trans "Subdistricts" %}</a></li>
@@ -25,7 +25,12 @@
                         </ul>
                     </li>
                     -->
-                    <li><a href="{% url 'disasterrehabilitation:disasterrehabilitation_index' %}">{% trans "Rehabilitation" %}</a></li>
+                    <li class="{% active_url request 'disasterrehabilitation:disasterrehabilitation_index' %}"><a href="{% url 'disasterrehabilitation:disasterrehabilitation_index' %}">{% trans "Rehabilitation" %}</a>
+                        <ul class="sub-menu">
+                            <li class="{% active_url request 'disasterrehabilitation:activity_list' %}"><a href="{% url 'disasterrehabilitation:activity_list' %}">{% trans "Activity" %}</a></li>
+                            <li class="{% active_url request 'disasterrehabilitation:eventassessment_list' %}"><a href="{% url 'disasterrehabilitation:eventassessment_list' %}">{% trans "Event Assessment" %}</a></li>
+                        </ul>
+                    </li>
                     {% get_category_tree 'news' as nodes %}
                     {% recursetree nodes %}
                     <li>
