@@ -46,6 +46,10 @@
     min-width: 210px;
 }
 
+.col-count {
+    width: 40px;
+}
+
 .logo {
     margin: 30px auto;
 }
