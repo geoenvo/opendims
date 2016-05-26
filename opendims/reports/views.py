@@ -14,30 +14,6 @@ def statistics(request):
     events = Event.objects.order_by('-created')
     eventimpacts = EventImpact.objects.order_by('-pk')
     context = {'events': events, 'eventimpacts': eventimpacts}
-
-    total = 0
-    for event in events:
-        total = total + 1
-    print total
-
-    total_evac_value = 0
-    total_affected_total = 0
-
-    for eventimpact in eventimpacts:
-        total_evac_value += eventimpact.evac_total
-        total_affected_total += eventimpact.affected_total
-
-    print total_evac_value
-    print total_affected_total
-
-    """if event.disaster.code == 'ABR':
-            return sum(event.disaster.code)
-
-        if event.disaster.code == 'BJR':
-            return sum(event.disaster.code)
-        else:
-            print "I'm the others"""
-
     return render(request, 'reports/statistics.html', context)
 
 
