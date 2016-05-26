@@ -342,3 +342,6 @@ URL_TWITTER = 'https://twitter.com/BPBDJakarta'
 # Water level map settings
 DEFAULT_CENTER_WATERLEVEL = (-6.359658, 106.827621)
 DEFAULT_ZOOM_WATERLEVEL = 10
+
+# Disaster categories to show in the disaster statistics block
+DISASTER_STATISTICS = ('BJR', 'CEK', 'KBK', 'SOS')

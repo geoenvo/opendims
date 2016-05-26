@@ -8,6 +8,9 @@ register = template.Library()
 
 @register.simple_tag
 def get_event_statistics(disaster, month, year):
+    """
+    Return monthly summary of a disaster category and its impact.
+    """
     events_with_impacts = Event.objects.filter(
         eventimpacts__isnull=False, disaster=disaster,
         created__month=month, created__year=year
@@ -24,6 +27,9 @@ def get_event_statistics(disaster, month, year):
 
 @register.simple_tag
 def get_eventimpact_total(event_statistics):
+    """
+    Calculate the sum impact of a particular disaster category.
+    """
     eventimpact_total = {
         'evac_total': 0,
         'affected_total': 0,
