@@ -345,3 +345,6 @@ DEFAULT_ZOOM_WATERLEVEL = 10
 
 # Disaster categories to show in the disaster statistics block
 DISASTER_STATISTICS = ('BJR', 'CEK', 'KBK', 'SOS')
+
+# Cities to show in the weather forecast block
+WEATHERFORECAST_CITIES = ('Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara')

@@ -1,4 +1,4 @@
-{% load staticfiles i18n weatherforecast_tags common_tags %}
+{% load staticfiles i18n weatherforecast_tags %}
 
 <link rel="stylesheet" href="{% static 'weather-icons/css/weather-icons.min.css' %}">
 
@@ -42,8 +42,7 @@
         </div> <!-- /.event-small-list -->
         {% endif %}
 
-        {% to_list 'Jakarta Selatan' 'Jakarta Timur' 'Jakarta Pusat' 'Jakarta Barat' 'Jakarta Utara' as city_list %}
-        {% for city in city_list %}
+        {% for city in WEATHERFORECAST_CITIES %}
         {% get_latest_weatherforecastreport_by_city city as weatherforecastreport_city %}
         {% if weatherforecastreport_city %}
         <div class="event-small-list mini-forecast clearfix">
