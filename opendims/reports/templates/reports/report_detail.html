@@ -6,6 +6,7 @@
 
 {% block extra_css %}
 {% leaflet_css %}
+
 <style type="text/css">
 .tab-content > .tab-pane {
     background-color: #fff;
@@ -21,7 +22,7 @@
 {% block page_content_upper %}
 {% if report.event %}
 <div class="widget-main pull-up">
-    {% leaflet_map "leaflet_map" callback="window.leaflet_map_init" %}
+    {% leaflet_map "leaflet_event_map" callback="window.leaflet_event_map_init" %}
 </div>
 {% endif %}
 {% endblock %}
@@ -41,23 +42,23 @@
         <table class="table table-striped table-bordered">
             <tbody>
                 <tr>
-                    <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name report "created" %}</th>
                     <td>{{ report.created|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name report 'updated' %}</th>
+                    <th>{% get_verbose_field_name report "updated" %}</th>
                     <td>{{ report.updated|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name report 'source' %}</th>
+                    <th>{% get_verbose_field_name report "source" %}</th>
                     <td>{{ report.source.note }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name report 'status' %}</th>
+                    <th>{% get_verbose_field_name report "status" %}</th>
                     <td>{{ report.status }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name report 'note' %}</th>
+                    <th>{% get_verbose_field_name report "note" %}</th>
                     <td>{{ report.note }}</td>
                 </tr>
             </tbody>
@@ -70,73 +71,61 @@
         <table class="table table-striped table-bordered">
             <tbody>
                 <tr>
-                    <th class="col-md-2">{% get_verbose_field_name report.event 'created' %}</th>
-                    <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.created|date:"j F Y H:i T" }}</a></td>
+                    <th class="col-md-2">{% get_verbose_field_name report.event "disaster" %}</th>
+                    <td><a href="{{ report.event.get_absolute_url }}">{{ report.event.disaster.note }}</a></td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'updated' %}</th>
-                    <td>{{ report.event.updated|date:"j F Y H:i T" }}</td>
+                    <th class="col-md-2">{% get_verbose_field_name report.event "created" %}</th>
+                    <td>{{ report.event.created|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'disaster' %}</th>
-                    <td>{{ report.event.disaster.note }}</td>
-                </tr>
-                <tr>
-                    <th>{% get_verbose_field_name report.event 'status' %}</th>
-                    <td>{{ report.event.status }}</td>
-                </tr>
-                <tr>
-                    <th>{% get_verbose_field_name report.event 'height' %}</th>
-                    <td>{{ report.event.height }}</td>
-                </tr>
-                <tr>
-                    <th>{% get_verbose_field_name report.event 'magnitude' %}</th>
-                    <td>{{ report.event.magnitude }}</td>
+                    <th>{% get_verbose_field_name report.event "height" %} (cm)</th>
+                    <td>{% if report.event.height_min %}{{ report.event.height_min }} ~ {% endif %}{{ report.event.height }}</td>
                 </tr>
 
                 {% if report.event.province %}
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'province' %}</th>
+                    <th>{% get_verbose_field_name report.event "province" %}</th>
                     <td><a href="{% url 'geolevels:province_detail' report.event.province.pk %}">{{ report.event.province }}</a></td>
                 </tr>
                 {% endif %}
 
                 {% if report.event.city %}
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'city' %}</th>
+                    <th>{% get_verbose_field_name report.event "city" %}</th>
                     <td><a href="{% url 'geolevels:city_detail' report.event.city.pk %}">{{ report.event.city }}</a></td>
                 </tr>
                 {% endif %}
 
                 {% if report.event.subdistrict %}
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'subdistrict' %}</th>
+                    <th>{% get_verbose_field_name report.event "subdistrict" %}</th>
                     <td><a href="{% url 'geolevels:subdistrict_detail' report.event.subdistrict.pk %}">{{ report.event.subdistrict }}</a></td>
                 </tr>
                 {% endif %}
 
                 {% if report.event.village %}
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'village' %}</th>
+                    <th>{% get_verbose_field_name report.event "village" %}</th>
                     <td><a href="{% url 'geolevels:village_detail' report.event.village.pk %}">{{ report.event.village }}</a></td>
                 </tr>
                 {% endif %}
 
                 {% if report.event.rw %}
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'rw' %}</th>
+                    <th>{% get_verbose_field_name report.event "rw" %}</th>
                     <td><a href="{% url 'geolevels:rw_detail' report.event.rw.pk %}">{{ report.event.rw }}</a></td>
                 </tr>
                 {% endif %}
 
                 {% if report.event.rt %}
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'rt' %}</th>
+                    <th>{% get_verbose_field_name report.event "rt" %}</th>
                     <td><a href="{% url 'geolevels:rt_detail' report.event.rt.pk %}">{{ report.event.rt }}</a></td>
                 </tr>
 
                 <tr>
-                    <th>{% get_verbose_field_name report.event 'note' %}</th>
+                    <th>{% get_verbose_field_name report.event "note" %}</th>
                     <td>{{ report.event.note }}</td>
                 </tr>
                 {% endif %}
@@ -149,13 +138,14 @@
 
 {% block extra_js %}
 {% leaflet_js %}
+
 <script type="text/javascript">
-{% if report.event %}
 /**
  * Show the polygon of the affected area in the lowest defined
  * administrative area and display a popup of the event details.
  */
-function leaflet_map_init(map, options) {
+function leaflet_event_map_init(map, options) {
+    {% if report.event %}
     {% if report.event.province %}
     var provinceLayer = L.geoJson({{ report.event.province.polygon.geojson|safe }}).addTo(map);
     {% endif %}
@@ -203,20 +193,16 @@ function leaflet_map_init(map, options) {
     <table class="table table-striped table-bordered">
         <tbody>
             <tr>
-                <th class="col-md-2">{% get_verbose_field_name report 'created' %}</th>
-                <td>{{ report.created|date:'j F Y H:i' }}</td>
+                <th class="col-md-2">{% get_verbose_field_name report.event 'disaster' %}</th>
+                <td>{{ report.event.disaster }}</td>
             </tr>
             <tr>
-                <th>{% get_verbose_field_name report 'updated' %}</th>
-                <td>{{ report.updated|date:'j F Y H:i' }}</td>
+                <th>{% get_verbose_field_name report.event 'created' %}</th>
+                <td>{{ report.event.created|date:"j F Y H:i T" }}</td>
             </tr>
             <tr>
-                <th>{% get_verbose_field_name report 'source' %}</th>
-                <td>{{ report.source.note }}</td>
-            </tr>
-            <tr>
-                <th>{% get_verbose_field_name report 'status' %}</th>
-                <td>{{ report.status }}</td>
+                <th>{% get_verbose_field_name report.event 'height' %} (cm)</th>
+                <td>{% if report.event.height_min %}{{ report.event.height_min }} ~ {% endif %}{{ report.event.height }}</td>
             </tr>
 
             {% if report.event.province %}
@@ -261,8 +247,8 @@ function leaflet_map_init(map, options) {
             </tr>
 
             <tr>
-                <th>{% get_verbose_field_name report 'note' %}</th>
-                <td>{{ report.note }}</td>
+                <th>{% get_verbose_field_name report.event 'note' %}</th>
+                <td>{{ report.event.note }}</td>
             </tr>
             {% endif %}
         </tbody>
@@ -274,8 +260,8 @@ function leaflet_map_init(map, options) {
     if (typeof pointLayer !== 'undefined') {
         var pointBounds = pointLayer.getBounds();
         var pointCenter = pointBounds.getCenter();
-        map.setZoom(16);
         map.panTo(pointCenter);
+        map.setZoom(16);
         popupLayer = pointLayer;
     } else if (typeof rtLayer !== 'undefined') {
         map.fitBounds(rtLayer);
@@ -298,7 +284,7 @@ function leaflet_map_init(map, options) {
     }
 
     popupLayer.bindPopup(popupContent);
+    {% endif %}
 }
-{% endif %}
 </script>
 {% endblock %}

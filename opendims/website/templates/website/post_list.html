@@ -65,7 +65,7 @@
                 </div> <!-- /.box-content-inner -->
             </div>
             {% empty %}
-            <div class="alert alert-info text-center">{% trans "No entries found!" %}</div>
+            <div class="alert alert-info text-center">{% trans "No entries found." %}</div>
             {% endfor %}
         </div> <!-- /.post-container -->
         {% include 'opendims/includes/pagination.html' with page=page_obj q=q %}

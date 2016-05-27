@@ -40,39 +40,39 @@
         <table class="table table-striped table-bordered">
             <tbody>
                 <tr>
-                    <th class="col-md-2">{% get_verbose_field_name activity 'name' %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name activity "name" %}</th>
                     <td>{{ activity.name }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'created' %}</th>
+                    <th>{% get_verbose_field_name activity "created" %}</th>
                     <td>{{ activity.created|date:"j F Y H:i T" }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'start' %}</th>
-                    <td>{{ activity.start }}</td>
+                    <th>{% get_verbose_field_name activity "start" %}</th>
+                    <td>{{ activity.start|date:"j F Y" }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'end' %}</th>
-                    <td>{{ activity.end }}</td>
+                    <th>{% get_verbose_field_name activity "end" %}</th>
+                    <td>{{ activity.end|date:"j F Y" }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'type' %}</th>
+                    <th>{% get_verbose_field_name activity "type" %}</th>
                     <td>{{ activity.type }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'agency' %}</th>
+                    <th>{% get_verbose_field_name activity "agency" %}</th>
                     <td>{{ activity.agency }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'funding' %}</th>
+                    <th>{% get_verbose_field_name activity "funding" %}</th>
                     <td>{{ activity.funding }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'year' %}</th>
+                    <th>{% get_verbose_field_name activity "year" %}</th>
                     <td>{{ activity.year }}</td>
                 </tr>
                 <tr>
-                    <th>{% get_verbose_field_name activity 'note' %}</th>
+                    <th>{% get_verbose_field_name activity "note" %}</th>
                     <td>{{ activity.note }}</td>
                 </tr>
             </tbody>
@@ -89,14 +89,14 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    {% for location in locations|slice:'1' %}
+                    {% for location in locations|slice:"1" %}
                     <th class="col-count">{% trans "No." %}</th>
-                    <th>{% get_verbose_field_name location 'province' %}</th>
-                    <th>{% get_verbose_field_name location 'city' %}</th>
-                    <th>{% get_verbose_field_name location 'subdistrict' %}</th>
-                    <th>{% get_verbose_field_name location 'village' %}</th>
-                    <th>{% get_verbose_field_name location 'rw' %}</th>
-                    <th>{% get_verbose_field_name location 'rt' %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name location "province" %}</th>
+                    <th class="col-md-2">{% get_verbose_field_name location "city" %}</th>
+                    <th>{% get_verbose_field_name location "subdistrict" %}</th>
+                    <th>{% get_verbose_field_name location "village" %}</th>
+                    <th>{% get_verbose_field_name location "rw" %}</th>
+                    <th>{% get_verbose_field_name location "rt" %}</th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -104,12 +104,12 @@
                 {% for location in locations %}
                 <tr>
                     <td>{{ forloop.counter }}.</td>
-                    <td>{% if location.province %}<a href="{{ location.province.get_absolute_url }}">{{ location.province }}</a>{% else %}{% endif %}</td>
-                    <td>{% if location.city %}<a href="{{ location.city.get_absolute_url }}">{{ location.city }}</a>{% else %}{% endif %}</td>
-                    <td>{% if location.subdistrict %}<a href="{{ location.subdistrict.get_absolute_url }}">{{ location.subdistrict }}</a>{% else %}{% endif %}</td>
-                    <td>{% if location.village %}<a href="{{ location.village.get_absolute_url }}">{{ location.village }}</a>{% else %}{% endif %}</td>
-                    <td>{% if location.rw %}<a href="{{ location.rw.get_absolute_url }}">{{ location.rw }}</a>{% else %}{% endif %}</td>
-                    <td>{% if location.rt %}<a href="{{ location.rt.get_absolute_url }}">{{ location.rt }}</a>{% else %}{% endif %}</td>
+                    <td>{% if location.province %}<a href="{{ location.province.get_absolute_url }}">{{ location.province }}</a>{% else %}-{% endif %}</td>
+                    <td>{% if location.city %}<a href="{{ location.city.get_absolute_url }}">{{ location.city }}</a>{% else %}-{% endif %}</td>
+                    <td>{% if location.subdistrict %}<a href="{{ location.subdistrict.get_absolute_url }}">{{ location.subdistrict }}</a>{% else %}-{% endif %}</td>
+                    <td>{% if location.village %}<a href="{{ location.village.get_absolute_url }}">{{ location.village }}</a>{% else %}-{% endif %}</td>
+                    <td>{% if location.rw %}<a href="{{ location.rw.get_absolute_url }}">{{ location.rw }}</a>{% else %}-{% endif %}</td>
+                    <td>{% if location.rt %}<a href="{{ location.rt.get_absolute_url }}">{{ location.rt }}</a>{% else %}-{% endif %}</td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -126,12 +126,12 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    {% for reference in references|slice:'1' %}
+                    {% for reference in references|slice:"1" %}
                     <th class="col-count">{% trans "No." %}</th>
-                    <th>{% get_verbose_field_name reference 'name' %}</th>
-                    <th>{% get_verbose_field_name reference 'created' %}</th>
-                    <th>{% get_verbose_field_name reference 'year' %}</th>
-                    <th>{% get_verbose_field_name reference 'file' %}</th>
+                    <th>{% get_verbose_field_name reference "name" %}</th>
+                    <th>{% get_verbose_field_name reference "created" %}</th>
+                    <th>{% get_verbose_field_name reference "year" %}</th>
+                    <th>{% get_verbose_field_name reference "file" %}</th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -142,7 +142,7 @@
                     <td>{{ reference.name }}</td>
                     <td>{{ reference.created|date:"j F Y H:i T" }}</td>
                     <td>{{ reference.year }}</td>
-                    <td><a href='{{ reference.file.url }}' download> {{ reference.file|filename }}</td>
+                    <td><a href="{{ reference.file.url }}" download>{{ reference.file|filename }}</a></td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -217,32 +217,16 @@ function leaflet_event_map_init(map, options) {
     <table class="table table-striped table-bordered">
        <tbody>
            <tr>
-               <th class="col-md-2">{% get_verbose_field_name activity.event 'created' %}</th>
+               <th class="col-md-2">{% get_verbose_field_name activity.event 'disaster' %}</th>
+               <td>{{ activity.event.disaster }}</td>
+           </tr>
+           <tr>
+               <th>{% get_verbose_field_name activity.event 'created' %}</th>
                <td>{{ activity.event.created|date:"j F Y H:i T" }}</td>
            </tr>
            <tr>
-               <th class="col-md-2">{% get_verbose_field_name activity.event 'updated' %}</th>
-               <td>{{ activity.event.updated|date:"j F Y H:i T" }}</td>
-           </tr>
-           <tr>
-               <th>{% get_verbose_field_name activity.event 'status' %}</th>
-               <td>{{ activity.event.status }}</td>
-           </tr>
-           <tr>
-               <th>{% get_verbose_field_name activity.event 'disaster' %}</th>
-               <td>{{ activity.event.disaster.note }}</td>
-           </tr>
-           <tr>
-               <th>{% get_verbose_field_name activity.event 'height_min' %}</th>
-               <td>{{ activity.event.height_min }}</td>
-           </tr>
-           <tr>
-               <th>{% get_verbose_field_name activity.event 'height' %}</th>
-               <td>{{ activity.event.height }}</td>
-           </tr>
-           <tr>
-               <th>{% get_verbose_field_name activity.event 'magnitude' %}</th>
-               <td>{{ activity.event.magnitude }}</td>
+               <th>{% get_verbose_field_name activity.event 'height' %} (cm)</th>
+               <td>{% if activity.event.height_min %}{{ activity.event.height_min }} ~ {% endif %}{{ activity.event.height }}</td>
            </tr>
 
            {% if activity.event.province %}
@@ -286,6 +270,7 @@ function leaflet_event_map_init(map, options) {
                <td><a href="{% url 'geolevels:rt_detail' activity.event.rt.pk %}">{{ activity.event.rt }}</a></td>
            </tr>
            {% endif %}
+
            <tr>
                <th>{% get_verbose_field_name activity.event 'note' %}</th>
                <td>{{ activity.event.note }}</td>
@@ -340,30 +325,35 @@ function leaflet_locations_map_init(map, options) {
                 <td><a href="{% url 'geolevels:province_detail' location.province.pk %}">{{ location.province }}</td>
             </tr>
             {% endif %}
+
             {% if location.city %}
             <tr>
                 <th>{% get_verbose_field_name location 'city' %}</th>
                 <td><a href="{% url 'geolevels:city_detail' location.city.pk %}">{{ location.city }}</td>
             </tr>
             {% endif %}
+
             {% if location.subdistrict %}
             <tr>
                 <th>{% get_verbose_field_name location 'subdistrict' %}</th>
                 <td><a href="{% url 'geolevels:subdistrict_detail' location.subdistrict.pk %}">{{ location.subdistrict }}</td>
             </tr>
             {% endif %}
+
             {% if location.village %}
             <tr>
                 <th>{% get_verbose_field_name location 'village' %}</th>
                 <td><a href="{% url 'geolevels:village_detail' location.village.pk %}">{{ location.village }}</td>
             </tr>
             {% endif %}
+
             {% if location.rw %}
             <tr>
                 <th>{% get_verbose_field_name location 'rw' %}</th>
                 <td><a href="{% url 'geolevels:rw_detail' location.rw.pk %}">{{ location.rw }}</td>
             </tr>
             {% endif %}
+
             {% if location.rt %}
             <tr>
                 <th>{% get_verbose_field_name location 'rt' %}</th>

@@ -26,7 +26,7 @@
                 {% get_event_statistics disaster current_month current_year as disaster_statistics %}
                 {% if disaster_statistics %}
                 {% get_eventimpact_total disaster_statistics as eventimpact_total %}
-                <td>{{ disaster_statistics.first.disaster.note }}</td>
+                <td>{{ disaster_statistics.first.disaster }}</td>
                 <td class="text-center">{{ disaster_statistics|length }}</td>
                 <td class="text-center">{{ eventimpact_total.evac_total }}</td>
                 <td class="text-center">{{ eventimpact_total.affected_total }}</td>
