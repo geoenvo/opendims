@@ -50,8 +50,21 @@
     margin: 42px auto;
 }
 
+.search-form {
+    margin-bottom: 15px;
+}
+
 .search-form form input {
     min-width: 210px;
+}
+
+.lang-button {
+    border: none;
+    text-indent:-9999px;
+    padding: 0;
+    margin-left: 5px;
+    width: 20px;
+    height: 15px;
 }
 
 .col-count {

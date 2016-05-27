@@ -28,7 +28,7 @@ apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 echo "---------------------------------------------"
 echo "Installing dependencies (build libs, Git, PostgreSQL, PostGIS)"
 echo "---------------------------------------------"
-apt-get install -y build-essential python-pip python-dev libpq-dev python-software-properties git-core libjpeg8-dev libfreetype6-dev libz-dev libjpeg-dev
+apt-get install -y build-essential python-pip python-dev libpq-dev python-software-properties git-core libjpeg8-dev libfreetype6-dev libz-dev libjpeg-dev gettext
 
 # Install PostgreSQL with PostGIS
 apt-get install -y postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis-2.1

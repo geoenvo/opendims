@@ -1,0 +1,1800 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-27 16:06+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: automaticweathersystem/admin.py:7
+msgid "AWS Station details"
+msgstr ""
+
+#: automaticweathersystem/admin.py:8
+msgid "AWS Report details"
+msgstr ""
+
+#: automaticweathersystem/models.py:12 contact/models.py:9
+#: disasterrehabilitation/models.py:15 earlywarning/models.py:12
+#: jaksafe/models.py:12 maps/templates/maps/jaksafe_map.html.py:329
+#: reportaggregator/models.py:11 reporting/models.py:19 reports/models.py:47
+#: smsblast/models.py:10 waterlevel/models.py:12 weatherforecast/models.py:11
+#: website/models.py:15
+msgid "Created"
+msgstr ""
+
+#: automaticweathersystem/models.py:13 disasterrehabilitation/models.py:16
+#: earlywarning/models.py:13 reportaggregator/models.py:12
+#: reporting/models.py:20 reports/models.py:48 smsblast/models.py:11
+#: waterlevel/models.py:13 weatherforecast/models.py:12 website/models.py:18
+msgid "Updated"
+msgstr ""
+
+#: automaticweathersystem/models.py:14 reports/models.py:46
+#: waterlevel/models.py:11
+msgid "Point"
+msgstr ""
+
+#: automaticweathersystem/models.py:15 contact/models.py:10
+#: disasterrehabilitation/models.py:17 geolevels/models.py:12
+#: reportaggregator/models.py:15 reporting/models.py:17 smsblast/models.py:14
+#: waterlevel/models.py:19 website/models.py:43
+msgid "Name"
+msgstr ""
+
+#: automaticweathersystem/models.py:16 disasterrehabilitation/models.py:18
+#: earlywarning/models.py:15 geolevels/models.py:11 jaksafe/models.py:26
+#: maps/templates/maps/jaksafe_map.html:333 reports/models.py:18
+#: smsblast/models.py:12 waterlevel/models.py:16 weatherforecast/models.py:13
+#: website/models.py:19
+msgid "Note"
+msgstr ""
+
+#: automaticweathersystem/models.py:17
+msgid "AWS Station"
+msgstr ""
+
+#: automaticweathersystem/models.py:18
+msgid "Temperature"
+msgstr ""
+
+#: automaticweathersystem/models.py:19
+msgid "Humidity"
+msgstr ""
+
+#: automaticweathersystem/models.py:20
+msgid "Pressure"
+msgstr ""
+
+#: automaticweathersystem/models.py:21
+msgid "Wind Speed"
+msgstr ""
+
+#: automaticweathersystem/models.py:22 automaticweathersystem/models.py:27
+msgid "Wind Direction"
+msgstr ""
+
+#: automaticweathersystem/models.py:23
+msgid "Day Rain"
+msgstr ""
+
+#: automaticweathersystem/models.py:24
+msgid "Rain Rate"
+msgstr ""
+
+#: automaticweathersystem/models.py:25
+msgid "UV Index"
+msgstr ""
+
+#: automaticweathersystem/models.py:26
+msgid "Solar Radiation"
+msgstr ""
+
+#: common/validators.py:17
+msgid "Invalid file type."
+msgstr ""
+
+#: common/validators.py:19
+msgid "Unable to detect the file type."
+msgstr ""
+
+#: common/validators.py:30
+msgid "Maximum file upload size:"
+msgstr ""
+
+#: contact/admin.py:10 contact/templates/contact/contact.html.py:5
+#: contact/templates/contact/contact.html:12
+#: contact/templates/contact/contact_index.html:6 smsblast/models.py:19
+#: templates/opendims/includes/block_footer.html:80
+#: templates/opendims/includes/block_header.html:36
+msgid "Contact"
+msgstr ""
+
+#: contact/models.py:11
+#: templates/opendims/includes/block_contact_address.html:29
+msgid "E-mail"
+msgstr ""
+
+#: contact/models.py:12
+#: templates/opendims/includes/block_contact_address.html:34
+msgid "Website"
+msgstr ""
+
+#: contact/models.py:13 smsblast/models.py:17
+msgid "Subject"
+msgstr ""
+
+#: contact/models.py:14
+msgid "Message"
+msgstr ""
+
+#: contact/models.py:19
+msgid "Disaster information"
+msgstr ""
+
+#: contact/models.py:20
+msgid "Water level information"
+msgstr ""
+
+#: contact/templates/contact/contact_index.html:12
+#: templates/opendims/includes/block_footer.html:9
+msgid "Contact Us"
+msgstr ""
+
+#: contact/templates/contact/contact_index.html:13
+msgid "Please use the form below to submit information to us."
+msgstr ""
+
+#: contact/templates/contact/contact_index.html:20
+#: waterlevel/templates/waterlevel/watergate_list.html:34
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:39
+msgid "Submit"
+msgstr ""
+
+#: contact/views.py:17
+msgid "Message sent. Thank you for contacting us!"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:11 disasterrehabilitation/forms.py:43
+#: disasterrehabilitation/models.py:30 geolevels/models.py:44
+#: reports/admin.py:82 reports/models.py:54 weatherforecast/models.py:19
+msgid "Province"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:12 disasterrehabilitation/forms.py:44
+#: disasterrehabilitation/models.py:31 geolevels/models.py:78
+#: reports/admin.py:83 reports/models.py:55 weatherforecast/models.py:18
+msgid "City"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:13 disasterrehabilitation/forms.py:45
+#: disasterrehabilitation/models.py:32 geolevels/models.py:109
+#: reports/admin.py:84 reports/models.py:56
+msgid "Subdistrict"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:14 disasterrehabilitation/forms.py:46
+#: disasterrehabilitation/models.py:33 geolevels/models.py:143
+#: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:330
+#: reports/admin.py:85 reports/models.py:57
+msgid "Village"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:15 disasterrehabilitation/forms.py:47
+#: disasterrehabilitation/models.py:34 geolevels/models.py:144
+#: geolevels/templates/geolevels/rw_list.html:5
+#: geolevels/templates/geolevels/rw_list.html:9
+#: geolevels/templates/geolevels/rw_list.html:13
+#: geolevels/templates/geolevels/village_detail.html:34 jaksafe/models.py:24
+#: maps/templates/maps/jaksafe_map.html.py:331 reports/admin.py:86
+#: reports/models.py:58
+msgid "RW"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:16 disasterrehabilitation/forms.py:48
+#: disasterrehabilitation/models.py:35 geolevels/models.py:178
+#: geolevels/templates/geolevels/rt_list.html:5
+#: geolevels/templates/geolevels/rt_list.html:9
+#: geolevels/templates/geolevels/rt_list.html:13
+#: geolevels/templates/geolevels/rw_detail.html:34 reports/admin.py:87
+#: reports/models.py:59
+msgid "RT"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:17
+msgid "Location details"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:18
+msgid "Activity details"
+msgstr ""
+
+#: disasterrehabilitation/admin.py:19
+msgid "Event assessment details"
+msgstr ""
+
+#: disasterrehabilitation/forms.py:112
+#: templates/opendims/includes/block_header.html:43 website/forms.py:22
+#: website/templates/website/post_list.html:5
+#: website/templates/website/post_list.html:15
+#: website/templates/website/post_list.html:37
+msgid "Search"
+msgstr ""
+
+#: disasterrehabilitation/models.py:19
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:31
+#: reports/admin.py:296 reports/models.py:146
+#: reports/templates/reports/report_detail.html:34
+#: reports/templates/reports/report_detail.html:69
+msgid "Event"
+msgstr ""
+
+#: disasterrehabilitation/models.py:20 earlywarning/models.py:16
+#: reports/models.py:191 website/models.py:31
+msgid "Published"
+msgstr ""
+
+#: disasterrehabilitation/models.py:21 reporting/models.py:30
+#: website/models.py:21
+msgid "File"
+msgstr ""
+
+#: disasterrehabilitation/models.py:22
+msgid "Start date"
+msgstr ""
+
+#: disasterrehabilitation/models.py:23
+msgid "End date"
+msgstr ""
+
+#: disasterrehabilitation/models.py:24
+msgid "Year"
+msgstr ""
+
+#: disasterrehabilitation/models.py:25
+msgid "Agency"
+msgstr ""
+
+#: disasterrehabilitation/models.py:26 reportaggregator/models.py:13
+#: reporting/models.py:31
+msgid "Type"
+msgstr ""
+
+#: disasterrehabilitation/models.py:27
+msgid "Funding"
+msgstr ""
+
+#: disasterrehabilitation/models.py:28
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:5
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:9
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:13
+#: templates/opendims/includes/nav.html:30
+#: templates/opendims/includes/nav_responsive.html:33
+msgid "Activity"
+msgstr ""
+
+#: disasterrehabilitation/models.py:29
+msgid "Event assessment"
+msgstr ""
+
+#: disasterrehabilitation/models.py:36 reportaggregator/models.py:16
+#: reporting/models.py:32 reports/models.py:50
+msgid "Status"
+msgstr ""
+
+#: disasterrehabilitation/models.py:96
+msgid "PHYSICAL"
+msgstr ""
+
+#: disasterrehabilitation/models.py:97
+msgid "NON-PHYSICAL"
+msgstr ""
+
+#: disasterrehabilitation/models.py:100
+msgid "APBN"
+msgstr ""
+
+#: disasterrehabilitation/models.py:101
+msgid "APBD"
+msgstr ""
+
+#: disasterrehabilitation/models.py:102
+msgid "CSR"
+msgstr ""
+
+#: disasterrehabilitation/models.py:103
+msgid "Public"
+msgstr ""
+
+#: disasterrehabilitation/models.py:104
+msgid "Other"
+msgstr ""
+
+#: disasterrehabilitation/models.py:107
+msgid "PENDING"
+msgstr ""
+
+#: disasterrehabilitation/models.py:108
+msgid "IN-PROGRESS"
+msgstr ""
+
+#: disasterrehabilitation/models.py:109
+msgid "COMPLETED"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:32
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:30
+#: reports/templates/reports/event_detail.html:30
+#: reports/templates/reports/report_detail.html:32
+msgid "Detail"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:33
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:83
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:32
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:130
+msgid "Locations"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:34
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:124
+msgid "References"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:93
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:130
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:27
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:43
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:102
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:155
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:140
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:27
+#: reporting/templates/reporting/report_ABR.html:39
+#: reporting/templates/reporting/report_ABR.html:76
+#: reporting/templates/reporting/report_ABR.html:108
+#: reporting/templates/reporting/report_ABR.html:149
+#: reporting/templates/reporting/report_BJR.html:39
+#: reporting/templates/reporting/report_BJR.html:76
+#: reporting/templates/reporting/report_BJR.html:108
+#: reporting/templates/reporting/report_BJR.html:149
+#: reporting/templates/reporting/report_CEK.html:39
+#: reporting/templates/reporting/report_CEK.html:76
+#: reporting/templates/reporting/report_CEK.html:108
+#: reporting/templates/reporting/report_CEK.html:149
+#: reporting/templates/reporting/report_GMP.html:39
+#: reporting/templates/reporting/report_GMP.html:76
+#: reporting/templates/reporting/report_GMP.html:108
+#: reporting/templates/reporting/report_GMP.html:149
+#: reporting/templates/reporting/report_KBK.html:39
+#: reporting/templates/reporting/report_KBK.html:76
+#: reporting/templates/reporting/report_KBK.html:108
+#: reporting/templates/reporting/report_KBK.html:149
+#: reporting/templates/reporting/report_KLB.html:39
+#: reporting/templates/reporting/report_KLB.html:76
+#: reporting/templates/reporting/report_KLB.html:108
+#: reporting/templates/reporting/report_KLB.html:149
+#: reporting/templates/reporting/report_LAI.html:39
+#: reporting/templates/reporting/report_LAI.html:76
+#: reporting/templates/reporting/report_LAI.html:108
+#: reporting/templates/reporting/report_LAI.html:149
+#: reporting/templates/reporting/report_LSR.html:39
+#: reporting/templates/reporting/report_LSR.html:76
+#: reporting/templates/reporting/report_LSR.html:108
+#: reporting/templates/reporting/report_LSR.html:149
+#: reporting/templates/reporting/report_PHT.html:39
+#: reporting/templates/reporting/report_PHT.html:76
+#: reporting/templates/reporting/report_PHT.html:108
+#: reporting/templates/reporting/report_PHT.html:149
+#: reporting/templates/reporting/report_ROB.html:39
+#: reporting/templates/reporting/report_ROB.html:76
+#: reporting/templates/reporting/report_ROB.html:108
+#: reporting/templates/reporting/report_ROB.html:149
+#: reporting/templates/reporting/report_SOS.html:39
+#: reporting/templates/reporting/report_SOS.html:76
+#: reporting/templates/reporting/report_SOS.html:108
+#: reporting/templates/reporting/report_SOS.html:149
+#: reporting/templates/reporting/report_TER.html:39
+#: reporting/templates/reporting/report_TER.html:76
+#: reporting/templates/reporting/report_TER.html:108
+#: reporting/templates/reporting/report_TER.html:149
+#: reporting/templates/reporting/report_TSU.html:39
+#: reporting/templates/reporting/report_TSU.html:76
+#: reporting/templates/reporting/report_TSU.html:108
+#: reporting/templates/reporting/report_TSU.html:149
+#: reports/templates/reports/event_detail.html:124
+#: reports/templates/reports/event_detail.html:161
+#: reports/templates/reports/event_list.html:27
+#: reports/templates/reports/report_list.html:27
+msgid "No."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:116
+msgid "No locations found for this activity."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:149
+msgid "No references found for this activity."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:16
+msgid ""
+"\n"
+"Description about activities, id blandit augue varius vel. Mauris bibendum "
+"nulla at erat feugiat gravida. Nulla id dolor id arcu vestibulum gravida. "
+"Aenean a risus ut sapien malesuada dapibus id at dui. Nullam et fringilla "
+"sem, in cursus erat. Ut maximus porttitor fermentum. Proin pulvinar "
+"ultricies velit, non cursus magna. Mauris ullamcorper pellentesque feugiat. "
+"Vestibulum tincidunt a dolor non convallis. Phasellus tempus risus "
+"vestibulum luctus posuere. Vivamus gravida sed quam a dignissim. Fusce "
+"sodales rhoncus erat, sed euismod urna auctor vel.\n"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:50
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:67
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:83
+msgid "No activities found."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:5
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:12
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:22
+msgid "Disaster Rehabilitation"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:11
+msgid "Search By Location"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:20
+msgid "Search Results"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:25
+msgid ""
+"\n"
+"Description about disaster rehabilitation, id blandit augue varius vel. "
+"Mauris bibendum nulla at erat feugiat gravida. Nulla id dolor id arcu "
+"vestibulum gravida. Aenean a risus ut sapien malesuada dapibus id at dui. "
+"Nullam et fringilla sem, in cursus erat. Ut maximus porttitor fermentum. "
+"Proin pulvinar ultricies velit, non cursus magna. Mauris ullamcorper "
+"pellentesque feugiat. Vestibulum tincidunt a dolor non convallis. Phasellus "
+"tempus risus vestibulum luctus posuere. Vivamus gravida sed quam a "
+"dignissim. Fusce sodales rhoncus erat, sed euismod urna auctor vel.\n"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:34
+msgid "Activities"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:36
+msgid "Latest Activities"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:36
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:95
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:148
+msgid "View List"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:93
+msgid "Event Assesments"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:95
+msgid "Latest Event Assessments"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:122
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:136
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:46
+msgid "No event assessments found."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:146
+#: reporting/templates/reporting/report_ABR.html:32
+#: reporting/templates/reporting/report_BJR.html:32
+#: reporting/templates/reporting/report_CEK.html:32
+#: reporting/templates/reporting/report_GMP.html:32
+#: reporting/templates/reporting/report_KBK.html:32
+#: reporting/templates/reporting/report_KLB.html:32
+#: reporting/templates/reporting/report_LAI.html:32
+#: reporting/templates/reporting/report_LSR.html:32
+#: reporting/templates/reporting/report_PHT.html:32
+#: reporting/templates/reporting/report_ROB.html:32
+#: reporting/templates/reporting/report_SOS.html:32
+#: reporting/templates/reporting/report_TER.html:32
+#: reporting/templates/reporting/report_TSU.html:32
+#: reports/templates/reports/event_list.html:5
+#: reports/templates/reports/event_list.html:9
+#: reports/templates/reports/event_list.html:13
+#: templates/opendims/includes/nav.html:8
+#: templates/opendims/includes/nav.html:15
+#: templates/opendims/includes/nav_responsive.html:11
+#: templates/opendims/includes/nav_responsive.html:18
+msgid "Events"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:148
+msgid "Latest Events"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:175
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:189
+#: reports/templates/reports/event_list.html:46
+msgid "No events found."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:163
+msgid "No locations found for this event assessment."
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:5
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:9
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:13
+#: templates/opendims/includes/nav.html:31
+#: templates/opendims/includes/nav_responsive.html:34
+msgid "Event Assessment"
+msgstr ""
+
+#: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:16
+msgid ""
+"\n"
+"Description about event assessments, id blandit augue varius vel. Mauris "
+"bibendum nulla at erat feugiat gravida. Nulla id dolor id arcu vestibulum "
+"gravida. Aenean a risus ut sapien malesuada dapibus id at dui. Nullam et "
+"fringilla sem, in cursus erat. Ut maximus porttitor fermentum. Proin "
+"pulvinar ultricies velit, non cursus magna. Mauris ullamcorper pellentesque "
+"feugiat. Vestibulum tincidunt a dolor non convallis. Phasellus tempus risus "
+"vestibulum luctus posuere. Vivamus gravida sed quam a dignissim. Fusce "
+"sodales rhoncus erat, sed euismod urna auctor vel.\n"
+msgstr ""
+
+#: earlywarning/models.py:11 reports/models.py:194 website/models.py:22
+msgid "Title"
+msgstr ""
+
+#: earlywarning/models.py:14 reporting/models.py:24 smsblast/models.py:13
+#: website/models.py:20
+msgid "Content"
+msgstr ""
+
+#: earlywarning/templates/earlywarning/earlywarning.html:5
+#: earlywarning/templates/earlywarning/earlywarning.html:12
+#: earlywarning/templates/earlywarning/earlywarningreport_list.html:10
+#: templates/opendims/includes/block_earlywarning.html:7
+msgid "Early Warning"
+msgstr ""
+
+#: earlywarning/templates/earlywarning/earlywarningreport_list.html:23
+#: website/templates/website/post_list.html:68
+msgid "No entries found."
+msgstr ""
+
+#: geolevels/forms.py:34
+msgid "ID digit length must be at least"
+msgstr ""
+
+#: geolevels/models.py:13
+msgid "Polygon"
+msgstr ""
+
+#: geolevels/models.py:14
+msgid "GeoJSON"
+msgstr ""
+
+#: geolevels/models.py:69 geolevels/templates/geolevels/city_list.html.py:5
+#: geolevels/templates/geolevels/city_list.html:9
+#: geolevels/templates/geolevels/city_list.html:13
+#: geolevels/templates/geolevels/province_detail.html:34
+#: templates/opendims/includes/nav.html:22
+#: templates/opendims/includes/nav_responsive.html:25
+msgid "Cities"
+msgstr ""
+
+#: geolevels/templates/geolevels/city_detail.html:34
+#: geolevels/templates/geolevels/subdistrict_list.html:5
+#: geolevels/templates/geolevels/subdistrict_list.html:9
+#: geolevels/templates/geolevels/subdistrict_list.html:13
+#: templates/opendims/includes/nav.html:23
+#: templates/opendims/includes/nav_responsive.html:26
+msgid "Subdistricts"
+msgstr ""
+
+#: geolevels/templates/geolevels/city_detail.html:55
+msgid "No subdistricts found in this city."
+msgstr ""
+
+#: geolevels/templates/geolevels/city_list.html:32
+msgid "No cities found."
+msgstr ""
+
+#: geolevels/templates/geolevels/geolevels.html:5
+#: geolevels/templates/geolevels/geolevels.html:12
+#: templates/opendims/includes/block_footer.html:78
+#: templates/opendims/includes/nav.html:19
+#: templates/opendims/includes/nav_responsive.html:22
+msgid "Geolevels"
+msgstr ""
+
+#: geolevels/templates/geolevels/province_detail.html:55
+msgid "No cities found in this province."
+msgstr ""
+
+#: geolevels/templates/geolevels/province_list.html:5
+#: geolevels/templates/geolevels/province_list.html:9
+#: geolevels/templates/geolevels/province_list.html:13
+#: templates/opendims/includes/nav.html:21
+#: templates/opendims/includes/nav_responsive.html:24
+msgid "Provinces"
+msgstr ""
+
+#: geolevels/templates/geolevels/province_list.html:32
+msgid "No provinces found."
+msgstr ""
+
+#: geolevels/templates/geolevels/rt_list.html:32
+msgid "No RT found."
+msgstr ""
+
+#: geolevels/templates/geolevels/rw_detail.html:55
+msgid "No RT found in this RW."
+msgstr ""
+
+#: geolevels/templates/geolevels/rw_list.html:32
+msgid "No RW found."
+msgstr ""
+
+#: geolevels/templates/geolevels/subdistrict_detail.html:34
+#: geolevels/templates/geolevels/village_list.html:5
+#: geolevels/templates/geolevels/village_list.html:9
+#: geolevels/templates/geolevels/village_list.html:13
+#: templates/opendims/includes/nav.html:24
+#: templates/opendims/includes/nav_responsive.html:27
+msgid "Villages"
+msgstr ""
+
+#: geolevels/templates/geolevels/subdistrict_detail.html:55
+msgid "No villages found in this subdistrict."
+msgstr ""
+
+#: geolevels/templates/geolevels/subdistrict_list.html:32
+msgid "No subdistricts found."
+msgstr ""
+
+#: geolevels/templates/geolevels/village_detail.html:54
+msgid "No RW found in this village."
+msgstr ""
+
+#: geolevels/templates/geolevels/village_list.html:32
+msgid "No villages found."
+msgstr ""
+
+#: jaksafe/admin.py:11
+msgid "ReportAutoSummary"
+msgstr ""
+
+#: jaksafe/models.py:13 maps/templates/maps/jaksafe_map.html.py:334
+msgid "Infrastructure Damage"
+msgstr ""
+
+#: jaksafe/models.py:14 maps/templates/maps/jaksafe_map.html.py:335
+msgid "Infrastructure Loss"
+msgstr ""
+
+#: jaksafe/models.py:15
+msgid "Trans-sector Damage"
+msgstr ""
+
+#: jaksafe/models.py:16
+msgid "Trans-sector Loss"
+msgstr ""
+
+#: jaksafe/models.py:17 maps/templates/maps/jaksafe_map.html.py:338
+msgid "Productive Damage"
+msgstr ""
+
+#: jaksafe/models.py:18 maps/templates/maps/jaksafe_map.html.py:339
+msgid "Productive Loss"
+msgstr ""
+
+#: jaksafe/models.py:19
+msgid "Social Estate Damage"
+msgstr ""
+
+#: jaksafe/models.py:20
+msgid "Social Estate Loss"
+msgstr ""
+
+#: jaksafe/models.py:21 maps/templates/maps/jaksafe_map.html.py:342
+msgid "Total Damage"
+msgstr ""
+
+#: jaksafe/models.py:22 maps/templates/maps/jaksafe_map.html.py:343
+#: templates/opendims/includes/block_statistics.html:21
+msgid "Total Loss"
+msgstr ""
+
+#: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:332
+#: reportaggregator/models.py:17 reports/models.py:147
+msgid "Source"
+msgstr ""
+
+#: jaksafe/templates/jaksafe/jaksafe.html:5
+#: jaksafe/templates/jaksafe/jaksafe.html:12
+#: jaksafe/templates/jaksafe/reportautosummary_list.html:5
+msgid "Jaksafe"
+msgstr ""
+
+#: jaksafe/templates/jaksafe/reportautosummary_list.html:9
+#: jaksafe/templates/jaksafe/reportautosummary_list.html:13
+msgid "Jaksafe Auto Summary"
+msgstr ""
+
+#: jaksafe/templates/jaksafe/reportautosummary_list.html:38
+msgid "No Data found."
+msgstr ""
+
+#: maps/templates/maps/jaksafe_map.html:336
+msgid "Cross-sector Damage"
+msgstr ""
+
+#: maps/templates/maps/jaksafe_map.html:337
+msgid "Cross-sector Loss"
+msgstr ""
+
+#: maps/templates/maps/jaksafe_map.html:340
+msgid "Social-Housing Damage"
+msgstr ""
+
+#: maps/templates/maps/jaksafe_map.html:341
+msgid "Social-Housing Loss"
+msgstr ""
+
+#: maps/templates/maps/waterlevel_map.html:105
+#: waterlevel/templates/waterlevel/watergate_list.html:85
+#: waterlevel/templates/waterlevel/watergate_list.html:188
+msgid "Time"
+msgstr ""
+
+#: maps/templates/maps/waterlevel_map.html:105 reports/models.py:51
+#: templates/opendims/includes/block_waterlevel.html:13
+#: waterlevel/models.py:14
+#: waterlevel/templates/waterlevel/watergate_list.html:191
+msgid "Height"
+msgstr ""
+
+#: maps/templates/maps/waterlevel_map.html:105 waterlevel/models.py:15
+msgid "Weather"
+msgstr ""
+
+#: reportaggregator/admin.py:9
+msgid "Source details"
+msgstr ""
+
+#: reportaggregator/admin.py:10
+msgid "Keyword details"
+msgstr ""
+
+#: reportaggregator/models.py:10 reports/models.py:45
+#: templates/opendims/includes/block_statistics.html:15
+#: waterlevel/templates/waterlevel/watergate_detail.html:81
+#: waterlevel/templates/waterlevel/watergate_list.html:125
+msgid "Disaster"
+msgstr ""
+
+#: reportaggregator/models.py:14 website/forms.py:12
+msgid "Keyword"
+msgstr ""
+
+#: reportaggregator/models.py:22
+msgid "Twitter"
+msgstr ""
+
+#: reportaggregator/models.py:44 reporting/models.py:70 reports/models.py:64
+msgid "Active"
+msgstr ""
+
+#: reportaggregator/models.py:45 reporting/models.py:71 reports/models.py:65
+msgid "Inactive"
+msgstr ""
+
+#: reporting/admin.py:19 reporting/admin.py:28 smsblast/admin.py:8
+msgid "Template details"
+msgstr ""
+
+#: reporting/admin.py:20 reporting/admin.py:25 reporting/admin.py:29
+#: reports/admin.py:295
+msgid "Report details"
+msgstr ""
+
+#: reporting/admin.py:21
+msgid "Set Template as Active"
+msgstr ""
+
+#: reporting/admin.py:22
+msgid "Set Template as Inactive"
+msgstr ""
+
+#: reporting/admin.py:26
+msgid "Report content"
+msgstr ""
+
+#: reporting/admin.py:27
+msgid "Report output"
+msgstr ""
+
+#: reporting/admin.py:30 reporting/models.py:25
+msgid "Disaster attached"
+msgstr ""
+
+#: reporting/forms.py:9
+msgid "Replace report content with template?"
+msgstr ""
+
+#: reporting/models.py:18
+#: waterlevel/templates/waterlevel/watergate_list.html:25
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:30
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:58
+msgid "Date"
+msgstr ""
+
+#: reporting/models.py:21 website/models.py:16
+msgid "Start"
+msgstr ""
+
+#: reporting/models.py:22 website/models.py:17
+msgid "End"
+msgstr ""
+
+#: reporting/models.py:23
+msgid "Author"
+msgstr ""
+
+#: reporting/models.py:26 smsblast/models.py:15
+msgid "Template"
+msgstr ""
+
+#: reporting/models.py:27
+msgid "Text ID"
+msgstr ""
+
+#: reporting/models.py:28
+msgid "Text author"
+msgstr ""
+
+#: reporting/models.py:29
+msgid "Text title"
+msgstr ""
+
+#: reporting/models.py:33
+msgid "Report"
+msgstr ""
+
+#: reporting/models.py:64
+msgid "Daily"
+msgstr ""
+
+#: reporting/models.py:65
+msgid "Weekly"
+msgstr ""
+
+#: reporting/models.py:66
+msgid "Monthly"
+msgstr ""
+
+#: reporting/models.py:67
+msgid "Yearly"
+msgstr ""
+
+#: reporting/templates/reporting/report_ABR.html:70
+#: reporting/templates/reporting/report_BJR.html:70
+#: reporting/templates/reporting/report_CEK.html:70
+#: reporting/templates/reporting/report_GMP.html:70
+#: reporting/templates/reporting/report_KBK.html:70
+#: reporting/templates/reporting/report_KLB.html:70
+#: reporting/templates/reporting/report_LAI.html:70
+#: reporting/templates/reporting/report_LSR.html:70
+#: reporting/templates/reporting/report_PHT.html:70
+#: reporting/templates/reporting/report_ROB.html:70
+#: reporting/templates/reporting/report_SOS.html:70
+#: reporting/templates/reporting/report_TER.html:70
+#: reporting/templates/reporting/report_TSU.html:70
+#: reports/templates/reports/event_detail.html:31
+#: reports/templates/reports/event_detail.html:118
+#: reports/templates/reports/report_list.html:5
+#: reports/templates/reports/report_list.html:9
+#: reports/templates/reports/report_list.html:13
+#: reports/templates/reports/reports.html:5
+#: templates/opendims/includes/nav.html:10
+#: templates/opendims/includes/nav_responsive.html:13
+msgid "Reports"
+msgstr ""
+
+#: reporting/templates/reporting/report_ABR.html:100
+#: reporting/templates/reporting/report_BJR.html:100
+#: reporting/templates/reporting/report_CEK.html:100
+#: reporting/templates/reporting/report_GMP.html:100
+#: reporting/templates/reporting/report_KBK.html:100
+#: reporting/templates/reporting/report_KLB.html:100
+#: reporting/templates/reporting/report_LAI.html:100
+#: reporting/templates/reporting/report_LSR.html:100
+#: reporting/templates/reporting/report_PHT.html:100
+#: reporting/templates/reporting/report_ROB.html:100
+#: reporting/templates/reporting/report_SOS.html:100
+#: reporting/templates/reporting/report_TER.html:100
+#: reporting/templates/reporting/report_TSU.html:100
+#: reports/templates/reports/statistics.html:7
+msgid "Event Impacts"
+msgstr ""
+
+#: reporting/templates/reporting/report_ABR.html:142
+#: reporting/templates/reporting/report_BJR.html:142
+#: reporting/templates/reporting/report_CEK.html:142
+#: reporting/templates/reporting/report_GMP.html:142
+#: reporting/templates/reporting/report_KBK.html:142
+#: reporting/templates/reporting/report_KLB.html:142
+#: reporting/templates/reporting/report_LAI.html:142
+#: reporting/templates/reporting/report_LSR.html:142
+#: reporting/templates/reporting/report_PHT.html:142
+#: reporting/templates/reporting/report_ROB.html:142
+#: reporting/templates/reporting/report_SOS.html:142
+#: reporting/templates/reporting/report_TER.html:142
+#: reporting/templates/reporting/report_TSU.html:142
+msgid "Event images"
+msgstr ""
+
+#: reports/admin.py:23
+msgid "Set Event as Active"
+msgstr ""
+
+#: reports/admin.py:24
+msgid "Set Event as Inactive"
+msgstr ""
+
+#: reports/admin.py:25
+msgid "Set Event as Unverified"
+msgstr ""
+
+#: reports/admin.py:26
+msgid "Set Event as Verified"
+msgstr ""
+
+#: reports/admin.py:80
+msgid "Event details"
+msgstr ""
+
+#: reports/admin.py:81
+msgid "Affected area"
+msgstr ""
+
+#: reports/admin.py:199
+#, python-format
+msgid "<h1>Imported file is not in unicode: %s</h1>"
+msgstr ""
+
+#: reports/admin.py:201
+#, python-format
+msgid "<h1>%s encountred while trying to read file: %s</h1>"
+msgstr ""
+
+#: reports/admin.py:320
+msgid "Impact data"
+msgstr ""
+
+#: reports/forms.py:28
+msgid "Please select a Village."
+msgstr ""
+
+#: reports/forms.py:32
+msgid "Please select a RW."
+msgstr ""
+
+#: reports/forms.py:36
+msgid "The selected RT is not found in the selected RW."
+msgstr ""
+
+#: reports/forms.py:41
+msgid "The selected RW is not found in the selected village."
+msgstr ""
+
+#: reports/forms.py:46
+msgid "The selected village is not found in the selected subdistrict."
+msgstr ""
+
+#: reports/forms.py:51
+msgid "The selected subdistrict is not found in the selected city."
+msgstr ""
+
+#: reports/forms.py:56
+msgid "The selected city is not found in the selected province."
+msgstr ""
+
+#: reports/models.py:17 waterlevel/models.py:17
+msgid "Code"
+msgstr ""
+
+#: reports/models.py:49
+msgid "Closed"
+msgstr ""
+
+#: reports/models.py:52
+msgid "Minimum height"
+msgstr ""
+
+#: reports/models.py:53
+msgid "Magnitude"
+msgstr ""
+
+#: reports/models.py:152
+msgid "Verified"
+msgstr ""
+
+#: reports/models.py:153
+msgid "Unverified"
+msgstr ""
+
+#: reports/models.py:154
+msgid "Pending"
+msgstr ""
+
+#: reports/models.py:189 website/models.py:33
+msgid "Image"
+msgstr ""
+
+#: reports/models.py:190 website/models.py:39
+msgid "Order"
+msgstr ""
+
+#: reports/models.py:192 website/models.py:37
+msgid "Image preview (260x180 px)"
+msgstr ""
+
+#: reports/models.py:193 website/models.py:36
+msgid "Image thumb (70x70 px)"
+msgstr ""
+
+#: reports/models.py:249
+msgid "RT text"
+msgstr ""
+
+#: reports/models.py:250
+msgid "Evacuation point"
+msgstr ""
+
+#: reports/models.py:251
+msgid "Evacuated total"
+msgstr ""
+
+#: reports/models.py:252
+msgid "Affected total"
+msgstr ""
+
+#: reports/models.py:253
+msgid "Affected death"
+msgstr ""
+
+#: reports/models.py:254
+msgid "Affected injury"
+msgstr ""
+
+#: reports/models.py:255
+msgid "Loss total"
+msgstr ""
+
+#: reports/resources.py:107
+msgid "Invalid disaster code. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:113
+msgid "Province not found. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:119
+msgid "City not found. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:126
+msgid "Subdistrict not found. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:132
+msgid "Village not found. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:141
+msgid "City not found in the province. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:150
+msgid "Subdistrict not found in the city. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:159
+msgid "Village not found in the subdistrict. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:169
+msgid "RW not found in the village. Skipping this row for import."
+msgstr ""
+
+#: reports/resources.py:176
+msgid "RT not found. Skipping this row for import."
+msgstr ""
+
+#: reports/templates/reports/event_detail.html:32
+msgid "Impact"
+msgstr ""
+
+#: reports/templates/reports/event_detail.html:33
+#: reports/templates/reports/event_detail.html:198
+#: website/templates/website/post_detail.html:76
+msgid "Images"
+msgstr ""
+
+#: reports/templates/reports/event_detail.html:143
+msgid "No reports found for this event."
+msgstr ""
+
+#: reports/templates/reports/event_detail.html:151
+msgid "Evacuation Points"
+msgstr ""
+
+#: reports/templates/reports/event_detail.html:190
+msgid "No evacuation points found for this event."
+msgstr ""
+
+#: reports/templates/reports/event_list.html:16
+msgid ""
+"\n"
+"Description about events, id blandit augue varius vel. Mauris bibendum nulla "
+"at erat feugiat gravida. Nulla id dolor id arcu vestibulum gravida. Aenean a "
+"risus ut sapien malesuada dapibus id at dui. Nullam et fringilla sem, in "
+"cursus erat. Ut maximus porttitor fermentum. Proin pulvinar ultricies velit, "
+"non cursus magna. Mauris ullamcorper pellentesque feugiat. Vestibulum "
+"tincidunt a dolor non convallis. Phasellus tempus risus vestibulum luctus "
+"posuere. Vivamus gravida sed quam a dignissim. Fusce sodales rhoncus erat, "
+"sed euismod urna auctor vel.\n"
+msgstr ""
+
+#: reports/templates/reports/report_list.html:16
+msgid ""
+"\n"
+"Description about reports, id blandit augue varius vel. Mauris bibendum "
+"nulla at erat feugiat gravida. Nulla id dolor id arcu vestibulum gravida. "
+"Aenean a risus ut sapien malesuada dapibus id at dui. Nullam et fringilla "
+"sem, in cursus erat. Ut maximus porttitor fermentum. Proin pulvinar "
+"ultricies velit, non cursus magna. Mauris ullamcorper pellentesque feugiat. "
+"Vestibulum tincidunt a dolor non convallis. Phasellus tempus risus "
+"vestibulum luctus posuere. Vivamus gravida sed quam a dignissim. Fusce "
+"sodales rhoncus erat, sed euismod urna auctor vel.\n"
+msgstr ""
+
+#: reports/templates/reports/report_list.html:48
+msgid "No reports found."
+msgstr ""
+
+#: smsblast/admin.py:9
+msgid "Group details"
+msgstr ""
+
+#: smsblast/admin.py:10 smsblast/admin.py:12
+msgid "Message details"
+msgstr ""
+
+#: smsblast/admin.py:11
+msgid "Contact details"
+msgstr ""
+
+#: smsblast/models.py:16
+msgid "Group"
+msgstr ""
+
+#: smsblast/models.py:18
+msgid "Contact Number"
+msgstr ""
+
+#: smsblast/models.py:20
+msgid "Contacts"
+msgstr ""
+
+#: templates/admin/base_site.html:4
+msgid "Django site admin"
+msgstr ""
+
+#: templates/admin/base_site.html:8
+msgid "Django administration"
+msgstr ""
+
+#: templates/opendims/includes/block_categories.html:5
+msgid "Categories"
+msgstr ""
+
+#: templates/opendims/includes/block_contact_address.html:5
+msgid "Address"
+msgstr ""
+
+#: templates/opendims/includes/block_contact_address.html:19
+msgid "Phone"
+msgstr ""
+
+#: templates/opendims/includes/block_contact_address.html:24
+msgid "Fax"
+msgstr ""
+
+#: templates/opendims/includes/block_contact_location.html:5
+msgid "Location"
+msgstr ""
+
+#: templates/opendims/includes/block_contact_location.html:11
+msgid "View full map"
+msgstr ""
+
+#: templates/opendims/includes/block_earlywarning.html:31
+#: templates/opendims/includes/block_elibrary.html:30
+#: templates/opendims/includes/block_gallery.html:31
+#: templates/opendims/includes/block_latest_earlywarningreports.html:20
+#: templates/opendims/includes/block_news.html:30
+#: templates/opendims/includes/block_similar_posts.html:24
+#: templates/opendims/includes/block_statistics.html:44
+#: templates/opendims/includes/block_waterlevel.html:33
+#: templates/opendims/includes/block_weatherforecast.html:78
+msgid "More"
+msgstr ""
+
+#: templates/opendims/includes/block_elibrary.html:7
+msgid "E-Library"
+msgstr ""
+
+#: templates/opendims/includes/block_footer.html:15
+msgid "Links"
+msgstr ""
+
+#: templates/opendims/includes/block_footer.html:28
+msgid "Resources"
+msgstr ""
+
+#: templates/opendims/includes/block_footer.html:41
+#: templates/opendims/includes/block_partners.html:9
+msgid "Partners"
+msgstr ""
+
+#: templates/opendims/includes/block_footer.html:73
+msgid "Copyright"
+msgstr ""
+
+#: templates/opendims/includes/block_footer.html:77
+#: templates/opendims/includes/nav.html:7
+#: templates/opendims/includes/nav_responsive.html:10
+#: templates/opendims/page.html:8
+msgid "Home"
+msgstr ""
+
+#: templates/opendims/includes/block_gallery.html:7
+#: website/templates/website/post_list.html:37
+msgid "Gallery"
+msgstr ""
+
+#: templates/opendims/includes/block_header.html:38
+msgid "Logout"
+msgstr ""
+
+#: templates/opendims/includes/block_latest_earlywarningreports.html:7
+msgid "Latest Early Warning Reports"
+msgstr ""
+
+#: templates/opendims/includes/block_news.html:7
+msgid "Latest News"
+msgstr ""
+
+#: templates/opendims/includes/block_similar_posts.html:7
+msgid "More in"
+msgstr ""
+
+#: templates/opendims/includes/block_similar_posts.html:18
+msgid "No entries found!"
+msgstr ""
+
+#: templates/opendims/includes/block_statistics.html:9
+msgid "Disaster Statistics"
+msgstr ""
+
+#: templates/opendims/includes/block_statistics.html:16
+msgid "Count"
+msgstr ""
+
+#: templates/opendims/includes/block_statistics.html:17
+msgid "Total Evacuated"
+msgstr ""
+
+#: templates/opendims/includes/block_statistics.html:18
+msgid "Total Affected"
+msgstr ""
+
+#: templates/opendims/includes/block_statistics.html:19
+msgid "Total Death"
+msgstr ""
+
+#: templates/opendims/includes/block_statistics.html:20
+msgid "Total Injury"
+msgstr ""
+
+#: templates/opendims/includes/block_waterlevel.html:6
+#: waterlevel/templates/waterlevel/watergate_list.html:44
+#: waterlevel/templates/waterlevel/waterlevel.html:5
+#: waterlevel/templates/waterlevel/waterlevel.html:13
+msgid "Water Level"
+msgstr ""
+
+#: templates/opendims/includes/block_waterlevel.html:12
+#: waterlevel/templates/waterlevel/watergate_list.html:54
+msgid "Water Gate"
+msgstr ""
+
+#: templates/opendims/includes/block_waterlevel.html:14
+#: waterlevel/templates/waterlevel/watergate_detail.html:35
+#: waterlevel/templates/waterlevel/watergate_list.html:55
+msgid "Level"
+msgstr ""
+
+#: templates/opendims/includes/block_weatherforecast.html:7
+#: weatherforecast/templates/weatherforecast/weatherforecast.html:5
+#: weatherforecast/templates/weatherforecast/weatherforecast.html:12
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:49
+msgid "Weather Forecast"
+msgstr ""
+
+#: templates/opendims/includes/block_weatherforecast.html:59
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:59
+msgid "Morning"
+msgstr ""
+
+#: templates/opendims/includes/block_weatherforecast.html:63
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:60
+msgid "Noon"
+msgstr ""
+
+#: templates/opendims/includes/block_weatherforecast.html:67
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:61
+msgid "Night"
+msgstr ""
+
+#: templates/opendims/includes/nav.html:13
+#: templates/opendims/includes/nav_responsive.html:16
+msgid "Maps"
+msgstr ""
+
+#: templates/opendims/includes/nav.html:28
+#: templates/opendims/includes/nav_responsive.html:31
+msgid "Rehabilitation"
+msgstr ""
+
+#: templates/opendims/includes/nav.html:68
+msgid "Layouts"
+msgstr ""
+
+#: templates/opendims/includes/pagination.html:6
+msgid "Previous"
+msgstr ""
+
+#: templates/opendims/includes/pagination.html:10
+msgid "Page"
+msgstr ""
+
+#: templates/opendims/includes/pagination.html:10
+msgid "of"
+msgstr ""
+
+#: templates/opendims/includes/pagination.html:12
+msgid "Next"
+msgstr ""
+
+#: templates/registration/activate.html:5
+#: templates/registration/activate.html:8
+msgid "Account Activation Failed"
+msgstr ""
+
+#: templates/registration/activate.html:15
+msgid "Account activation failed."
+msgstr ""
+
+#: templates/registration/activation_complete.html:5
+#: templates/registration/activation_complete.html:8
+msgid "Account Activated"
+msgstr ""
+
+#: templates/registration/activation_complete.html:16
+msgid "Your account is now activated."
+msgstr ""
+
+#: templates/registration/activation_complete.html:18
+msgid "You can login."
+msgstr ""
+
+#: templates/registration/login.html:5 templates/registration/login.html:8
+#: templates/registration/login.html:22
+msgid "Login"
+msgstr ""
+
+#: templates/registration/login.html:16
+msgid "Invalid username or password"
+msgstr ""
+
+#: templates/registration/login.html:25
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/registration/login.html:25
+msgid "Reset it"
+msgstr ""
+
+#: templates/registration/login.html:26
+msgid "Not a member?"
+msgstr ""
+
+#: templates/registration/login.html:26
+#: templates/registration/registration_form.html:18
+msgid "Register"
+msgstr ""
+
+#: templates/registration/logout.html:5 templates/registration/logout.html:8
+msgid "Logged Out"
+msgstr ""
+
+#: templates/registration/logout.html:15
+msgid "Successfully logged out"
+msgstr ""
+
+#: templates/registration/password_change_done.html:5
+#: templates/registration/password_change_done.html:8
+msgid "Password Change Complete"
+msgstr ""
+
+#: templates/registration/password_change_done.html:15
+msgid "Password successfully changed!"
+msgstr ""
+
+#: templates/registration/password_change_form.html:5
+#: templates/registration/password_change_form.html:8
+#: templates/registration/password_change_form.html:18
+msgid "Change Password"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:5
+#: templates/registration/password_reset_complete.html:8
+#: templates/registration/password_reset_done.html:5
+#: templates/registration/password_reset_done.html:8
+msgid "Password Reset Complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:16
+msgid "Your password has been reset!"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:17
+#, python-format
+msgid "You may now <a href=\"%(login_url)s\">login</a>"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:5
+#: templates/registration/password_reset_confirm.html:8
+msgid "Confirm Password Reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:15
+msgid "Enter your new password below to reset your password:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:19
+#: templates/registration/password_reset_form.html:5
+#: templates/registration/password_reset_form.html:8
+#: templates/registration/password_reset_form.html:23
+msgid "Reset Password"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:16
+msgid ""
+"\n"
+"                We have sent you an email with a link to reset your "
+"password. Please check\n"
+"                your email and click the link to continue.\n"
+"                "
+msgstr ""
+
+#: templates/registration/password_reset_form.html:16
+msgid ""
+"\n"
+"                Forgot your password? Enter your email in the form below and "
+"we'll send you instructions for creating a new one.\n"
+"                "
+msgstr ""
+
+#: templates/registration/registration_closed.html:5
+#: templates/registration/registration_closed.html:8
+msgid "Registration Closed"
+msgstr ""
+
+#: templates/registration/registration_closed.html:15
+msgid "Sorry, but registration is closed at this moment. Come back later."
+msgstr ""
+
+#: templates/registration/registration_complete.html:5
+#: templates/registration/registration_complete.html:8
+msgid "Registration Complete"
+msgstr ""
+
+#: templates/registration/registration_complete.html:15
+msgid "Please check your email to complete the registration process."
+msgstr ""
+
+#: templates/registration/registration_form.html:5
+#: templates/registration/registration_form.html:8
+msgid "Registration"
+msgstr ""
+
+#: waterlevel/admin.py:11
+msgid "Water Gate details"
+msgstr ""
+
+#: waterlevel/admin.py:12
+msgid "Water Level Report details"
+msgstr ""
+
+#: waterlevel/models.py:18
+msgid "Water gate"
+msgstr ""
+
+#: waterlevel/models.py:20
+msgid "Siaga 1 min"
+msgstr ""
+
+#: waterlevel/models.py:21
+msgid "Siaga 1 max"
+msgstr ""
+
+#: waterlevel/models.py:22
+msgid "Siaga 2 min"
+msgstr ""
+
+#: waterlevel/models.py:23
+msgid "Siaga 2 max"
+msgstr ""
+
+#: waterlevel/models.py:24
+msgid "Siaga 3 min"
+msgstr ""
+
+#: waterlevel/models.py:25
+msgid "Siaga 3 max"
+msgstr ""
+
+#: waterlevel/models.py:73
+#: waterlevel/templates/waterlevel/watergate_detail.html:96
+#: waterlevel/templates/waterlevel/watergate_list.html:140
+#: weatherforecast/models.py:28
+msgid "Clear"
+msgstr ""
+
+#: waterlevel/models.py:74
+#: waterlevel/templates/waterlevel/watergate_detail.html:98
+#: waterlevel/templates/waterlevel/watergate_list.html:142
+msgid "Slightly cloudy"
+msgstr ""
+
+#: waterlevel/models.py:75
+#: waterlevel/templates/waterlevel/watergate_detail.html:100
+#: waterlevel/templates/waterlevel/watergate_list.html:144
+#: weatherforecast/models.py:30
+msgid "Cloudy"
+msgstr ""
+
+#: waterlevel/models.py:76
+#: waterlevel/templates/waterlevel/watergate_detail.html:102
+#: waterlevel/templates/waterlevel/watergate_list.html:146
+msgid "Drizzle"
+msgstr ""
+
+#: waterlevel/models.py:77
+#: waterlevel/templates/waterlevel/watergate_detail.html:104
+#: waterlevel/templates/waterlevel/watergate_list.html:148
+msgid "Rain"
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_detail.html:30
+msgid "Water Gate Threshold"
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_detail.html:52
+msgid "Water Level Reports"
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_detail.html:71
+#: waterlevel/templates/waterlevel/watergate_list.html:112
+msgid "No water level reports found."
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_detail.html:83
+#: waterlevel/templates/waterlevel/watergate_list.html:127
+msgid "Critical"
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_detail.html:85
+#: waterlevel/templates/waterlevel/watergate_list.html:129
+msgid "Caution"
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_detail.html:87
+#: waterlevel/templates/waterlevel/watergate_list.html:131
+msgid "Safe"
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_list.html:73
+msgid "No water gates found."
+msgstr ""
+
+#: waterlevel/templates/waterlevel/watergate_list.html:186
+msgid "Water Level Chart"
+msgstr ""
+
+#: weatherforecast/admin.py:8
+msgid "Weather Forecast Report details"
+msgstr ""
+
+#: weatherforecast/models.py:14
+msgid "Morning forecast"
+msgstr ""
+
+#: weatherforecast/models.py:15
+msgid "Noon forecast"
+msgstr ""
+
+#: weatherforecast/models.py:16
+msgid "Night forecast"
+msgstr ""
+
+#: weatherforecast/models.py:17
+msgid "Forecast"
+msgstr ""
+
+#: weatherforecast/models.py:20
+msgid "Temperature min"
+msgstr ""
+
+#: weatherforecast/models.py:21
+msgid "Temperature max"
+msgstr ""
+
+#: weatherforecast/models.py:22
+msgid "Humidity min"
+msgstr ""
+
+#: weatherforecast/models.py:23
+msgid "Humidity max"
+msgstr ""
+
+#: weatherforecast/models.py:29
+msgid "Partly cloudy"
+msgstr ""
+
+#: weatherforecast/models.py:31
+msgid "Light rain"
+msgstr ""
+
+#: weatherforecast/models.py:32
+msgid "Moderate rain"
+msgstr ""
+
+#: weatherforecast/models.py:33
+msgid "Heavy rain"
+msgstr ""
+
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:57
+msgid "Area"
+msgstr ""
+
+#: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:78
+msgid "No weather forecast reports found."
+msgstr ""
+
+#: website/admin.py:12
+msgid "Attachment details"
+msgstr ""
+
+#: website/admin.py:13
+msgid "Attachment image"
+msgstr ""
+
+#: website/admin.py:14
+msgid "Post details"
+msgstr ""
+
+#: website/admin.py:15
+msgid "Site header details"
+msgstr ""
+
+#: website/admin.py:16 website/models.py:34
+#: website/templates/website/post_list.html:37
+msgid "Category"
+msgstr ""
+
+#: website/forms.py:33
+msgid "Maximum image width is"
+msgstr ""
+
+#: website/forms.py:35
+msgid "Maximum image height is"
+msgstr ""
+
+#: website/models.py:23
+msgid "Slug"
+msgstr ""
+
+#: website/models.py:24
+msgid "Attachment"
+msgstr ""
+
+#: website/models.py:25
+msgid "Author text"
+msgstr ""
+
+#: website/models.py:26
+msgid "Slideshow image"
+msgstr ""
+
+#: website/models.py:27
+msgid "Slideshow image crop (770x400 px)"
+msgstr ""
+
+#: website/models.py:28
+msgid "Slideshow image post (750x390 px)"
+msgstr ""
+
+#: website/models.py:29
+msgid "Slideshow image list (170x150 px)"
+msgstr ""
+
+#: website/models.py:30
+msgid "Slideshow image thumb (70x70 px)"
+msgstr ""
+
+#: website/models.py:32
+msgid "Slideshow enabled"
+msgstr ""
+
+#: website/models.py:35
+msgid "Post"
+msgstr ""
+
+#: website/models.py:38
+msgid "Image list (170x150 px)"
+msgstr ""
+
+#: website/models.py:40
+msgid "Url"
+msgstr ""
+
+#: website/models.py:41
+msgid "Logo"
+msgstr ""
+
+#: website/models.py:42
+msgid "Logo crop"
+msgstr ""
+
+#: website/templates/website/post_detail.html:66
+msgid "Files"
+msgstr ""
+
+#: website/templates/website/post_list.html:24
+msgid "Search posts"
+msgstr ""

@@ -40,7 +40,15 @@
                 </ul>
                 <div class="search-form">
                     <form name="search_form" method="get" action="{% url 'website:post_search' %}" class="search_form">
-                        <input type="text" name="q" placeholder="{% trans 'Search' %}..." title="Search the site..." class="field_search">
+                        <input type="text" name="q" placeholder="{% trans 'Search' %}..." title="{% trans 'Search' %}..." class="field_search">
+                    </form>
+                </div>
+                <div class="lang-switcher">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <input class="lang-button flag-icon flag-icon-id" type="submit" name="language" value="id">
+                        <input class="lang-button flag-icon flag-icon-gb" type="submit" name="language" value="en">
                     </form>
                 </div>
             </div> <!-- /.header-right -->
@@ -48,5 +56,4 @@
     </div> <!-- /.container -->
 
 {% include "opendims/includes/nav.html" %}
-
 </header> <!-- /.site-header -->

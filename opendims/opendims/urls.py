@@ -40,8 +40,7 @@ from earlywarning import urls as earlywarning_urls
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
-    url(r'^bootleaf_example/$', TemplateView.as_view(template_name='bootleaf_example/example.html'), name='bootleaf_example'),
-    url(r'^bootleaf_test/$', TemplateView.as_view(template_name='bootleaf_example/test.html'), name='bootleaf_test'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^accounts/login/$', common_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
     url(r'^accounts/', include(registration_urls)),
