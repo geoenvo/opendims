@@ -22,9 +22,7 @@
 <h3 class="page-header heading">{% trans "Disaster Rehabilitation" %}</h3>
 
 <p>
-{% blocktrans %}
-Description about disaster rehabilitation, id blandit augue varius vel. Mauris bibendum nulla at erat feugiat gravida. Nulla id dolor id arcu vestibulum gravida. Aenean a risus ut sapien malesuada dapibus id at dui. Nullam et fringilla sem, in cursus erat. Ut maximus porttitor fermentum. Proin pulvinar ultricies velit, non cursus magna. Mauris ullamcorper pellentesque feugiat. Vestibulum tincidunt a dolor non convallis. Phasellus tempus risus vestibulum luctus posuere. Vivamus gravida sed quam a dignissim. Fusce sodales rhoncus erat, sed euismod urna auctor vel.
-{% endblocktrans %}
+{% blocktrans %}Description about disaster rehabilitation.{% endblocktrans %}
 </p>
 
 <br>
@@ -33,7 +31,7 @@ Description about disaster rehabilitation, id blandit augue varius vel. Mauris b
 {% if search %}
 <h4 class="heading">{{ activities|length }} {% trans "Activities" %}</h4>
 {% else %}
-<h4>{% trans "Latest Activities" %} <span class="small-text"><a href="{% url 'disasterrehabilitation:activity_list' %}">{% trans "View List" %}</a></span></h4>
+<h4>{% trans "Latest Activities" %} <span class="small-text"><a href="{% url 'disasterrehabilitation:activity_list' %}">{% trans "More" %}</a></span></h4>
 {% endif %}
 
 <table class="table table-striped table-bordered">
@@ -90,9 +88,9 @@ Description about disaster rehabilitation, id blandit augue varius vel. Mauris b
 <br>
 
 {% if search %}
-<h4 class="heading">{{ eventassessments|length }} {% trans "Event Assesments" %}</h4>
+<h4 class="heading">{{ eventassessments|length }} {% trans "Event Assessments" %}</h4>
 {% else %}
-<h4 class="heading">{% trans "Latest Event Assessments" %} <span class="small-text"><a href="{% url 'disasterrehabilitation:eventassessment_list' %}">{% trans "View List" %}</a></span></h4>
+<h4 class="heading">{% trans "Latest Event Assessments" %} <span class="small-text"><a href="{% url 'disasterrehabilitation:eventassessment_list' %}">{% trans "More" %}</a></span></h4>
 {% endif %}
 
 <table class="table table-striped table-bordered">
@@ -145,7 +143,7 @@ Description about disaster rehabilitation, id blandit augue varius vel. Mauris b
 {% if search %}
 <h4 class="heading">{{ events|length }} {% trans "Events" %}</h4>
 {% else %}
-<h4 class="heading">{% trans "Latest Events" %} <span class="small-text"><a href="{% url 'reports:event_list' %}">{% trans "View List" %}</a></span></h4>
+<h4 class="heading">{% trans "Latest Events" %} <span class="small-text"><a href="{% url 'reports:event_list' %}">{% trans "More" %}</a></span></h4>
 {% endif %}
 
 <table class="table table-striped table-bordered">

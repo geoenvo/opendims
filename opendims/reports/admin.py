@@ -20,10 +20,10 @@ from .forms import EventForm, EventImpactForm
 from .resources import EventResource
 
 
-verbose_set_active = _('Set Event as Active')
-verbose_set_inactive = _('Set Event as Inactive')
-verbose_set_unverified = _('Set Event as Unverified')
-verbose_set_verified = _('Set Event as Verified')
+verbose_set_active = _('Set event as active')
+verbose_set_inactive = _('Set event as inactive')
+verbose_set_unverified = _('Set report as unverified')
+verbose_set_verified = _('Set report as verified')
 
 
 def set_unverified(modeladmin, request, queryset):
@@ -196,9 +196,9 @@ class EventAdmin(ImportExportModelAdmin,
                     data = force_text(data, self.from_encoding)
                 dataset = input_format.create_dataset(data)
             except UnicodeDecodeError as e:
-                return HttpResponse(_(u"<h1>Imported file is not in unicode: %s</h1>" % e))
+                return HttpResponse("<h1>{}: {}</h1>".format(_('Imported file is not in unicode'), e))
             except Exception as e:
-                return HttpResponse(_(u"<h1>%s encountred while trying to read file: %s</h1>" % (type(e).__name__, e)))
+                return HttpResponse("<h1>{} {}: {}</h1>".format(type(e).__name__, _('encountered while trying to read file'), e))
             result = resource.import_data(dataset, dry_run=True,
                                           raise_errors=False,
                                           file_name=import_file.name,

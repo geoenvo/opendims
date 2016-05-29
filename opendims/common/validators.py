@@ -27,5 +27,5 @@ class FileSizeValidator(object):
     def __call__(self, value):
         if value.file.size > self.max_size_mb * 1024 * 1024:
             raise ValidationError(
-                _('Maximum file upload size:') + ' %d MB' % self.max_size_mb
+                "{}: {} MB".format(_('Maximum file upload size'), self.max_size_mb)
             )
