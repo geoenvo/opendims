@@ -7,7 +7,6 @@ from .models import Source, Keyword
 
 
 verbose_source_details = _('Source details')
-verbose_keyword_details = _('Keyword details')
 
 
 class KeywordInline(admin.TabularInline):
@@ -42,14 +41,10 @@ class SourceAdmin(admin.ModelAdmin):
 
 
 class KeywordAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_keyword_details, {
-            'fields': [
-                'source',
-                'keyword'
-            ]
-        })
-    ]
+    fields = (
+        'source',
+        'keyword'
+    )
     list_display = [
         'source',
         'keyword'

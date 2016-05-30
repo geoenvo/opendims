@@ -105,8 +105,7 @@ class EventAdmin(ImportExportModelAdmin,
                 'disaster',
                 'status',
                 'closed',
-                'height_min',
-                'height',
+                ('height_min', 'height'),
                 'magnitude',
                 'note'
             ]

@@ -11,9 +11,8 @@ from .forms import SiteHeaderForm
 
 verbose_attachment_details = _('Attachment details')
 verbose_attachment_image = _('Attachment image')
+verbose_attachment_file = _('Attachment file')
 verbose_post_details = _('Post details')
-verbose_siteheader_details = _('Site header details')
-verbose_category = _('Category')
 
 
 class AttachmentInline(ImageCroppingMixin, admin.TabularInline):
@@ -27,7 +26,11 @@ class AttachmentAdmin(ImageCroppingMixin, admin.ModelAdmin):
             'fields': [
                 'title',
                 'created',
-                'published',
+                'published'
+            ]
+        }),
+        (verbose_attachment_file, {
+            'fields': [
                 'file'
             ]
         }),
@@ -90,18 +93,13 @@ class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 class SiteHeaderAdmin(admin.ModelAdmin):
     form = SiteHeaderForm
-    fieldsets = [
-        (verbose_siteheader_details, {
-            'fields': [
-                'title',
-                'start',
-                'end',
-                'image',
-                'note',
-                'published'
-            ]
-        })
-    ]
+    fields = (
+        'title',
+        ('start', 'end'),
+        'image',
+        'note',
+        'published'
+    )
     list_display = [
         'title',
         'start',

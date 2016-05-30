@@ -11,17 +11,11 @@ from django.core.files import File
 from xhtml2pdf import pisa
 
 from .models import Template, Report, Attachment
-
 from .forms import ReportForm
-
 from reports.models import Event
 
+
 verbose_template_details = _('Template details')
-verbose_report_details = _('Report details')
-verbose_set_active = _('Set Template as Active')
-verbose_set_inactive = _('Set Template as Inactive')
-
-
 verbose_report_details = _('Report details')
 verbose_report_content = _('Report content')
 verbose_report_output = _('Report output')
@@ -136,16 +130,12 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 class TemplateAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_template_details, {
-            'fields': [
-                'name',
-                'created',
-                'content',
-                'disaster_attached'
-            ]
-        })
-    ]
+    fields = (
+        'name',
+        'created',
+        'content',
+        'disaster_attached'
+    )
     list_display = [
         'name',
         'created',
@@ -164,15 +154,11 @@ class TemplateAdmin(admin.ModelAdmin):
 
 
 class AttachmentAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_attachment_details, {
-            'fields': [
-                'report',
-                'created',
-                'file'
-            ]
-        })
-    ]
+    fields = (
+        'report',
+        'created',
+        'file'
+    )
     list_display = [
         'report',
         'created',

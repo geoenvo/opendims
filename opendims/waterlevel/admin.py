@@ -8,27 +8,19 @@ from leaflet.admin import LeafletGeoAdmin
 from .models import WaterGate, WaterLevelReport
 
 
-verbose_watergate_details = _('Water Gate details')
-verbose_waterlevelreport_details = _('Water Level Report details')
-
-
 class WaterGateAdmin(LeafletGeoAdmin):
     settings_overrides = {
         'DEFAULT_ZOOM': 13,
     }
 
-    fieldsets = [
-        (verbose_watergate_details, {
-            'fields': [
-                'name',
-                'point',
-                ('siaga_1_min', 'siaga_1_max'),
-                ('siaga_2_min', 'siaga_2_max'),
-                ('siaga_3_min', 'siaga_3_max'),
-                'note'
-            ]
-        })
-    ]
+    fields = (
+        'name',
+        'point',
+        ('siaga_1_min', 'siaga_1_max'),
+        ('siaga_2_min', 'siaga_2_max'),
+        ('siaga_3_min', 'siaga_3_max'),
+        'note'
+    )
     list_display = [
         'name',
         'siaga_1_min',
@@ -42,16 +34,12 @@ class WaterGateAdmin(LeafletGeoAdmin):
 
 
 class WaterLevelReportAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_waterlevelreport_details, {
-            'fields': [
-                'created',
-                'watergate',
-                'weather',
-                'height'
-            ]
-        })
-    ]
+    fields = (
+        'created',
+        'watergate',
+        'weather',
+        'height'
+    )
     list_display = [
         'created',
         'updated',

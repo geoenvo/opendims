@@ -2,10 +2,13 @@ from __future__ import unicode_literals
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.contrib.gis.db import models
-from ckeditor.fields import RichTextField
-from common.models import CommonAbstractModel
+from django.db import models
 from django.core.validators import RegexValidator
+
+from ckeditor.fields import RichTextField
+
+from common.models import CommonAbstractModel
+
 
 verbose_created = _('Created')
 verbose_updated = _('Updated')
@@ -15,7 +18,7 @@ verbose_name = _('Name')
 verbose_template = _('Template')
 verbose_group = _('Group')
 verbose_subject = _('Subject')
-verbose_contactnumber = _('Contact Number')
+verbose_contactnumber = _('Contact number')
 verbose_contact = _('Contact')
 verbose_contacts = _('Contacts')
 
@@ -38,11 +41,11 @@ class Template(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.name, timezone.localtime(self.created))
+        return '%s' % self.name
 
 
 class Contact(CommonAbstractModel):
@@ -63,11 +66,11 @@ class Contact(CommonAbstractModel):
     )  # validators should be a list
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] - %s ' % (self.name, timezone.localtime(self.created))
+        return '%s' % self.name
 
 
 class Group(CommonAbstractModel):
@@ -91,11 +94,11 @@ class Group(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.name, timezone.localtime(self.created))
+        return '%s' % self.name
 
 
 class Message(CommonAbstractModel):
@@ -127,8 +130,8 @@ class Message(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] - %s - %s' % (self.group, self.template, timezone.localtime(self.created))
+        return '[%s] - [%s] - %s' % (self.group, self.template, timezone.localtime(self.created))
