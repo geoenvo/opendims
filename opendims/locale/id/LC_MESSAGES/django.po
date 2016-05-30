@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-30 16:07+0700\n"
+"POT-Creation-Date: 2016-05-30 16:47+0700\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -226,7 +226,7 @@ msgstr "Detil lokasi"
 
 #: disasterrehabilitation/admin.py:18
 msgid "Activity details"
-msgstr "Detil aktifitas"
+msgstr "Detil aktivitas"
 
 #: disasterrehabilitation/admin.py:19
 msgid "Event assessment details"
@@ -287,10 +287,10 @@ msgstr "Pendanaan"
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:5
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:13
-#: templates/opendims/includes/nav.html:30
-#: templates/opendims/includes/nav_responsive.html:33
+#: templates/opendims/includes/nav.html:31
+#: templates/opendims/includes/nav_responsive.html:34
 msgid "Activity"
-msgstr "Aktifitas"
+msgstr "Aktivitas"
 
 #: disasterrehabilitation/models.py:29
 msgid "Event assessment"
@@ -429,23 +429,23 @@ msgstr ""
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:116
 msgid "No locations found for this activity."
-msgstr "Tidak ditemukan lokasi untuk aktifitas ini."
+msgstr "Tidak ditemukan lokasi untuk aktivitas ini."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:149
 msgid "No references found for this activity."
-msgstr "Tidak ditemukan referensi untuk aktifitas ini."
+msgstr "Tidak ditemukan referensi untuk aktivitas ini."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:16
 #, fuzzy
 #| msgid "Disaster Rehabilitation"
 msgid "Description about activities."
-msgstr "Deskripsi mengenai aktifitas."
+msgstr "Deskripsi mengenai aktivitas."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:48
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:65
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:81
 msgid "No activities found."
-msgstr "Aktifitas tidak ditemukan."
+msgstr "Aktivitas tidak ditemukan."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:5
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:12
@@ -469,11 +469,11 @@ msgstr "Deskripsi mengenai rehabilitasi bencana."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:32
 msgid "Activities"
-msgstr "Aktifitas"
+msgstr "Aktivitas"
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:34
 msgid "Latest Activities"
-msgstr "Aktifitas Terbaru"
+msgstr "Aktivitas Terbaru"
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:34
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:93
@@ -545,8 +545,8 @@ msgstr "Tidak ditemukan lokasi untuk studi kejadian bencana ini."
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:5
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:13
-#: templates/opendims/includes/nav.html:31
-#: templates/opendims/includes/nav_responsive.html:34
+#: templates/opendims/includes/nav.html:32
+#: templates/opendims/includes/nav_responsive.html:35
 msgid "Event Assessment"
 msgstr "Studi Kejadian Bencana"
 
@@ -597,8 +597,8 @@ msgstr ""
 #: geolevels/templates/geolevels/city_list.html:9
 #: geolevels/templates/geolevels/city_list.html:13
 #: geolevels/templates/geolevels/province_detail.html:34
-#: templates/opendims/includes/nav.html:22
-#: templates/opendims/includes/nav_responsive.html:25
+#: templates/opendims/includes/nav.html:23
+#: templates/opendims/includes/nav_responsive.html:26
 msgid "Cities"
 msgstr "Kotamadya"
 
@@ -606,8 +606,8 @@ msgstr "Kotamadya"
 #: geolevels/templates/geolevels/subdistrict_list.html:5
 #: geolevels/templates/geolevels/subdistrict_list.html:9
 #: geolevels/templates/geolevels/subdistrict_list.html:13
-#: templates/opendims/includes/nav.html:23
-#: templates/opendims/includes/nav_responsive.html:26
+#: templates/opendims/includes/nav.html:24
+#: templates/opendims/includes/nav_responsive.html:27
 msgid "Subdistricts"
 msgstr "Kecamatan"
 
@@ -622,8 +622,8 @@ msgstr "Kotamadya tidak ditemukan."
 #: geolevels/templates/geolevels/geolevels.html:5
 #: geolevels/templates/geolevels/geolevels.html:12
 #: templates/opendims/includes/block_footer.html:78
-#: templates/opendims/includes/nav.html:19
-#: templates/opendims/includes/nav_responsive.html:22
+#: templates/opendims/includes/nav.html:20
+#: templates/opendims/includes/nav_responsive.html:23
 msgid "Geolevels"
 msgstr ""
 
@@ -634,8 +634,8 @@ msgstr "Tidak ditemukan kotamadya di provinsi ini."
 #: geolevels/templates/geolevels/province_list.html:5
 #: geolevels/templates/geolevels/province_list.html:9
 #: geolevels/templates/geolevels/province_list.html:13
-#: templates/opendims/includes/nav.html:21
-#: templates/opendims/includes/nav_responsive.html:24
+#: templates/opendims/includes/nav.html:22
+#: templates/opendims/includes/nav_responsive.html:25
 msgid "Provinces"
 msgstr "Provinsi"
 
@@ -659,8 +659,8 @@ msgstr "RW tidak ditemukan."
 #: geolevels/templates/geolevels/village_list.html:5
 #: geolevels/templates/geolevels/village_list.html:9
 #: geolevels/templates/geolevels/village_list.html:13
-#: templates/opendims/includes/nav.html:24
-#: templates/opendims/includes/nav_responsive.html:27
+#: templates/opendims/includes/nav.html:25
+#: templates/opendims/includes/nav_responsive.html:28
 msgid "Villages"
 msgstr "Kelurahan"
 
@@ -1322,12 +1322,19 @@ msgstr "Malam"
 msgid "Maps"
 msgstr "Peta"
 
-#: templates/opendims/includes/nav.html:28
-#: templates/opendims/includes/nav_responsive.html:31
+#: templates/opendims/includes/nav.html:16
+#: templates/opendims/includes/nav_responsive.html:19
+#, fuzzy
+#| msgid "Rehabilitation"
+msgid "Rehabilitation Activity"
+msgstr "Aktivitas Rehabilitasi"
+
+#: templates/opendims/includes/nav.html:29
+#: templates/opendims/includes/nav_responsive.html:32
 msgid "Rehabilitation"
 msgstr "Rehabilitasi"
 
-#: templates/opendims/includes/nav.html:68
+#: templates/opendims/includes/nav.html:69
 msgid "Layouts"
 msgstr ""
 

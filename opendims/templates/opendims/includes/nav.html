@@ -13,6 +13,7 @@
                     <li><a href="#">{% trans "Maps" %}</a>
                         <ul class="sub-menu">
                             <li class="{% active_url request 'maps:event_map' %}"><a href="{% url 'maps:event_map' %}">{% trans "Events" %}</a></li>
+                            <li class="{% active_url request 'maps:rehabilitation_activity_map' %}"><a href="{% url 'maps:rehabilitation_activity_map' %}">{% trans "Rehabilitation Activity" %}</a></li>
                         </ul>
                     </li>
                     <!--
