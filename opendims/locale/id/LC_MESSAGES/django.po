@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-29 22:06+0700\n"
+"POT-Creation-Date: 2016-05-31 12:52+0700\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -18,26 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: automaticweathersystem/admin.py:7
-msgid "AWS Station details"
-msgstr ""
-
-#: automaticweathersystem/admin.py:8
-msgid "AWS Report details"
-msgstr ""
-
-#: automaticweathersystem/models.py:12 contact/models.py:9
-#: disasterrehabilitation/models.py:15 earlywarning/models.py:12
+#: automaticweathersystem/models.py:12 contact/models.py:10
+#: disasterrehabilitation/models.py:14 earlywarning/models.py:14
 #: jaksafe/models.py:12 maps/templates/maps/jaksafe_map.html.py:329
 #: reportaggregator/models.py:11 reporting/models.py:19 reports/models.py:47
-#: smsblast/models.py:10 waterlevel/models.py:12 weatherforecast/models.py:11
+#: smsblast/models.py:13 waterlevel/models.py:12 weatherforecast/models.py:11
 #: website/models.py:15
 msgid "Created"
 msgstr "Tanggal"
 
-#: automaticweathersystem/models.py:13 disasterrehabilitation/models.py:16
-#: earlywarning/models.py:13 reportaggregator/models.py:12
-#: reporting/models.py:20 reports/models.py:48 smsblast/models.py:11
+#: automaticweathersystem/models.py:13 disasterrehabilitation/models.py:15
+#: earlywarning/models.py:15 reportaggregator/models.py:12
+#: reporting/models.py:20 reports/models.py:48 smsblast/models.py:14
 #: waterlevel/models.py:13 weatherforecast/models.py:12 website/models.py:18
 msgid "Updated"
 msgstr "Diperbarui"
@@ -47,17 +39,17 @@ msgstr "Diperbarui"
 msgid "Point"
 msgstr "Titik"
 
-#: automaticweathersystem/models.py:15 contact/models.py:10
-#: disasterrehabilitation/models.py:17 geolevels/models.py:12
-#: reportaggregator/models.py:15 reporting/models.py:17 smsblast/models.py:14
-#: waterlevel/models.py:19 website/models.py:43
+#: automaticweathersystem/models.py:15 contact/models.py:11
+#: disasterrehabilitation/models.py:16 geolevels/models.py:13
+#: reportaggregator/models.py:15 reporting/models.py:17 smsblast/models.py:17
+#: waterlevel/models.py:18 website/models.py:43
 msgid "Name"
 msgstr "Nama"
 
-#: automaticweathersystem/models.py:16 disasterrehabilitation/models.py:18
-#: earlywarning/models.py:15 geolevels/models.py:11 jaksafe/models.py:26
+#: automaticweathersystem/models.py:16 disasterrehabilitation/models.py:17
+#: earlywarning/models.py:17 geolevels/models.py:12 jaksafe/models.py:26
 #: maps/templates/maps/jaksafe_map.html:333 reports/models.py:18
-#: smsblast/models.py:12 waterlevel/models.py:16 weatherforecast/models.py:13
+#: smsblast/models.py:15 waterlevel/models.py:16 weatherforecast/models.py:13
 #: website/models.py:19
 msgid "Note"
 msgstr "Catatan"
@@ -84,7 +76,7 @@ msgstr "Tekanan"
 #, fuzzy
 #| msgid "Wind Speed"
 msgid "Wind speed"
-msgstr "Kecepatan Angin"
+msgstr "Kecepatan angin"
 
 #: automaticweathersystem/models.py:22 automaticweathersystem/models.py:27
 #, fuzzy
@@ -94,11 +86,11 @@ msgstr "Arah angin"
 
 #: automaticweathersystem/models.py:23
 msgid "Day rain"
-msgstr ""
+msgstr "Hari hujan"
 
 #: automaticweathersystem/models.py:24
 msgid "Rain rate"
-msgstr ""
+msgstr "Curah hujan"
 
 #: automaticweathersystem/models.py:25
 msgid "UV index"
@@ -120,39 +112,39 @@ msgstr "Jenis file tidak dapat dideteksi."
 msgid "Maximum file upload size"
 msgstr "Ukuran maksimum file unggahan"
 
-#: contact/admin.py:10 contact/templates/contact/contact.html.py:5
-#: contact/templates/contact/contact.html:12
-#: contact/templates/contact/contact_index.html:6 smsblast/models.py:19
-#: templates/opendims/includes/block_footer.html:80
-#: templates/opendims/includes/block_header.html:36
-msgid "Contact"
-msgstr "Kontak"
-
-#: contact/models.py:11
+#: contact/models.py:12
 #: templates/opendims/includes/block_contact_address.html:29
 msgid "E-mail"
 msgstr ""
 
-#: contact/models.py:12
+#: contact/models.py:13
 #: templates/opendims/includes/block_contact_address.html:34
 msgid "Website"
 msgstr ""
 
-#: contact/models.py:13 smsblast/models.py:17
+#: contact/models.py:14 smsblast/models.py:20
 msgid "Subject"
 msgstr "Subyek"
 
-#: contact/models.py:14
+#: contact/models.py:15
 msgid "Message"
 msgstr "Pesan"
 
-#: contact/models.py:19
+#: contact/models.py:20
 msgid "Disaster information"
 msgstr "Informasi bencana"
 
-#: contact/models.py:20
+#: contact/models.py:21
 msgid "Water level information"
 msgstr "Informasi tinggi muka air"
+
+#: contact/templates/contact/contact.html:5
+#: contact/templates/contact/contact.html:12
+#: contact/templates/contact/contact_index.html:6 smsblast/models.py:22
+#: templates/opendims/includes/block_footer.html:80
+#: templates/opendims/includes/block_header.html:36
+msgid "Contact"
+msgstr "Kontak"
 
 #: contact/templates/contact/contact_index.html:12
 #: templates/opendims/includes/block_footer.html:9
@@ -175,62 +167,58 @@ msgid "Message sent. Thank you for contacting us!"
 msgstr "Pesan terkirim. Terima kasih telah menghubungi kami!"
 
 #: disasterrehabilitation/admin.py:11 disasterrehabilitation/forms.py:43
-#: disasterrehabilitation/models.py:30 geolevels/models.py:44
-#: reports/admin.py:82 reports/models.py:54 weatherforecast/models.py:19
+#: disasterrehabilitation/models.py:29 geolevels/models.py:45
+#: reports/admin.py:70 reports/models.py:54 weatherforecast/models.py:19
 msgid "Province"
 msgstr "Provinsi"
 
 #: disasterrehabilitation/admin.py:12 disasterrehabilitation/forms.py:44
-#: disasterrehabilitation/models.py:31 geolevels/models.py:78
-#: reports/admin.py:83 reports/models.py:55 weatherforecast/models.py:18
+#: disasterrehabilitation/models.py:30 geolevels/models.py:79
+#: reports/admin.py:71 reports/models.py:55 weatherforecast/models.py:18
 msgid "City"
 msgstr "Kotamadya"
 
 #: disasterrehabilitation/admin.py:13 disasterrehabilitation/forms.py:45
-#: disasterrehabilitation/models.py:32 geolevels/models.py:109
-#: reports/admin.py:84 reports/models.py:56
+#: disasterrehabilitation/models.py:31 geolevels/models.py:110
+#: reports/admin.py:72 reports/models.py:56
 msgid "Subdistrict"
 msgstr "Kecamatan"
 
 #: disasterrehabilitation/admin.py:14 disasterrehabilitation/forms.py:46
-#: disasterrehabilitation/models.py:33 geolevels/models.py:143
+#: disasterrehabilitation/models.py:32 geolevels/models.py:144
 #: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:330
-#: reports/admin.py:85 reports/models.py:57
+#: reports/admin.py:73 reports/models.py:57
 msgid "Village"
 msgstr "Kelurahan"
 
 #: disasterrehabilitation/admin.py:15 disasterrehabilitation/forms.py:47
-#: disasterrehabilitation/models.py:34 geolevels/models.py:144
+#: disasterrehabilitation/models.py:33 geolevels/models.py:145
 #: geolevels/templates/geolevels/rw_list.html:5
 #: geolevels/templates/geolevels/rw_list.html:9
 #: geolevels/templates/geolevels/rw_list.html:13
 #: geolevels/templates/geolevels/village_detail.html:34 jaksafe/models.py:24
-#: maps/templates/maps/jaksafe_map.html.py:331 reports/admin.py:86
+#: maps/templates/maps/jaksafe_map.html.py:331 reports/admin.py:74
 #: reports/models.py:58
 msgid "RW"
 msgstr ""
 
 #: disasterrehabilitation/admin.py:16 disasterrehabilitation/forms.py:48
-#: disasterrehabilitation/models.py:35 geolevels/models.py:178
+#: disasterrehabilitation/models.py:34 geolevels/models.py:179
 #: geolevels/templates/geolevels/rt_list.html:5
 #: geolevels/templates/geolevels/rt_list.html:9
 #: geolevels/templates/geolevels/rt_list.html:13
-#: geolevels/templates/geolevels/rw_detail.html:34 reports/admin.py:87
+#: geolevels/templates/geolevels/rw_detail.html:34 reports/admin.py:75
 #: reports/models.py:59
 msgid "RT"
 msgstr ""
 
 #: disasterrehabilitation/admin.py:17
-msgid "Location details"
-msgstr ""
+msgid "Activity details"
+msgstr "Detil aktivitas"
 
 #: disasterrehabilitation/admin.py:18
-msgid "Activity details"
-msgstr ""
-
-#: disasterrehabilitation/admin.py:19
 msgid "Event assessment details"
-msgstr ""
+msgstr "Detil studi kejadian bencana"
 
 #: disasterrehabilitation/forms.py:112
 #: templates/opendims/includes/block_header.html:43 website/forms.py:22
@@ -240,63 +228,63 @@ msgstr ""
 msgid "Search"
 msgstr "Pencarian"
 
-#: disasterrehabilitation/models.py:19
+#: disasterrehabilitation/models.py:18
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:31
-#: reports/admin.py:296 reports/models.py:146
+#: reports/admin.py:283 reports/models.py:146
 #: reports/templates/reports/report_detail.html:34
 #: reports/templates/reports/report_detail.html:69
 msgid "Event"
 msgstr "Kejadian"
 
-#: disasterrehabilitation/models.py:20 earlywarning/models.py:16
+#: disasterrehabilitation/models.py:19 earlywarning/models.py:18
 #: reports/models.py:191 website/models.py:31
 msgid "Published"
 msgstr "Dipublikasikan"
 
-#: disasterrehabilitation/models.py:21 reporting/models.py:30
+#: disasterrehabilitation/models.py:20 reporting/models.py:30
 #: website/models.py:21
 msgid "File"
 msgstr ""
 
-#: disasterrehabilitation/models.py:22
+#: disasterrehabilitation/models.py:21
 msgid "Start date"
 msgstr "Tanggal berawal"
 
-#: disasterrehabilitation/models.py:23
+#: disasterrehabilitation/models.py:22
 msgid "End date"
 msgstr "Tanggal berakhir"
 
-#: disasterrehabilitation/models.py:24
+#: disasterrehabilitation/models.py:23
 msgid "Year"
 msgstr "Tahun"
 
-#: disasterrehabilitation/models.py:25
+#: disasterrehabilitation/models.py:24
 msgid "Agency"
 msgstr "Pelaksana"
 
-#: disasterrehabilitation/models.py:26 reportaggregator/models.py:13
+#: disasterrehabilitation/models.py:25 reportaggregator/models.py:13
 #: reporting/models.py:31
 msgid "Type"
 msgstr "Jenis"
 
-#: disasterrehabilitation/models.py:27
+#: disasterrehabilitation/models.py:26
 msgid "Funding"
 msgstr "Pendanaan"
 
-#: disasterrehabilitation/models.py:28
+#: disasterrehabilitation/models.py:27
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:5
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:13
-#: templates/opendims/includes/nav.html:30
-#: templates/opendims/includes/nav_responsive.html:33
+#: templates/opendims/includes/nav.html:31
+#: templates/opendims/includes/nav_responsive.html:34
 msgid "Activity"
-msgstr "Aktifitas"
+msgstr "Aktivitas"
 
-#: disasterrehabilitation/models.py:29
+#: disasterrehabilitation/models.py:28
 msgid "Event assessment"
 msgstr "Studi kejadian bencana"
 
-#: disasterrehabilitation/models.py:36 reportaggregator/models.py:16
+#: disasterrehabilitation/models.py:35 reportaggregator/models.py:16
 #: reporting/models.py:32 reports/models.py:50
 msgid "Status"
 msgstr ""
@@ -429,23 +417,23 @@ msgstr ""
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:116
 msgid "No locations found for this activity."
-msgstr "Tidak ditemukan lokasi untuk aktifitas ini."
+msgstr "Tidak ditemukan lokasi untuk aktivitas ini."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:149
 msgid "No references found for this activity."
-msgstr "Tidak ditemukan referensi untuk aktifitas ini."
+msgstr "Tidak ditemukan referensi untuk aktivitas ini."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:16
 #, fuzzy
 #| msgid "Disaster Rehabilitation"
 msgid "Description about activities."
-msgstr "Deskripsi mengenai aktifitas."
+msgstr "Deskripsi mengenai aktivitas."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:48
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:65
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:81
 msgid "No activities found."
-msgstr "Aktifitas tidak ditemukan."
+msgstr "Aktivitas tidak ditemukan."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:5
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:12
@@ -469,11 +457,11 @@ msgstr "Deskripsi mengenai rehabilitasi bencana."
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:32
 msgid "Activities"
-msgstr "Aktifitas"
+msgstr "Aktivitas"
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:34
 msgid "Latest Activities"
-msgstr "Aktifitas Terbaru"
+msgstr "Aktivitas Terbaru"
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:34
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:93
@@ -545,8 +533,8 @@ msgstr "Tidak ditemukan lokasi untuk studi kejadian bencana ini."
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:5
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:13
-#: templates/opendims/includes/nav.html:31
-#: templates/opendims/includes/nav_responsive.html:34
+#: templates/opendims/includes/nav.html:32
+#: templates/opendims/includes/nav_responsive.html:35
 msgid "Event Assessment"
 msgstr "Studi Kejadian Bencana"
 
@@ -556,11 +544,11 @@ msgstr "Studi Kejadian Bencana"
 msgid "Description about event assessments."
 msgstr "Deskripsi mengenai studi kejadian bencana."
 
-#: earlywarning/models.py:11 reports/models.py:194 website/models.py:22
+#: earlywarning/models.py:13 reports/models.py:194 website/models.py:22
 msgid "Title"
 msgstr "Judul"
 
-#: earlywarning/models.py:14 reporting/models.py:24 smsblast/models.py:13
+#: earlywarning/models.py:16 reporting/models.py:24 smsblast/models.py:16
 #: website/models.py:20
 msgid "Content"
 msgstr "Konten"
@@ -581,20 +569,24 @@ msgstr "Entri tidak ditemukan."
 msgid "ID digit length must be at least"
 msgstr "Panjang angka ID minimal harus"
 
-#: geolevels/models.py:13
-msgid "Polygon"
+#: geolevels/models.py:11
+msgid "ID"
 msgstr ""
 
 #: geolevels/models.py:14
+msgid "Polygon"
+msgstr ""
+
+#: geolevels/models.py:15
 msgid "GeoJSON"
 msgstr ""
 
-#: geolevels/models.py:69 geolevels/templates/geolevels/city_list.html.py:5
+#: geolevels/models.py:70 geolevels/templates/geolevels/city_list.html.py:5
 #: geolevels/templates/geolevels/city_list.html:9
 #: geolevels/templates/geolevels/city_list.html:13
 #: geolevels/templates/geolevels/province_detail.html:34
-#: templates/opendims/includes/nav.html:22
-#: templates/opendims/includes/nav_responsive.html:25
+#: templates/opendims/includes/nav.html:23
+#: templates/opendims/includes/nav_responsive.html:26
 msgid "Cities"
 msgstr "Kotamadya"
 
@@ -602,8 +594,8 @@ msgstr "Kotamadya"
 #: geolevels/templates/geolevels/subdistrict_list.html:5
 #: geolevels/templates/geolevels/subdistrict_list.html:9
 #: geolevels/templates/geolevels/subdistrict_list.html:13
-#: templates/opendims/includes/nav.html:23
-#: templates/opendims/includes/nav_responsive.html:26
+#: templates/opendims/includes/nav.html:24
+#: templates/opendims/includes/nav_responsive.html:27
 msgid "Subdistricts"
 msgstr "Kecamatan"
 
@@ -618,8 +610,8 @@ msgstr "Kotamadya tidak ditemukan."
 #: geolevels/templates/geolevels/geolevels.html:5
 #: geolevels/templates/geolevels/geolevels.html:12
 #: templates/opendims/includes/block_footer.html:78
-#: templates/opendims/includes/nav.html:19
-#: templates/opendims/includes/nav_responsive.html:22
+#: templates/opendims/includes/nav.html:20
+#: templates/opendims/includes/nav_responsive.html:23
 msgid "Geolevels"
 msgstr ""
 
@@ -630,8 +622,8 @@ msgstr "Tidak ditemukan kotamadya di provinsi ini."
 #: geolevels/templates/geolevels/province_list.html:5
 #: geolevels/templates/geolevels/province_list.html:9
 #: geolevels/templates/geolevels/province_list.html:13
-#: templates/opendims/includes/nav.html:21
-#: templates/opendims/includes/nav_responsive.html:24
+#: templates/opendims/includes/nav.html:22
+#: templates/opendims/includes/nav_responsive.html:25
 msgid "Provinces"
 msgstr "Provinsi"
 
@@ -655,8 +647,8 @@ msgstr "RW tidak ditemukan."
 #: geolevels/templates/geolevels/village_list.html:5
 #: geolevels/templates/geolevels/village_list.html:9
 #: geolevels/templates/geolevels/village_list.html:13
-#: templates/opendims/includes/nav.html:24
-#: templates/opendims/includes/nav_responsive.html:27
+#: templates/opendims/includes/nav.html:25
+#: templates/opendims/includes/nav_responsive.html:28
 msgid "Villages"
 msgstr "Kelurahan"
 
@@ -676,55 +668,54 @@ msgstr "Tidak ditemukan RW dalam kelurahan ini."
 msgid "No villages found."
 msgstr "Kelurahan tidak ditemukan."
 
-#: jaksafe/admin.py:11
-msgid "ReportAutoSummary"
-msgstr ""
+#: jaksafe/models.py:13
+msgid "Infrastructure damage"
+msgstr "Kerusakan infrastruktur"
 
-#: jaksafe/models.py:13 maps/templates/maps/jaksafe_map.html.py:334
-msgid "Infrastructure Damage"
-msgstr ""
-
-#: jaksafe/models.py:14 maps/templates/maps/jaksafe_map.html.py:335
-msgid "Infrastructure Loss"
-msgstr ""
+#: jaksafe/models.py:14
+msgid "Infrastructure loss"
+msgstr "Kerugian infrastruktur"
 
 #: jaksafe/models.py:15
-msgid "Trans-sector Damage"
-msgstr ""
+msgid "Cross-sector damage"
+msgstr "Kerusakan lintas sektor"
 
 #: jaksafe/models.py:16
-msgid "Trans-sector Loss"
-msgstr ""
+msgid "Cross-sector loss"
+msgstr "Kerugian lintas sektor"
 
-#: jaksafe/models.py:17 maps/templates/maps/jaksafe_map.html.py:338
-msgid "Productive Damage"
-msgstr ""
+#: jaksafe/models.py:17
+msgid "Productive damage"
+msgstr "Kerusakan produktif"
 
-#: jaksafe/models.py:18 maps/templates/maps/jaksafe_map.html.py:339
-msgid "Productive Loss"
-msgstr ""
+#: jaksafe/models.py:18
+msgid "Productive loss"
+msgstr "Kerugian produktif"
 
 #: jaksafe/models.py:19
-msgid "Social Estate Damage"
-msgstr ""
+msgid "Social-Housing damage"
+msgstr "Kerusakan sosial perumahan"
 
 #: jaksafe/models.py:20
-msgid "Social Estate Loss"
-msgstr ""
+msgid "Social-Housing loss"
+msgstr "Kerugian sosial perumahan"
 
-#: jaksafe/models.py:21 maps/templates/maps/jaksafe_map.html.py:342
-msgid "Total Damage"
-msgstr ""
+#: jaksafe/models.py:21
+#, fuzzy
+#| msgid "Total Evacuated"
+msgid "Total damage"
+msgstr "Total kerusakan"
 
-#: jaksafe/models.py:22 maps/templates/maps/jaksafe_map.html.py:343
-#: templates/opendims/includes/block_statistics.html:21
-msgid "Total Loss"
-msgstr ""
+#: jaksafe/models.py:22
+#, fuzzy
+#| msgid "Total Loss"
+msgid "Total loss"
+msgstr "Total kerugian"
 
 #: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:332
 #: reportaggregator/models.py:17 reports/models.py:147
 msgid "Source"
-msgstr ""
+msgstr "Sumber"
 
 #: jaksafe/templates/jaksafe/jaksafe.html:5
 #: jaksafe/templates/jaksafe/jaksafe.html:12
@@ -741,21 +732,46 @@ msgstr ""
 msgid "No Data found."
 msgstr ""
 
+#: maps/templates/maps/jaksafe_map.html:334
+msgid "Infrastructure Damage"
+msgstr "Kerusakan Infrastruktur"
+
+#: maps/templates/maps/jaksafe_map.html:335
+msgid "Infrastructure Loss"
+msgstr "Kerugian Infrastruktur"
+
 #: maps/templates/maps/jaksafe_map.html:336
 msgid "Cross-sector Damage"
-msgstr ""
+msgstr "Kerusakan Lintas Sektor"
 
 #: maps/templates/maps/jaksafe_map.html:337
 msgid "Cross-sector Loss"
-msgstr ""
+msgstr "Kerugian Lintas Sektor"
+
+#: maps/templates/maps/jaksafe_map.html:338
+msgid "Productive Damage"
+msgstr "Kerusakan Produktif"
+
+#: maps/templates/maps/jaksafe_map.html:339
+msgid "Productive Loss"
+msgstr "Kerugian Produktif"
 
 #: maps/templates/maps/jaksafe_map.html:340
 msgid "Social-Housing Damage"
-msgstr ""
+msgstr "Kerusakan Sosial-Perumahan"
 
 #: maps/templates/maps/jaksafe_map.html:341
 msgid "Social-Housing Loss"
-msgstr ""
+msgstr "Kerugian Sosial-Perumahan"
+
+#: maps/templates/maps/jaksafe_map.html:342
+msgid "Total Damage"
+msgstr "Total Kerusakan"
+
+#: maps/templates/maps/jaksafe_map.html:343
+#: templates/opendims/includes/block_statistics.html:21
+msgid "Total Loss"
+msgstr "Total Kerugian"
 
 #: maps/templates/maps/waterlevel_map.html:105
 #: waterlevel/templates/waterlevel/watergate_list.html:85
@@ -776,11 +792,7 @@ msgstr "Cuaca"
 
 #: reportaggregator/admin.py:9
 msgid "Source details"
-msgstr ""
-
-#: reportaggregator/admin.py:10
-msgid "Keyword details"
-msgstr ""
+msgstr "Detil sumber"
 
 #: reportaggregator/models.py:10 reports/models.py:45
 #: templates/opendims/includes/block_statistics.html:15
@@ -791,7 +803,7 @@ msgstr "Bencana"
 
 #: reportaggregator/models.py:14 website/forms.py:12
 msgid "Keyword"
-msgstr ""
+msgstr "Kata kunci"
 
 #: reportaggregator/models.py:22
 msgid "Twitter"
@@ -799,44 +811,31 @@ msgstr ""
 
 #: reportaggregator/models.py:44 reporting/models.py:70 reports/models.py:64
 msgid "Active"
-msgstr ""
+msgstr "Aktif"
 
 #: reportaggregator/models.py:45 reporting/models.py:71 reports/models.py:65
 msgid "Inactive"
-msgstr ""
+msgstr "Non-aktif"
 
-#: reporting/admin.py:19 reporting/admin.py:28 smsblast/admin.py:8
-msgid "Template details"
-msgstr ""
-
-#: reporting/admin.py:20 reporting/admin.py:25 reporting/admin.py:29
-#: reports/admin.py:295
+#: reporting/admin.py:18 reports/admin.py:282
 msgid "Report details"
-msgstr ""
+msgstr "Detil laporan"
 
-#: reporting/admin.py:21
-msgid "Set Template as Active"
-msgstr ""
-
-#: reporting/admin.py:22
-msgid "Set Template as Inactive"
-msgstr ""
-
-#: reporting/admin.py:26
+#: reporting/admin.py:19
 msgid "Report content"
-msgstr ""
+msgstr "Konten laporan"
 
-#: reporting/admin.py:27
+#: reporting/admin.py:20
 msgid "Report output"
-msgstr ""
+msgstr "Keluaran laporan"
 
-#: reporting/admin.py:30 reporting/models.py:25
+#: reporting/admin.py:21 reporting/models.py:25
 msgid "Disaster attached"
-msgstr ""
+msgstr "Bencana terlampir"
 
 #: reporting/forms.py:9
 msgid "Replace report content with template?"
-msgstr ""
+msgstr "Ganti konten laporan dengan template?"
 
 #: reporting/models.py:18
 #: waterlevel/templates/waterlevel/watergate_list.html:25
@@ -847,51 +846,51 @@ msgstr "Tanggal"
 
 #: reporting/models.py:21 website/models.py:16
 msgid "Start"
-msgstr ""
+msgstr "Awal"
 
 #: reporting/models.py:22 website/models.py:17
 msgid "End"
-msgstr ""
+msgstr "Akhir"
 
 #: reporting/models.py:23
 msgid "Author"
-msgstr ""
+msgstr "Penulis"
 
-#: reporting/models.py:26 smsblast/models.py:15
+#: reporting/models.py:26 smsblast/models.py:18
 msgid "Template"
 msgstr ""
 
 #: reporting/models.py:27
 msgid "Text ID"
-msgstr ""
+msgstr "Teks ID"
 
 #: reporting/models.py:28
 msgid "Text author"
-msgstr ""
+msgstr "Teks penulis"
 
 #: reporting/models.py:29
 msgid "Text title"
-msgstr ""
+msgstr "Teks judul"
 
 #: reporting/models.py:33
 msgid "Report"
-msgstr ""
+msgstr "Laporan"
 
 #: reporting/models.py:64
 msgid "Daily"
-msgstr ""
+msgstr "Harian"
 
 #: reporting/models.py:65
 msgid "Weekly"
-msgstr ""
+msgstr "Mingguan"
 
 #: reporting/models.py:66
 msgid "Monthly"
-msgstr ""
+msgstr "Bulanan"
 
 #: reporting/models.py:67
 msgid "Yearly"
-msgstr ""
+msgstr "Tahunan"
 
 #: reporting/templates/reporting/report_ABR.html:70
 #: reporting/templates/reporting/report_BJR.html:70
@@ -932,7 +931,7 @@ msgstr "Laporan"
 #: reporting/templates/reporting/report_TSU.html:100
 #: reports/templates/reports/statistics.html:7
 msgid "Event Impacts"
-msgstr ""
+msgstr "Dampak Kejadian"
 
 #: reporting/templates/reporting/report_ABR.html:142
 #: reporting/templates/reporting/report_BJR.html:142
@@ -952,83 +951,83 @@ msgstr "Foto kejadian"
 
 #: reports/admin.py:23
 msgid "Set event as active"
-msgstr ""
+msgstr "Tetapkan kejadian menjadi aktif"
 
 #: reports/admin.py:24
 msgid "Set event as inactive"
-msgstr ""
+msgstr "Tetapkan kejadian menjadi non-aktif"
 
 #: reports/admin.py:25
 msgid "Set report as unverified"
-msgstr ""
+msgstr "Tetapkan laporan menjadi tidak terverifikasi"
 
 #: reports/admin.py:26
 msgid "Set report as verified"
-msgstr ""
+msgstr "Tetapkan laporan menjadi terverifikasi"
 
-#: reports/admin.py:80
+#: reports/admin.py:68
 msgid "Event details"
-msgstr ""
+msgstr "Detil kejadian"
 
-#: reports/admin.py:81
+#: reports/admin.py:69
 msgid "Affected area"
 msgstr "Area terdampak"
 
-#: reports/admin.py:199
+#: reports/admin.py:186
 msgid "Imported file is not in unicode"
-msgstr ""
+msgstr "File yang diimport tidak dalam format unicode"
 
-#: reports/admin.py:201
+#: reports/admin.py:188
 msgid "encountered while trying to read file"
-msgstr ""
+msgstr "terjadi error ketika mencoba membaca file"
 
-#: reports/admin.py:320
+#: reports/admin.py:307
 msgid "Impact data"
-msgstr ""
+msgstr "Data dampak"
 
 #: reports/forms.py:28
 msgid "Please select a Village."
-msgstr ""
+msgstr "Mohon pilih sebuah kelurahan."
 
 #: reports/forms.py:32
 msgid "Please select a RW."
-msgstr ""
+msgstr "Mohon pilih sebuah RW."
 
 #: reports/forms.py:36
 msgid "The selected RT is not found in the selected RW."
-msgstr ""
+msgstr "RT terpilih tidak ditemukan dalam RW yang terpilih."
 
 #: reports/forms.py:41
 msgid "The selected RW is not found in the selected village."
-msgstr ""
+msgstr "RW terpilih tidak ditemukan dalam kelurahan yang terpilih."
 
 #: reports/forms.py:46
 msgid "The selected village is not found in the selected subdistrict."
-msgstr ""
+msgstr "Kelurahan terpilih tidak ditemukan dalam kecamatan yang terpilih."
 
 #: reports/forms.py:51
 msgid "The selected subdistrict is not found in the selected city."
-msgstr ""
+msgstr "Kecamatan terpilih tidak ditemukan dalam kotamadya yang terpilih."
 
 #: reports/forms.py:56
 msgid "The selected city is not found in the selected province."
-msgstr ""
+msgstr "Kotamadya terpilih tidak ditemukan dalam provinsi yang terpilih."
 
-#: reports/models.py:17 waterlevel/models.py:17
+#: reports/models.py:17
 msgid "Code"
-msgstr ""
+msgstr "Kode"
 
 #: reports/models.py:49
 msgid "Closed"
-msgstr ""
+msgstr "Ditutup"
 
 #: reports/models.py:52
 msgid "Minimum height"
-msgstr ""
+msgstr "Ketinggian minimum"
 
 #: reports/models.py:53
 msgid "Magnitude"
-msgstr ""
+msgstr "Magnitudo"
 
 #: reports/models.py:152
 msgid "Verified"
@@ -1040,15 +1039,15 @@ msgstr "Tidak terverifikasi"
 
 #: reports/models.py:154
 msgid "Pending"
-msgstr ""
+msgstr "Tertunda"
 
 #: reports/models.py:189 website/models.py:33
 msgid "Image"
-msgstr ""
+msgstr "Foto"
 
 #: reports/models.py:190 website/models.py:39
 msgid "Order"
-msgstr ""
+msgstr "Urutan"
 
 #: reports/models.py:192 website/models.py:37
 msgid "Image preview (260x180 px)"
@@ -1058,73 +1057,99 @@ msgstr ""
 msgid "Image thumb (70x70 px)"
 msgstr ""
 
-#: reports/models.py:249
+#: reports/models.py:248
 msgid "RT text"
 msgstr ""
 
-#: reports/models.py:250
+#: reports/models.py:249
 msgid "Evacuation point"
 msgstr "Titik evakuasi"
 
-#: reports/models.py:251
+#: reports/models.py:250
 msgid "Evacuated total"
-msgstr "Terevakuasi"
+msgstr "Total terevakuasi"
+
+#: reports/models.py:251
+msgid "Affected total"
+msgstr "Total terdampak"
 
 #: reports/models.py:252
-msgid "Affected total"
-msgstr "Terdampak"
-
-#: reports/models.py:253
 msgid "Affected death"
 msgstr "Meninggal"
 
-#: reports/models.py:254
+#: reports/models.py:253
 msgid "Affected injury"
 msgstr "Cedera"
 
-#: reports/models.py:255
+#: reports/models.py:254
 msgid "Loss total"
-msgstr "Kerugian"
+msgstr "Total kerugian"
 
-#: reports/resources.py:107
-msgid "Invalid disaster code. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:98
+#, fuzzy
+#| msgid "RT not found. Skipping this row for import."
+msgid "Skipping this row for import."
+msgstr "Baris ini dilewatkan untuk import."
 
-#: reports/resources.py:113
-msgid "Province not found. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:108
+#, fuzzy
+#| msgid "Invalid file type."
+msgid "Invalid disaster code."
+msgstr "Jenis file tidak valid."
 
-#: reports/resources.py:119
-msgid "City not found. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:114
+#, fuzzy
+#| msgid "No provinces found."
+msgid "Province not found."
+msgstr "Provinsi tidak ditemukan."
 
-#: reports/resources.py:126
-msgid "Subdistrict not found. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:120
+#, fuzzy
+#| msgid "No events found."
+msgid "City not found."
+msgstr "Kotamadya tidak ditemukan."
 
-#: reports/resources.py:132
-msgid "Village not found. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:127
+#, fuzzy
+#| msgid "No subdistricts found."
+msgid "Subdistrict not found."
+msgstr "Kecamatan tidak ditemukan."
 
-#: reports/resources.py:141
-msgid "City not found in the province. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:133
+#, fuzzy
+#| msgid "No villages found."
+msgid "Village not found."
+msgstr "Kelurahan tidak ditemukan."
 
-#: reports/resources.py:150
-msgid "Subdistrict not found in the city. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:142
+#, fuzzy
+#| msgid "No cities found in this province."
+msgid "City not found in the province."
+msgstr "Tidak ditemukan kotamadya di provinsi ini."
 
-#: reports/resources.py:159
-msgid "Village not found in the subdistrict. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:151
+#, fuzzy
+#| msgid "No subdistricts found in this city."
+msgid "Subdistrict not found in the city."
+msgstr "Tidak ditemukan kecamatan di kotamadya ini."
 
-#: reports/resources.py:169
-msgid "RW not found in the village. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:160
+#, fuzzy
+#| msgid "No villages found in this subdistrict."
+msgid "Village not found in the subdistrict."
+msgstr "Tidak ditemukan kelurahan di kecamatan ini."
 
-#: reports/resources.py:176
-msgid "RT not found. Skipping this row for import."
-msgstr ""
+#: reports/resources.py:170
+#, fuzzy
+#| msgid "No RW found in this village."
+msgid "RW not found in the village."
+msgstr "Tidak ditemukan RW di kelurahan ini."
+
+#: reports/resources.py:177
+#, fuzzy
+#| msgid "No RT found."
+msgid "RT not found."
+msgstr "RT tidak ditemukan."
 
 #: reports/templates/reports/event_detail.html:32
 msgid "Impact"
@@ -1164,27 +1189,17 @@ msgstr "Deskripsi mengenai laporan."
 msgid "No reports found."
 msgstr "Laporan tidak ditemukan."
 
-#: smsblast/admin.py:9
-msgid "Group details"
-msgstr ""
-
-#: smsblast/admin.py:10 smsblast/admin.py:12
-msgid "Message details"
-msgstr ""
-
-#: smsblast/admin.py:11
-msgid "Contact details"
-msgstr ""
-
-#: smsblast/models.py:16
+#: smsblast/models.py:19
 msgid "Group"
 msgstr "Grup"
 
-#: smsblast/models.py:18
-msgid "Contact Number"
-msgstr "Nomor Kontak"
+#: smsblast/models.py:21
+#, fuzzy
+#| msgid "Contact Number"
+msgid "Contact number"
+msgstr "Nomor kontak"
 
-#: smsblast/models.py:20
+#: smsblast/models.py:23
 msgid "Contacts"
 msgstr "Kontak"
 
@@ -1230,7 +1245,7 @@ msgstr "Tautan"
 
 #: templates/opendims/includes/block_footer.html:28
 msgid "Resources"
-msgstr ""
+msgstr "Materi"
 
 #: templates/opendims/includes/block_footer.html:41
 #: templates/opendims/includes/block_partners.html:9
@@ -1283,19 +1298,19 @@ msgstr "Jumlah"
 
 #: templates/opendims/includes/block_statistics.html:17
 msgid "Total Evacuated"
-msgstr "Terevakuasi"
+msgstr "Total Terevakuasi"
 
 #: templates/opendims/includes/block_statistics.html:18
 msgid "Total Affected"
-msgstr ""
+msgstr "Total Terdampak"
 
 #: templates/opendims/includes/block_statistics.html:19
 msgid "Total Death"
-msgstr "Meninggal"
+msgstr "Total Meninggal"
 
 #: templates/opendims/includes/block_statistics.html:20
 msgid "Total Injury"
-msgstr "Cedera"
+msgstr "Total Cedera"
 
 #: templates/opendims/includes/block_waterlevel.html:6
 #: waterlevel/templates/waterlevel/watergate_list.html:44
@@ -1313,7 +1328,7 @@ msgstr "Pintu Air"
 #: waterlevel/templates/waterlevel/watergate_detail.html:35
 #: waterlevel/templates/waterlevel/watergate_list.html:55
 msgid "Level"
-msgstr ""
+msgstr "Tingkatan"
 
 #: templates/opendims/includes/block_weatherforecast.html:7
 #: weatherforecast/templates/weatherforecast/weatherforecast.html:5
@@ -1342,14 +1357,17 @@ msgstr "Malam"
 msgid "Maps"
 msgstr "Peta"
 
-#: templates/opendims/includes/nav.html:28
-#: templates/opendims/includes/nav_responsive.html:31
+#: templates/opendims/includes/nav.html:16
+#: templates/opendims/includes/nav_responsive.html:19
+#, fuzzy
+#| msgid "Rehabilitation"
+msgid "Rehabilitation Activity"
+msgstr "Aktivitas Rehabilitasi"
+
+#: templates/opendims/includes/nav.html:29
+#: templates/opendims/includes/nav_responsive.html:32
 msgid "Rehabilitation"
 msgstr "Rehabilitasi"
-
-#: templates/opendims/includes/nav.html:68
-msgid "Layouts"
-msgstr ""
 
 #: templates/opendims/includes/pagination.html:6
 msgid "Previous"
@@ -1370,29 +1388,29 @@ msgstr "Berikutnya"
 #: templates/registration/activate.html:5
 #: templates/registration/activate.html:8
 msgid "Account Activation Failed"
-msgstr ""
+msgstr "Aktifasi Akun Gagal"
 
 #: templates/registration/activate.html:15
 msgid "Account activation failed."
-msgstr ""
+msgstr "Aktifasi akun gagal."
 
 #: templates/registration/activation_complete.html:5
 #: templates/registration/activation_complete.html:8
 msgid "Account Activated"
-msgstr ""
+msgstr "Akun Teraktifasi"
 
 #: templates/registration/activation_complete.html:16
 msgid "Your account is now activated."
-msgstr ""
+msgstr "Akun Anda sudah teraktifasi."
 
 #: templates/registration/activation_complete.html:18
 msgid "You can login."
-msgstr ""
+msgstr "Anda dapat masuk."
 
 #: templates/registration/login.html:5 templates/registration/login.html:8
 #: templates/registration/login.html:22
 msgid "Login"
-msgstr ""
+msgstr "Masuk"
 
 #: templates/registration/login.html:16
 msgid "Invalid username or password"
@@ -1408,20 +1426,20 @@ msgstr ""
 
 #: templates/registration/login.html:26
 msgid "Not a member?"
-msgstr ""
+msgstr "Bukan anggota?"
 
 #: templates/registration/login.html:26
 #: templates/registration/registration_form.html:18
 msgid "Register"
-msgstr ""
+msgstr "Registrasi"
 
 #: templates/registration/logout.html:5 templates/registration/logout.html:8
 msgid "Logged Out"
-msgstr ""
+msgstr "Sudah Keluar"
 
 #: templates/registration/logout.html:15
 msgid "Successfully logged out"
-msgstr ""
+msgstr "Berhasil keluar"
 
 #: templates/registration/password_change_done.html:5
 #: templates/registration/password_change_done.html:8
@@ -1510,69 +1528,61 @@ msgstr "Mohon periksa email Anda untuk menyelesaikan proses registrasi."
 msgid "Registration"
 msgstr "Registrasi"
 
-#: waterlevel/admin.py:11
-msgid "Water Gate details"
-msgstr ""
-
-#: waterlevel/admin.py:12
-msgid "Water Level Report details"
-msgstr ""
-
-#: waterlevel/models.py:18
+#: waterlevel/models.py:17
 msgid "Water gate"
 msgstr "Pintu air"
 
-#: waterlevel/models.py:20
+#: waterlevel/models.py:19
 msgid "Siaga 1 min"
 msgstr ""
 
-#: waterlevel/models.py:21
+#: waterlevel/models.py:20
 msgid "Siaga 1 max"
 msgstr ""
 
-#: waterlevel/models.py:22
+#: waterlevel/models.py:21
 msgid "Siaga 2 min"
 msgstr ""
 
-#: waterlevel/models.py:23
+#: waterlevel/models.py:22
 msgid "Siaga 2 max"
 msgstr ""
 
-#: waterlevel/models.py:24
+#: waterlevel/models.py:23
 msgid "Siaga 3 min"
 msgstr ""
 
-#: waterlevel/models.py:25
+#: waterlevel/models.py:24
 msgid "Siaga 3 max"
 msgstr ""
 
-#: waterlevel/models.py:73
+#: waterlevel/models.py:76
 #: waterlevel/templates/waterlevel/watergate_detail.html:96
 #: waterlevel/templates/waterlevel/watergate_list.html:140
 #: weatherforecast/models.py:28
 msgid "Clear"
 msgstr "Cerah"
 
-#: waterlevel/models.py:74
+#: waterlevel/models.py:77
 #: waterlevel/templates/waterlevel/watergate_detail.html:98
 #: waterlevel/templates/waterlevel/watergate_list.html:142
 msgid "Slightly cloudy"
 msgstr "Sedikit berawan"
 
-#: waterlevel/models.py:75
+#: waterlevel/models.py:78
 #: waterlevel/templates/waterlevel/watergate_detail.html:100
 #: waterlevel/templates/waterlevel/watergate_list.html:144
 #: weatherforecast/models.py:30
 msgid "Cloudy"
 msgstr "Berawan"
 
-#: waterlevel/models.py:76
+#: waterlevel/models.py:79
 #: waterlevel/templates/waterlevel/watergate_detail.html:102
 #: waterlevel/templates/waterlevel/watergate_list.html:146
 msgid "Drizzle"
 msgstr "Gerimis"
 
-#: waterlevel/models.py:77
+#: waterlevel/models.py:80
 #: waterlevel/templates/waterlevel/watergate_detail.html:104
 #: waterlevel/templates/waterlevel/watergate_list.html:148
 msgid "Rain"
@@ -1614,10 +1624,6 @@ msgstr "Pintu air tidak ditemukan."
 msgid "Water Level Chart"
 msgstr "Grafik Tinggi Muka Air"
 
-#: weatherforecast/admin.py:8
-msgid "Weather Forecast Report details"
-msgstr ""
-
 #: weatherforecast/models.py:14
 msgid "Morning forecast"
 msgstr "Prakiraan cuaca pagi"
@@ -1632,23 +1638,23 @@ msgstr "Prakiraan cuaca malam"
 
 #: weatherforecast/models.py:17
 msgid "Forecast"
-msgstr ""
+msgstr "Prakiraan cuaca"
 
 #: weatherforecast/models.py:20
 msgid "Temperature min"
-msgstr ""
+msgstr "Suhu min"
 
 #: weatherforecast/models.py:21
 msgid "Temperature max"
-msgstr ""
+msgstr "Suhu max"
 
 #: weatherforecast/models.py:22
 msgid "Humidity min"
-msgstr ""
+msgstr "Kelembaban min"
 
 #: weatherforecast/models.py:23
 msgid "Humidity max"
-msgstr ""
+msgstr "Kelembaban max"
 
 #: weatherforecast/models.py:29
 msgid "Partly cloudy"
@@ -1676,24 +1682,19 @@ msgstr "Laporan prakiraan cuaca tidak ditemukan."
 
 #: website/admin.py:12
 msgid "Attachment details"
-msgstr ""
+msgstr "Detil lampiran"
 
 #: website/admin.py:13
 msgid "Attachment image"
-msgstr ""
+msgstr "Gambar lampiran"
 
 #: website/admin.py:14
-msgid "Post details"
-msgstr ""
+msgid "Attachment file"
+msgstr "File lampiran"
 
 #: website/admin.py:15
-msgid "Site header details"
-msgstr ""
-
-#: website/admin.py:16 website/models.py:34
-#: website/templates/website/post_list.html:37
-msgid "Category"
-msgstr "Kategori"
+msgid "Post details"
+msgstr "Detil post"
 
 #: website/forms.py:33
 msgid "Maximum image width is"
@@ -1709,15 +1710,15 @@ msgstr ""
 
 #: website/models.py:24
 msgid "Attachment"
-msgstr ""
+msgstr "Lampiran"
 
 #: website/models.py:25
 msgid "Author text"
-msgstr ""
+msgstr "Teks penulis"
 
 #: website/models.py:26
 msgid "Slideshow image"
-msgstr ""
+msgstr "Gambar slideshow"
 
 #: website/models.py:27
 msgid "Slideshow image crop (770x400 px)"
@@ -1737,7 +1738,11 @@ msgstr ""
 
 #: website/models.py:32
 msgid "Slideshow enabled"
-msgstr ""
+msgstr "Aktifkan slideshow"
+
+#: website/models.py:34 website/templates/website/post_list.html.py:37
+msgid "Category"
+msgstr "Kategori"
 
 #: website/models.py:35
 msgid "Post"
@@ -1761,8 +1766,53 @@ msgstr ""
 
 #: website/templates/website/post_detail.html:66
 msgid "Files"
-msgstr ""
+msgstr "File"
 
 #: website/templates/website/post_list.html:24
 msgid "Search posts"
 msgstr "Cari post"
+
+#~ msgid "Invalid disaster code. Skipping this row for import."
+#~ msgstr "Kode bencana salah. Baris ini dilewatkan untuk import."
+
+#~ msgid "Province not found. Skipping this row for import."
+#~ msgstr "Provinsi tidak ditemukan. Baris ini dilewatkan untuk import."
+
+#~ msgid "City not found. Skipping this row for import."
+#~ msgstr "Kotamadya tidak ditemukan. Baris ini dilewatkan untuk import."
+
+#~ msgid "Subdistrict not found. Skipping this row for import."
+#~ msgstr "Kecamatan tidak ditemukan. Baris ini dilewatkan untuk import."
+
+#~ msgid "Village not found. Skipping this row for import."
+#~ msgstr "Kelurahan tidak ditemukan. Baris ini dilewatkan untuk import."
+
+#~ msgid "City not found in the province. Skipping this row for import."
+#~ msgstr ""
+#~ "Kotamadya tidak ditemukan di provinsi. Baris ini dilewatkan untuk import."
+
+#~ msgid "Subdistrict not found in the city. Skipping this row for import."
+#~ msgstr ""
+#~ "Kecamatan tidak ditemukan di kotamadya. Baris ini dilewatkan untuk import."
+
+#~ msgid "Village not found in the subdistrict. Skipping this row for import."
+#~ msgstr ""
+#~ "Kelurahan tidak ditemukan di kecamatan. Baris ini dilewatkan untuk import."
+
+#~ msgid "RW not found in the village. Skipping this row for import."
+#~ msgstr "RW tidak ditemukan di kelurahan. Baris ini dilewatkan untuk import."
+
+#~ msgid "Location details"
+#~ msgstr "Detil lokasi"
+
+#~ msgid "Template details"
+#~ msgstr "Detil template"
+
+#~ msgid "Group details"
+#~ msgstr "Detil grup"
+
+#~ msgid "Message details"
+#~ msgstr "Detil pesan"
+
+#~ msgid "Contact details"
+#~ msgstr "Detil kontak"

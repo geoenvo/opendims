@@ -8,6 +8,7 @@ from common.models import CommonAbstractModel
 from common.validators import MimetypeValidator, FileSizeValidator
 
 
+verbose_id = _('ID')
 verbose_note = _('Note')
 verbose_name = _('Name')
 verbose_polygon = _('Polygon')
@@ -15,7 +16,7 @@ verbose_geojson = _('GeoJSON')
 
 
 class Province(CommonAbstractModel):
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True, verbose_name=verbose_id)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
     polygon = models.MultiPolygonField(
         null=True,
@@ -45,7 +46,7 @@ verbose_province = _('Province')
 
 
 class City(CommonAbstractModel):
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True, verbose_name=verbose_id)
     province = models.ForeignKey(Province, verbose_name=verbose_province)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
     polygon = models.MultiPolygonField(
@@ -79,7 +80,7 @@ verbose_city = _('City')
 
 
 class Subdistrict(CommonAbstractModel):
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True, verbose_name=verbose_id)
     city = models.ForeignKey(City, verbose_name=verbose_city)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
     polygon = models.MultiPolygonField(
@@ -110,7 +111,7 @@ verbose_subdistrict = _('Subdistrict')
 
 
 class Village(CommonAbstractModel):
-    id = models.BigIntegerField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True, verbose_name=verbose_id)
     subdistrict = models.ForeignKey(
         Subdistrict,
         verbose_name=verbose_subdistrict
@@ -145,7 +146,7 @@ verbose_rw = _('RW')
 
 
 class RW(CommonAbstractModel):
-    id = models.BigIntegerField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True, verbose_name=verbose_id)
     village = models.ForeignKey(Village, verbose_name=verbose_village)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
     polygon = models.MultiPolygonField(
@@ -179,7 +180,7 @@ verbose_rt = _('RT')
 
 
 class RT(CommonAbstractModel):
-    id = models.BigIntegerField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True, verbose_name=verbose_id)
     rw = models.ForeignKey(RW, verbose_name=verbose_rw)
     name = models.CharField(max_length=50, verbose_name=verbose_name)
     polygon = models.MultiPolygonField(

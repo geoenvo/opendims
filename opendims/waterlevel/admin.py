@@ -8,27 +8,18 @@ from leaflet.admin import LeafletGeoAdmin
 from .models import WaterGate, WaterLevelReport
 
 
-verbose_watergate_details = _('Water Gate details')
-verbose_waterlevelreport_details = _('Water Level Report details')
-
-
 class WaterGateAdmin(LeafletGeoAdmin):
     settings_overrides = {
         'DEFAULT_ZOOM': 13,
     }
-
-    fieldsets = [
-        (verbose_watergate_details, {
-            'fields': [
-                'name',
-                'point',
-                ('siaga_1_min', 'siaga_1_max'),
-                ('siaga_2_min', 'siaga_2_max'),
-                ('siaga_3_min', 'siaga_3_max'),
-                'note'
-            ]
-        })
-    ]
+    fields = (
+        'name',
+        'point',
+        ('siaga_1_min', 'siaga_1_max'),
+        ('siaga_2_min', 'siaga_2_max'),
+        ('siaga_3_min', 'siaga_3_max'),
+        'note'
+    )
     list_display = [
         'name',
         'siaga_1_min',
@@ -38,31 +29,28 @@ class WaterGateAdmin(LeafletGeoAdmin):
         'siaga_3_min',
         'siaga_3_max'
     ]
-    search_fields = ['note', 'name']
+    search_fields = ['name', 'note']
 
 
 class WaterLevelReportAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_waterlevelreport_details, {
-            'fields': [
-                'created',
-                'watergate',
-                'weather',
-                'height'
-            ]
-        })
-    ]
+    fields = (
+        'created',
+        'watergate',
+        'weather',
+        'height'
+    )
     list_display = [
+        'watergate',
         'created',
         'updated',
-        'watergate',
         'weather',
         'height'
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['watergate', 'weather', 'created', 'updated']
-    search_fields = ['created', 'watergate', 'weather']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'watergate', 'weather']
+    search_fields = ['watergate']
 
 
 admin.site.register(WaterGate, WaterGateAdmin)

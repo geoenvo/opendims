@@ -16,6 +16,7 @@
             <li><a href="#">{% trans "Maps" %}</a>
                 <ul class="sub-menu">
                     <li><a href="{% url 'maps:event_map' %}">{% trans "Events" %}</a></li>
+                    <li><a href="{% url 'maps:rehabilitation_activity_map' %}">{% trans "Rehabilitation Activity" %}</a></li>
                 </ul>
             </li>
             <!--
@@ -37,7 +38,7 @@
             {% get_category_tree 'news' as nodes %}
             {% recursetree nodes %}
             <li>
-                <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
                 {% if not node.is_leaf_node %}
                 <ul class="sub-menu">
                     {{ children }}
@@ -48,7 +49,7 @@
             {% get_category_tree 'e-library' as nodes %}
             {% recursetree nodes %}
             <li>
-                <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
                 {% if not node.is_leaf_node %}
                 <ul class="sub-menu">
                     {{ children }}
@@ -59,7 +60,7 @@
             {% get_category_tree 'gallery' as nodes %}
             {% recursetree nodes %}
             <li>
-                <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
+                <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
                 {% if not node.is_leaf_node %}
                 <ul class="sub-menu">
                     {{ children }}

@@ -1,14 +1,9 @@
 from __future__ import unicode_literals
 
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from django.contrib.gis import admin
+from django.contrib import admin
 
-from geolevels.models import Village
 from .models import ReportAutoSummary
-
-verbose_ReportAutoSummary = _('ReportAutoSummary')
 
 
 class ReportAutoSummaryAdmin(admin.ModelAdmin):
@@ -21,7 +16,9 @@ class ReportAutoSummaryAdmin(admin.ModelAdmin):
         'note'
     ]
     ordering = ['-created']
+    date_hierarchy = 'created'
     list_filter = ['created']
-    search_fields = ['note']
+    search_fields = ['note', 'village__name']
+
 
 admin.site.register(ReportAutoSummary, ReportAutoSummaryAdmin)

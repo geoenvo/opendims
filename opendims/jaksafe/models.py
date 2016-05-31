@@ -10,16 +10,16 @@ from common.models import CommonAbstractModel
 from geolevels.models import Village
 
 verbose_created = _('Created')
-verbose_infradamage = _('Infrastructure Damage')
-verbose_infraloss = _('Infrastructure Loss')
-verbose_sectordamage = _('Trans-sector Damage')
-verbose_sectorloss = _('Trans-sector Loss')
-verbose_productdamage = _('Productive Damage')
-verbose_productloss = _('Productive Loss')
-verbose_socialdamage = _('Social Estate Damage')
-verbose_socialloss = _('Social Estate Loss')
-verbose_totaldamage = _('Total Damage')
-verbose_totalloss = _('Total Loss')
+verbose_infradamage = _('Infrastructure damage')
+verbose_infraloss = _('Infrastructure loss')
+verbose_sectordamage = _('Cross-sector damage')
+verbose_sectorloss = _('Cross-sector loss')
+verbose_productdamage = _('Productive damage')
+verbose_productloss = _('Productive loss')
+verbose_socialdamage = _('Social-Housing damage')
+verbose_socialloss = _('Social-Housing loss')
+verbose_totaldamage = _('Total damage')
+verbose_totalloss = _('Total loss')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_source = _('Source')
@@ -31,14 +31,14 @@ class ReportAutoSummary(CommonAbstractModel):
         default=timezone.now,
         verbose_name=verbose_created
     )
-
     village = models.ForeignKey(
         Village,
         verbose_name=verbose_village
     )
     rw = models.TextField(blank=True, verbose_name=verbose_rw)
     source = models.URLField(
-        blank=True, default='',
+        blank=True,
+        default='',
         verbose_name=verbose_source)
     note = models.TextField(blank=True, default='', verbose_name=verbose_note)
     damage_infrastruktur = models.DecimalField(
@@ -113,8 +113,8 @@ class ReportAutoSummary(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-created']
-        get_latest_by = 'created'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def get_absolute_url(self):
         return reverse('jaksafe:reportautosummary_detail', args=[self.pk])

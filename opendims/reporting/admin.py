@@ -11,22 +11,13 @@ from django.core.files import File
 from xhtml2pdf import pisa
 
 from .models import Template, Report, Attachment
-
 from .forms import ReportForm
-
 from reports.models import Event
-
-verbose_template_details = _('Template details')
-verbose_report_details = _('Report details')
-verbose_set_active = _('Set Template as Active')
-verbose_set_inactive = _('Set Template as Inactive')
 
 
 verbose_report_details = _('Report details')
 verbose_report_content = _('Report content')
 verbose_report_output = _('Report output')
-verbose_template_details = _('Template details')
-verbose_attachment_details = _('Report details')
 verbose_disaster_attached = _('Disaster attached')
 
 
@@ -41,16 +32,15 @@ class AttachmentInLine (admin.TabularInline):
 
 
 class ReportAdmin(admin.ModelAdmin):
-
     form = ReportForm
 
     def save_model(self, request, obj, form, change):
         """
+        Write the attached disaster files.
         """
         obj.save()
 
         for disaster in obj.template.disaster_attached.all():
-
             try:
                 template = get_template('reporting/report_' + disaster.code + '.html')
                 events = Event.objects.filter(disaster__code=disaster.code)
@@ -127,25 +117,19 @@ class ReportAdmin(admin.ModelAdmin):
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['template', 'created', 'updated']
-    search_fields = ['author', 'file', 'template']
+    date_hierarchy = 'created'
+    list_filter = ['template', 'created']
+    search_fields = ['author', 'template']
     inlines = [AttachmentInline]
-    list_filter = ['content', 'template', 'created', 'updated']
-    search_fields = ['file', 'author']
-    inlines = [AttachmentInLine]
 
 
 class TemplateAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_template_details, {
-            'fields': [
-                'name',
-                'created',
-                'content',
-                'disaster_attached'
-            ]
-        })
-    ]
+    fields = (
+        'name',
+        'created',
+        'content',
+        'disaster_attached'
+    )
     list_display = [
         'name',
         'created',
@@ -154,7 +138,8 @@ class TemplateAdmin(admin.ModelAdmin):
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['name', 'created', 'updated']
+    date_hierarchy = 'created'
+    list_filter = ['created']
     search_fields = ['name']
 
     def disaster_attached_list(self, obj):
@@ -164,15 +149,11 @@ class TemplateAdmin(admin.ModelAdmin):
 
 
 class AttachmentAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_attachment_details, {
-            'fields': [
-                'report',
-                'created',
-                'file'
-            ]
-        })
-    ]
+    fields = (
+        'report',
+        'created',
+        'file'
+    )
     list_display = [
         'report',
         'created',
@@ -180,7 +161,7 @@ class AttachmentAdmin(admin.ModelAdmin):
     ]
     ordering = ['-created']
     list_filter = ['created']
-    search_fields = ['file']
+    date_hierarchy = 'created'
 
 
 admin.site.register(Template, TemplateAdmin)

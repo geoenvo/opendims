@@ -1,13 +1,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from .models import Contact
-
-verbose_Contact = _('Contact')
 
 
 class ContactAdmin(admin.ModelAdmin):
@@ -18,7 +14,9 @@ class ContactAdmin(admin.ModelAdmin):
         'subject'
     ]
     ordering = ['-created']
-    list_filter = ['created']
-    search_fields = ['message']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'subject']
+    search_fields = ['subject', 'name', 'message']
+
 
 admin.site.register(Contact, ContactAdmin)

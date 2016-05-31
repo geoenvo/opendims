@@ -7,7 +7,6 @@ from .models import Source, Keyword
 
 
 verbose_source_details = _('Source details')
-verbose_keyword_details = _('Keyword details')
 
 
 class KeywordInline(admin.TabularInline):
@@ -35,27 +34,25 @@ class SourceAdmin(admin.ModelAdmin):
         'disaster',
         'status'
     ]
-
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'type', 'disaster', 'status']
+    search_fields = ['name', 'disaster', 'type']
     inlines = [KeywordInline]
 
 
 class KeywordAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (verbose_keyword_details, {
-            'fields': [
-                'source',
-                'keyword'
-            ]
-        })
-    ]
+    fields = (
+        'source',
+        'keyword'
+    )
     list_display = [
         'source',
         'keyword'
     ]
-
-    search_fields = ['keyword']
+    list_filter = ['source__name']
+    search_fields = ['keyword', 'source__name']
 
 
 admin.site.register(Source, SourceAdmin)

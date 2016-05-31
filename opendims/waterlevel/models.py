@@ -14,7 +14,6 @@ verbose_updated = _('Updated')
 verbose_height = _('Height')
 verbose_weather = _('Weather')
 verbose_note = _('Note')
-verbose_code = _('Code')
 verbose_watergate = _('Water gate')
 verbose_name = _('Name')
 verbose_siaga1min = _('Siaga 1 min')
@@ -61,6 +60,10 @@ class WaterGate(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
+    class Meta:
+        ordering = ['-pk']
+        get_latest_by = 'pk'
+
     def __unicode__(self):
         return '%s' % self.name
 
@@ -99,8 +102,8 @@ class WaterLevelReport(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.watergate, self.height, self.weather)
