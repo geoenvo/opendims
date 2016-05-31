@@ -60,6 +60,10 @@ class WaterGate(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
+    class Meta:
+        ordering = ['-pk']
+        get_latest_by = 'pk'
+
     def __unicode__(self):
         return '%s' % self.name
 
@@ -98,8 +102,8 @@ class WaterLevelReport(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['-pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.watergate, self.height, self.weather)

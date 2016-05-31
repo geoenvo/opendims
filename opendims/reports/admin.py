@@ -26,18 +26,6 @@ verbose_set_unverified = _('Set report as unverified')
 verbose_set_verified = _('Set report as verified')
 
 
-def set_unverified(modeladmin, request, queryset):
-    queryset.update(status='UNVERIFIED')
-
-set_unverified.short_description = verbose_set_unverified
-
-
-def set_verified(modeladmin, request, queryset):
-    queryset.update(status='VERIFIED')
-
-set_verified.short_description = verbose_set_verified
-
-
 def set_inactive(modeladmin, request, queryset):
     queryset.update(status='INACTIVE')
 
@@ -377,6 +365,18 @@ class EventImpactAdmin(LeafletGeoAdmin):
         'village__name'
     ]
     raw_id_fields = ['event']
+
+
+def set_unverified(modeladmin, request, queryset):
+    queryset.update(status='UNVERIFIED')
+
+set_unverified.short_description = verbose_set_unverified
+
+
+def set_verified(modeladmin, request, queryset):
+    queryset.update(status='VERIFIED')
+
+set_verified.short_description = verbose_set_verified
 
 
 class ReportAdmin(admin.ModelAdmin):

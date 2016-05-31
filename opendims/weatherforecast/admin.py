@@ -28,6 +28,7 @@ class WeatherForecastReportAdmin(admin.ModelAdmin):
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
     list_filter = ['city', 'forecast_morning', 'forecast_noon', 'forecast_night', 'updated']
     search_fields = ['note']
 

@@ -14,7 +14,6 @@ verbose_subdistrict = _('Subdistrict')
 verbose_village = _('Village')
 verbose_rw = _('RW')
 verbose_rt = _('RT')
-verbose_location_details = _('Location details')
 verbose_activity_details = _('Activity details')
 verbose_eventassessment_details = _('Event assessment details')
 
@@ -22,18 +21,14 @@ verbose_eventassessment_details = _('Event assessment details')
 class LocationInline(admin.TabularInline):
     form = LocationForm
     model = Location
-    fieldsets = [
-        (verbose_location_details, {
-            'fields': [
-                'province',
-                'city',
-                'subdistrict',
-                'village',
-                'rw',
-                'rt'
-            ]
-        })
-    ]
+    fields = (
+        'province',
+        'city',
+        'subdistrict',
+        'village',
+        'rw',
+        'rt'
+    )
     extra = 1
 
 
@@ -57,6 +52,8 @@ class ReferenceAdmin(admin.ModelAdmin):
         'published'
     ]
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'published']
 
 
 class LocationAdmin(admin.ModelAdmin):
@@ -155,7 +152,9 @@ class EventAssessmentAdmin(admin.ModelAdmin):
     inlines = [LocationInline]
     list_display = ['name', 'created', 'updated', 'event', 'published']
     ordering = ['-created', '-updated']
+    date_hierarchy = 'created'
     raw_id_fields = ['event']
+    list_filter = ['created', 'published']
 
 
 class ActivityAdmin(admin.ModelAdmin):
@@ -189,11 +188,13 @@ class ActivityAdmin(admin.ModelAdmin):
     ]
 
     ordering = ['-created', '-updated']
+    date_hierarchy = 'created'
     raw_id_fields = ['event']
     list_filter = ['created', 'published', 'agency', 'funding', 'location__city__name']
 
     def cities(self, obj):
         return ', '.join(location.city.name for location in obj.location_set.order_by('city__name'))
+
 
 admin.site.register(Agency, AgencyAdmin)
 admin.site.register(EventAssessment, EventAssessmentAdmin)

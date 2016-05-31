@@ -6,6 +6,7 @@ from django.db import models
 
 from common.models import CommonAbstractModel
 
+
 verbose_created = _('Created')
 verbose_name = _('Name')
 verbose_email = _('E-mail')
@@ -46,8 +47,8 @@ class Contact(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-created']
-        get_latest_by = 'created'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.subject, timezone.localtime(self.created), self.name)

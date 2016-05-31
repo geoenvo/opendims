@@ -51,7 +51,9 @@ class AttachmentAdmin(ImageCroppingMixin, admin.ModelAdmin):
         'published'
     ]
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
     list_filter = ['created', 'published']
+    search_fields = ['title']
 
 
 class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
@@ -102,12 +104,14 @@ class SiteHeaderAdmin(admin.ModelAdmin):
     )
     list_display = [
         'title',
+        'updated',
         'start',
         'end',
-        'updated',
         'published'
     ]
     readonly_fields = ['updated']
+    list_filter = ['published']
+    search_fields = ['title', 'note']
 
 
 class WelcomeAdmin(admin.ModelAdmin):
@@ -140,7 +144,7 @@ class PartnerAdmin(ImageCroppingMixin, admin.ModelAdmin):
         'url',
         'published'
     ]
-    list_filter = ['name', 'published']
+    list_filter = ['published']
     search_fields = ['name']
 
 
@@ -157,7 +161,7 @@ class LinkAdmin(admin.ModelAdmin):
         'url',
         'published'
     ]
-    list_filter = ['order', 'published']
+    list_filter = ['published']
     search_fields = ['name']
 
 
@@ -174,8 +178,9 @@ class ResourceAdmin(admin.ModelAdmin):
         'url',
         'published'
     ]
-    list_filter = ['order', 'published']
+    list_filter = ['published']
     search_fields = ['name']
+
 
 admin.site.register(Attachment, AttachmentAdmin)
 admin.site.register(Post, PostAdmin)

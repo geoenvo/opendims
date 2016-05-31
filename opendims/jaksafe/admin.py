@@ -16,7 +16,9 @@ class ReportAutoSummaryAdmin(admin.ModelAdmin):
         'note'
     ]
     ordering = ['-created']
+    date_hierarchy = 'created'
     list_filter = ['created']
-    search_fields = ['note']
+    search_fields = ['note', 'village__name']
+
 
 admin.site.register(ReportAutoSummary, ReportAutoSummaryAdmin)

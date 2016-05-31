@@ -17,6 +17,11 @@ class TemplateAdmin(admin.ModelAdmin):
         'created',
         'updated'
     ]
+    readonly_fields = ['updated']
+    ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created']
+    search_fields = ['name', 'content']
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -31,6 +36,11 @@ class GroupAdmin(admin.ModelAdmin):
         'created',
         'updated'
     ]
+    readonly_fields = ['updated']
+    ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created']
+    search_fields = ['name', 'note']
 
 
 class MessageAdmin(admin.ModelAdmin):
@@ -48,6 +58,11 @@ class MessageAdmin(admin.ModelAdmin):
         'group',
         'template'
     ]
+    readonly_fields = ['updated']
+    ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'group', 'template']
+    search_fields = ['subject', 'group', 'template', 'content']
 
 
 class ContactAdmin(admin.ModelAdmin):
@@ -62,6 +77,11 @@ class ContactAdmin(admin.ModelAdmin):
         'updated',
         'contact_number'
     ]
+    readonly_fields = ['updated']
+    ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created']
+    search_fields = ['name', 'contact_number']
 
 
 admin.site.register(Template, TemplateAdmin)

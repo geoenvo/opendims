@@ -15,8 +15,8 @@ verbose_point = _('Point')
 verbose_name = _('Name')
 verbose_note = _('Note')
 verbose_awsstation = _('AWS station')
-verbose_temp = _('Temperature')
-verbose_humid = _('Humidity')
+verbose_temperature = _('Temperature')
+verbose_humidity = _('Humidity')
 verbose_pressure = _('Pressure')
 verbose_windspeed = _('Wind speed')
 verbose_winddir = _('Wind direction')
@@ -40,7 +40,7 @@ class AWSStation(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     def __unicode__(self):
-        return '[%s]' % (self.name)
+        return '%s' % self.name
 
 
 class AWSReport(CommonAbstractModel):
@@ -60,12 +60,12 @@ class AWSReport(CommonAbstractModel):
         blank=True,
         max_digits=4,
         decimal_places=2,
-        verbose_name=verbose_temp
+        verbose_name=verbose_temperature
     )
     humidity = models.PositiveIntegerField(
         null=True,
         blank=True,
-        verbose_name=verbose_humid
+        verbose_name=verbose_humidity
     )
     pressure = models.PositiveIntegerField(
         null=True,
@@ -116,8 +116,8 @@ class AWSReport(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.awsstation, timezone.localtime(self.created))

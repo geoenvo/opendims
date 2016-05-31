@@ -4,7 +4,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
+
 from ckeditor.fields import RichTextField
+
 from common.models import CommonAbstractModel
 
 

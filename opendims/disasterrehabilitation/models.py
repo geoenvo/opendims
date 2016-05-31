@@ -6,7 +6,6 @@ from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.urlresolvers import reverse
 
-
 from common.models import CommonAbstractModel
 from geolevels.models import Province, City, Subdistrict, Village, RW, RT
 from reports.models import Event
@@ -44,7 +43,8 @@ class Agency(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['pk']
+        get_latest_by = 'pk'
         verbose_name_plural = 'agencies'
 
     def __unicode__(self):
@@ -81,8 +81,8 @@ class EventAssessment(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-created']
-        get_latest_by = 'created'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
@@ -164,8 +164,8 @@ class Activity(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
         verbose_name_plural = 'activities'
 
     def __unicode__(self):
@@ -204,14 +204,11 @@ class Reference(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
-        return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
-
-    def get_absolute_url(self):
-        return reverse('disasterrehabilitation:event_detail', args=[self.pk])
+        return '[%s] - %s -  %s' % (self.activity, self.name, timezone.localtime(self.created))
 
 
 class Location(CommonAbstractModel):
@@ -253,4 +250,8 @@ class Location(CommonAbstractModel):
     rt = models.ForeignKey(RT, null=True, blank=True, verbose_name=verbose_rt)
 
     class Meta:
-        ordering = ['-pk']
+        ordering = ['pk']
+        get_latest_by = 'pk'
+
+    def __unicode__(self):
+        return '[%s] -- [%s]' % (self.activity, self.eventassessment)

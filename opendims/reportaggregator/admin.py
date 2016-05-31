@@ -34,9 +34,11 @@ class SourceAdmin(admin.ModelAdmin):
         'disaster',
         'status'
     ]
-
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'type', 'disaster', 'status']
+    search_fields = ['name', 'disaster', 'type']
     inlines = [KeywordInline]
 
 
@@ -49,8 +51,8 @@ class KeywordAdmin(admin.ModelAdmin):
         'source',
         'keyword'
     ]
-
-    search_fields = ['keyword']
+    list_filter = ['source__name']
+    search_fields = ['keyword', 'source__name']
 
 
 admin.site.register(Source, SourceAdmin)

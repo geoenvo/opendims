@@ -196,7 +196,6 @@ verbose_title = _('Title')
 
 class EventImage(CommonAbstractModel):
     ORDER_CHOICES = [(i, i) for i in range(11)]
-
     event = models.ForeignKey(
         Event,
         related_name='eventimages',

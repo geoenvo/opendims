@@ -12,7 +12,6 @@ class WaterGateAdmin(LeafletGeoAdmin):
     settings_overrides = {
         'DEFAULT_ZOOM': 13,
     }
-
     fields = (
         'name',
         'point',
@@ -30,7 +29,7 @@ class WaterGateAdmin(LeafletGeoAdmin):
         'siaga_3_min',
         'siaga_3_max'
     ]
-    search_fields = ['note', 'name']
+    search_fields = ['name', 'note']
 
 
 class WaterLevelReportAdmin(admin.ModelAdmin):
@@ -41,16 +40,17 @@ class WaterLevelReportAdmin(admin.ModelAdmin):
         'height'
     )
     list_display = [
+        'watergate',
         'created',
         'updated',
-        'watergate',
         'weather',
         'height'
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
-    list_filter = ['watergate', 'weather', 'created', 'updated']
-    search_fields = ['created', 'watergate', 'weather']
+    date_hierarchy = 'created'
+    list_filter = ['created', 'watergate', 'weather']
+    search_fields = ['watergate']
 
 
 admin.site.register(WaterGate, WaterGateAdmin)

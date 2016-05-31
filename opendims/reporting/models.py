@@ -52,8 +52,8 @@ class Template(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, timezone.localtime(self.created))
@@ -137,8 +137,8 @@ class Report(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-updated', '-created']
-        get_latest_by = 'updated'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.template, timezone.localtime(self.created))
@@ -180,8 +180,8 @@ class Attachment(CommonAbstractModel):
     )
 
     class Meta:
-        ordering = ['-report']
-        get_latest_by = 'created'
+        ordering = ['pk']
+        get_latest_by = 'pk'
 
     def __unicode__(self):
         return '[%s] - %s' % (self.report, timezone.localtime(self.created))
