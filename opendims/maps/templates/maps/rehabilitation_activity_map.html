@@ -113,15 +113,15 @@ $("#filter-reset-btn").click(function() {
   $("#filter-all").prop("checked", false);
 
   clearActivities();
-  loadEvents();
+  loadActivities();
 });
 
 $("#filter-submit-btn").click(function() {
   clearActivities();
-  loadEvents($("#filter-date").val(), $("#filter-all").is(":checked"));
+  loadActivities($("#filter-date").val(), $("#filter-all").is(":checked"));
 });
 
-function loadEvents(status, all) {
+function loadActivities(status, all) {
   var status = typeof status !== 'undefined' ? status : false;
   var all = typeof all !== 'undefined' ? all : false;
   var apiFilter = '';
@@ -178,11 +178,11 @@ function loadEvents(status, all) {
     activity.addData(data);
   });
 
-  loadEventSearch();
+  loadActivitySearch();
 }
-// end loadEvents()
+// end loadActivities()
 
-loadEvents();
+loadActivities();
 
 
 function clearActivities() {
@@ -289,7 +289,7 @@ function syncSidebar() {
 function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGroupSearch, layerGroupSearchSource) {
     var center;
 
-    // Event geometry can be either a MultiPolygon or Point
+    // Location geometry can be either a MultiPolygon or Point
     if (feature.geometry.type === 'MultiPolygon') {
       // Get bounds and center of polygon
       var bounds = layer.getBounds();
@@ -399,9 +399,7 @@ var activityOverlays = {
     }
 };
 
-
 {% endfor %}
-
 {% endif %}
 
 console.log(activityOverlays)
@@ -416,7 +414,7 @@ map.on("overlayadd", function(e) {
   }
   });
 
-  function loadEventSearch() {
+  function loadActivitySearch() {
     /* Typeahead search functionality */
     $(document).one("ajaxStop", function() {
       $("#loading").hide();
@@ -454,7 +452,7 @@ map.on("overlayadd", function(e) {
           displayKey: "feature.properties.name",
           source: activityBH.ttAdapter(),
           templates: {
-            header: "<h4 class='typeahead-header'><img src='{% static "img/markers/physical.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
+            header: "<h4 class='typeahead-header'><img src='{% static "img/markers/physical.png" %}' width='24' height='28'>&nbsp; </h4>",
             suggestion: function(data) {
               return data.name + '<br><small>' + data.location + '</small>';
             }
@@ -471,7 +469,7 @@ map.on("overlayadd", function(e) {
       });
       // end ajaxStop
     }
-    // end loadEventSearch()
+    // end loadActivitySearch()
 
     // Leaflet patch to make layer control scrollable on touch browsers
     var container = $(".leaflet-control-layers")[0];
