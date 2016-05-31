@@ -1,7 +1,486 @@
+{% extends "opendims/base_map.html" %}
+
 {% load staticfiles i18n %}
 
+{% block title %}{{ block.super }} - {% trans "Activity map" %}{% endblock %}
+
+{% block extra_css_lib %}
+
+{% endblock %}
+
+{% block extra_css %}
+<style type="text/css">
+.filter-info {
+    padding: 6px 8px;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.filter-info .table td {
+  border: 0;
+}
+
+</style>
+{% endblock %}
+
+{% block map_navbar_tools %}
+<li class="hidden"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
+<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="filter-btn"><i class="fa fa-filter"></i>&nbsp;&nbsp;Filter</a></li>
+{% endblock %}
+
+{% block map_navbar %}
+
+{% endblock %}
+
+{% block map_sidebar_title %}Activities{% endblock %}
+
+{% block modal_about_title %}Activity Map{% endblock %}
+
+{% block modal_about_description %}
+<p>{% trans "Map description" %}</p>
+{% endblock %}
+
+{% block modal_about_disclaimer %}
+<p>The data provided on this site is for informational purposes only.</p>
+<p>Absolutely no accuracy or completeness guarantee is implied or intended.</p>
+{% endblock %}
+
+{% block modal_about_contact %}
+<p>{% trans "Contact information" %}</p>
+{% endblock %}
+
+{% block modal_legend %}
+<p>Map legend.</p>
+{% endblock %}
+
+{% block map_modal %}
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{% trans "Filter" %}</h4>
+      </div>
+      <div class="modal-body">
+        <form id="filter-form">
+          <fieldset>
+            <div class="form-group">
+              <label</label>
+              <div class="input-group date" >
+                <input type="text" class="form-control"/>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+            <div class="form-group{% if not user.is_authenticated %} hidden {% endif %}">
+              <div class="dropdown">
+                <label>
+                  <input type="checkbox" id="filter-all">
+                  {% trans "Show completed activity" %}
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="filter-reset-btn">{% trans "Reset" %}</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="filter-submit-btn">{% trans "Filter" %}</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+
+{% block extra_js_lib  %}
+
+{% endblock %}
+
+{% block extra_js %}
+var filterInfoControl; var activitySearch = [];
+
+$("#filter-btn").click(function() {
+  $("#filterModal").modal("show");
+  $(".navbar-collapse.in").collapse("hide");
+  return false;
+});
+
+$("#filter-reset-btn").click(function() {
+  $("#filter-date").val("");
+  $("#filter-all").prop("checked", false);
+
+  clearActivities();
+  loadEvents();
+});
+
+$("#filter-submit-btn").click(function() {
+  clearActivities();
+  loadEvents($("#filter-date").val(), $("#filter-all").is(":checked"));
+});
+
+function loadEvents(status, all) {
+  var status = typeof status !== 'undefined' ? status : false;
+  var all = typeof all !== 'undefined' ? all : false;
+  var apiFilter = '';
+
+  var filterInfo = '';
+  var showFilterInfoControl = false;
+
+  if (status !== false) {
+    apiFilter = apiFilter + "&status=" + status;
+    filterInfo = filterInfo ;
+    showFilterInfoControl = true;
+  }
+
+  if (all !== false) {
+    apiFilter = apiFilter + "&all=1";
+    filterInfo = filterInfo + '<tr><td>Showing completed activity:</td><td><span class="glyphicon glyphicon-ok"></span></td></tr>';
+    showFilterInfoControl = true;
+  }
+
+  if (showFilterInfoControl) {
+    filterInfoControl = L.control({
+      position: "topleft"
+    });
+
+    filterInfoControl.onAdd = function(map) {
+      var div = L.DomUtil.create("div", "filter-info");
+      div.innerHTML = "<table class='table hidden-xs'>" + filterInfo + "</table>";
+      return div;
+    }
+
+    map.addControl(filterInfoControl);
+  } else {
+    if (filterInfoControl) {
+      map.removeControl(filterInfoControl);
+    }
+  }
+
+  $("#loading").show();
+
+  activity = L.geoJson(null, {
+    style: function(feature) {
+      return {
+        color: '#00AEFF',
+        fill: true,
+        opacity: 1,
+        clickable: true
+      };
+    },
+    onEachFeature: function(feature, layer) {
+      drawLayerFeature(feature, layer, activityMarkers, "{% static 'img/markers/physical.png' %}", activitySearch, "activity");
+    },
+  });
+  $.getJSON("{% url 'disasterrehabilitation:activitylocation_api' %}?id={{ activity.id }}&format=json" + apiFilter, function(data) {
+    activity.addData(data);
+  });
+
+  loadEventSearch();
+}
+// end loadEvents()
+
+loadEvents();
+
+
+function clearActivities() {
+  map.removeLayer(activity);
+  activity.clearLayers();
+  activityMarkers.eachLayer(function(layer) {
+    map.removeLayer(layer);
+  });
+  activitySearch.length = 0;
+  clearHighlight();
+  $("#searchbox").typeahead('destroy');
+}
+
 {% if activities %}
-yes
-{% else %}
-no
+{% for activity in activities %}
+
+activityMarkers = L.layerGroup();
+
+
+function syncSidebarLayer(layer, layerGroup) {
+  if (map.hasLayer(layerGroup)) {
+    var center;
+
+    // Location geometry can be Point or MultiPolygon
+    if (layer.feature.geometry.type === 'Point') {
+      center = layer.getLatLng();
+    }
+    else if (layer.feature.geometry.type === 'MultiPolygon') {
+      var bounds = layer.getBounds();
+      center = bounds.getCenter();
+    }
+
+    if (map.getBounds().contains(center)) {
+      if (layer.feature.properties) {
+        var featureProvinceName = " - ";
+        var featureCityName = " - ";
+        var featureSubdistrictName = " - ";
+        var featureVillageName = " - ";
+        var featureRWName = " - ";
+        var featureRTName = " - ";
+
+        if (layer.feature.properties.province) {
+          featureProvinceName = layer.feature.properties.province_name;
+        }
+        if (layer.feature.properties.city) {
+          featureCityName = layer.feature.properties.city_name;
+        }
+        if (layer.feature.properties.subdistrict) {
+          featureSubdistrictName = layer.feature.properties.subdistrict_name;
+        }
+        if (layer.feature.properties.village) {
+          featureVillageName = layer.feature.properties.village_name;
+        }
+        if (layer.feature.properties.rw) {
+          featureRWName = layer.feature.properties.rw_name;
+        }
+        if (layer.feature.properties.rt) {
+          featureRTName = layer.feature.properties.rt_name;
+        }
+
+        var featureLocation = featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName + ', ' + featureRTName;
+
+        $("#feature-list tbody").append('<tr class="feature-row" id="' + L.stamp(layer) + '" lat="' + center.lat + '" lng="' + center.lng + '"><td style="vertical-align: middle;"><img width="16" height="18" src="{% static 'img/markers/watergate.png' %}"></td><td class="feature-name">' + featureName + '<br><small>' + featureLocation + '</small></td><td style="vertical-align: middle;"><i class="fa fa-chevron-right pull-right"></i></td></tr>');
+      }
+      // end if (layer.feature.properties)
+    }
+  }
+}
+
+activity = L.geoJson(null, {
+  style: function(feature) {
+    return {
+      color: '#00AEFF',
+      fill: true,
+      opacity: 1,
+      clickable: true
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    drawLayerFeature(feature, layer, activityMarkers, "{% static 'img/markers/physical.png' %}", activitySearch, "activity");
+  },
+});
+$.getJSON("{% url 'disasterrehabilitation:activitylocation_api' %}?id={{ activity.id }}&format=json", function(data) {
+  activity.addData(data);
+});
+
+function syncSidebar() {
+    /* Empty sidebar features */
+    $("#feature-list tbody").empty();
+
+    activity.eachLayer(function(layer) {
+      syncSidebarLayer(layer, "{% static 'img/markers/physical.png' %}");
+    });
+
+    /* Update list.js featureList */
+    featureList = new List("features", {
+      valueNames: ["feature-name"]
+    });
+    featureList.sort("feature-name", {
+      order: "desc"
+    });
+  }
+
+function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGroupSearch, layerGroupSearchSource) {
+    var center;
+
+    // Event geometry can be either a MultiPolygon or Point
+    if (feature.geometry.type === 'MultiPolygon') {
+      // Get bounds and center of polygon
+      var bounds = layer.getBounds();
+      center = bounds.getCenter();
+    }
+    else if (feature.geometry.type === 'Point') {
+      center = layer.getLatLng();
+    }
+
+    if (feature.properties) {
+      var featureProvinceName = " - ";
+      var featureCityName = " - ";
+      var featureSubdistrictName = " - ";
+      var featureVillageName = " - ";
+      var featureRWName = " - ";
+      var featureRTName = " - ";
+
+      if (feature.properties.province) {
+        featureProvinceName = feature.properties.province_name;
+        contentProvince = "<a class='url-break' href='" + "{% url "geolevels:province_list" %}" + feature.properties.province + "' target='_blank'>" + feature.properties.province_name  + "</a>";
+      }
+      if (feature.properties.city) {
+        featureCityName = feature.properties.city_name;
+        contentCity = "<a class='url-break' href='" + "{% url "geolevels:city_list" %}" + feature.properties.city + "' target='_blank'>" + feature.properties.city_name  + "</a>";
+      }
+      if (feature.properties.subdistrict) {
+        featureSubdistrictName = feature.properties.subdistrict_name;
+        contentSubdistrict = "<a class='url-break' href='" + "{% url "geolevels:subdistrict_list" %}" + feature.properties.subdistrict + "' target='_blank'>" + feature.properties.subdistrict_name  + "</a>";
+      }
+      if (feature.properties.village) {
+        featureVillageName = feature.properties.village_name;
+        contentVillage = "<a class='url-break' href='" + "{% url "geolevels:village_list" %}" + feature.properties.village + "' target='_blank'>" + feature.properties.village_name  + "</a>";
+      }
+      if (feature.properties.rw) {
+        featureRWName = feature.properties.rw_name;
+        contentRW = "<a class='url-break' href='" + "{% url "geolevels:rw_list" %}" + feature.properties.rw + "' target='_blank'>" + feature.properties.rw_name  + "</a>";
+      }
+      if (feature.properties.rt) {
+        featureRTName = feature.properties.rt_name;
+        contentRT = "<a class='url-break' href='" + "{% url "geolevels:rt_list" %}" + feature.properties.rt + "' target='_blank'>" + feature.properties.rt_name  + "</a>";
+      }
+      if (feature.properties.activity.name) {
+        featureActivityName = feature.properties.activity.name;
+        contentRT = "<a class='url-break' href='" + "{% url "geolevels:rt_list" %}" + feature.properties.rt + "' target='_blank'>" + feature.properties.activity.name  + "</a>";
+      }
+
+      var featureLocation = featureProvinceName + ', ' + featureCityName + ', ' + featureSubdistrictName + ', ' + featureVillageName + ', ' + featureRWName + ', ' + featureRTName;
+      var popupContent = featureLocation;
+
+      var content = "<table class='table table-striped table-bordered table-condensed'>";
+      content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
+      content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
+      content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
+      content = content + "<tr><th>Village</th><td>" + contentVillage  + "</td></tr>";
+      content = content + "<tr><th>RW</th><td>" + contentRW  + "</td></tr>";
+      content = content + "</table>";
+
+      // Use center to put a fixed marker on map
+      var marker = L.marker(center, {
+        icon: L.icon({
+          iconUrl: "{% static 'img/markers/physical.png' %}",
+          iconSize: [24, 28],
+          iconAnchor: [12, 28],
+          popupAnchor: [0, -25]
+        }),
+        title: popupContent,
+        riseOnHover: true
+      }).addTo(map);
+
+      layerMarkers.addLayer(marker);
+
+      layer.on({
+        click: function(e) {
+          $("#feature-title").html(feature.properties.activity.name);
+          $("#feature-info").html(content);
+          $("#featureModal").modal("show");
+          if (feature.geometry.type === 'Point') {
+            highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+          }
+        }
+      });
+
+      marker.on({
+        click: function(e) {
+          $("#feature-title").html(feature.properties.activity.name);
+          $("#feature-info").html(content);
+          $("#featureModal").modal("show");
+          highlight.clearLayers().addLayer(L.circleMarker(center, highlightStyle));
+        }
+      });
+
+      layerGroupSearch.push({
+        name: activity.name,
+        location: featureLocation,
+        source: layerGroupSearchSource,
+        id: L.stamp(layer),
+        lat: center.lat,
+        lng: center.lng
+      });
+    }
+    // end if (feature.properties)
+  }
+
+var activityOverlays = {
+    "Activities": {
+    "<img src='{% static "img/markers/physical.png" %}' width='24' height='28'>&nbsp;{{ activity.name }}": activity
+    }
+};
+
+
+{% endfor %}
+
 {% endif %}
+
+console.log(activityOverlays)
+L.control.groupedLayers(baseLayers, activityOverlays, {
+  collapsed: isCollapsed
+}).addTo(map);
+
+map.on("overlayadd", function(e) {
+  if (e.layer === activity) {
+    markerClusters.addLayer(activity);
+    syncSidebar();
+  }
+  });
+
+  function loadEventSearch() {
+    /* Typeahead search functionality */
+    $(document).one("ajaxStop", function() {
+      $("#loading").hide();
+      sizeLayerControl();
+
+      //map.fitBounds(BJR.getBounds());
+
+      featureList = new List("features", {
+        valueNames: ["feature-name"]
+      });
+      featureList.sort("feature-name", {
+        order:"desc"
+      });
+
+      var activityBH = new Bloodhound({
+        name: "activity",
+        datumTokenizer: function(d) {
+          return Bloodhound.tokenizers.whitespace(d.name);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: activitySearch,
+        limit: 10
+      });
+
+      activityBH.initialize();
+
+      $("#searchbox").typeahead(
+        {
+          minLength: 3,
+          highlight: true,
+          hint: false
+        },
+        {
+          name: "activity",
+          displayKey: "feature.properties.name",
+          source: activityBH.ttAdapter(),
+          templates: {
+            header: "<h4 class='typeahead-header'><img src='{% static "img/markers/physical.png" %}' width='24' height='28'>&nbsp;Abrasi</h4>",
+            suggestion: function(data) {
+              return data.name + '<br><small>' + data.location + '</small>';
+            }
+          }
+        }).on("typeahead:opened", function() {
+          $(".navbar-collapse.in").css("max-height", $(document).height() - $(".navbar-header").height());
+          $(".navbar-collapse.in").css("height", $(document).height() - $(".navbar-header").height());
+        }).on("typeahead:closed", function() {
+          $(".navbar-collapse.in").css("max-height", "");
+          $(".navbar-collapse.in").css("height", "");
+        });
+        $(".twitter-typeahead").css("position", "static");
+        $(".twitter-typeahead").css("display", "block");
+      });
+      // end ajaxStop
+    }
+    // end loadEventSearch()
+
+    // Leaflet patch to make layer control scrollable on touch browsers
+    var container = $(".leaflet-control-layers")[0];
+    if (!L.Browser.touch) {
+      L.DomEvent
+      .disableClickPropagation(container)
+      .disableScrollPropagation(container);
+    } else {
+      L.DomEvent.disableClickPropagation(container);
+    }
+
+{% endblock %}
