@@ -704,13 +704,13 @@ msgstr "Kerugian sosial perumahan"
 #, fuzzy
 #| msgid "Total Evacuated"
 msgid "Total damage"
-msgstr "Kerusakan total"
+msgstr "Total kerusakan"
 
 #: jaksafe/models.py:22
 #, fuzzy
 #| msgid "Total Loss"
 msgid "Total loss"
-msgstr "Kerugian total"
+msgstr "Total kerugian"
 
 #: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:332
 #: reportaggregator/models.py:17 reports/models.py:147
@@ -766,12 +766,12 @@ msgstr "Kerugian Sosial-Perumahan"
 
 #: maps/templates/maps/jaksafe_map.html:342
 msgid "Total Damage"
-msgstr "Kerusakan Total"
+msgstr "Total Kerusakan"
 
 #: maps/templates/maps/jaksafe_map.html:343
 #: templates/opendims/includes/block_statistics.html:21
 msgid "Total Loss"
-msgstr "Kerugian Total"
+msgstr "Total Kerugian"
 
 #: maps/templates/maps/waterlevel_map.html:105
 #: waterlevel/templates/waterlevel/watergate_list.html:85
@@ -1067,11 +1067,11 @@ msgstr "Titik evakuasi"
 
 #: reports/models.py:250
 msgid "Evacuated total"
-msgstr "Terevakuasi"
+msgstr "Total terevakuasi"
 
 #: reports/models.py:251
 msgid "Affected total"
-msgstr "Terdampak"
+msgstr "Total terdampak"
 
 #: reports/models.py:252
 msgid "Affected death"
@@ -1083,7 +1083,7 @@ msgstr "Cedera"
 
 #: reports/models.py:254
 msgid "Loss total"
-msgstr "Kerugian"
+msgstr "Total kerugian"
 
 #: reports/resources.py:98
 #, fuzzy
@@ -1298,19 +1298,19 @@ msgstr "Jumlah"
 
 #: templates/opendims/includes/block_statistics.html:17
 msgid "Total Evacuated"
-msgstr "Terevakuasi"
+msgstr "Total Terevakuasi"
 
 #: templates/opendims/includes/block_statistics.html:18
 msgid "Total Affected"
-msgstr "Terdampak"
+msgstr "Total Terdampak"
 
 #: templates/opendims/includes/block_statistics.html:19
 msgid "Total Death"
-msgstr "Meninggal"
+msgstr "Total Meninggal"
 
 #: templates/opendims/includes/block_statistics.html:20
 msgid "Total Injury"
-msgstr "Cedera"
+msgstr "Total Cedera"
 
 #: templates/opendims/includes/block_waterlevel.html:6
 #: waterlevel/templates/waterlevel/watergate_list.html:44
