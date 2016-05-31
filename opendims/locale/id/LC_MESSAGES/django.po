@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-31 12:37+0700\n"
+"POT-Creation-Date: 2016-05-31 12:52+0700\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -1368,10 +1368,6 @@ msgstr "Aktivitas Rehabilitasi"
 #: templates/opendims/includes/nav_responsive.html:32
 msgid "Rehabilitation"
 msgstr "Rehabilitasi"
-
-#: templates/opendims/includes/nav.html:69
-msgid "Layouts"
-msgstr ""
 
 #: templates/opendims/includes/pagination.html:6
 msgid "Previous"
