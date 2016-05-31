@@ -337,8 +337,8 @@
       });
 
       map = L.map("map", {
-        zoom: {{ DEFAULT_ZOOM }},
-        center: [{{ DEFAULT_CENTER.0 }}, {{ DEFAULT_CENTER.1 }}],
+        zoom: {{ DEFAULT_ZOOM|safe }},
+        center: [{{ DEFAULT_CENTER.0|safe }}, {{ DEFAULT_CENTER.1|safe }}],
         layers: [mapquestOSM, markerClusters, highlight],
         zoomControl: false,
         attributionControl: false

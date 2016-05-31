@@ -483,7 +483,12 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
       contentStatus = feature.properties.status;
     }
     if (feature.properties.height) {
-      contentHeight = feature.properties.height;
+      if (feature.properties.height_min) {
+        contentHeight = feature.properties.height_min + ' - ' + feature.properties.height;
+      }
+      else {
+        contentHeight = feature.properties.height;
+      }
     }
     if (feature.properties.disaster_note) {
       contentDisaster = feature.properties.disaster_note;
