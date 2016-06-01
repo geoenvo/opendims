@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from disasterrehabilitation.models import Activity
+from disasterrehabilitation.models import Activity, Agency
 
 
 def event_map(request):
@@ -39,7 +39,9 @@ def rehabilitation_activity_map(request):
         activities = activities.filter(funding__iexact=funding)
     if agency:
         activities = activities.filter(agency__pk=agency)
+    agencies = Agency.objects.all().order_by("name")
     context = {
-        'activities': activities
+        'activities': activities,
+        'agencies': agencies,
     }
     return render(request, 'maps/rehabilitation_activity_map.html', context)

@@ -76,36 +76,63 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Filter</h4>
+        <h4 class="modal-title">{% trans "Filter" %}</h4>
       </div>
+      <form id="filter-form" action="" method="get">
       <div class="modal-body">
-        <form id="filter-form" action="" method="get">
           <fieldset>
             <div class="form-group">
-              <label for="filter-date">Date:</label>
-              <div class="input-group date" id="datetimepicker">
-                <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="filter-date" readonly />
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+             <label for="filter-status">{% trans "By Status" %}:</label>
+              <div class="dropdown">
+                  <select name="status">
+                   <option value=""></option>
+                   <option value="PENDING">{% trans "Pending" %}</option>
+                   <option value="IN-PROGRESS">{% trans "In Progress" %}</option>
+                   <option value="COMPLETED">{% trans "Completed" %}</option>
+                 </select>
               </div>
             </div>
-            <div class="form-group{% if not user.is_authenticated %} hidden{% endif %}">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" id="filter-all">
-                  Show inactive events
-                </label>
-              </div>
+           <div class="form-group">
+            <label for="filter-type">{% trans "By Type" %}:</label>
+            <div class="dropdown">
+                <select name="type">
+                 <option value=""></option>
+                 <option value="PHYSICAL">{% trans "Physical" %}</option>
+                 <option value="NON-PHYSICAL">{% trans "Non Physical" %}</option>
+               </select>
             </div>
-          </fieldset>
-        </form>
+           </div>
+          <div class="form-group">
+           <label for="filter-agency">By Agency:</label>
+            <div class="dropdown">
+              <select name="agency">
+               {% for agency in agencies %}
+               <option value="{{ agency.pk }}">{{ agency.name }}</option>
+               {% endfor %}
+            </select>
+           </div>
+          </div>
+          <div class="form-group">
+          <label for="filter-funding">{% trans "By Funding" %}:</label>
+            <div class="dropdown">
+                <select name="funding">
+                 <option value=""></option>
+                 <option value="APBN">{% trans "APBN" %}</option>
+                 <option value="APBD">{% trans "APBD" %}</option>
+                 <option value="CSR">{% trans "CSR" %}</option>
+                 <option value="Public">{% trans "Public" %}</option>
+                 <option value="Other">{% trans "Other" %}</option>
+               </select>
+            </div>
+           </div>
+       </fieldset>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" id="filter-reset-btn">Reset</button>
-        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="filter-submit-btn">Filter</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="filter-reset-btn">{% trans "Reset" %}</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="filter-submit-btn">{% trans "Filter" %}</button>
       </div>
+      </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -145,7 +172,7 @@ $("#filter-btn").click(function() {
 
 $("#filter-reset-btn").click(function() {
   $("#filter-date").val("");
-  $("#filter-all").prop("checked", false);
+  $("#filter-all").prop("", false);
 });
 
 $("#filter-submit-btn").click(function() {
