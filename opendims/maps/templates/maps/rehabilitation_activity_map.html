@@ -3,7 +3,6 @@
 {% load staticfiles i18n %}
 
 {% block title %}{{ block.super }} - Rehabilitation Activity Map{% endblock %}
-
 {% block extra_css_lib %}
 <link rel="stylesheet" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}">
 {% endblock %}
@@ -80,6 +79,11 @@
       </div>
       <form id="filter-form" action="" method="get">
       <div class="modal-body">
+          {% if not activities %}
+          <div class="alert alert-warning">
+            No activities found. Please try searching again.
+          </div>
+          {% endif %}
           <fieldset>
             <div class="form-group">
              <label for="filter-status">{% trans "By Status" %}:</label>
@@ -179,6 +183,12 @@ $("#filter-submit-btn").click(function() {
   $('form#filter-form').submit();
 });
 
+{% if not activities %}
+$("#loading").hide();
+$("#filterModal").modal("show");
+return;
+{% endif %}
+
 function clearActivities() {
   {% for activity in activities %}
   map.removeLayer(ACTIVITY_{{ activity.pk }}_Layer);
@@ -252,7 +262,6 @@ function syncSidebarLayerActivity(layer, layerGroup, markerImgPath) {
 function syncSidebar() {
   /* Empty sidebar features */
   $("#feature-list tbody").empty();
-
   {% for activity in activities %}
   {% with "img/markers/"|add:activity.type|add:".png" as marker_img_path %}
   ACTIVITY_{{ activity.pk }}.eachLayer(function(layer) {
@@ -298,6 +307,7 @@ function drawLayerFeatureActivity(feature, layer, layerMarkers, markerImgPath, l
     var featureVillageName = " - ";
     var featureRWName = " - ";
     var featureRTName = " - ";
+    var featureActivityNote = " - ";
     var contentProvince = " - ";
     var contentCity = " - ";
     var contentSubdistrict = " - ";
@@ -314,6 +324,7 @@ function drawLayerFeatureActivity(feature, layer, layerMarkers, markerImgPath, l
       featureActivityStart = feature.properties.activity.start;
       featureActivityEnd = feature.properties.activity.end;
       featureActivityYear = feature.properties.activity.year;
+      featureActivityNote = feature.properties.activity.note;
     }
     if (feature.properties.province) {
       featureProvinceName = feature.properties.province_name;
@@ -358,6 +369,7 @@ function drawLayerFeatureActivity(feature, layer, layerMarkers, markerImgPath, l
     content = content + "<tr><th>{% trans "Village" %}</th><td>" + contentVillage  + "</td></tr>";
     content = content + "<tr><th>{% trans "RW" %}</th><td>" + contentRW  + "</td></tr>";
     content = content + "<tr><th>{% trans "RT" %}</th><td>" + contentRT  + "</td></tr>";
+    content = content + "<tr><th>{% trans "Note" %}</th><td>" + contentRT  + "</td></tr>";
     content = content + "</table>";
 
     // Use center to put a fixed marker on map
