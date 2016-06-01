@@ -2,7 +2,7 @@
 
 {% load staticfiles i18n %}
 
-{% block title %}{{ block.super }} - Rehabilitation Activity Map{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Rehabilitation Activity Map" %}{% endblock %}
 {% block extra_css_lib %}
 <link rel="stylesheet" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}">
 {% endblock %}
@@ -18,23 +18,6 @@
 }
 .filter-info .table td {
   border: 0;
-}
-/** style for legend **/
-.legend {
-    line-height: 20px;
-    color: #000000;
-    font:helvetica;
-    background: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    padding: 6px 8px;
-    border-radius: 5px;
-}
-.legend i {
-    width: 20px;
-    height: 20px;
-    float: left;
-    margin-right: 15px;
-    opacity: 1;
 }
 </style>
 {% endblock %}
@@ -71,71 +54,62 @@
 
 {% block map_modal %}
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">{% trans "Filter" %}</h4>
       </div>
       <form id="filter-form" action="" method="get">
-      <div class="modal-body">
+        <div class="modal-body">
           {% if not activities %}
-          <div class="alert alert-warning">
-            No activities found. Please try searching again.
-          </div>
+          <div class="alert alert-warning">{% blocktrans %}No activities found. Please try searching again.{% endblocktrans %}</div>
           {% endif %}
           <fieldset>
             <div class="form-group">
-             <label for="filter-status">{% trans "By Status" %}:</label>
-              <div class="dropdown">
-                  <select name="status">
-                   <option value=""></option>
-                   <option value="PENDING">{% trans "Pending" %}</option>
-                   <option value="IN-PROGRESS">{% trans "In Progress" %}</option>
-                   <option value="COMPLETED">{% trans "Completed" %}</option>
-                 </select>
-              </div>
+              <label for="filter-status">{% trans "Status" %}:</label>
+              <select id="filter-status" class="form-control" name="status">
+                <option value="">&mdash;</option>
+                <option value="PENDING"{% if status and status == 'PENDING' %} selected{% endif %}>{% trans "Pending" %}</option>
+                <option value="IN-PROGRESS"{% if status and status == 'IN-PROGRESS' %} selected{% endif %}>{% trans "In Progress" %}</option>
+                <option value="COMPLETED"{% if status and status == 'COMPLETED' %} selected{% endif %}>{% trans "Completed" %}</option>
+              </select>
             </div>
-           <div class="form-group">
-            <label for="filter-type">{% trans "By Type" %}:</label>
-            <div class="dropdown">
-                <select name="type">
-                 <option value=""></option>
-                 <option value="PHYSICAL">{% trans "Physical" %}</option>
-                 <option value="NON-PHYSICAL">{% trans "Non Physical" %}</option>
-               </select>
+            <div class="form-group">
+              <label for="filter-type">{% trans "Type" %}:</label>
+              <select id="filter-type" class="form-control" name="type">
+                <option value="">&mdash;</option>
+                <option value="PHYSICAL"{% if type and type == 'PHYSICAL' %} selected{% endif %}>{% trans "Physical" %}</option>
+                <option value="NON-PHYSICAL"{% if type and type == 'NON-PHYSICAL' %} selected{% endif %}>{% trans "Non Physical" %}</option>
+              </select>
             </div>
-           </div>
-          <div class="form-group">
-           <label for="filter-agency">By Agency:</label>
-            <div class="dropdown">
-              <select name="agency">
-               {% for agency in agencies %}
-               <option value="{{ agency.pk }}">{{ agency.name }}</option>
-               {% endfor %}
-            </select>
-           </div>
-          </div>
-          <div class="form-group">
-          <label for="filter-funding">{% trans "By Funding" %}:</label>
-            <div class="dropdown">
-                <select name="funding">
-                 <option value=""></option>
-                 <option value="APBN">{% trans "APBN" %}</option>
-                 <option value="APBD">{% trans "APBD" %}</option>
-                 <option value="CSR">{% trans "CSR" %}</option>
-                 <option value="Public">{% trans "Public" %}</option>
-                 <option value="Other">{% trans "Other" %}</option>
-               </select>
+            <div class="form-group">
+              <label for="filter-agency">{% trans "Agency" %}:</label>
+              <select id="filter-agency" class="form-control" name="agency">
+                <option value="">&mdash;</option>
+                {% for agency in agencies %}
+                <option value="{{ agency.pk }}"{% if selected_agency and selected_agency == agency.pk|stringformat:"i" %} selected{% endif %}>{{ agency.name }}</option>
+                {% endfor %}
+              </select>
             </div>
-           </div>
-       </fieldset>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" id="filter-reset-btn">{% trans "Reset" %}</button>
-        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="filter-submit-btn">{% trans "Filter" %}</button>
-      </div>
+            <div class="form-group">
+              <label for="filter-funding">{% trans "Funding" %}:</label>
+              <select id="filter-funding" class="form-control" name="funding">
+                <option value="">&mdash;</option>
+                <option value="APBN"{% if funding and funding == 'APBN' %} selected{% endif %}>{% trans "APBN" %}</option>
+                <option value="APBD"{% if funding and funding == 'APBD' %} selected{% endif %}>{% trans "APBD" %}</option>
+                <option value="CSR"{% if funding and funding == 'CSR' %} selected{% endif %}>{% trans "CSR" %}</option>
+                <option value="Public"{% if funding and funding == 'Public' %} selected{% endif %}>{% trans "Public" %}</option>
+                <option value="Other"{% if funding and funding == 'Other' %} selected{% endif %}>{% trans "Other" %}</option>
+              </select>
+            </div>
+          </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="filter-reset-btn">{% trans "Reset" %}</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" id="filter-submit-btn">{% trans "Filter" %}</button>
+        </div>
       </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -175,8 +149,11 @@ $("#filter-btn").click(function() {
 });
 
 $("#filter-reset-btn").click(function() {
-  $("#filter-date").val("");
-  $("#filter-all").prop("", false);
+  $("#filter-status").val("");
+  $("#filter-type").val("");
+  $("#filter-agency").val("");
+  $("#filter-funding").val("");
+  return false;
 });
 
 $("#filter-submit-btn").click(function() {
@@ -184,6 +161,7 @@ $("#filter-submit-btn").click(function() {
 });
 
 {% if not activities %}
+// No activities found, show filter dialog.
 $("#loading").hide();
 $("#filterModal").modal("show");
 return;
@@ -425,20 +403,12 @@ ACTIVITY_{{ activity.pk }}_Markers = L.layerGroup();
 function loadActivities() {
   $("#loading").show();
 
-  var markerImgPath;
-  var color = ' ';
-
   {% for activity in activities %}
-  {% if activity.type == "NON-PHYSICAL" %}
-    color = '#FF6A00'
-  {% elif activity.type == "PHYSICAL" %}
-    color = '#529E36'
-  {% endif %}
   {% with "img/markers/"|add:activity.type|add:".png" as marker_img_path %}
   ACTIVITY_{{ activity.pk }} = L.geoJson(null, {
     style: function(feature) {
       return {
-        color: color,
+        color: {% if activity.type == "PHYSICAL" %}'#FF6A00'{% elif activity.type == "NON-PHYSICAL" %}'#529E36'{% endif %},
         fill: true,
         opacity: 1,
         clickable: true

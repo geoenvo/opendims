@@ -27,21 +27,24 @@ def rehabilitation_activity_map(request):
     type = request.GET.get('type', None)
     funding = request.GET.get('funding', None)
     agency = request.GET.get('agency', None)
+    context = {}
     if all and request.user.is_authenticated():
         activities = Activity.objects.all()
     else:
         activities = Activity.objects.filter(published=True)
     if status:
         activities = activities.filter(status__iexact=status)
+        context['status'] = status
     if type:
         activities = activities.filter(type__iexact=type)
+        context['type'] = type
     if funding:
         activities = activities.filter(funding__iexact=funding)
+        context['funding'] = funding
     if agency:
         activities = activities.filter(agency__pk=agency)
+        context['selected_agency'] = agency
     agencies = Agency.objects.all().order_by("name")
-    context = {
-        'activities': activities,
-        'agencies': agencies,
-    }
+    context['activities'] = activities
+    context['agencies'] = agencies
     return render(request, 'maps/rehabilitation_activity_map.html', context)
