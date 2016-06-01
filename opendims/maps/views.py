@@ -42,4 +42,4 @@ def rehabilitation_activity_map(request):
     context = {
         'activities': activities
     }
-    return render(request, 'maps/rehabilitation_activity_map_1.html', context)
+    return render(request, 'maps/rehabilitation_activity_map.html', context)
