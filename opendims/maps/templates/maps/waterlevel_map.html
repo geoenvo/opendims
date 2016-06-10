@@ -90,7 +90,7 @@
 
       map = L.map("map", {
         zoom: {{ DEFAULT_ZOOM_WATERLEVEL }},
-        center: [{{ DEFAULT_CENTER_WATERLEVEL.0 }}, {{ DEFAULT_CENTER_WATERLEVEL.1 }}],
+        center: [{{ DEFAULT_CENTER_WATERLEVEL.0|safe }}, {{ DEFAULT_CENTER_WATERLEVEL.1|safe }}],
         layers: [mapquestOSM, waterlevel_layer],
         zoomControl: true,
         attributionControl: false

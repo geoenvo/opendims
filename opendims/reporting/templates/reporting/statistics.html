@@ -1,0 +1,62 @@
+{% load staticfiles i18n verbose_names reporting_tags %}
+
+{% now "Y" as current_year %}
+{% now "n" as current_month %}
+{% now "M" as name_month %}
+<html>
+<head>
+<style>
+@page {
+size:a4 ;
+margin-top: 3cm;
+margin-left: 3cm;
+margin-right: 2cm;
+margin-bottom: 2cm;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+    table-layout: fixed;
+}
+.col-count {
+    width: 40px;
+}
+</style>
+</head>
+
+<body>
+    <table style="width=100%">
+        <thead>
+            <tr>
+                <th class="col-count">{% trans 'No.' %}</th>
+                <th>{% trans "Disaster" %}</th>
+                <th>{% trans "Count" %} </th>
+                <th>{% trans "Total Evacuated" %}</th>
+                <th>{% trans "Total Affected" %}</th>
+                <th>{% trans "Total Death" %}</th>
+                <th>{% trans "Total Injury" %}</th>
+                <th>{% trans "Total Loss" %} (IDR)</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for statistic in statistics %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ statistic.disaster }}</td>
+            <td>{{ statistic|length }}</td>
+            <td>{{ statistic.evac_total }}</td>
+            <td>{{ statistic.affected_total }}</td>
+            <td>{{ statistic.affected_death }}</td>
+            <td>{{ statistic.affected_injury }}</td>
+            <td>{{ statistic.loss_total }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

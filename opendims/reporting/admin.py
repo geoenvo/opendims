@@ -13,6 +13,8 @@ from xhtml2pdf import pisa
 from .models import Template, Report, Attachment
 from .forms import ReportForm
 from reports.models import Event
+from weatherforecast.models import WeatherForecastReport
+from waterlevel.models import WaterLevelReport
 
 
 verbose_report_details = _('Report details')
@@ -39,7 +41,6 @@ class ReportAdmin(admin.ModelAdmin):
         Write the attached disaster files.
         """
         obj.save()
-
         for disaster in obj.template.disaster_attached.all():
             try:
                 template = get_template('reporting/report_' + disaster.code + '.html')
@@ -79,6 +80,131 @@ class ReportAdmin(admin.ModelAdmin):
                 attachment.save()
             except:
                 pass
+        try:
+            template = get_template('reporting/weather_forecast.html')
+            now = timezone.localtime(timezone.now())
+            weatherforcasts = WeatherForecastReport.objects.filter(
+                created__date=now.date(),
+                province__isnull=True
+            ).order_by('-created')
+            if obj.start and not obj.end:
+                start = datetime.date(
+                    obj.start.year,
+                    obj.start.month,
+                    obj.start.day
+                )
+                weatherforcasts = weatherforcasts.filter(created__date=start)
+
+            if obj.start and obj.end:
+                weatherforcasts = weatherforcasts.filter(
+                    created__range=(obj.start, obj.end)
+                )
+            html = template.render({'weatherforcasts': weatherforcasts})
+            pdf_disaster_temp = NamedTemporaryFile()
+            pisa.CreatePDF(
+                html.encode('utf-8'),
+                dest=pdf_disaster_temp,
+                encoding='utf-8'
+            )
+            attachment_created = timezone.localtime(timezone.now())
+            pdf_disaster_filename = "{}__{}{}".format(
+                attachment_created.strftime('%Y%m%d-%H%M'),
+                'weatherforcasts',
+                '.pdf'
+            )
+
+            attachment = Attachment()
+            attachment.report = obj
+            attachment.created = attachment_created
+            attachment.file.save(pdf_disaster_filename, File(pdf_disaster_temp), save=False)
+            attachment.save()
+
+        except:
+            pass
+
+        try:
+            template = get_template('reporting/statistics.html')
+            statistics = Event.objects.all()
+            if obj.start and not obj.end:
+                start = datetime.date(
+                    obj.start.year,
+                    obj.start.month,
+                    obj.start.day
+                )
+                statistics = statistics.filter(created__date=start)
+                print weatherforcasts
+
+            if obj.start and obj.end:
+                statistics = statistics.filter(
+                    created__range=(obj.start, obj.end)
+                )
+            html = template.render({'statistics': statistics})
+            print html
+
+            pdf_disaster_temp = NamedTemporaryFile()
+
+            pisa.CreatePDF(
+                html.encode('utf-8'),
+                dest=pdf_disaster_temp,
+                encoding='utf-8'
+            )
+            attachment_created = timezone.localtime(timezone.now())
+            pdf_disaster_filename = "{}__{}{}".format(
+                attachment_created.strftime('%Y%m%d-%H%M'),
+                'statistics',
+                '.pdf'
+            )
+
+            attachment = Attachment()
+            attachment.report = obj
+            attachment.created = attachment_created
+            attachment.file.save(pdf_disaster_filename, File(pdf_disaster_temp), save=False)
+            attachment.save()
+
+        except:
+            pass
+
+        try:
+            template = get_template('reporting/waterlevel.html')
+            waterlevels = WaterLevelReport.objects.all()
+            if obj.start and not obj.end:
+                start = datetime.date(
+                    obj.start.year,
+                    obj.start.month,
+                    obj.start.day
+                )
+                waterlevels = waterlevels.filter(created__date=start)
+                print weatherforcasts
+
+            if obj.start and obj.end:
+                waterlevels = waterlevels.filter(
+                    created__range=(obj.start, obj.end)
+                )
+            html = template.render({'waterlevels': waterlevels})
+            print html
+
+            pdf_disaster_temp = NamedTemporaryFile()
+
+            pisa.CreatePDF(
+                html.encode('utf-8'),
+                dest=pdf_disaster_temp,
+                encoding='utf-8'
+            )
+            attachment_created = timezone.localtime(timezone.now())
+            pdf_disaster_filename = "{}__{}{}".format(
+                attachment_created.strftime('%Y%m%d-%H%M'),
+                'waterlevel',
+                '.pdf'
+            )
+
+            attachment = Attachment()
+            attachment.report = obj
+            attachment.created = attachment_created
+            attachment.file.save(pdf_disaster_filename, File(pdf_disaster_temp), save=False)
+            attachment.save()
+
+        except:
+            pass
 
     fieldsets = [
         (verbose_report_details, {

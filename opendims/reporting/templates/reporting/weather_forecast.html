@@ -1,0 +1,56 @@
+{% load staticfiles i18n verbose_names weatherforecast_tags %}
+
+<html>
+<head>
+<style>
+@page {
+size:a4 ;
+margin-top: 3cm;
+margin-left: 3cm;
+margin-right: 2cm;
+margin-bottom: 2cm;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+    table-layout: fixed;
+}
+.col-count {
+    width: 40px;
+}
+</style>
+</head>
+
+    <body>
+        <table style="width=100%">
+            <thead>
+                <tr>
+                    <th class="col-count">{% trans "No." %}</th>
+                    <th>{% trans "Area" %}</th>
+                    <th>{% trans "Morning" %}</th>
+                    <th>{% trans "Noon" %}</th>
+                    <th>{% trans "Night" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for weatherforecast in weatherforecasts %}
+                <tr>
+                    <td class="col-count">{{ forloop.counter }}</td>
+                    <td>{{ weatherforecast.city }}</td>
+                    {% get_forecast_details weatherforecastreport.forecast_morning as forecast_details %}
+                    <td><i class="wi {{ forecast_details.weather_icon_class }}" ></i><br>{% trans forecast_details.forecast_text %}</td>
+                    {% get_forecast_details weatherforecastreport.forecast_noon as forecast_details %}
+                    <td><i class="wi {{ forecast_details.weather_icon_class }}" ></i><br>{% trans forecast_details.forecast_text %}</td>
+                    {% get_forecast_details weatherforecastreport.forecast_night as forecast_details %}
+                    <td><i class="wi {{ forecast_details.weather_icon_class }}" ></i><br>{% trans forecast_details.forecast_text %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

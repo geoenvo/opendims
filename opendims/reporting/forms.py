@@ -38,6 +38,7 @@ class ReportForm(forms.ModelForm):
             report_content = template.content
             if date:
                 report_content = report_content.replace('[[date]]', date.strftime('%-d %B %Y'))
+
             if text_id:
                 report_content = report_content.replace('[[id]]', text_id)
             if text_title:
