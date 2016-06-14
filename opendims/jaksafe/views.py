@@ -22,7 +22,7 @@ class ReportAutoSummaryDetailView(generic.DetailView):
     model = ReportAutoSummary
 
 
-class APIReportAutoSummaryList(CustomListAPIView):
+class APIReportAutoSummaryList(generics.ListAPIView):
     """
     Return JakSAFE auto summary reports on a given day based on the date
     parameter. If not returns the latest available report.
@@ -30,7 +30,6 @@ class APIReportAutoSummaryList(CustomListAPIView):
     http://jaksafe.bpbd.jakarta.go.id/report/auto_report_json/.
     """
     serializer_class = ReportAutoSummarySerializer
-    filter_class = ReportAutoSummaryFilter
 
     def get_queryset(self):
         date = self.request.query_params.get('date', None)
