@@ -236,7 +236,7 @@
 
         map = L.map("map", {
           zoom: {{ DEFAULT_ZOOM }},
-          center: [{{ DEFAULT_CENTER.0 }}, {{ DEFAULT_CENTER.1 }}],
+          center: [{{ DEFAULT_CENTER.0|safe }}, {{ DEFAULT_CENTER.1|safe }}],
           layers: [mapquestOSM, today_layer],
           zoomControl: true,
           attributionControl: false
