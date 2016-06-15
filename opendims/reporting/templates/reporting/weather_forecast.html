@@ -1,4 +1,4 @@
-{% load staticfiles i18n verbose_names weatherforecast_tags %}
+{% load staticfiles i18n verbose_names %}
 
 <html>
 <head>
@@ -25,8 +25,9 @@ th, td {
 }
 </style>
 </head>
-
     <body>
+        <h3>{% trans "Weather forecast" %}</h3>
+
         <table style="width=100%">
             <thead>
                 <tr>
@@ -42,12 +43,9 @@ th, td {
                 <tr>
                     <td class="col-count">{{ forloop.counter }}</td>
                     <td>{{ weatherforecast.city }}</td>
-                    {% get_forecast_details weatherforecastreport.forecast_morning as forecast_details %}
-                    <td><i class="wi {{ forecast_details.weather_icon_class }}" ></i><br>{% trans forecast_details.forecast_text %}</td>
-                    {% get_forecast_details weatherforecastreport.forecast_noon as forecast_details %}
-                    <td><i class="wi {{ forecast_details.weather_icon_class }}" ></i><br>{% trans forecast_details.forecast_text %}</td>
-                    {% get_forecast_details weatherforecastreport.forecast_night as forecast_details %}
-                    <td><i class="wi {{ forecast_details.weather_icon_class }}" ></i><br>{% trans forecast_details.forecast_text %}</td>
+                    <td>{{ weatherforecast.forecast_morning }}</td>
+                    <td>{{ weatherforecast.forecast_noon }}</td>
+                    <td>{{ weatherforecast.forecast_night }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,8 +1,5 @@
-{% load staticfiles i18n verbose_names reporting_tags %}
+{% load staticfiles i18n %}
 
-{% now "Y" as current_year %}
-{% now "n" as current_month %}
-{% now "M" as name_month %}
 <html>
 <head>
 <style>
@@ -30,6 +27,9 @@ th, td {
 </head>
 
 <body>
+
+    <h3>{% trans "Disaster statistics" %}</h3>
+
     <table style="width=100%">
         <thead>
             <tr>
@@ -48,7 +48,7 @@ th, td {
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ statistic.disaster }}</td>
-            <td>{{ statistic|length }}</td>
+            <td>{{ statistics|length }}</td>
             <td>{{ statistic.evac_total }}</td>
             <td>{{ statistic.affected_total }}</td>
             <td>{{ statistic.affected_death }}</td>

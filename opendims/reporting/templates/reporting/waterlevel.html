@@ -27,27 +27,28 @@ th, td {
 </head>
 
 <body>
+    <h3>{% trans "Water level" %}</h3>
+
 <table>
     <thead>
         <tr>
             <th class="col-count">{% trans 'No.' %}</th>
             <th>{% trans "Water Gate" %}</th>
+            <th>{% trans "Created" %}</th>
             <th>{% trans "Height" %}</th>
-            <th>{% trans "Status" %}</th>
             <th>{% trans "Weather" %}</th>
         </tr>
     </thead>
     <tbody>
-                    {% for waterlevel in waterlevels %}
+        {% for waterlevel in waterlevels %}
         <tr>
-
             <td>{{ forloop.counter }}</td>
             <td>{{ waterlevel.watergate.name }}</td>
+            <td>{{ waterlevel.created }}</td>
             <td>{{ waterlevel.height }}</td>
-            <td>{{ waterlevel.status }}</td>
             <td>{{ waterlevel.weather }}</td>
         </tr>
-                    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
 

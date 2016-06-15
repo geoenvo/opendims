@@ -18,6 +18,7 @@ th, td {
     padding: 5px;
     text-align: center;
     table-layout: fixed;
+    text-align: center;
 }
 .col-count {
     width: 40px;
@@ -26,6 +27,7 @@ th, td {
 </head>
 <body>
 
+{% if events %}
 <div class="page-header">
     <h2>{% trans "Events" %}</h2>
 </div>
@@ -72,7 +74,7 @@ th, td {
     <thead>
         <tr>
             {% for report in event.reports.all|slice:'1' %}
-            <th class="col-count">{% trans 'No.' %}</th>
+            {% if events %}<th class="col-count">{% trans 'No.' %}</th>{% endif %}
             <th class="col-md-2">{% get_verbose_field_name report 'event' %}</th>
             <th>{% get_verbose_field_name report 'source' %}</th>
             <th>{% get_verbose_field_name report 'status' %}</th>
@@ -103,7 +105,7 @@ th, td {
     <thead>
         <tr>
             {% for eventimpact in event.eventimpacts.all|slice:'1' %}
-            <th class="col-count">{% trans 'No.' %}</th>
+            {% if events %}<th class="col-count">{% trans 'No.' %}</th>{% endif %}
             <th>{% get_verbose_field_name eventimpact 'village' %}</th>
             <th>{% get_verbose_field_name eventimpact 'rw' %}</th>
             <th>{% get_verbose_field_name eventimpact 'rt' %}</th>
@@ -144,7 +146,7 @@ th, td {
     <thead>
         <tr>
             {% for eventimage in event.eventimages.all|slice:'1' %}
-            <th class="col-count">{% trans 'No.' %}</th>
+            {% if events %}<th class="col-count">{% trans 'No.' %}</th>{% endif %}
             <th>{% get_verbose_field_name eventimage 'title' %}</th>
             <th>{% get_verbose_field_name eventimage 'image' %}</th>
             {% endfor %}
@@ -155,12 +157,13 @@ th, td {
         <tr>
             <td class="col-count">{{ forloop.counter }}</a></td>
             <td>{{ eventimage.title }}</td>
-            <td><img src="{{ get.absolute.url }}{{ eventimage.image.url|slice:'1:' }}"  width="200"></td>
+            <td><img src="{{ get.absolute.url }}{{ eventimage.image.url|slice:'1:' }}"  width="100"></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 <br></br>
-{% endfor%}
+{% endfor %}
 </body>
+{% endif %}
 </html>
