@@ -10,7 +10,7 @@ class EventFilter(filters.FilterSet):
         name='disaster__code',
         lookup_expr='iexact'
     )
-    date = django_filters.DateFilter(name='created', lookup_expr='contains')
+    date = django_filters.DateFromToRangeFilter(name='created')
 
     class Meta:
         model = Event
@@ -27,7 +27,7 @@ class ReportFilter(filters.FilterSet):
         name='source__code',
         lookup_expr='iexact'
     )
-    date = django_filters.DateFilter(name='created', lookup_expr='contains')
+    date = django_filters.DateFromToRangeFilter(name='created')
 
     class Meta:
         model = Report

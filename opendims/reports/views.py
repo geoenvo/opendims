@@ -3,7 +3,7 @@ from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 
 from .serializers import EventSerializer, ReportSerializer
-from rest_framework import filters
+from rest_framework import filters, generics
 
 from common.views import CustomListAPIView
 from .models import Event, Report, EventImpact, EventImage
@@ -63,7 +63,7 @@ class ReportDetailView(generic.DetailView):
         return context
 
 
-class APIEventList(CustomListAPIView):
+class APIEventList(generics.ListAPIView):
     serializer_class = EventSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_class = EventFilter
@@ -85,7 +85,7 @@ class APIEventList(CustomListAPIView):
             return queryset.filter(status='ACTIVE')
 
 
-class APIReportList(CustomListAPIView):
+class APIReportList(generics.ListAPIView):
     serializer_class = ReportSerializer
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     filter_class = ReportFilter

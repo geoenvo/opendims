@@ -638,7 +638,7 @@ function loadEvents(date, all) {
   var showFilterInfoControl = false;
 
   if (date !== false && date.length) {
-    apiFilter = apiFilter + "&date=" + date;
+    apiFilter = apiFilter + "&date_0=" + date + "&date_1=" + date;
     filterInfo = filterInfo + "<tr><td>Showing events on:</td><td>" + date + "</td></tr>";
     showFilterInfoControl = true;
   }
