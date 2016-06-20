@@ -1034,7 +1034,16 @@ map.on("overlayremove", function(e) {
 });
 // end overlayremove
 
+var river_wms = {
+    "<img src='{% static "img/markers/river.png" %}' width='24' height='28'>&nbsp;Sungai": L.tileLayer.wms('http://139.162.55.216/geoserver/geonode/wms?version=1.1.0&layers=geonode:river_makro&styles=&bbox=686686.0815,9295569.4571,718707.1239,9325997.3233&width=768&height=729&srs=EPSG:32748&', {
+        layers: 'riverdki_polygon',
+        format: 'image/png',
+        transparent: true
+    }),
+};
+
 var groupedOverlays = {
+  "River": river_wms,
   "Affected Areas": {
     "<img src='{% static "img/markers/ABR.png" %}' width='24' height='28'>&nbsp;Abrasi": ABRLayer,
     "<img src='{% static "img/markers/CEK.png" %}' width='24' height='28'>&nbsp;Angin Kencang": CEKLayer,
