@@ -106,7 +106,7 @@ msgstr "Stasiun AWS"
 
 #: automaticweathersystem/models.py:124
 msgid "Aws reports"
-msgstr "Laporan aws"
+msgstr "Laporan AWS"
 
 #: common/validators.py:17
 msgid "Invalid file type."
@@ -323,7 +323,7 @@ msgstr "Pelaksana"
 
 #: disasterrehabilitation/models.py:86
 msgid "Event assessments"
-msgstr "Studi kejadian bencana"
+msgstr "Studi Kejadian Bencana"
 
 #: disasterrehabilitation/models.py:97
 msgid "PHYSICAL"
@@ -602,7 +602,7 @@ msgstr "Isi"
 
 #: earlywarning/models.py:46
 msgid "EarlyWarningReports"
-msgstr "Peringatan Dini Terbaru"
+msgstr "Laporan Peringatan Dini"
 
 #: earlywarning/templates/earlywarning/earlywarning.html:5
 #: earlywarning/templates/earlywarning/earlywarning.html:12
@@ -779,7 +779,7 @@ msgstr "Sumber"
 
 #: jaksafe/models.py:118
 msgid "Report auto summarys"
-msgstr "Ringkasan laporan otomatis"
+msgstr "Ringkasan Laporan Otomatis"
 
 #: jaksafe/templates/jaksafe/jaksafe.html:5
 #: jaksafe/templates/jaksafe/jaksafe.html:12
@@ -945,7 +945,7 @@ msgstr "Sumber"
 
 #: reportaggregator/models.py:77
 msgid "Keywords"
-msgstr "Kata kunci"
+msgstr "Kata Kunci"
 
 #: reporting/admin.py:22 reports/admin.py:283
 msgid "Report details"
@@ -1077,7 +1077,7 @@ msgstr "Dampak Kejadian"
 #: reporting/templates/reporting/report_TER.html:142
 #: reporting/templates/reporting/report_TSU.html:142 reports/models.py:266
 msgid "Event images"
-msgstr "Foto kejadian"
+msgstr "Gambar Kejadian"
 
 #: reporting/templates/reporting/statistics.html:31
 msgid "Disaster statistics"
@@ -1116,7 +1116,7 @@ msgstr "Tinggi Muka Air"
 #: templates/opendims/includes/block_waterlevel.html:12
 #: waterlevel/templates/waterlevel/watergate_list.html:54
 msgid "Water Gate"
-msgstr "Pintu Air"
+msgstr "Pintu air"
 
 #: reporting/templates/reporting/weather_forecast.html:29
 #, fuzzy
@@ -1725,7 +1725,7 @@ msgstr ""
 
 #: waterlevel/models.py:66
 msgid "Water gates"
-msgstr "Pintu air"
+msgstr "Pintu Air"
 
 #: waterlevel/models.py:77
 #: waterlevel/templates/waterlevel/watergate_detail.html:96
@@ -1849,7 +1849,7 @@ msgstr "Hujan deras"
 
 #: weatherforecast/models.py:105
 msgid "Weather forecast reports"
-msgstr "Laporan prakiraan Cuaca"
+msgstr "Laporan Prakiraan Cuaca"
 
 #: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:78
 msgid "No weather forecast reports found."
@@ -1945,11 +1945,11 @@ msgstr "Post"
 
 #: website/models.py:229
 msgid "Site headers"
-msgstr "Kepala situs"
+msgstr "Kepala Situs"
 
 #: website/models.py:256
 msgid "Welcomes"
-msgstr "Selamat datang"
+msgstr "Selamat Datang"
 
 #: website/templates/website/post_detail.html:66
 msgid "Files"
