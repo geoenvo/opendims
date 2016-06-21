@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 15:44+0700\n"
+"POT-Creation-Date: 2016-06-21 18:23+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: automaticweathersystem/apps.py:9
+msgid "Automatic Weather System"
+msgstr ""
 
 #: automaticweathersystem/models.py:12 contact/models.py:10
 #: disasterrehabilitation/models.py:14 earlywarning/models.py:14
@@ -115,13 +119,21 @@ msgstr ""
 msgid "Maximum file upload size"
 msgstr ""
 
+#: contact/apps.py:9 contact/templates/contact/contact.html.py:5
+#: contact/templates/contact/contact.html:12
+#: contact/templates/contact/contact_index.html:6 smsblast/models.py:22
+#: templates/opendims/includes/block_footer.html:80
+#: templates/opendims/includes/block_header.html:36
+msgid "Contact"
+msgstr ""
+
 #: contact/models.py:12
 #: templates/opendims/includes/block_contact_address.html:29
 msgid "E-mail"
 msgstr ""
 
 #: contact/models.py:13
-#: templates/opendims/includes/block_contact_address.html:34
+#: templates/opendims/includes/block_contact_address.html:34 website/apps.py:9
 msgid "Website"
 msgstr ""
 
@@ -145,14 +157,6 @@ msgstr ""
 msgid "Contacts"
 msgstr ""
 
-#: contact/templates/contact/contact.html:5
-#: contact/templates/contact/contact.html:12
-#: contact/templates/contact/contact_index.html:6 smsblast/models.py:22
-#: templates/opendims/includes/block_footer.html:80
-#: templates/opendims/includes/block_header.html:36
-msgid "Contact"
-msgstr ""
-
 #: contact/templates/contact/contact_index.html:12
 #: templates/opendims/includes/block_footer.html:9
 msgid "Contact Us"
@@ -173,14 +177,14 @@ msgid "Message sent. Thank you for contacting us!"
 msgstr ""
 
 #: disasterrehabilitation/admin.py:11 disasterrehabilitation/forms.py:43
-#: disasterrehabilitation/models.py:29 geolevels/models.py:48 maps/forms.py:43
+#: disasterrehabilitation/models.py:29 geolevels/models.py:48
 #: maps/templates/maps/rehabilitation_activity_map.html:344
 #: reports/admin.py:70 reports/models.py:62 weatherforecast/models.py:19
 msgid "Province"
 msgstr ""
 
 #: disasterrehabilitation/admin.py:12 disasterrehabilitation/forms.py:44
-#: disasterrehabilitation/models.py:30 geolevels/models.py:82 maps/forms.py:44
+#: disasterrehabilitation/models.py:30 geolevels/models.py:82
 #: maps/templates/maps/rehabilitation_activity_map.html:345
 #: reports/admin.py:71 reports/models.py:63 weatherforecast/models.py:18
 msgid "City"
@@ -188,15 +192,14 @@ msgstr ""
 
 #: disasterrehabilitation/admin.py:13 disasterrehabilitation/forms.py:45
 #: disasterrehabilitation/models.py:31 geolevels/models.py:116
-#: maps/forms.py:45 maps/templates/maps/rehabilitation_activity_map.html:346
+#: maps/templates/maps/rehabilitation_activity_map.html:346
 #: reports/admin.py:72 reports/models.py:64
 msgid "Subdistrict"
 msgstr ""
 
 #: disasterrehabilitation/admin.py:14 disasterrehabilitation/forms.py:46
 #: disasterrehabilitation/models.py:32 geolevels/models.py:153
-#: jaksafe/models.py:23 maps/forms.py:46
-#: maps/templates/maps/jaksafe_map.html:330
+#: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:330
 #: maps/templates/maps/rehabilitation_activity_map.html:347
 #: reports/admin.py:73 reports/models.py:65
 msgid "Village"
@@ -208,7 +211,7 @@ msgstr ""
 #: geolevels/templates/geolevels/rw_list.html:9
 #: geolevels/templates/geolevels/rw_list.html:13
 #: geolevels/templates/geolevels/village_detail.html:34 jaksafe/models.py:24
-#: maps/forms.py:47 maps/templates/maps/jaksafe_map.html:331
+#: maps/templates/maps/jaksafe_map.html.py:331
 #: maps/templates/maps/rehabilitation_activity_map.html:348
 #: reports/admin.py:74 reports/models.py:66
 msgid "RW"
@@ -219,7 +222,7 @@ msgstr ""
 #: geolevels/templates/geolevels/rt_list.html:5
 #: geolevels/templates/geolevels/rt_list.html:9
 #: geolevels/templates/geolevels/rt_list.html:13
-#: geolevels/templates/geolevels/rw_detail.html:34 maps/forms.py:48
+#: geolevels/templates/geolevels/rw_detail.html:34
 #: maps/templates/maps/rehabilitation_activity_map.html:349
 #: reports/admin.py:75 reports/models.py:67
 msgid "RT"
@@ -233,7 +236,14 @@ msgstr ""
 msgid "Event assessment details"
 msgstr ""
 
-#: disasterrehabilitation/forms.py:112 maps/forms.py:112
+#: disasterrehabilitation/apps.py:9
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:5
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:12
+#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:22
+msgid "Disaster Rehabilitation"
+msgstr ""
+
+#: disasterrehabilitation/forms.py:112
 #: templates/opendims/includes/block_header.html:43 website/forms.py:22
 #: website/templates/website/post_list.html:5
 #: website/templates/website/post_list.html:15
@@ -478,12 +488,6 @@ msgstr ""
 msgid "No activities found."
 msgstr ""
 
-#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:5
-#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation.html:12
-#: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:22
-msgid "Disaster Rehabilitation"
-msgstr ""
-
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:11
 msgid "Search By Location"
 msgstr ""
@@ -579,6 +583,14 @@ msgstr ""
 msgid "Description about event assessments."
 msgstr ""
 
+#: earlywarning/apps.py:9
+#: earlywarning/templates/earlywarning/earlywarning.html:5
+#: earlywarning/templates/earlywarning/earlywarning.html:12
+#: earlywarning/templates/earlywarning/earlywarningreport_list.html:10
+#: templates/opendims/includes/block_earlywarning.html:7
+msgid "Early Warning"
+msgstr ""
+
 #: earlywarning/models.py:13 reports/models.py:217 website/models.py:22
 msgid "Title"
 msgstr ""
@@ -592,16 +604,13 @@ msgstr ""
 msgid "EarlyWarningReports"
 msgstr ""
 
-#: earlywarning/templates/earlywarning/earlywarning.html:5
-#: earlywarning/templates/earlywarning/earlywarning.html:12
-#: earlywarning/templates/earlywarning/earlywarningreport_list.html:10
-#: templates/opendims/includes/block_earlywarning.html:7
-msgid "Early Warning"
-msgstr ""
-
 #: earlywarning/templates/earlywarning/earlywarningreport_list.html:23
 #: website/templates/website/post_list.html:68
 msgid "No entries found."
+msgstr ""
+
+#: geolevels/apps.py:9
+msgid "Geo Level"
 msgstr ""
 
 #: geolevels/forms.py:34
@@ -897,6 +906,10 @@ msgstr ""
 msgid "Source details"
 msgstr ""
 
+#: reportaggregator/apps.py:9
+msgid "Report Aggregator"
+msgstr ""
+
 #: reportaggregator/models.py:10
 #: reporting/templates/reporting/statistics.html:37 reports/models.py:52
 #: templates/opendims/includes/block_statistics.html:15
@@ -943,6 +956,10 @@ msgstr ""
 
 #: reporting/admin.py:25 reporting/models.py:25
 msgid "Disaster attached"
+msgstr ""
+
+#: reporting/apps.py:9
+msgid "Reporting"
 msgstr ""
 
 #: reporting/forms.py:9
@@ -1012,8 +1029,8 @@ msgstr ""
 #: reporting/templates/reporting/report_ROB.html:70
 #: reporting/templates/reporting/report_SOS.html:70
 #: reporting/templates/reporting/report_TER.html:70
-#: reporting/templates/reporting/report_TSU.html:70 reports/models.py:203
-#: reports/templates/reports/event_detail.html:31
+#: reporting/templates/reporting/report_TSU.html:70 reports/apps.py:9
+#: reports/models.py:203 reports/templates/reports/event_detail.html.py:31
 #: reports/templates/reports/event_detail.html:118
 #: reports/templates/reports/report_list.html:5
 #: reports/templates/reports/report_list.html:9
@@ -1349,6 +1366,10 @@ msgstr ""
 msgid "No reports found."
 msgstr ""
 
+#: smsblast/apps.py:9
+msgid "Sms Blast"
+msgstr ""
+
 #: smsblast/models.py:19
 msgid "Group"
 msgstr ""
@@ -1454,7 +1475,7 @@ msgstr ""
 msgid "Disaster Statistics"
 msgstr ""
 
-#: templates/opendims/includes/block_waterlevel.html:6
+#: templates/opendims/includes/block_waterlevel.html:6 waterlevel/apps.py:9
 #: waterlevel/templates/waterlevel/watergate_list.html:44
 #: waterlevel/templates/waterlevel/waterlevel.html:5
 #: waterlevel/templates/waterlevel/waterlevel.html:13
@@ -1468,6 +1489,7 @@ msgid "Level"
 msgstr ""
 
 #: templates/opendims/includes/block_weatherforecast.html:7
+#: weatherforecast/apps.py:9
 #: weatherforecast/templates/weatherforecast/weatherforecast.html:5
 #: weatherforecast/templates/weatherforecast/weatherforecast.html:12
 #: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:49
