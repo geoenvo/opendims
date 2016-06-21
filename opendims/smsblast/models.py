@@ -43,6 +43,7 @@ class Template(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Templates')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -68,6 +69,7 @@ class Contact(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Contacts')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -96,6 +98,7 @@ class Group(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Groups')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -132,6 +135,7 @@ class Message(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Messages')
 
     def __unicode__(self):
         return '[%s] - [%s] - %s' % (self.group, self.template, timezone.localtime(self.created))

@@ -102,6 +102,7 @@ class WeatherForecastReport(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Weather forecast reports')
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.province, self.city, timezone.localtime(self.created))

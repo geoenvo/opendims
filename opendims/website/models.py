@@ -120,6 +120,7 @@ class Post(CommonAbstractModel):
         index_together = ['id', 'slug']
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Posts')
 
     def get_absolute_url(self):
         return reverse('website:post_detail', args=[self.pk, self.slug])
@@ -187,6 +188,7 @@ class Attachment(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Attachments')
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.title, timezone.localtime(self.created))
@@ -224,6 +226,7 @@ class SiteHeader(models.Model):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Site headers')
 
     def __unicode__(self):
         return '[%s] - %s ~ %s' % (self.title, self.start, self.end)
@@ -250,6 +253,7 @@ class Welcome(models.Model):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Welcomes')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.title, timezone.localtime(self.created))
@@ -279,6 +283,7 @@ class Partner(models.Model):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Partners')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, self.url)
@@ -301,6 +306,7 @@ class Link(models.Model):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Links')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, self.url)
@@ -323,6 +329,7 @@ class Resource(models.Model):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Resources')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.name, self.url)

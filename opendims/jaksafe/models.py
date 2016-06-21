@@ -115,6 +115,7 @@ class ReportAutoSummary(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Report auto summarys')
 
     def get_absolute_url(self):
         return reverse('jaksafe:reportautosummary_detail', args=[self.pk])

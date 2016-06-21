@@ -43,6 +43,7 @@ class EarlyWarningReport(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('EarlyWarningReports')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.title, timezone.localtime(self.created))

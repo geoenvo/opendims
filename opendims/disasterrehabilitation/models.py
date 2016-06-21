@@ -45,7 +45,7 @@ class Agency(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
-        verbose_name_plural = 'agencies'
+        verbose_name_plural = _('Agencies')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -83,6 +83,7 @@ class EventAssessment(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Event assessments')
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
@@ -166,7 +167,7 @@ class Activity(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
-        verbose_name_plural = 'activities'
+        verbose_name_plural = _('Activities')
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.name, timezone.localtime(self.created))
@@ -206,6 +207,7 @@ class Reference(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('References')
 
     def __unicode__(self):
         return '[%s] - %s -  %s' % (self.activity, self.name, timezone.localtime(self.created))
@@ -252,6 +254,7 @@ class Location(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Locations')
 
     def __unicode__(self):
         return '[%s] -- [%s]' % (self.activity, self.eventassessment)

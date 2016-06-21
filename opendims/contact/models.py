@@ -49,6 +49,7 @@ class Contact(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Contacts')
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.subject, timezone.localtime(self.created), self.name)

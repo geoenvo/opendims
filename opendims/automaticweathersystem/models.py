@@ -39,6 +39,9 @@ class AWSStation(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
+    class Meta:
+        verbose_name_plural = _('Aws stations')
+
     def __unicode__(self):
         return '%s' % self.name
 
@@ -118,6 +121,7 @@ class AWSReport(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Aws reports')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.awsstation, timezone.localtime(self.created))

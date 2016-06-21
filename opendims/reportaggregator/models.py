@@ -54,6 +54,7 @@ class Source(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Sources')
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.type, self.name, self.disaster)
@@ -73,6 +74,7 @@ class Keyword(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Keywords')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.source, self.keyword)

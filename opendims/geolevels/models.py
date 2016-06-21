@@ -35,6 +35,9 @@ class Province(CommonAbstractModel):
         verbose_name=verbose_geojson
     )
 
+    class Meta:
+        verbose_name_plural = _('Provinces')
+
     def get_absolute_url(self):
         return reverse('geolevels:province_detail', args=[self.pk])
 
@@ -100,6 +103,9 @@ class Subdistrict(CommonAbstractModel):
         verbose_name=verbose_geojson
     )
 
+    class Meta:
+        verbose_name_plural = _('Subdistricts')
+
     def get_absolute_url(self):
         return reverse('geolevels:subdistrict_detail', args=[self.pk])
 
@@ -134,6 +140,9 @@ class Village(CommonAbstractModel):
         verbose_name=verbose_geojson
     )
 
+    class Meta:
+        verbose_name_plural = _('Villages')
+
     def get_absolute_url(self):
         return reverse('geolevels:village_detail', args=[self.pk])
 
@@ -167,7 +176,7 @@ class RW(CommonAbstractModel):
     )
 
     class Meta:
-        verbose_name = verbose_rw
+        verbose_name_plural = _('RWs')
 
     def get_absolute_url(self):
         return reverse('geolevels:rw_detail', args=[self.pk])
@@ -201,7 +210,7 @@ class RT(CommonAbstractModel):
     )
 
     class Meta:
-        verbose_name = verbose_rt
+        verbose_name_plural = _('RTs')
 
     def get_absolute_url(self):
         return reverse('geolevels:rt_detail', args=[self.pk])

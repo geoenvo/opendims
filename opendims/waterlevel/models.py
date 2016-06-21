@@ -63,6 +63,7 @@ class WaterGate(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Water gates')
 
     def __unicode__(self):
         return '%s' % self.name
@@ -104,6 +105,7 @@ class WaterLevelReport(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Water level reports')
 
     def __unicode__(self):
         return '[%s] - %s - %s' % (self.watergate, self.height, self.weather)
