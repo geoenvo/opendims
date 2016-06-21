@@ -94,7 +94,7 @@ class EventAdmin(ImportExportModelAdmin,
                 'status',
                 'closed',
                 ('height_min', 'height'),
-                'magnitude',
+                ('magnitude', 'depth'),
                 'note'
             ]
         }),
@@ -126,6 +126,7 @@ class EventAdmin(ImportExportModelAdmin,
         'height_min',
         'height',
         'magnitude',
+        'depth',
         'note'
     ]
     readonly_fields = ['updated']

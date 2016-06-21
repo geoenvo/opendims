@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
 from django.core.urlresolvers import reverse
+from django import forms
 
 from image_cropping import ImageRatioField
 
@@ -26,6 +27,9 @@ class Source(CommonAbstractModel):
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
+    class Meta:
+        verbose_name_plural = _('Sources')
+
     def __unicode__(self):
         return '%s' % self.note
 
@@ -37,6 +41,9 @@ class Disaster(CommonAbstractModel):
         verbose_name=verbose_code
     )
     note = models.TextField(blank=True, verbose_name=verbose_note)
+
+    class Meta:
+        verbose_name_plural = _('Disasters')
 
     def __unicode__(self):
         return '%s' % self.note
@@ -51,6 +58,7 @@ verbose_status = _('Status')
 verbose_height = _('Height')
 verbose_height_min = _('Minimum height')
 verbose_magnitude = _('Magnitude')
+verbose_depth = _('Depth')
 verbose_province = _('Province')
 verbose_city = _('City')
 verbose_subdistrict = _('Subdistrict')
@@ -91,19 +99,32 @@ class Event(CommonAbstractModel):
     height = models.PositiveIntegerField(
         null=True,
         blank=True,
-        verbose_name=verbose_height
+        verbose_name=verbose_height,
+        help_text='unit in cm'
     )
     height_min = models.PositiveIntegerField(
         null=True,
         blank=True,
-        verbose_name=verbose_height_min)
+        verbose_name=verbose_height_min,
+        help_text='unit in cm'
+    )
     magnitude = models.DecimalField(
         null=True,
         blank=True,
         max_digits=4,
         decimal_places=2,
         validators=[MinValueValidator(Decimal('0.01'))],
-        verbose_name=verbose_magnitude
+        verbose_name=verbose_magnitude,
+        help_text='unit in Scala Richter'
+    )
+    depth = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))],
+        verbose_name=verbose_depth,
+        help_text='unit in km'
     )
     province = models.ForeignKey(
         Province,
@@ -135,6 +156,7 @@ class Event(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Events')
 
     def get_absolute_url(self):
         return reverse('reports:event_detail', args=[self.pk])
@@ -178,6 +200,7 @@ class Report(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Reports')
 
     def get_absolute_url(self):
         return reverse('reports:report_detail', args=[self.pk])
@@ -240,6 +263,7 @@ class EventImage(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Event images')
 
     def __unicode__(self):
         return '[%s] -  %s' % (self.event, self.title)
@@ -328,6 +352,7 @@ class EventImpact(CommonAbstractModel):
     class Meta:
         ordering = ['-pk']
         get_latest_by = 'pk'
+        verbose_name_plural = _('Event impacts')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.event, self.note)
