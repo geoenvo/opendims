@@ -78,6 +78,11 @@ verbose_rt = _('RT')
 class EventAdmin(ImportExportModelAdmin,
                  ExportActionModelAdmin,
                  LeafletGeoAdmin):
+
+    class Media:
+        js = (
+            'reports/js/admin_event_field_hide.js',
+        )
     resource_class = EventResource
 
     # Leaflet widget override
