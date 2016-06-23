@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'reports.apps.ReportsConfig',
     'reporting.apps.ReportingConfig',
     'geolevels.apps.GeolevelsConfig',
-    'waterlevel',
+    'waterlevel.apps.WaterlevelConfig',
     'maps',
     'jaksafe',
     'contact.apps.ContactConfig',
@@ -236,14 +236,14 @@ ADMIN_REORDER = (
     ('earlywarning', ('EarlyWarningReport')),
     ('automaticweathersystem', ('AWSStation', 'AWSReport')),
     ('weatherforecast', ('WeatherForecastReport')),
-    ('jaksafe', ('ReportAutoSummary')),
     ('reporting', ('Report', 'Template', 'Attachment')),
-    ('smsblast', ('Message', 'Template', 'Group', 'Contact')),
-    ('categories', ('Category')),
     ('website', ('Post', 'Attachment', 'Welcome', 'SiteHeader', 'Partner', 'Link', 'Resource')),
     ('reportaggregator', ('Source', 'Keyword')),
     ('disasterrehabilitation', ('Activity', 'EventAssessment', 'Location', 'Reference', 'Agency')),
     ('contact', ('Contact')),
+    ('smsblast', ('Message', 'Template', 'Group', 'Contact')),
+    ('jaksafe', ('ReportAutoSummary')),
+    ('categories', ('Category')),
 )
 
 SITE_NAME = 'Open-DiMS'

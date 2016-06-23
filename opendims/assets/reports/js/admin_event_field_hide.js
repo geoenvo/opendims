@@ -24,7 +24,10 @@
                 depth.hide();
             }
             else{
-                // show all fields as default
+                height.hide();
+                height_min.hide();
+                magnitude.hide();
+                depth.hide();
             }
         }
 
