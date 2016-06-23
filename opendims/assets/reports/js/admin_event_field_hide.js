@@ -6,7 +6,7 @@
         var magnitude = $('#id_magnitude').closest('.field-magnitude');
         var depth = $('#id_depth').closest('.field-depth');
 
-        // select the outer most div for magnitude's field and depth's field
+        // select the outer most div for height's field and height_min's field
         var height = $('#id_height').closest('.field-height');
         var height_min = $('#id_height_min').closest('.field-height_min');
 
@@ -17,7 +17,7 @@
                 height.hide();
                 height_min.hide();
             }
-            else if(value == 'BJR'){
+            else if(value == 'BJR' || value == 'ROB'){
                 height.show();
                 height_min.show();
                 magnitude.hide();
