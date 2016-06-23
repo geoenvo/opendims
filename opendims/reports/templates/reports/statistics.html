@@ -10,13 +10,9 @@
 {{ block.super }}
 {% endblock %}
 
-
-
-
 {% block page_content %}
 
     {% if event_statistics %}
-
     {% get_eventimpact_total event_statistics as eventimpact_total %}
     {{ disaster_statistics|length }} {{ eventimpact_total }} {{ eventimpact_total.affected_total }} {}
     {% endif %}

@@ -78,10 +78,22 @@
                     <th class="col-md-2">{% get_verbose_field_name report.event "created" %}</th>
                     <td>{{ report.event.created|date:"j F Y H:i T" }}</td>
                 </tr>
+                {% if report.event.disaster.code == 'BJR' %}
                 <tr>
                     <th>{% get_verbose_field_name report.event "height" %} (cm)</th>
                     <td>{% if report.event.height_min %}{{ report.event.height_min }} ~ {% endif %}{{ report.event.height }}</td>
                 </tr>
+                {% endif %}
+                {% if report.event.disaster.code == 'GMP' %}
+                <tr>
+                    <th>{% get_verbose_field_name report.event "magnitude" %} (cm)</th>
+                    <td>{{ report.event.magnitude }} (SR)</td>
+                </tr>
+                <tr>
+                    <th>{% get_verbose_field_name report.event "depth" %} (cm)</th>
+                    <td>{{ report.event.depth }}</td>
+                </tr>
+                {% endif %}
 
                 {% if report.event.province %}
                 <tr>
@@ -200,10 +212,22 @@ function leaflet_event_map_init(map, options) {
                 <th>{% get_verbose_field_name report.event 'created' %}</th>
                 <td>{{ report.event.created|date:"j F Y H:i T" }}</td>
             </tr>
+            {% if report.event.disaster.code == 'BJR' %}
             <tr>
-                <th>{% get_verbose_field_name report.event 'height' %} (cm)</th>
+                <th>{% get_verbose_field_name report.event "height" %} (cm)</th>
                 <td>{% if report.event.height_min %}{{ report.event.height_min }} ~ {% endif %}{{ report.event.height }}</td>
             </tr>
+            {% endif %}
+            {% if report.event.disaster.code == 'GMP' %}
+            <tr>
+                <th>{% get_verbose_field_name report.event "magnitude" %} (cm)</th>
+                <td>{{ report.event.magnitude }} (SR)</td>
+            </tr>
+            <tr>
+                <th>{% get_verbose_field_name report.event "depth" %} (cm)</th>
+                <td>{{ report.event.depth }}</td>
+            </tr>
+            {% endif %}
 
             {% if report.event.province %}
             <tr>

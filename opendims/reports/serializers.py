@@ -109,6 +109,7 @@ class EventSerializer(gis_serializers.GeoFeatureModelSerializer):
             'height_min',
             'height',
             'magnitude',
+            'depth',
             'province',
             'province_name',
             'city',

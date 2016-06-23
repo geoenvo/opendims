@@ -55,15 +55,22 @@
                     <th>{% get_verbose_field_name event "status" %}</th>
                     <td>{{ event.status }}</td>
                 </tr>
+                {% if event.disaster.code == 'BJR' %}
                 <tr>
                     <th>{% get_verbose_field_name event "height" %} (cm)</th>
                     <td>{% if event.height_min %}{{ event.height_min }} ~ {% endif %}{{ event.height }}</td>
                 </tr>
+                {% endif %}
+                {% if event.disaster.code == 'GMP'  %}
                 <tr>
                     <th>{% get_verbose_field_name event "magnitude" %}</th>
                     <td>{{ event.magnitude }}</td>
                 </tr>
-
+                <tr>
+                    <th>{% get_verbose_field_name event "depth" %}</th>
+                    <td>{{ event.depth }}</td>
+                </tr>
+                {% endif %}
                 {% if event.province %}
                 <tr>
                     <th>{% get_verbose_field_name event "province" %}</th>
@@ -291,14 +298,22 @@ function leaflet_event_map_init(map, options) {
                 <th>{% get_verbose_field_name event 'status' %}</th>
                 <td>{{ event.status }}</td>
             </tr>
+            {% if event.disaster.code == 'BJR' %}
             <tr>
                 <th>{% get_verbose_field_name event 'height' %} (cm)</th>
                 <td>{% if event.height_min %}{{ event.height_min }} ~ {% endif %}{{ event.height }}</td>
             </tr>
+            {% endif %}
+            {% if event.disaster.code == 'GMP' %}
             <tr>
                 <th>{% get_verbose_field_name event 'magnitude' %}</th>
                 <td>{{ event.magnitude }}</td>
             </tr>
+            <tr>
+                <th>{% get_verbose_field_name event 'depth' %}</th>
+                <td>{{ event.depth }}</td>
+            </tr>
+            {% endif %}
 
             {% if event.province %}
             <tr>
