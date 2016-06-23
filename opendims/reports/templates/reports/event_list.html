@@ -39,7 +39,6 @@
             <td><a href="{{ event.get_absolute_url }}">{{ event.disaster }}</a></td>
             <td>{{ event.created|date:"j F Y H:i T" }}</td>
             <td>{% if event.height_min %}{{ event.height_min }} ~ {% endif %}{{ event.height }}</td>
-
             <td>{% if event.disaster.code == 'GMP' %}{{ event.magnitude }}{% endif %}</td>
             <td>{% if event.disaster.code == 'GMP' %}{{ event.depth }}{% endif %}</td>
 
