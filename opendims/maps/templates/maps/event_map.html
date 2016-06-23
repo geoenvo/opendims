@@ -463,6 +463,8 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     var contentDisaster = " - ";
     var contentStatus = " - ";
     var contentHeight = " - ";
+    var contentDepth = " - ";
+    var contentMagnitude = " - ";
     var contentProvince = " - ";
     var contentCity = " - ";
     var contentSubdistrict = " - ";
@@ -489,6 +491,12 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
       else {
         contentHeight = feature.properties.height;
       }
+    }
+    if(feature.properties.magnitude){
+      contentMagnitude = feature.properties.magnitude
+    }
+    if(feature.properties.depth){
+      contentDepth = feature.properties.depth;
     }
     if (feature.properties.disaster_note) {
       contentDisaster = feature.properties.disaster_note;
@@ -538,7 +546,15 @@ function drawLayerFeature(feature, layer, layerMarkers, markerImgPath, layerGrou
     content = content + "<tr><th>Created</th><td>" + contentCreated + "</td></tr>";
     content = content + "<tr><th>Disaster</th><td>" + contentDisaster + "</td></tr>";
     content = content + "<tr><th>Status</th><td>" + contentStatus + "</td></tr>";
-    content = content + "<tr><th>Height</th><td>" + contentHeight + "</td></tr>";
+    if (feature.properties) {
+        if (feature.properties.disaster == 'BJR' || feature.properties.disaster == 'ROB' || feature.properties.disaster == 'TSU'){
+        content = content + "<tr><th>Height</th><td>" + contentHeight + ' cm'+ "</td></tr>";
+        }
+        if (feature.properties.disaster == 'GMP'){
+        content = content + "<tr><th>Magnitude</th><td>" + contentMagnitude + ' SR' + "</td></tr>";
+        content = content + "<tr><th>Depth</th><td>" + contentDepth  + ' km'  + "</td></tr>";
+        }
+    }
     content = content + "<tr><th>Province</th><td>" + contentProvince  + "</td></tr>";
     content = content + "<tr><th>City</th><td>" + contentCity  + "</td></tr>";
     content = content + "<tr><th>Subdistrict</th><td>" + contentSubdistrict  + "</td></tr>";
