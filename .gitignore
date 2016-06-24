@@ -2,6 +2,7 @@
 *.log
 *.pid
 Vagrantfile
+supervisord.conf
 *.DS_Store
 .idea
 .vagrant
