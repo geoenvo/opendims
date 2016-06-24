@@ -1,4 +1,4 @@
-{% load i18n verbose_names staticfiles reporting_tags screamshot absoluteuri common_filters %}
+{% load i18n verbose_names staticfiles screamshot absoluteuri common_filters %}
 <html>
 <head>
 <style>
@@ -39,7 +39,6 @@ th, td {
             <th class="col-count">{% trans 'No.' %}</th>
             <th class="col-md-2">{% get_verbose_field_name event 'disaster' %}</th>
             <th>{% get_verbose_field_name event 'height' %}</th>
-            <th>{% get_verbose_field_name event 'magnitude' %}</th>
             <th>{% get_verbose_field_name event 'subdistrict' %}</th>
             <th>{% get_verbose_field_name event 'village' %}</th>
             <th>{% get_verbose_field_name event 'rw' %}</th>
@@ -55,14 +54,13 @@ th, td {
             <td class="col-count">{{ forloop.counter }}</a></td>
             <td>{{ event.disaster.note }}</a></td>
             <td>{{ event.height }}</td>
-            <td>{{ event.magnitude }}</td>
             <td>{{ event.subdistrict }}</td>
             <td>{{ event.village }}</td>
             <td>{{ event.rw }}</td>
             <td>{{ event.rt }}</td>
             <td>{{ event.note }}</td>
         </tr>
-        <td colspan="9"><img src="data:{% base64capture event_map_url '#leaflet_map' wait=0 %}"></td>
+        <td colspan="8"><img src="data:{% base64capture event_map_url '#leaflet_map' wait=0 %}"></td>
         {% endfor %}
     </tbody>
 </table>

@@ -7,10 +7,10 @@
 {% block crumbs %}
 {{ block.super }}
 {% for category in post.category.get_ancestors.all %}
-<h6><a href="{% url 'website:post_list' category.slug %}">{{ category.name }}</a></h6>
+<h6><a href="{% url 'website:post_list' category.slug %}">{% trans category.name %}</a></h6>
 {% endfor %}
-<h6><a href="{% url 'website:post_list' post.category.slug %}">{{ post.category.name }}</a></h6>
-<h6 class="page-active">{{ post.title }}</h6>
+<h6><a href="{% url 'website:post_list' post.category.slug %}">{% trans post.category.name %}</a></h6>
+<h6 class="page-active">{% trans post.title %}</h6>
 {% endblock %}
 
 {% block page_content_upper %}

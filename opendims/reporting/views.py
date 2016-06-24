@@ -20,19 +20,3 @@ def test_screamshot(request):
     # )
     # return HttpResponse('done!')
     return render(request, 'reporting/test_screamshot.html', context)
-
-
-def statistics(request):
-    return render(request, 'reporting/statistics.html')
-
-
-def weather_forecast(request):
-    return render(request, 'reporting/weather_forecast.html')
-
-
-def waterlevel(request):
-    return render(request, 'reporting/waterlevel.html')
-
-
-def report_ABR(request):
-    return render(request, 'reporting/report_ABR.html')

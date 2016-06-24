@@ -8,9 +8,9 @@
 {{ block.super }}
 {% if category %}
 {% for category in category.get_ancestors.all %}
-<h6><a href="{% url 'website:post_list' category.slug %}">{{ category.name }}</a></h6>
+<h6><a href="{% url 'website:post_list' category.slug %}">{% trans category.name %}</a></h6>
 {% endfor %}
-<h6><a class="active">{{ category.name }}</a></h6>
+<h6><a class="active">{% trans category.name %}</a></h6>
 {% elif search %}
 <h6><a class="active">{% trans "Search" %}</a></h6>
 {% endif %}
@@ -34,7 +34,7 @@
 <div class="row" >
     <div class="col-md-12">
         <h3 class="page-header heading">
-            {% if gallery %}{% trans "Gallery" %}{% elif search %}{% trans "Search" %}{% else %}{% trans "Category" %}{% endif %}{% if search and q %}: &quot;{{ q }}&quot;{% elif category.slug != 'gallery' %}: {{ category.name }}{% endif %}
+            {% if gallery %}{% trans "Gallery" %}{% elif search %}{% trans "Search" %}{% else %}{% trans "Category" %}{% endif %}{% if search and q %}: &quot;{{ q }}&quot;{% elif category.slug != 'gallery' %}: {% trans category.name %}{% endif %}
         </h3>
         <div class="post-container">
             {% for post in post_list %}

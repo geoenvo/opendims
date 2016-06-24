@@ -228,18 +228,30 @@ class ReportAdmin(admin.ModelAdmin):
             except:
                 pass
 
-        # menggabungkan pdf_files dan menyimpannya di folder uploaded/reporting
-        # /report/ dengan nama pdf_daily_report_name
         merger = PdfFileMerger()
+
+        # loop through pdf_files to get pdf_file and append it
         for pdf_file in pdf_files:
             merger.append(PdfFileReader(pdf_file))
 
-        pdf_daily_report_name = "uploaded/reporting/report/" + "{}__{}{}".format(
+        pdf_join_temp = NamedTemporaryFile()
+        merger.write(pdf_join_temp)
+
+        attachment_created = timezone.localtime(timezone.now())
+        pdf_join_filename = "{}__{}{}".format(
             attachment_created.strftime('%Y%m%d-%H%M'),
             'DAILY_REPORT',
             '.pdf'
         )
-        merger.write(pdf_daily_report_name)
+        attachment = Attachment()
+        attachment.report = obj
+        attachment.created = attachment_created
+        attachment.file.save(
+            pdf_join_filename,
+            File(pdf_join_temp),
+            save=False
+        )
+        attachment.save()
 
     fieldsets = [
         (verbose_report_details, {
