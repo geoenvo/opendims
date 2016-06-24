@@ -35,7 +35,7 @@
                     {% get_category_tree 'news' as nodes %}
                     {% recursetree nodes %}
                     <li>
-                        <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
+                        <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
                         {% if not node.is_leaf_node %}
                         <ul class="sub-menu">
                             {{ children }}
@@ -46,7 +46,7 @@
                     {% get_category_tree 'e-library' as nodes %}
                     {% recursetree nodes %}
                     <li>
-                        <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
+                        <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
                         {% if not node.is_leaf_node %}
                         <ul class="sub-menu">
                             {{ children }}
@@ -57,7 +57,7 @@
                     {% get_category_tree 'gallery' as nodes %}
                     {% recursetree nodes %}
                     <li>
-                        <a href="{% url 'website:post_list' node.slug %}">{{ node.name }}</a>
+                        <a href="{% url 'website:post_list' node.slug %}">{% trans node.name %}</a>
                         {% if not node.is_leaf_node %}
                         <ul class="sub-menu">
                             {{ children }}

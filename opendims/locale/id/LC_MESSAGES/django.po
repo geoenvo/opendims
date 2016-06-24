@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 18:23+0700\n"
+"POT-Creation-Date: 2016-06-24 15:16+0700\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -77,14 +77,10 @@ msgid "Pressure"
 msgstr "Tekanan"
 
 #: automaticweathersystem/models.py:21
-#, fuzzy
-#| msgid "Wind Speed"
 msgid "Wind speed"
 msgstr "Kecepatan angin"
 
 #: automaticweathersystem/models.py:22 automaticweathersystem/models.py:27
-#, fuzzy
-#| msgid "Wind Direction"
 msgid "Wind direction"
 msgstr "Arah angin"
 
@@ -176,7 +172,7 @@ msgstr ""
 #: waterlevel/templates/waterlevel/watergate_list.html:34
 #: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:39
 msgid "Submit"
-msgstr ""
+msgstr "Kirim"
 
 #: contact/views.py:17
 msgid "Message sent. Thank you for contacting us!"
@@ -259,7 +255,7 @@ msgstr "Pencarian"
 
 #: disasterrehabilitation/models.py:18
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:31
-#: reports/admin.py:284 reports/models.py:168
+#: reports/admin.py:289 reports/models.py:168
 #: reports/templates/reports/report_detail.html:34
 #: reports/templates/reports/report_detail.html:69
 msgid "Event"
@@ -312,7 +308,7 @@ msgstr "Pendanaan"
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:13
 #: templates/opendims/includes/nav.html:31
-#: templates/opendims/includes/nav_responsive.html:34
+#: templates/opendims/includes/nav_responsive.html:37
 msgid "Activity"
 msgstr "Aktivitas"
 
@@ -415,62 +411,62 @@ msgstr "Detil"
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_detail.html:140
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:25
 #: reporting/templates/reporting/report_ABR.html:39
-#: reporting/templates/reporting/report_ABR.html:77
-#: reporting/templates/reporting/report_ABR.html:108
-#: reporting/templates/reporting/report_ABR.html:149
+#: reporting/templates/reporting/report_ABR.html:73
+#: reporting/templates/reporting/report_ABR.html:104
+#: reporting/templates/reporting/report_ABR.html:145
 #: reporting/templates/reporting/report_BJR.html:39
-#: reporting/templates/reporting/report_BJR.html:77
-#: reporting/templates/reporting/report_BJR.html:108
-#: reporting/templates/reporting/report_BJR.html:149
+#: reporting/templates/reporting/report_BJR.html:75
+#: reporting/templates/reporting/report_BJR.html:106
+#: reporting/templates/reporting/report_BJR.html:147
 #: reporting/templates/reporting/report_CEK.html:39
-#: reporting/templates/reporting/report_CEK.html:77
-#: reporting/templates/reporting/report_CEK.html:108
-#: reporting/templates/reporting/report_CEK.html:149
+#: reporting/templates/reporting/report_CEK.html:73
+#: reporting/templates/reporting/report_CEK.html:104
+#: reporting/templates/reporting/report_CEK.html:145
 #: reporting/templates/reporting/report_GMP.html:39
 #: reporting/templates/reporting/report_GMP.html:77
 #: reporting/templates/reporting/report_GMP.html:108
 #: reporting/templates/reporting/report_GMP.html:149
 #: reporting/templates/reporting/report_KBK.html:39
-#: reporting/templates/reporting/report_KBK.html:77
-#: reporting/templates/reporting/report_KBK.html:108
-#: reporting/templates/reporting/report_KBK.html:149
+#: reporting/templates/reporting/report_KBK.html:73
+#: reporting/templates/reporting/report_KBK.html:104
+#: reporting/templates/reporting/report_KBK.html:145
 #: reporting/templates/reporting/report_KLB.html:39
-#: reporting/templates/reporting/report_KLB.html:77
-#: reporting/templates/reporting/report_KLB.html:108
-#: reporting/templates/reporting/report_KLB.html:149
+#: reporting/templates/reporting/report_KLB.html:73
+#: reporting/templates/reporting/report_KLB.html:104
+#: reporting/templates/reporting/report_KLB.html:145
 #: reporting/templates/reporting/report_LAI.html:39
-#: reporting/templates/reporting/report_LAI.html:77
-#: reporting/templates/reporting/report_LAI.html:108
-#: reporting/templates/reporting/report_LAI.html:149
+#: reporting/templates/reporting/report_LAI.html:73
+#: reporting/templates/reporting/report_LAI.html:104
+#: reporting/templates/reporting/report_LAI.html:145
 #: reporting/templates/reporting/report_LSR.html:39
-#: reporting/templates/reporting/report_LSR.html:77
-#: reporting/templates/reporting/report_LSR.html:108
-#: reporting/templates/reporting/report_LSR.html:149
+#: reporting/templates/reporting/report_LSR.html:73
+#: reporting/templates/reporting/report_LSR.html:104
+#: reporting/templates/reporting/report_LSR.html:145
 #: reporting/templates/reporting/report_PHT.html:39
-#: reporting/templates/reporting/report_PHT.html:77
-#: reporting/templates/reporting/report_PHT.html:108
-#: reporting/templates/reporting/report_PHT.html:149
+#: reporting/templates/reporting/report_PHT.html:73
+#: reporting/templates/reporting/report_PHT.html:104
+#: reporting/templates/reporting/report_PHT.html:145
 #: reporting/templates/reporting/report_ROB.html:39
-#: reporting/templates/reporting/report_ROB.html:77
-#: reporting/templates/reporting/report_ROB.html:108
-#: reporting/templates/reporting/report_ROB.html:149
+#: reporting/templates/reporting/report_ROB.html:75
+#: reporting/templates/reporting/report_ROB.html:106
+#: reporting/templates/reporting/report_ROB.html:147
 #: reporting/templates/reporting/report_SOS.html:39
-#: reporting/templates/reporting/report_SOS.html:77
-#: reporting/templates/reporting/report_SOS.html:108
-#: reporting/templates/reporting/report_SOS.html:149
+#: reporting/templates/reporting/report_SOS.html:73
+#: reporting/templates/reporting/report_SOS.html:104
+#: reporting/templates/reporting/report_SOS.html:145
 #: reporting/templates/reporting/report_TER.html:39
-#: reporting/templates/reporting/report_TER.html:77
-#: reporting/templates/reporting/report_TER.html:108
-#: reporting/templates/reporting/report_TER.html:149
+#: reporting/templates/reporting/report_TER.html:73
+#: reporting/templates/reporting/report_TER.html:104
+#: reporting/templates/reporting/report_TER.html:145
 #: reporting/templates/reporting/report_TSU.html:39
-#: reporting/templates/reporting/report_TSU.html:77
-#: reporting/templates/reporting/report_TSU.html:108
-#: reporting/templates/reporting/report_TSU.html:149
+#: reporting/templates/reporting/report_TSU.html:73
+#: reporting/templates/reporting/report_TSU.html:104
+#: reporting/templates/reporting/report_TSU.html:145
 #: reporting/templates/reporting/statistics.html:36
 #: reporting/templates/reporting/waterlevel.html:35
 #: reporting/templates/reporting/weather_forecast.html:34
-#: reports/templates/reports/event_detail.html:124
-#: reports/templates/reports/event_detail.html:161
+#: reports/templates/reports/event_detail.html:131
+#: reports/templates/reports/event_detail.html:168
 #: reports/templates/reports/event_list.html:25
 #: reports/templates/reports/report_list.html:25
 msgid "No."
@@ -573,7 +569,7 @@ msgstr "Kejadian Terbaru"
 
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:173
 #: disasterrehabilitation/templates/disasterrehabilitation/disasterrehabilitation_index.html:187
-#: reports/templates/reports/event_list.html:44
+#: reports/templates/reports/event_list.html:49
 msgid "No events found."
 msgstr "Kejadian tidak ditemukan."
 
@@ -585,13 +581,11 @@ msgstr "Tidak ditemukan lokasi untuk studi kejadian bencana ini."
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:13
 #: templates/opendims/includes/nav.html:32
-#: templates/opendims/includes/nav_responsive.html:35
+#: templates/opendims/includes/nav_responsive.html:38
 msgid "Event Assessment"
 msgstr "Studi Kejadian Bencana"
 
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:16
-#, fuzzy
-#| msgid "Disaster Rehabilitation"
 msgid "Description about event assessments."
 msgstr "Deskripsi mengenai studi kejadian bencana."
 
@@ -962,7 +956,7 @@ msgstr "Sumber"
 msgid "Keywords"
 msgstr "Kata Kunci"
 
-#: reporting/admin.py:22 reports/admin.py:283
+#: reporting/admin.py:22 reports/admin.py:288
 msgid "Report details"
 msgstr "Detil laporan"
 
@@ -1037,21 +1031,21 @@ msgstr "Bulanan"
 msgid "Yearly"
 msgstr "Tahunan"
 
-#: reporting/models.py:143 reporting/templates/reporting/report_ABR.html.py:70
-#: reporting/templates/reporting/report_BJR.html:70
-#: reporting/templates/reporting/report_CEK.html:70
+#: reporting/models.py:143 reporting/templates/reporting/report_ABR.html.py:66
+#: reporting/templates/reporting/report_BJR.html:68
+#: reporting/templates/reporting/report_CEK.html:66
 #: reporting/templates/reporting/report_GMP.html:70
-#: reporting/templates/reporting/report_KBK.html:70
-#: reporting/templates/reporting/report_KLB.html:70
-#: reporting/templates/reporting/report_LAI.html:70
-#: reporting/templates/reporting/report_LSR.html:70
-#: reporting/templates/reporting/report_PHT.html:70
-#: reporting/templates/reporting/report_ROB.html:70
-#: reporting/templates/reporting/report_SOS.html:70
-#: reporting/templates/reporting/report_TER.html:70
-#: reporting/templates/reporting/report_TSU.html:70 reports/apps.py:9
+#: reporting/templates/reporting/report_KBK.html:66
+#: reporting/templates/reporting/report_KLB.html:66
+#: reporting/templates/reporting/report_LAI.html:66
+#: reporting/templates/reporting/report_LSR.html:66
+#: reporting/templates/reporting/report_PHT.html:66
+#: reporting/templates/reporting/report_ROB.html:68
+#: reporting/templates/reporting/report_SOS.html:66
+#: reporting/templates/reporting/report_TER.html:66
+#: reporting/templates/reporting/report_TSU.html:66 reports/apps.py:9
 #: reports/models.py:203 reports/templates/reports/event_detail.html.py:31
-#: reports/templates/reports/event_detail.html:118
+#: reports/templates/reports/event_detail.html:125
 #: reports/templates/reports/report_list.html:5
 #: reports/templates/reports/report_list.html:9
 #: reports/templates/reports/report_list.html:13
@@ -1065,36 +1059,36 @@ msgstr "Laporan"
 msgid "Attachments"
 msgstr "Lampiran"
 
-#: reporting/templates/reporting/report_ABR.html:100
-#: reporting/templates/reporting/report_BJR.html:100
-#: reporting/templates/reporting/report_CEK.html:100
+#: reporting/templates/reporting/report_ABR.html:96
+#: reporting/templates/reporting/report_BJR.html:98
+#: reporting/templates/reporting/report_CEK.html:96
 #: reporting/templates/reporting/report_GMP.html:100
-#: reporting/templates/reporting/report_KBK.html:100
-#: reporting/templates/reporting/report_KLB.html:100
-#: reporting/templates/reporting/report_LAI.html:100
-#: reporting/templates/reporting/report_LSR.html:100
-#: reporting/templates/reporting/report_PHT.html:100
-#: reporting/templates/reporting/report_ROB.html:100
-#: reporting/templates/reporting/report_SOS.html:100
-#: reporting/templates/reporting/report_TER.html:100
-#: reporting/templates/reporting/report_TSU.html:100
+#: reporting/templates/reporting/report_KBK.html:96
+#: reporting/templates/reporting/report_KLB.html:96
+#: reporting/templates/reporting/report_LAI.html:96
+#: reporting/templates/reporting/report_LSR.html:96
+#: reporting/templates/reporting/report_PHT.html:96
+#: reporting/templates/reporting/report_ROB.html:98
+#: reporting/templates/reporting/report_SOS.html:96
+#: reporting/templates/reporting/report_TER.html:96
+#: reporting/templates/reporting/report_TSU.html:96
 #: reports/templates/reports/statistics.html:7
 msgid "Event Impacts"
 msgstr "Dampak Kejadian"
 
-#: reporting/templates/reporting/report_ABR.html:142
-#: reporting/templates/reporting/report_BJR.html:142
-#: reporting/templates/reporting/report_CEK.html:142
+#: reporting/templates/reporting/report_ABR.html:138
+#: reporting/templates/reporting/report_BJR.html:140
+#: reporting/templates/reporting/report_CEK.html:138
 #: reporting/templates/reporting/report_GMP.html:142
-#: reporting/templates/reporting/report_KBK.html:142
-#: reporting/templates/reporting/report_KLB.html:142
-#: reporting/templates/reporting/report_LAI.html:142
-#: reporting/templates/reporting/report_LSR.html:142
-#: reporting/templates/reporting/report_PHT.html:142
-#: reporting/templates/reporting/report_ROB.html:142
-#: reporting/templates/reporting/report_SOS.html:142
-#: reporting/templates/reporting/report_TER.html:142
-#: reporting/templates/reporting/report_TSU.html:142 reports/models.py:266
+#: reporting/templates/reporting/report_KBK.html:138
+#: reporting/templates/reporting/report_KLB.html:138
+#: reporting/templates/reporting/report_LAI.html:138
+#: reporting/templates/reporting/report_LSR.html:138
+#: reporting/templates/reporting/report_PHT.html:138
+#: reporting/templates/reporting/report_ROB.html:140
+#: reporting/templates/reporting/report_SOS.html:138
+#: reporting/templates/reporting/report_TER.html:138
+#: reporting/templates/reporting/report_TSU.html:138 reports/models.py:266
 msgid "Event images"
 msgstr "Gambar Kejadian"
 
@@ -1190,15 +1184,15 @@ msgstr "Detil kejadian"
 msgid "Affected area"
 msgstr "Wilayah terdampak"
 
-#: reports/admin.py:187
+#: reports/admin.py:192
 msgid "Imported file is not in unicode"
 msgstr "Berkas yang diimport tidak dalam format unicode"
 
-#: reports/admin.py:189
+#: reports/admin.py:194
 msgid "encountered while trying to read file"
 msgstr "terjadi kesalahan ketika mencoba membaca file"
 
-#: reports/admin.py:308
+#: reports/admin.py:313
 msgid "Impact data"
 msgstr "Data dampak"
 
@@ -1379,20 +1373,20 @@ msgid "Impact"
 msgstr "Dampak"
 
 #: reports/templates/reports/event_detail.html:33
-#: reports/templates/reports/event_detail.html:198
+#: reports/templates/reports/event_detail.html:205
 #: website/templates/website/post_detail.html:76
 msgid "Images"
 msgstr "Gambar"
 
-#: reports/templates/reports/event_detail.html:143
+#: reports/templates/reports/event_detail.html:150
 msgid "No reports found for this event."
 msgstr "Tidak ditemukan laporan untuk kejadian ini."
 
-#: reports/templates/reports/event_detail.html:151
+#: reports/templates/reports/event_detail.html:158
 msgid "Evacuation Points"
 msgstr "Titik Evakuasi"
 
-#: reports/templates/reports/event_detail.html:190
+#: reports/templates/reports/event_detail.html:197
 msgid "No evacuation points found for this event."
 msgstr "Tidak ditemukan titik evakuasi untuk kejadian ini."
 
@@ -1555,9 +1549,21 @@ msgid "Rehabilitation Activity"
 msgstr "Aktivitas Rehabilitasi"
 
 #: templates/opendims/includes/nav.html:29
-#: templates/opendims/includes/nav_responsive.html:32
+#: templates/opendims/includes/nav_responsive.html:35
 msgid "Rehabilitation"
 msgstr "Rehabilitasi"
+
+#: templates/opendims/includes/nav_responsive.html:29
+msgid "News"
+msgstr "Berita"
+
+#: templates/opendims/includes/nav_responsive.html:30
+msgid "General"
+msgstr "Umum"
+
+#: templates/opendims/includes/nav_responsive.html:31
+msgid "Announcement"
+msgstr "Pengumuman"
 
 #: templates/opendims/includes/pagination.html:6
 msgid "Previous"

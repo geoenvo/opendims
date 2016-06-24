@@ -19,7 +19,7 @@
                 </a>
             </div> <!-- /.prof-thumb -->
             <div class="prof-details">
-                <h5 class="prof-name-list"><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></h5>
+                <h5 class="prof-name-list"><a href="{{ post.get_absolute_url }}" title="{% trans post.title %}">{% trans post.title %}</a></h5>
                 <p class="small-text">{{ post.content|striptags|truncatewords:15 }}</p>
             </div> <!-- /.prof-details -->
         </div> <!-- /.prof-list-item -->
