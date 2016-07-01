@@ -1,10 +1,11 @@
 from __future__ import unicode_literals
+from decimal import Decimal
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.core.urlresolvers import reverse
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
-from decimal import Decimal
 
 from common.models import CommonAbstractModel
 
@@ -41,6 +42,9 @@ class AWSStation(CommonAbstractModel):
 
     class Meta:
         verbose_name_plural = _('Aws stations')
+
+    def get_absolute_url(self):
+        return reverse('aws:awsstation_detail', args=[self.pk])
 
     def __unicode__(self):
         return '%s' % self.name
