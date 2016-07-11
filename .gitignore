@@ -3,6 +3,7 @@
 *.pid
 Vagrantfile
 supervisord.conf
+supervisord-rq.conf
 *.DS_Store
 .idea
 .vagrant

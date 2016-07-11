@@ -65,6 +65,8 @@
                         {% endif %}
                     </li>
                     {% endrecursetree %}
+
+                    <li class="{% active_url request 'aws:awsstation_list' %}"><a href="{% url 'aws:awsstation_list' %}">{% trans "AWS" %}</a></li>
                 </ul> <!-- /.main-menu -->
 
                 <ul class="social-icons pull-right">
