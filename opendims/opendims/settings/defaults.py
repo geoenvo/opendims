@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'disasterrehabilitation.apps.DisasterrehabilitationConfig',
     'reportaggregator.apps.ReportaggregatorConfig',
+    'sendsms',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -381,3 +382,6 @@ DISASTER_STATISTICS = ('BJR', 'CEK', 'KBK', 'SOS')
 
 # Cities to show in the weather forecast block
 WEATHERFORECAST_CITIES = ('Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara')
+
+# sendsms
+SENDSMS_BACKEND = 'smsblast.mysmsbackend.SmsBackend'
