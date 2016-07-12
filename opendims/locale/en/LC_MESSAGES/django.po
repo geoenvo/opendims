@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 11:56+0700\n"
+"POT-Creation-Date: 2016-07-12 13:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -396,7 +396,7 @@ msgstr ""
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:13
 #: templates/opendims/includes/nav.html:31
-#: templates/opendims/includes/nav_responsive.html:37
+#: templates/opendims/includes/nav_responsive.html:39
 msgid "Activity"
 msgstr ""
 
@@ -595,7 +595,7 @@ msgstr ""
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:13
 #: templates/opendims/includes/nav.html:32
-#: templates/opendims/includes/nav_responsive.html:38
+#: templates/opendims/includes/nav_responsive.html:40
 msgid "Event Assessment"
 msgstr ""
 
@@ -1531,7 +1531,7 @@ msgid "Rehabilitation Activity"
 msgstr ""
 
 #: templates/opendims/includes/nav.html:29
-#: templates/opendims/includes/nav_responsive.html:35
+#: templates/opendims/includes/nav_responsive.html:37
 msgid "Rehabilitation"
 msgstr ""
 
@@ -1549,6 +1549,14 @@ msgstr ""
 
 #: templates/opendims/includes/nav_responsive.html:31
 msgid "Announcement"
+msgstr ""
+
+#: templates/opendims/includes/nav_responsive.html:32
+msgid "Knowledge"
+msgstr ""
+
+#: templates/opendims/includes/nav_responsive.html:33
+msgid "Go"
 msgstr ""
 
 #: templates/opendims/includes/pagination.html:6

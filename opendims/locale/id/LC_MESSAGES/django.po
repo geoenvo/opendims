@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 11:56+0700\n"
+"POT-Creation-Date: 2016-07-12 13:39+0700\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -398,7 +398,7 @@ msgstr "Pendanaan"
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:13
 #: templates/opendims/includes/nav.html:31
-#: templates/opendims/includes/nav_responsive.html:37
+#: templates/opendims/includes/nav_responsive.html:39
 msgid "Activity"
 msgstr "Aktivitas"
 
@@ -597,7 +597,7 @@ msgstr "Tidak ditemukan lokasi untuk studi kejadian bencana ini."
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:9
 #: disasterrehabilitation/templates/disasterrehabilitation/eventassessment_list.html:13
 #: templates/opendims/includes/nav.html:32
-#: templates/opendims/includes/nav_responsive.html:38
+#: templates/opendims/includes/nav_responsive.html:40
 msgid "Event Assessment"
 msgstr "Studi Kejadian Bencana"
 
@@ -1533,7 +1533,7 @@ msgid "Rehabilitation Activity"
 msgstr "Aktivitas Rehabilitasi"
 
 #: templates/opendims/includes/nav.html:29
-#: templates/opendims/includes/nav_responsive.html:35
+#: templates/opendims/includes/nav_responsive.html:37
 msgid "Rehabilitation"
 msgstr "Rehabilitasi"
 
@@ -1552,6 +1552,14 @@ msgstr "Umum"
 #: templates/opendims/includes/nav_responsive.html:31
 msgid "Announcement"
 msgstr "Pengumuman"
+
+#: templates/opendims/includes/nav_responsive.html:32
+msgid "Knowledge"
+msgstr "Kajian"
+
+#: templates/opendims/includes/nav_responsive.html:33
+msgid "Go"
+msgstr "Ok"
 
 #: templates/opendims/includes/pagination.html:6
 msgid "Previous"
