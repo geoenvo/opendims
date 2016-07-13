@@ -62,11 +62,10 @@
     <script type="text/javascript">
     $(document).ready(function() {
       var map;
-      var mapquestOSM = L.tileLayer("https://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
-        attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
-      });
+      var mapnikOSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
 
       var waterlevel_layer = L.geoJson(null, {
         pointToLayer: function (feature, latlng) {
@@ -91,7 +90,7 @@
       map = L.map("map", {
         zoom: {{ DEFAULT_ZOOM_WATERLEVEL }},
         center: [{{ DEFAULT_CENTER_WATERLEVEL.0|safe }}, {{ DEFAULT_CENTER_WATERLEVEL.1|safe }}],
-        layers: [mapquestOSM, waterlevel_layer],
+        layers: [mapnikOSM, waterlevel_layer],
         zoomControl: true,
         attributionControl: false
       });
