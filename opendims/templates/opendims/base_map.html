@@ -318,6 +318,10 @@
         subdomains: ["otile1-s", "otile2-s", "otile3-s", "otile4-s"],
         attribution: 'Labels courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
       })]);
+	  var mapnikOSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
 
       /* Overlay Layers */
       var highlight = L.geoJson(null);
@@ -339,7 +343,7 @@
       map = L.map("map", {
         zoom: {{ DEFAULT_ZOOM|safe }},
         center: [{{ DEFAULT_CENTER.0|safe }}, {{ DEFAULT_CENTER.1|safe }}],
-        layers: [mapquestOSM, markerClusters, highlight],
+        layers: [mapnikOSM, markerClusters, highlight],
         zoomControl: false,
         attributionControl: false
       });
@@ -420,9 +424,7 @@
       }
 
       var baseLayers = {
-        "Street Map": mapquestOSM,
-        "Aerial Imagery": mapquestOAM,
-        "Imagery with Streets": mapquestHYB
+        "Base Map": mapnikOSM,
       };
 
       /* Highlight search box text on click */

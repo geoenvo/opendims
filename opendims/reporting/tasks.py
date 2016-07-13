@@ -9,6 +9,7 @@ from django.db.models import Sum
 
 from xhtml2pdf import pisa
 from PyPDF2 import PdfFileReader, PdfFileMerger
+
 from django_rq import job
 
 from reports.models import Event
