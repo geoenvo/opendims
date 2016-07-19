@@ -981,10 +981,8 @@ msgid "Disaster attached"
 msgstr "Bencana terlampir"
 
 #: reporting/admin.py:17
-#, fuzzy
-#| msgid "Aws reports"
 msgid "Daily report"
-msgstr "Laporan AWS"
+msgstr "Laporan Harian"
 
 #: reporting/apps.py:9
 msgid "Pusdalops Reporting"
