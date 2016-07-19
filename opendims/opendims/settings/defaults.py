@@ -381,7 +381,7 @@ DEFAULT_ZOOM_WATERLEVEL = 10
 DISASTER_STATISTICS = ('BJR', 'CEK', 'KBK', 'SOS')
 
 # Cities to show in the weather forecast block
-WEATHERFORECAST_CITIES = ('Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara')
+WEATHERFORECAST_CITIES = ('Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara', 'Kepulauan Seribu')
 
 # sendsms
 SENDSMS_BACKEND = 'smsblast.mysmsbackend.SmsBackend'

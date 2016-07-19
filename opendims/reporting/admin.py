@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
+from django.utils.html import format_html
 
 
 from .models import Template, Report, Attachment
@@ -13,6 +14,7 @@ verbose_report_details = _('Report details')
 verbose_report_content = _('Report content')
 verbose_report_output = _('Report output')
 verbose_disaster_attached = _('Disaster attached')
+verbose_daily_report_file = _('Daily report')
 
 
 class AttachmentInline(admin.TabularInline):
@@ -69,7 +71,8 @@ class ReportAdmin(admin.ModelAdmin):
         'type',
         'status',
         'author',
-        'file'
+        'file',
+        'daily_report_file'
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
@@ -77,6 +80,20 @@ class ReportAdmin(admin.ModelAdmin):
     list_filter = ['template', 'created']
     search_fields = ['author', 'template']
     inlines = [AttachmentInline]
+
+    def daily_report_file(self, obj):
+        daily_report_file = None
+        attachments = obj.attachments.all()
+        for attachment in attachments:
+            if 'DAILY_REPORT' in attachment.file.name:
+                daily_report_file = format_html(
+                    "<a href='{url}'>{file}</a>",
+                    url=attachment.file.url,
+                    file=attachment.file.name
+                )
+        return daily_report_file
+
+    daily_report_file.short_description = verbose_daily_report_file
 
 
 class TemplateAdmin(admin.ModelAdmin):
