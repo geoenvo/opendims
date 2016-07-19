@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 13:39+0700\n"
+"POT-Creation-Date: 2016-07-19 10:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: automaticweathersystem/models.py:13 contact/models.py:10
 #: disasterrehabilitation/models.py:14 earlywarning/models.py:14
-#: jaksafe/models.py:12 maps/templates/maps/jaksafe_map.html.py:329
+#: jaksafe/models.py:12 maps/templates/maps/jaksafe_map.html.py:330
 #: reportaggregator/models.py:11 reporting/models.py:19
 #: reporting/templates/reporting/waterlevel.html:37 reports/models.py:54
 #: smsblast/models.py:13 waterlevel/models.py:12 weatherforecast/models.py:11
@@ -55,7 +55,7 @@ msgstr ""
 
 #: automaticweathersystem/models.py:17 disasterrehabilitation/models.py:17
 #: earlywarning/models.py:17 geolevels/models.py:12 jaksafe/models.py:26
-#: maps/templates/maps/jaksafe_map.html:333
+#: maps/templates/maps/jaksafe_map.html:334
 #: maps/templates/maps/rehabilitation_activity_map.html:350
 #: reports/models.py:19 smsblast/models.py:15 waterlevel/models.py:16
 #: weatherforecast/models.py:13 website/models.py:19
@@ -289,7 +289,7 @@ msgstr ""
 
 #: disasterrehabilitation/admin.py:14 disasterrehabilitation/forms.py:46
 #: disasterrehabilitation/models.py:32 geolevels/models.py:153
-#: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:330
+#: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:331
 #: maps/templates/maps/rehabilitation_activity_map.html:347
 #: reports/admin.py:73 reports/models.py:65
 msgid "Village"
@@ -301,7 +301,7 @@ msgstr ""
 #: geolevels/templates/geolevels/rw_list.html:9
 #: geolevels/templates/geolevels/rw_list.html:13
 #: geolevels/templates/geolevels/village_detail.html:34 jaksafe/models.py:24
-#: maps/templates/maps/jaksafe_map.html.py:331
+#: maps/templates/maps/jaksafe_map.html.py:332
 #: maps/templates/maps/rehabilitation_activity_map.html:348
 #: reports/admin.py:74 reports/models.py:66
 msgid "RW"
@@ -535,7 +535,7 @@ msgstr ""
 #: templates/opendims/includes/block_similar_posts.html:24
 #: templates/opendims/includes/block_statistics.html:44
 #: templates/opendims/includes/block_waterlevel.html:33
-#: templates/opendims/includes/block_weatherforecast.html:78
+#: templates/opendims/includes/block_weatherforecast.html:81
 msgid "More"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "Total loss"
 msgstr ""
 
-#: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:332
+#: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:333
 #: reportaggregator/models.py:17 reports/models.py:169
 msgid "Source"
 msgstr ""
@@ -809,43 +809,43 @@ msgstr ""
 msgid "No Data found."
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:334
+#: maps/templates/maps/jaksafe_map.html:335
 msgid "Infrastructure Damage"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:335
+#: maps/templates/maps/jaksafe_map.html:336
 msgid "Infrastructure Loss"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:336
+#: maps/templates/maps/jaksafe_map.html:337
 msgid "Cross-sector Damage"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:337
+#: maps/templates/maps/jaksafe_map.html:338
 msgid "Cross-sector Loss"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:338
+#: maps/templates/maps/jaksafe_map.html:339
 msgid "Productive Damage"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:339
+#: maps/templates/maps/jaksafe_map.html:340
 msgid "Productive Loss"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:340
+#: maps/templates/maps/jaksafe_map.html:341
 msgid "Social-Housing Damage"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:341
+#: maps/templates/maps/jaksafe_map.html:342
 msgid "Social-Housing Loss"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:342
+#: maps/templates/maps/jaksafe_map.html:343
 msgid "Total Damage"
 msgstr ""
 
-#: maps/templates/maps/jaksafe_map.html:343
+#: maps/templates/maps/jaksafe_map.html:344
 #: reporting/templates/reporting/statistics.html:43
 #: templates/opendims/includes/block_statistics.html:21
 msgid "Total Loss"
@@ -903,13 +903,13 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: maps/templates/maps/waterlevel_map.html:105
+#: maps/templates/maps/waterlevel_map.html:104
 #: waterlevel/templates/waterlevel/watergate_list.html:85
 #: waterlevel/templates/waterlevel/watergate_list.html:188
 msgid "Time"
 msgstr ""
 
-#: maps/templates/maps/waterlevel_map.html:105
+#: maps/templates/maps/waterlevel_map.html:104
 #: reporting/templates/reporting/waterlevel.html:38 reports/models.py:58
 #: templates/opendims/includes/block_waterlevel.html:13
 #: waterlevel/models.py:14
@@ -917,7 +917,7 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-#: maps/templates/maps/waterlevel_map.html:105
+#: maps/templates/maps/waterlevel_map.html:104
 #: reporting/templates/reporting/waterlevel.html:39 waterlevel/models.py:15
 msgid "Weather"
 msgstr ""
@@ -962,20 +962,24 @@ msgstr ""
 msgid "Keywords"
 msgstr ""
 
-#: reporting/admin.py:12 reports/admin.py:288
+#: reporting/admin.py:13 reports/admin.py:288
 msgid "Report details"
 msgstr ""
 
-#: reporting/admin.py:13
+#: reporting/admin.py:14
 msgid "Report content"
 msgstr ""
 
-#: reporting/admin.py:14
+#: reporting/admin.py:15
 msgid "Report output"
 msgstr ""
 
-#: reporting/admin.py:15 reporting/models.py:25
+#: reporting/admin.py:16 reporting/models.py:25
 msgid "Disaster attached"
+msgstr ""
+
+#: reporting/admin.py:17
+msgid "Daily report"
 msgstr ""
 
 #: reporting/apps.py:9
@@ -1148,18 +1152,21 @@ msgstr ""
 
 #: reporting/templates/reporting/weather_forecast.html:36
 #: templates/opendims/includes/block_weatherforecast.html:59
+#: templates/opendims/includes/block_weatherforecast.html:60
 #: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:59
 msgid "Morning"
 msgstr ""
 
 #: reporting/templates/reporting/weather_forecast.html:37
-#: templates/opendims/includes/block_weatherforecast.html:63
+#: templates/opendims/includes/block_weatherforecast.html:64
+#: templates/opendims/includes/block_weatherforecast.html:65
 #: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:60
 msgid "Noon"
 msgstr ""
 
 #: reporting/templates/reporting/weather_forecast.html:38
-#: templates/opendims/includes/block_weatherforecast.html:67
+#: templates/opendims/includes/block_weatherforecast.html:69
+#: templates/opendims/includes/block_weatherforecast.html:70
 #: weatherforecast/templates/weatherforecast/weatherforecastreport_list.html:61
 msgid "Night"
 msgstr ""
