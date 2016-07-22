@@ -15,8 +15,6 @@ DATABASES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 # Try looking for local settings...
 try:
     from local_settings import *

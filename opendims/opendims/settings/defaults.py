@@ -385,3 +385,6 @@ WEATHERFORECAST_CITIES = ('Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', '
 
 # sendsms
 SENDSMS_BACKEND = 'smsblast.mysmsbackend.SmsBackend'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
