@@ -17,7 +17,7 @@
                 height.hide();
                 height_min.hide();
             }
-            else if(value == 'BJR' || value == 'ROB'){
+            else if(value == 'BJR' || value == 'ROB' || value == 'GNJ'){
                 height.show();
                 height_min.show();
                 magnitude.hide();

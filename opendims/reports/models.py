@@ -100,13 +100,13 @@ class Event(CommonAbstractModel):
         null=True,
         blank=True,
         verbose_name=verbose_height,
-        help_text='unit in cm'
+        help_text=_('Unit in cm')
     )
     height_min = models.PositiveIntegerField(
         null=True,
         blank=True,
         verbose_name=verbose_height_min,
-        help_text='unit in cm'
+        help_text=_('Unit in cm')
     )
     magnitude = models.DecimalField(
         null=True,
@@ -115,7 +115,7 @@ class Event(CommonAbstractModel):
         decimal_places=2,
         validators=[MinValueValidator(Decimal('0.01'))],
         verbose_name=verbose_magnitude,
-        help_text='unit in Scala Richter'
+        help_text=_('Unit in Scala Richter')
     )
     depth = models.DecimalField(
         null=True,
@@ -124,7 +124,7 @@ class Event(CommonAbstractModel):
         decimal_places=2,
         validators=[MinValueValidator(Decimal('0.01'))],
         verbose_name=verbose_depth,
-        help_text='unit in km'
+        help_text=_('Unit in km')
     )
     province = models.ForeignKey(
         Province,

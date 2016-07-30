@@ -1,93 +1,100 @@
 [
-    {
-        "pk": "BJR",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Banjir"
-        }
-    },
-    {
-        "pk": "KBK",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Kebakaran"
-        }
-    },
-    {
-        "pk": "LSR",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Longsor"
-        }
-    },
-    {
-        "pk": "GMP",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Gempa Bumi"
-        }
-    },
-    {
-        "pk": "CEK",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Cuaca Ekstrem/Angin Kencang/Hujan Disertai Angin Kencang"
-        }
-    },
-    {
-        "pk": "ROB",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Banjir Rob"
-        }
-    },
-    {
-        "pk": "ABR",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Abrasi"
-        }
-    },
-    {
-        "pk": "TSU",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Tsunami"
-        }
-    },
-    {
-        "pk": "SOS",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Konflik Sosial/Tawuran Warga/Kerusuhan"
-        }
-    },
-    {
-        "pk": "TER",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Terorisme"
-        }
-    },
-    {
-        "pk": "LAI",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Lain-lain"
-        }
-    },
-    {
-        "pk": "PHT",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Pohon Tumbang"
-        }
-    },
-    {
-        "pk": "KLB",
-        "model": "reports.Disaster",
-        "fields": {
-            "note": "Kejadian Luar Biasa"
-        }
-    }
+{
+  "model": "reports.disaster",
+  "pk": "ABR",
+  "fields": {
+    "note": "Abrasi"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "BJR",
+  "fields": {
+    "note": "Banjir"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "CEK",
+  "fields": {
+    "note": "Cuaca Ekstrem/Angin Kencang/Hujan Disertai Angin Kencang"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "GMP",
+  "fields": {
+    "note": "Gempa Bumi"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "GNJ",
+  "fields": {
+    "note": "Genangan Jalan"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "KBK",
+  "fields": {
+    "note": "Kebakaran"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "KLB",
+  "fields": {
+    "note": "Kejadian Luar Biasa"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "LAI",
+  "fields": {
+    "note": "Lain-lain"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "LSR",
+  "fields": {
+    "note": "Longsor"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "PHT",
+  "fields": {
+    "note": "Pohon Tumbang"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "ROB",
+  "fields": {
+    "note": "Banjir Rob"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "SOS",
+  "fields": {
+    "note": "Konflik Sosial/Tawuran Warga/Kerusuhan"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "TER",
+  "fields": {
+    "note": "Terorisme"
+  }
+},
+{
+  "model": "reports.disaster",
+  "pk": "TSU",
+  "fields": {
+    "note": "Tsunami"
+  }
+}
 ]
