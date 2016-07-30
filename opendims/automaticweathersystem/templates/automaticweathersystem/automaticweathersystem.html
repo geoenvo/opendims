@@ -2,7 +2,7 @@
 
 {% load i18n active_url %}
 
-{% block title %}{{ block.super }} - {% trans "Automatic Weather System" %}{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Censor System" %}{% endblock %}
 
 {% block breadcrumbs %}
 {{ block.super }}
@@ -10,5 +10,5 @@
 
 {% block crumbs %}
 {{ block.super }}
-<h6><a class="{% active_url request 'aws:awsstation_list' %}" href="{% url 'aws:awsstation_list' %}">{% trans "Automatic Weather System" %}</a></h6>
+<h6><a class="{% active_url request 'aws:sensorstation_list' %}" href="{% url 'aws:sensorstation_list' %}">{% trans "Censor System" %}</a></h6>
 {% endblock %}

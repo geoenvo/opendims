@@ -5,10 +5,10 @@ from django.contrib import admin
 
 from leaflet.admin import LeafletGeoAdmin
 
-from .models import AWSStation, AWSReport
+from .models import SensorStation, SensorReport
 
 
-class AWSStationAdmin(LeafletGeoAdmin):
+class SensorStationAdmin(LeafletGeoAdmin):
     settings_overrides = {
         'DEFAULT_ZOOM': 13,
     }
@@ -23,10 +23,10 @@ class AWSStationAdmin(LeafletGeoAdmin):
     ]
 
 
-class AWSReportAdmin(admin.ModelAdmin):
+class SensorReportAdmin(admin.ModelAdmin):
     fields = (
         'created',
-        'awsstation',
+        'sensorstation',
         'temperature',
         'humidity',
         'pressure',
@@ -40,14 +40,14 @@ class AWSReportAdmin(admin.ModelAdmin):
     list_display = [
         'created',
         'updated',
-        'awsstation'
+        'sensorstation'
     ]
     readonly_fields = ['updated']
     ordering = ['-updated', '-created']
     date_hierarchy = 'created'
-    list_filter = ['awsstation', 'created']
-    search_fields = ['awsstation']
+    list_filter = ['sensorstation', 'created']
+    search_fields = ['sensorstation']
 
 
-admin.site.register(AWSStation, AWSStationAdmin)
-admin.site.register(AWSReport, AWSReportAdmin)
+admin.site.register(SensorStation, SensorStationAdmin)
+admin.site.register(SensorReport, SensorReportAdmin)

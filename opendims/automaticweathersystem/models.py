@@ -15,7 +15,7 @@ verbose_updated = _('Updated')
 verbose_point = _('Point')
 verbose_name = _('Name')
 verbose_note = _('Note')
-verbose_awsstation = _('AWS station')
+verbose_sensorstation = _('Sensor station')
 verbose_temperature = _('Temperature')
 verbose_humidity = _('Humidity')
 verbose_pressure = _('Pressure')
@@ -28,7 +28,7 @@ verbose_solarradiation = _('Solar radiation')
 verbose_winddir = _('Wind direction')
 
 
-class AWSStation(CommonAbstractModel):
+class SensorStation(CommonAbstractModel):
     name = models.CharField(
         max_length=100,
         verbose_name=verbose_name
@@ -41,16 +41,16 @@ class AWSStation(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
-        verbose_name_plural = _('Aws stations')
+        verbose_name_plural = _('Censor stations')
 
     def get_absolute_url(self):
-        return reverse('aws:awsstation_detail', args=[self.pk])
+        return reverse('aws:sensorstation_detail', args=[self.pk])
 
     def __unicode__(self):
         return '%s' % self.name
 
 
-class AWSReport(CommonAbstractModel):
+class SensorReport(CommonAbstractModel):
     created = models.DateTimeField(
         default=timezone.now,
         verbose_name=verbose_created
@@ -58,9 +58,9 @@ class AWSReport(CommonAbstractModel):
     updated = models.DateTimeField(
         auto_now=True,
         verbose_name=verbose_updated)
-    awsstation = models.ForeignKey(
-        AWSStation,
-        verbose_name=verbose_awsstation
+    sensorstation = models.ForeignKey(
+        SensorStation,
+        verbose_name=verbose_sensorstation
     )
     temperature = models.DecimalField(
         null=True,
@@ -125,7 +125,7 @@ class AWSReport(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
-        verbose_name_plural = _('Aws reports')
+        verbose_name_plural = _('Censor reports')
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.awsstation, timezone.localtime(self.created))
+        return '[%s] - %s' % (self.sensorstation, timezone.localtime(self.created))

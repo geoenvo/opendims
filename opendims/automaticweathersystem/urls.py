@@ -10,13 +10,13 @@ from . import views
 urlpatterns = [
     url(
         r'^$',
-        views.AWSStationListView.as_view(),
-        name='awsstation_list'
+        views.SensorStationListView.as_view(),
+        name='sensorstation_list'
     ),
     url(
         r'^(?P<pk>\d+)/$',
-        views.AWSStationDetailView.as_view(),
-        name='awsstation_detail'
+        views.SensorStationDetailView.as_view(),
+        name='sensorstation_detail'
     ),
 
 ]
