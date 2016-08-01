@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-19 10:40+0700\n"
+"POT-Creation-Date: 2016-07-30 14:17+0700\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -19,15 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: automaticweathersystem/apps.py:9
-#: automaticweathersystem/templates/automaticweathersystem/automaticweathersystem.html:5
-#: automaticweathersystem/templates/automaticweathersystem/automaticweathersystem.html:13
-#: automaticweathersystem/templates/automaticweathersystem/awsstation_list.html:7
-msgid "Automatic Weather System"
-msgstr "Sistem Cuaca Otomatis"
+#: automaticweathersystem/templates/automaticweathersystem/sensorstation_list.html:7
+msgid "Censor"
+msgstr "Sensor"
 
 #: automaticweathersystem/models.py:13 contact/models.py:10
 #: disasterrehabilitation/models.py:14 earlywarning/models.py:14
-#: jaksafe/models.py:12 maps/templates/maps/jaksafe_map.html.py:330
+#: jaksafe/models.py:12 maps/templates/maps/jaksafe_map.html.py:328
 #: reportaggregator/models.py:11 reporting/models.py:19
 #: reporting/templates/reporting/waterlevel.html:37 reports/models.py:54
 #: smsblast/models.py:13 waterlevel/models.py:12 weatherforecast/models.py:11
@@ -56,7 +54,7 @@ msgstr "Nama"
 
 #: automaticweathersystem/models.py:17 disasterrehabilitation/models.py:17
 #: earlywarning/models.py:17 geolevels/models.py:12 jaksafe/models.py:26
-#: maps/templates/maps/jaksafe_map.html:334
+#: maps/templates/maps/jaksafe_map.html:332
 #: maps/templates/maps/rehabilitation_activity_map.html:350
 #: reports/models.py:19 smsblast/models.py:15 waterlevel/models.py:16
 #: weatherforecast/models.py:13 website/models.py:19
@@ -64,7 +62,9 @@ msgid "Note"
 msgstr "Catatan"
 
 #: automaticweathersystem/models.py:18
-msgid "AWS station"
+#, fuzzy
+#| msgid "AWS station"
+msgid "Sensor station"
 msgstr "Stasiun AWS"
 
 #: automaticweathersystem/models.py:19
@@ -104,26 +104,32 @@ msgid "Solar radiation"
 msgstr "Radiasi surya"
 
 #: automaticweathersystem/models.py:44
-msgid "Aws stations"
-msgstr "Stasiun AWS"
+msgid "Censor stations"
+msgstr "Stasiun Sensor"
 
 #: automaticweathersystem/models.py:128
-msgid "Aws reports"
-msgstr "Laporan AWS"
+msgid "Censor reports"
+msgstr "Laporan Sensor"
 
-#: automaticweathersystem/templates/automaticweathersystem/awsreport_list.html:31
-msgid "Automatic Weather System Report"
-msgstr "Sistem Cuaca Otomatis"
+#: automaticweathersystem/templates/automaticweathersystem/automaticweathersystem.html:5
+#: automaticweathersystem/templates/automaticweathersystem/automaticweathersystem.html:13
+#: templates/opendims/includes/nav.html:69
+msgid "Censor System"
+msgstr "Sistem Sensor"
 
-#: automaticweathersystem/templates/automaticweathersystem/awsreport_list.html:70
-msgid "No automatic weather system reports found."
-msgstr "Laporan prakiraan cuaca tidak ditemukan."
+#: automaticweathersystem/templates/automaticweathersystem/sensorreport_list.html:31
+msgid "Censor Report"
+msgstr "Laporan Sensor"
 
-#: automaticweathersystem/templates/automaticweathersystem/awsstation_list.html:10
+#: automaticweathersystem/templates/automaticweathersystem/sensorreport_list.html:70
+msgid "No Censor reports found."
+msgstr "Laporan tidak ditemukan."
+
+#: automaticweathersystem/templates/automaticweathersystem/sensorstation_list.html:10
 msgid "Sensor list."
 msgstr ""
 
-#: automaticweathersystem/templates/automaticweathersystem/awsstation_list.html:17
+#: automaticweathersystem/templates/automaticweathersystem/sensorstation_list.html:17
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:93
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_detail.html:130
 #: disasterrehabilitation/templates/disasterrehabilitation/activity_list.html:25
@@ -194,8 +200,10 @@ msgstr ""
 msgid "No."
 msgstr ""
 
-#: automaticweathersystem/templates/automaticweathersystem/awsstation_list.html:32
-msgid "No AWS Station found."
+#: automaticweathersystem/templates/automaticweathersystem/sensorstation_list.html:32
+#, fuzzy
+#| msgid "No AWS Station found."
+msgid "No Cencor Station found."
 msgstr "Stasiun AWS tidak ditemukan"
 
 #: common/validators.py:17
@@ -291,7 +299,7 @@ msgstr "Kecamatan"
 
 #: disasterrehabilitation/admin.py:14 disasterrehabilitation/forms.py:46
 #: disasterrehabilitation/models.py:32 geolevels/models.py:153
-#: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:331
+#: jaksafe/models.py:23 maps/templates/maps/jaksafe_map.html.py:329
 #: maps/templates/maps/rehabilitation_activity_map.html:347
 #: reports/admin.py:73 reports/models.py:65
 msgid "Village"
@@ -303,7 +311,7 @@ msgstr "Kelurahan"
 #: geolevels/templates/geolevels/rw_list.html:9
 #: geolevels/templates/geolevels/rw_list.html:13
 #: geolevels/templates/geolevels/village_detail.html:34 jaksafe/models.py:24
-#: maps/templates/maps/jaksafe_map.html.py:332
+#: maps/templates/maps/jaksafe_map.html.py:330
 #: maps/templates/maps/rehabilitation_activity_map.html:348
 #: reports/admin.py:74 reports/models.py:66
 msgid "RW"
@@ -623,7 +631,9 @@ msgid "Content"
 msgstr "Isi"
 
 #: earlywarning/models.py:46
-msgid "EarlyWarningReports"
+#, fuzzy
+#| msgid "EarlyWarningReports"
+msgid "Early Warning Reports"
 msgstr "Laporan Peringatan Dini"
 
 #: earlywarning/templates/earlywarning/earlywarningreport_list.html:23
@@ -787,7 +797,7 @@ msgstr "Total kerusakan"
 msgid "Total loss"
 msgstr "Total kerugian"
 
-#: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:333
+#: jaksafe/models.py:25 maps/templates/maps/jaksafe_map.html.py:331
 #: reportaggregator/models.py:17 reports/models.py:169
 msgid "Source"
 msgstr "Sumber"
@@ -811,43 +821,43 @@ msgstr ""
 msgid "No Data found."
 msgstr "Data tidak ditemukan"
 
-#: maps/templates/maps/jaksafe_map.html:335
+#: maps/templates/maps/jaksafe_map.html:333
 msgid "Infrastructure Damage"
 msgstr "Kerusakan Infrastruktur"
 
-#: maps/templates/maps/jaksafe_map.html:336
+#: maps/templates/maps/jaksafe_map.html:334
 msgid "Infrastructure Loss"
 msgstr "Kerugian Infrastruktur"
 
-#: maps/templates/maps/jaksafe_map.html:337
+#: maps/templates/maps/jaksafe_map.html:335
 msgid "Cross-sector Damage"
 msgstr "Kerusakan Lintas Sektor"
 
-#: maps/templates/maps/jaksafe_map.html:338
+#: maps/templates/maps/jaksafe_map.html:336
 msgid "Cross-sector Loss"
 msgstr "Kerugian Lintas Sektor"
 
-#: maps/templates/maps/jaksafe_map.html:339
+#: maps/templates/maps/jaksafe_map.html:337
 msgid "Productive Damage"
 msgstr "Kerusakan Produktif"
 
-#: maps/templates/maps/jaksafe_map.html:340
+#: maps/templates/maps/jaksafe_map.html:338
 msgid "Productive Loss"
 msgstr "Kerugian Produktif"
 
-#: maps/templates/maps/jaksafe_map.html:341
+#: maps/templates/maps/jaksafe_map.html:339
 msgid "Social-Housing Damage"
 msgstr "Kerusakan Sosial-Perumahan"
 
-#: maps/templates/maps/jaksafe_map.html:342
+#: maps/templates/maps/jaksafe_map.html:340
 msgid "Social-Housing Loss"
 msgstr "Kerugian Sosial-Perumahan"
 
-#: maps/templates/maps/jaksafe_map.html:343
+#: maps/templates/maps/jaksafe_map.html:341
 msgid "Total Damage"
 msgstr "Total Kerusakan"
 
-#: maps/templates/maps/jaksafe_map.html:344
+#: maps/templates/maps/jaksafe_map.html:342
 #: reporting/templates/reporting/statistics.html:43
 #: templates/opendims/includes/block_statistics.html:21
 msgid "Total Loss"
@@ -1265,6 +1275,18 @@ msgstr "Magnitudo"
 msgid "Depth"
 msgstr "Kedalaman"
 
+#: reports/models.py:103 reports/models.py:109
+msgid "Unit in cm"
+msgstr "Satuan dalam cm"
+
+#: reports/models.py:118
+msgid "Unit in Scala Richter"
+msgstr "Satuan dalam Scala Richter"
+
+#: reports/models.py:127
+msgid "Unit in km"
+msgstr "Satuan dalam km"
+
 #: reports/models.py:174
 msgid "Verified"
 msgstr "Terverifikasi"
@@ -1543,10 +1565,6 @@ msgstr "Aktivitas Rehabilitasi"
 #: templates/opendims/includes/nav_responsive.html:37
 msgid "Rehabilitation"
 msgstr "Rehabilitasi"
-
-#: templates/opendims/includes/nav.html:69
-msgid "AWS"
-msgstr "AWS"
 
 #: templates/opendims/includes/nav_responsive.html:29
 msgid "News"
@@ -1991,6 +2009,18 @@ msgstr "Berkas"
 #: website/templates/website/post_list.html:24
 msgid "Search posts"
 msgstr "Cari post"
+
+#~ msgid "Automatic Weather System"
+#~ msgstr "Sistem Cuaca Otomatis"
+
+#~ msgid "Automatic Weather System Report"
+#~ msgstr "Sistem Cuaca Otomatis"
+
+#~ msgid "No automatic weather system reports found."
+#~ msgstr "Laporan prakiraan cuaca tidak ditemukan."
+
+#~ msgid "AWS"
+#~ msgstr "AWS"
 
 #~ msgid "Disaters"
 #~ msgstr "Bencana"
