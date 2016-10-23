@@ -31,3 +31,6 @@ rq==0.6.0
 django-rq==0.9.1
 rq-scheduler==0.6.1
 django-sendsms==0.2.3
+django-embed-video==1.1.0
+django-colorfield==0.1.10
+
