@@ -1,3 +1,5 @@
+{% load embed_video_tags %}
+
 <div class="row">
     <div class="col-md-6">
         {% block social_left %}
@@ -5,8 +7,9 @@
         {% endblock social_left %}
     </div>
     <div class="col-md-6">
-        {% block social_right %}
+        {% block facebook_right %}
         {% include "opendims/includes/block_facebook.html" %}
-        {% endblock social_right %}
+        {% endblock facebook_right %}
     </div>
+
 </div>

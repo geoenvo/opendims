@@ -1,5 +1,17 @@
 {% load staticfiles i18n category_tags active_url website_tags common_tags %}
 
+{% get_siteheaders as siteheaders %}
+
+{% block extra_css %}
+{% if siteheaders %}
+<style>
+.main-navigation {
+    background-color: {% for siteheader in siteheaders %} {{ siteheader.background_color }} {% endfor %};
+}
+</style>
+{% endif %}
+{% endblock extra_css %}
+
 <div class="nav-bar-main" role="navigation">
     <div class="container">
         <nav class="main-navigation clearfix visible-md visible-lg" role="navigation">

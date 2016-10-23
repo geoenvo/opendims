@@ -32,6 +32,10 @@ th, td {
     <h2>{% trans "Events" %}</h2>
 </div>
 
+{% absoluteuri  'reports:event_map_pdf' as event_map_pdf_url %}
+      {{ event_map_pdf_url }}
+<img src="data:{% base64capture event_map_pdf_url '#leaflet_map' wait=0 %}">
+
 <table style="width=100%">
     <thead>
         <tr>

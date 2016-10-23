@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'image_cropping',
     'screamshot',
     'absoluteuri',
+    'embed_video',
+    'colorfield',
     'django_rq',
     'common',
     'reports.apps.ReportsConfig',
@@ -124,7 +126,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'opendims.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases

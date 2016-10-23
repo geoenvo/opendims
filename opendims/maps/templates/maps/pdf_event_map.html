@@ -3,10 +3,8 @@
 <html>
 <body>
 {% comment %}
-base64capture accepts absolute url e.g. http://localhost:8000/reports/event_map/4/
 {% endcomment %}
 {% absoluteuri  'maps:event_map_new' as event_map_url %}
-{{ event_map_url }}
 <img src="data:{% base64capture event_map_url '#map' wait=0 %}">
 </body>
 </html>

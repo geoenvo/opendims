@@ -1,4 +1,7 @@
-{% load staticfiles %}
+{% load staticfiles website_tags %}
+
+{% get_siteheaders as siteheaders %}
+
 
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">
@@ -41,7 +44,15 @@
     </div>
     <![endif]-->
 
-    {% block extra_css %}{% endblock extra_css %}
+    {% block extra_css %}
+        {% if siteheaders %}
+        <style>
+        body{
+            background-color: {% for siteheader in siteheaders %} {{ siteheader.background_color }} {% endfor %};
+        }
+        </style>
+        {% endif %}
+    {% endblock extra_css %}
 </head>
 <body>
     {% block header %}

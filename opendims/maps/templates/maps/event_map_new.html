@@ -1,0 +1,244 @@
+{% load staticfiles i18n screamshot absoluteuri %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% trans "Event Map PDF" %}</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicon-152x152.png' %}">
+    <link rel="icon" sizes="196x196" href="{% static 'favicon-196x196.png' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style type="text/css">
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+/** style for legend **/
+    .legend {
+        line-height: 20px;
+        color: #000000;
+        font:helvetica;
+        background: white;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        padding: 6px 8px;
+        border-radius: 5px;
+    }
+    .legend i {
+        width: 20px;
+        height: 20px;
+        float: left;
+        margin-right: 15px;
+        opacity: 1;
+    }
+  </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'leaflet/leaflet.js' %}"></script>
+
+    <div class="modal fade" id="featureModal" tabindex="1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title text-primary" id="feature-title"></h4>
+          </div>
+          <div class="modal-body" id="feature-info"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+ 
+    <script type="text/javascript">
+    $(document).ready(function() {
+     
+      var map;
+
+      
+      var OpenMapSurfer_Grayscale = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
+          maxZoom: 19,
+          attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+
+      
+      map = L.map("map", {
+        zoom: 12,
+        center: [{{ DEFAULT_CENTER_WATERLEVEL.0|safe }}, {{ DEFAULT_CENTER_WATERLEVEL.1|safe }}],
+        layers: [OpenMapSurfer_Grayscale],
+        zoomControl: true,
+        attributionControl: false
+      });
+
+
+      function getColor(height) {
+          return height > 150  ? '#e31a1c' :
+                 height > 70   ? '#ff7f00' :
+                 height > 10   ? '#ffff59' :
+                                 '#BCC2F8' ;
+      }
+
+      var legend = L.control({position: 'bottomleft'});
+
+      legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend'),
+                values = [0, 10, 70, 150],
+                labels = ['<strong> Flood height </strong>'];
+
+      // loop through height intervals and generate a label with a colored square for each interval
+
+          for (var i = 0; i < values.length; i++) {
+              labels.push(
+                '<i style="background:' + getColor(values[i] + 1) + '"></i> ' +
+                values[i]  + (values[i + 1]? ' &ndash; ' + values[i + 1] : '+'));
+               }
+
+                div.innerHTML = labels.join('<br>');
+                return div;
+      };
+
+    legend.addTo(map);
+
+    function style(feature) {
+          return {
+              color: white,
+              opacity: 1,
+              fillOpacity: 1,
+          };
+      }
+
+  /*  function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+          weight: 5,
+          color: '#666',
+          dashArray: '',
+          fillOpacity: 0.7
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront();
+      }
+  };
+
+    function resetHighlight(e) {
+        provinceLayer.resetStyle(e.target);
+    };
+
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+    };
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+        });
+    }; */
+       function style(feature) {
+          return {
+            weight: 2,
+            opacity: 1,
+            color: '#000000',
+            dashArray: '3',
+          };
+       }
+
+       var OpenMapSurfer_Grayscale = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
+          maxZoom: 19,
+          attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+
+       
+       var river_wms = {
+          "<img src='{% static "img/markers/river.png" %}' width='24' height='28'>&nbsp;Sungai": L.tileLayer.wms('http://139.162.55.216/geoserver/geonode/wms?version=1.1.0&layers=geonode:river_makro&styles=&bbox=686686.0815,9295569.4571,718707.1239,9325997.3233&width=768&height=729&srs=EPSG:32748&', {
+                layers: 'riverdki_polygon',
+                format: 'image/png',
+                transparent: true
+            }).addTo(map),
+        };
+      
+       var boundary_kecamatan_wms = {
+          "<img src='{% static "img/markers/river.png" %}' width='24' height='28'>&nbsp;Sungai": L.tileLayer.wms('http://139.162.55.216/geoserver/geonode/wms?service=WMS&version=1.1.0&request=GetMap&layers=geonode:boundary_kec&styles=&bbox=686528.100516924,9295150.31187555,718419.018700002,9326629.16413096&width=768&height=758&srs=EPSG:32748&format=application/openlayers', {
+                layers: 'boundary_kec',
+                format: 'image/png',
+                transparent: true
+            }).addTo(map),
+        };
+
+   
+      {% for event_lokasi in event_lokasis|slice:'1' %}
+
+     
+       var provinceLayer = L.geoJson({{  event_lokasi.province.polygon.geojson|safe }}, {style: style} ).addTo(map);
+
+      {% endfor %}
+      
+        var BJR = L.geoJson(null, {
+        style: function(feature) {
+        return {
+                color: getColor(feature.properties.height),
+                fill: true,
+                opacity: 1,
+                fillOpacity: 1,
+                clickable: true
+              };
+            },
+          });
+          $.getJSON("{% url 'reports:event_api' %}?disaster=BJR&format=json", function(data) {
+            BJR.addData(data);
+        });
+        BJR.addTo(map);
+
+
+
+        var KBK = L.geoJson(null, {
+        style: function(feature) {
+        return {
+                color: "red",
+                fill: true,
+                opacity: 1,
+                fillOpacity: 1,
+                clickable: true
+              };
+            },
+          });
+          $.getJSON("{% url 'reports:event_api' %}?disaster=KBK&format=json{% if date %}&date={{ date }}{% endif %}", function(data) {
+            KBK.addData(data);
+        });
+        KBK.addTo(map);
+
+    }); 
+    </script>
+  </body>
+</html>

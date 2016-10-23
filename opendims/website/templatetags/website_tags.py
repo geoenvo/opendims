@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from categories.models import Category
 
-from website.models import Post, Welcome, SiteHeader, Partner, Link, Resource
+from website.models import Post, Welcome, SiteHeader, Partner, Link, Resource, Video
 
 register = template.Library()
 
@@ -114,3 +114,11 @@ def get_resources():
         published=True
     ).order_by('order')
     return resources
+
+
+@register.simple_tag
+def get_videos():
+    videos = Video.objects.filter(
+        published=True
+    )
+    return videos

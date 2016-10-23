@@ -1,0 +1,28 @@
+{% load staticfiles i18n verbose_names website_tags embed_video_tags %}
+
+{% get_videos as videos %}
+
+<div class="widget-main block-video">
+    <div class="widget-main-title">
+        <h4 class="widget-title">{% trans "Video" %}</h4>
+    </div>
+    {%if videos %}
+    {% for video in videos %}
+
+    <div class="widget-inner">
+        <div class="panel panel-default">
+            <div class="widget-main-title">
+                <h5 class="widget-title"><a href="{{ video.url }}">{{ video.title }}</a></h5>
+            </div> 
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% video video.url "290x260" %}
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div> <!-- /.widget-inner -->
+    {% endfor %}  
+    {% endif %}
+</div> <!-- /.widget-main -->

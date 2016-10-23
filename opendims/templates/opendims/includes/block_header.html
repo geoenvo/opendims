@@ -4,6 +4,16 @@
 
 {% get_siteheaders as siteheaders %}
 
+{% block extra_css %}
+{% if siteheaders %}
+<style>
+.site-header{
+    background-color: {% for siteheader in siteheaders %} {{ siteheader.background_color }} {% endfor %};
+}
+</style>
+{% endif %}
+{% endblock extra_css %}
+
 <header class="site-header">
     <div class="container">
         <div class="row">
@@ -17,8 +27,9 @@
                     <a href="{% url 'home' %}" title="BPBD Provinsi DKI Jakarta" rel="home">
                     {% if siteheaders %}
                         {% for siteheader in siteheaders|slice:'1' %}
-                        <div class="siteheader">
-                            <img src="{{ siteheader.image.url }}" title="{{ siteheader.title }}">
+                        <div class="logo-with-text clearfix">
+                            <div class="logo-image"><img src="{{ siteheader.image.url }}" alt="logo"></div>
+                            <div class="logo-text"><span class="upper">{{ siteheader.title }}</div>
                         </div>
                         {% endfor %}
                         {% else %}

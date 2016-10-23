@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Attachment, Post, SiteHeader, Welcome, Partner, Link, Resource
+from .models import Attachment, Post, SiteHeader, Welcome, Partner, Link, Resource, Video
 from .forms import SiteHeaderForm
 
 
@@ -99,6 +99,7 @@ class SiteHeaderAdmin(admin.ModelAdmin):
         'title',
         ('start', 'end'),
         'image',
+        'background_color',
         'note',
         'published'
     )
@@ -182,6 +183,11 @@ class ResourceAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class VideoAdmin(admin.ModelAdmin):
+    fields=('title', 'created', 'url', 'published')
+    list_display = ['title', 'created', 'url', 'published']
+
+
 admin.site.register(Attachment, AttachmentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(SiteHeader, SiteHeaderAdmin)
@@ -189,3 +195,4 @@ admin.site.register(Welcome, WelcomeAdmin)
 admin.site.register(Partner, PartnerAdmin)
 admin.site.register(Link, LinkAdmin)
 admin.site.register(Resource, ResourceAdmin)
+admin.site.register(Video, VideoAdmin)

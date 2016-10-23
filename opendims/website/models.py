@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 
 from ckeditor.fields import RichTextField
 from image_cropping import ImageRatioField
+from embed_video.fields import EmbedVideoField
+from colorfield.fields import ColorField
 
 from common.models import CommonAbstractModel
 from common.validators import FileSizeValidator
@@ -217,6 +219,7 @@ class SiteHeader(models.Model):
         ],
         verbose_name=verbose_image
     )
+    background_color = ColorField(default='#003a6a')
     note = models.TextField(blank=True, verbose_name=verbose_note)
     published = models.BooleanField(
         default=False,
@@ -326,10 +329,28 @@ class Resource(models.Model):
         verbose_name=verbose_published
     )
 
+
+
+class Video(models.Model):
+    created = models.DateTimeField(
+        default=timezone.now,
+        verbose_name=verbose_created
+    )
+    title = models.CharField(max_length=100, verbose_name="Judul")
+    url = EmbedVideoField(verbose_name='URL')  # same like models.URLField()
+    published = models.BooleanField(
+        default=False,
+        verbose_name=verbose_published
+    )
+
     class Meta:
-        ordering = ['pk']
-        get_latest_by = 'pk'
-        verbose_name_plural = _('Resources')
+        ordering = ['created']
+        get_latest_by = 'created'
+        verbose_name_plural = _('Videos')
 
     def __unicode__(self):
-        return '[%s] - %s' % (self.name, self.url)
+        return '[%s] - %s' % (self.title, self.url)
+
+
+
+

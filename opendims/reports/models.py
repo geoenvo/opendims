@@ -272,10 +272,11 @@ class EventImage(CommonAbstractModel):
 verbose_rt_text = _('RT text')
 verbose_evac_point = _('Evacuation point')
 verbose_evac_total = _('Evacuated total')
-verbose_affected_total = _('Affected total')
+verbose_affected_total = _('Affected (in Person)')
 verbose_affected_death = _('Affected death')
 verbose_affected_injury = _('Affected injury')
 verbose_loss_total = _('Loss total')
+verbose_affected_total_in_kk = _('Affected (in KK)')
 
 
 class EventImpact(CommonAbstractModel):
@@ -327,8 +328,16 @@ class EventImpact(CommonAbstractModel):
     affected_total = models.PositiveIntegerField(
         null=True,
         blank=True,
-        verbose_name=verbose_affected_total
+        verbose_name=verbose_affected_total,
+        help_text=_('In Person')
     )
+    affected_total_in_kk = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=verbose_affected_total_in_kk,
+        help_text=_('In KK')
+    )
+
     affected_death = models.PositiveIntegerField(
         null=True,
         blank=True,

@@ -1,5 +1,18 @@
 {% load staticfiles i18n common_tags website_tags %}
 
+{% get_siteheaders as siteheaders %}
+
+{% block extra_css %}
+{% if siteheaders %}
+<style>
+.site-footer {
+    background-color: {% for siteheader in siteheaders %} {{ siteheader.background_color }} {% endfor %};
+}
+</style>
+{% endif %}
+{% endblock extra_css %}
+
+
 <!-- begin The Footer -->
 <footer class="site-footer">
     <div class="container">

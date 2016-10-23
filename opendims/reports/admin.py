@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
+from datetime import datetime
 
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.contrib.gis import admin
+from django.contrib import messages
 from leaflet.admin import LeafletGeoAdmin
 
 import django
@@ -28,6 +30,8 @@ verbose_set_verified = _('Set report as verified')
 
 def set_inactive(modeladmin, request, queryset):
     queryset.update(status='INACTIVE')
+    queryset.update(closed=datetime.now())
+
 
 set_inactive.short_description = verbose_set_inactive
 
@@ -340,7 +344,7 @@ class EventImpactAdmin(LeafletGeoAdmin):
         }),
         (verbose_impact_data, {
             'fields': [
-                ('affected_total', 'affected_death', 'affected_injury'),
+                ('affected_total', 'affected_total_in_kk', 'affected_death', 'affected_injury'),
                 'evac_total',
                 'loss_total',
                 'note'

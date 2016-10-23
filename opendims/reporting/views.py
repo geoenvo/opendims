@@ -7,7 +7,7 @@ from reports.models import Event
 
 
 def test_screamshot(request):
-    event = get_object_or_404(Event, pk=4)
+    event = get_object_or_404(Event, pk=20)
     context = {
         'event': event
     }

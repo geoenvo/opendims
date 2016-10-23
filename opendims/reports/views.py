@@ -1,5 +1,6 @@
 from django.views import generic
 from django.conf import settings
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 
 from .serializers import EventSerializer, ReportSerializer

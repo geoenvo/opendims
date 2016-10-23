@@ -1,10 +1,53 @@
+from datetime import datetime
+import cStringIO as StringIO 
+import pdfkit
+
 from django.shortcuts import render
+from django.template.loader import get_template 
+from django.template import Context
+from django.core.files.temp import NamedTemporaryFile
+from django.http import HttpResponse
+
+from xhtml2pdf import pisa
 
 from disasterrehabilitation.models import Activity, Agency
+from reports.models import Event
+from reporting.models import Report
 
 
 def event_map(request):
     return render(request, 'maps/event_map.html')
+
+def index(request):
+    pdf = pdfkit.from_url('maps/event_map_new_pdf.html', False)
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="hello.pdf"'
+    return response
+
+def event_map_new_pdf(request):
+    events = Event.objects.all()
+    context = {
+        'events': events
+    }
+    return render(request, 'maps/pdf_event_map.html', context)
+
+
+def event_map_new(request):
+    template = get_template('maps/event_map_new.html')
+    events = Event.objects.all()
+    date = datetime.now()
+    events = events.filter(created__date=date)
+    html = template.render({'events': events})
+    pdf_map_temp = NamedTemporaryFile()
+    pdf = pisa.pisaDocument(
+        html.encode('utf-8'),
+        dest=pdf_map_temp,
+        encoding='utf-8'
+    )
+    event_lokasis = Event.objects.all()
+    context = {'event_lokasis': event_lokasis}
+
+    return render(request, 'maps/event_map_new.html', context)
 
 
 def jaksafe_map(request):
