@@ -2,6 +2,9 @@
 
 {% get_siteheaders as siteheaders %}
 
+{% comment %} /* Use this for background color */ 
+
+<!--
 {% block extra_css %}
 {% if siteheaders %}
 <style>
@@ -10,13 +13,15 @@
 }
 </style>
 {% endif %}
-{% endblock extra_css %}
+{% endblock extra_css %} -->
+{% endcomment %}
 
 <div class="nav-bar-main" role="navigation">
     <div class="container">
         <nav class="main-navigation clearfix visible-md visible-lg" role="navigation">
                 <ul class="main-menu sf-menu">
                     <li class="{% active_url request 'home' %}"><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                    <li><a href="/profile/">{% trans "Profile" %}</a></li>
                     <li class="{% active_url request 'reports:event_list' %}"><a href="{% url 'reports:event_list' %}">{% trans "Events" %}</a>
                         <ul class="sub-menu">
                             <li class="{% active_url request 'reports:report_list' %}"><a href="{% url 'reports:report_list' %}">{% trans "Reports" %}</a></li>
