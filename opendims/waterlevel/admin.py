@@ -5,8 +5,20 @@ from django.contrib.gis import admin
 
 from leaflet.admin import LeafletGeoAdmin
 
-from .models import WaterGate, WaterLevelReport
+from .models import WaterGate, WaterLevelReport, MultipleWaterLevelReport
 
+
+class MultipleWaterLevelReportInline(admin.TabularInline):
+    model = MultipleWaterLevelReport
+    extra = 1
+
+
+class WaterLevelReportInline(admin.TabularInline):
+    model = WaterLevelReport
+    extra = 3
+
+class MultipleWaterLevelReportAdmin(admin.ModelAdmin):
+    inlines = [WaterLevelReportInline]
 
 class WaterGateAdmin(LeafletGeoAdmin):
     settings_overrides = {
@@ -51,7 +63,8 @@ class WaterLevelReportAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
     list_filter = ['created', 'watergate', 'weather']
     search_fields = ['watergate']
+    #inlines = [MultipleWaterLevelReportInline]
 
-
+admin.site.register(MultipleWaterLevelReport, MultipleWaterLevelReportAdmin)
 admin.site.register(WaterGate, WaterGateAdmin)
 admin.site.register(WaterLevelReport, WaterLevelReportAdmin)

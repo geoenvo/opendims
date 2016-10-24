@@ -72,6 +72,13 @@ class WaterGate(CommonAbstractModel):
         return reverse('waterlevel:watergate_detail', args=[self.pk])
 
 
+class MultipleWaterLevelReport(models.Model):
+    class Meta:
+        ordering = ['-pk']
+        get_latest_by = 'pk'
+        verbose_name_plural = _('Multiple Water Level Report')
+
+
 class WaterLevelReport(CommonAbstractModel):
     WEATHER_CHOICES = (
         ('T', _('Clear')),
@@ -80,6 +87,8 @@ class WaterLevelReport(CommonAbstractModel):
         ('G', _('Drizzle')),
         ('H', _('Rain')),
     )
+
+    multiple_water_level_report = models.ForeignKey(MultipleWaterLevelReport, blank=True, null=True)
 
     height = models.PositiveIntegerField(
         default=0,
@@ -121,3 +130,5 @@ class WaterLevelReport(CommonAbstractModel):
         elif self.height >= self.watergate.siaga_1_min:
             threshold_level = 'SIAGA-1'
         return threshold_level
+
+
