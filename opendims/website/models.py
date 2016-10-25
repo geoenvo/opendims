@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from ckeditor.fields import RichTextField
@@ -352,5 +353,48 @@ class Video(models.Model):
         return '[%s] - %s' % (self.title, self.url)
 
 
+# Class For Django Activity Stream
+class Verb(models.Model):
+    name = models.CharField(
+        max_length=255
+    )
+    description = models.TextField(
+        null=True,
+        blank=True
+    )
+
+    def __unicode__(self):
+        return self.name
+
+
+class Actor(models.Model):
+    user = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        related_name='actor'
+    )
+    verb = models.ManyToManyField(
+        Verb,
+        related_name='verb'
+    )
+
+    def __unicode__(self):
+        return self.user.username
+
+
+class Object(models.Model):
+    obj_id = models.IntegerField(
+        null=True
+    )
+    obj_text = models.CharField(
+        max_length=255
+    )
+    sub_id = models.IntegerField(
+        null=True
+    )
+
+    def __unicode__(self):
+        return '[%s] - %s' % (self.obj_id, self.obj_text)
 
 

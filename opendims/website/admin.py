@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from image_cropping import ImageCroppingMixin
 
-from .models import Attachment, Post, SiteHeader, Welcome, Partner, Link, Resource, Video
+from .models import Attachment, Post, SiteHeader, Welcome, Partner, Link, Resource, Video, Actor, Verb, Object
 from .forms import SiteHeaderForm
 
 
@@ -196,3 +196,6 @@ admin.site.register(Partner, PartnerAdmin)
 admin.site.register(Link, LinkAdmin)
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(Video, VideoAdmin)
+admin.site.register(Actor)
+admin.site.register(Verb)
+admin.site.register(Object)
