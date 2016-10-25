@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'screamshot',
+    'actstream',
     'absoluteuri',
     'embed_video',
     'colorfield',
@@ -379,7 +380,7 @@ DEFAULT_CENTER_WATERLEVEL = (-6.359658, 106.827621)
 DEFAULT_ZOOM_WATERLEVEL = 10
 
 # Disaster categories to show in the disaster statistics block
-DISASTER_STATISTICS = ('BJR', 'CEK', 'KBK', 'SOS')
+DISASTER_STATISTICS = ('BJR', 'CEK', 'KBK', 'SOS', 'GNJ')
 
 # Cities to show in the weather forecast block
 WEATHERFORECAST_CITIES = ('Jakarta Selatan', 'Jakarta Timur', 'Jakarta Pusat', 'Jakarta Barat', 'Jakarta Utara', 'Kepulauan Seribu')
