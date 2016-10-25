@@ -44,18 +44,20 @@
     </div>
     <![endif]-->
 
-    {% comment %} /* Use this for background color */ 
+    
 
-    <!--{% block extra_css %}
-        {% if siteheaders %}
+    {% block extra_css %}
+    {% comment %} /* Use this for change background color */ 
+        <!--{% if siteheaders %}
         <style>
         body{
             background-color: {% for siteheader in siteheaders %} {{ siteheader.background_color }} {% endfor %};
         }
         </style>
-        {% endif %}
-    {% endblock extra_css %} -->
+        {% endif %} -->
     {% endcomment %}
+    {% endblock extra_css %} 
+    
 
 </head>
 <body>
