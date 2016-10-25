@@ -1,0 +1,50 @@
+[
+{
+  "model": "website.verb",
+  "pk": 1,
+  "fields": {
+    "name": "login",
+    "description": "login"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 2,
+  "fields": {
+    "name": "logout",
+    "description": "logout"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 3,
+  "fields": {
+    "name": "waterlevel report edited",
+    "description": ""
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 4,
+  "fields": {
+    "name": "water gate added",
+    "description": ""
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 5,
+  "fields": {
+    "name": "waterlevel report added",
+    "description": ""
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 6,
+  "fields": {
+    "name": "water gate edited",
+    "description": ""
+  }
+}
+]
