@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+import raven
+
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages import constants as message_constants
 
@@ -65,6 +67,7 @@ INSTALLED_APPS = [
     'embed_video',
     'colorfield',
     'django_rq',
+    'raven.contrib.django.raven_compat',
     'common',
     'reports.apps.ReportsConfig',
     'reporting.apps.ReportingConfig',
@@ -84,6 +87,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = [
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware', # Comment to disable sentry 404 logging
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'common.middleware.ForceDefaultLanguageMiddleware',
@@ -406,4 +410,56 @@ ACTSTREAM_SETTINGS = {
     'USE_PREFETCH': True,
     'USE_JSONFIELD': False,
     'GFK_FETCH_DEPTH': 1,
+}
+
+# Sentry settings
+RAVEN_CONFIG = {
+    'dsn': 'https://1a28538b213c4c6d8f4b7b8d95cdb5e7:87e396ad8e9c4ce69a4805288a5f86d7@sentry.io/109389',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.dirname(BASE_DIR)),
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR', # To capture more than ERROR, change to WARNING, INFO, etc.
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'tags': {'custom-tag': 'x'},
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'root': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+        },
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
 }

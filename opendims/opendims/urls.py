@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.flatpages import urls as flatpages_urls
 
@@ -40,8 +40,11 @@ from earlywarning import urls as earlywarning_urls
 from automaticweathersystem import urls as aws_urls
 
 
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
+    url(r'^favicon\.ico$', favicon_view),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^accounts/login/$', common_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
