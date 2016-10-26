@@ -19,32 +19,216 @@
   "model": "website.verb",
   "pk": 3,
   "fields": {
-    "name": "waterlevel report edited",
-    "description": ""
-  }
-},
-{
-  "model": "website.verb",
-  "pk": 4,
-  "fields": {
-    "name": "water gate added",
-    "description": ""
+    "name": "waterlevel_report_deleting",
+    "description": "Menghapus Laporan Tinngi Muka Air"
   }
 },
 {
   "model": "website.verb",
   "pk": 5,
   "fields": {
-    "name": "waterlevel report added",
-    "description": ""
+    "name": "waterlevel_report_adding",
+    "description": "Menambahkan/Mengedit Laporan Tinggi Muka Air"
   }
 },
 {
   "model": "website.verb",
   "pk": 6,
   "fields": {
-    "name": "water gate edited",
+    "name": "watergate_adding",
+    "description": "Menambahkan/ Mengedit Pintu Air"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 7,
+  "fields": {
+    "name": "event_report_adding",
+    "description": "Menambahkan/Mengedit Laporan Kejadian"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 8,
+  "fields": {
+    "name": "waterlevel_report_deleting",
     "description": ""
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 9,
+  "fields": {
+    "name": "event_report_deleting",
+    "description": ""
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 10,
+  "fields": {
+    "name": "early_warning_report_adding",
+    "description": "Menambahkan/Mengedit laporan Peringatan Dini"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 11,
+  "fields": {
+    "name": "early_warning_report_deleting",
+    "description": "Menghapus Laporan Peringatan Dini"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 12,
+  "fields": {
+    "name": "sensor_report_deleting",
+    "description": "Menghapus Laporan Sensor"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 13,
+  "fields": {
+    "name": "sensor_report_adding",
+    "description": "Menambahkan/Mengedit Laporan Sensor"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 14,
+  "fields": {
+    "name": "weather_forecast_report_adding",
+    "description": "Menambahkan/Mengedit Laporan Ramalan Cuaca"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 15,
+  "fields": {
+    "name": "weather_forecast_report_deleting",
+    "description": "Menghapus Laporan Ramalan Cuaca"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 16,
+  "fields": {
+    "name": "pusdalops_report_adding",
+    "description": "Menambahkan/Mengedit Laporan Pusdalops"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 17,
+  "fields": {
+    "name": "pusdalops_report_deleting",
+    "description": "Menghapus Laporan Pusdalops"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 18,
+  "fields": {
+    "name": "website_post_adding",
+    "description": "Menambahkan/Mengedit Posting Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 19,
+  "fields": {
+    "name": "website_post_deleting",
+    "description": "Menghapus Post Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 20,
+  "fields": {
+    "name": "website_siteheader_deleting",
+    "description": "Menghapus Kepala Situs Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 21,
+  "fields": {
+    "name": "website_siteheader_adding",
+    "description": "Menambahkan/Mengedit Kepala Situs Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 22,
+  "fields": {
+    "name": "watergate_deleting",
+    "description": "Menghapus Pintu Air"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 23,
+  "fields": {
+    "name": "website_welcome_adding",
+    "description": "Menambahkan/Mengedit Selamat Datang Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 24,
+  "fields": {
+    "name": "website_welcome_deleting",
+    "description": "Menghapus Selamat Datang di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 25,
+  "fields": {
+    "name": "website_partner_adding",
+    "description": "Menambahkan/Mengedit Partner Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 26,
+  "fields": {
+    "name": "website_partner_deleting",
+    "description": "Menghapus Partner di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 27,
+  "fields": {
+    "name": "website_resource_adding",
+    "description": "Menambahkan/Mengedit Link Sumber di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 28,
+  "fields": {
+    "name": "website_resource_deleting",
+    "description": "Menghapus Link Sumber di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 29,
+  "fields": {
+    "name": "website_video_adding",
+    "description": "Menambahkan/Mengedit Video di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 30,
+  "fields": {
+    "name": "website_video_deleting",
+    "description": "Menghapus Video di Website"
   }
 }
 ]
