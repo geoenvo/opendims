@@ -1,6 +1,6 @@
 from datetime import datetime
 import cStringIO as StringIO 
-import pdfkit
+
 
 from django.shortcuts import render
 from django.template.loader import get_template 
@@ -18,11 +18,10 @@ from reporting.models import Report
 def event_map(request):
     return render(request, 'maps/event_map.html')
 
-def index(request):
-    pdf = pdfkit.from_url('maps/event_map_new_pdf.html', False)
-    response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="hello.pdf"'
-    return response
+#def index(request):
+ #   response = HttpResponse(pdf, content_type='application/pdf')
+  #  response['Content-Disposition'] = 'attachment; filename="hello.pdf"'
+   # return response
 
 def event_map_new_pdf(request):
     events = Event.objects.all()

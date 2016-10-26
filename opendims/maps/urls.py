@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^report_auto_summary/$', views.jaksafe_map, name='jaksafe_map'),
     url(r'^rehabilitation_activity/$', views.rehabilitation_activity_map, name='rehabilitation_activity_map'),
     url(r'^event_map_new_pdf/$', views.event_map_new_pdf, name='event_map_new_pdf'),
-    url(r'^index/$', views.index, name='index'),
+    # url(r'^index/$', views.index, name='index'),
     ]
 
