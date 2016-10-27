@@ -28,7 +28,7 @@
   "pk": 5,
   "fields": {
     "name": "waterlevel_report_adding",
-    "description": "Menambahkan/Mengedit Laporan Tinggi Muka Air"
+    "description": "Menambahkan Laporan Tinggi Muka Air"
   }
 },
 {
@@ -36,7 +36,7 @@
   "pk": 6,
   "fields": {
     "name": "watergate_adding",
-    "description": "Menambahkan/ Mengedit Pintu Air"
+    "description": "Menambahkan Pintu Air"
   }
 },
 {
@@ -68,7 +68,7 @@
   "pk": 10,
   "fields": {
     "name": "early_warning_report_adding",
-    "description": "Menambahkan/Mengedit laporan Peringatan Dini"
+    "description": "Menambahkan laporan Peringatan Dini"
   }
 },
 {
@@ -92,7 +92,7 @@
   "pk": 13,
   "fields": {
     "name": "sensor_report_adding",
-    "description": "Menambahkan/Mengedit Laporan Sensor"
+    "description": "Menambahkan Laporan Sensor"
   }
 },
 {
@@ -100,7 +100,7 @@
   "pk": 14,
   "fields": {
     "name": "weather_forecast_report_adding",
-    "description": "Menambahkan/Mengedit Laporan Ramalan Cuaca"
+    "description": "Menambahkan Laporan Ramalan Cuaca"
   }
 },
 {
@@ -116,7 +116,7 @@
   "pk": 16,
   "fields": {
     "name": "pusdalops_report_adding",
-    "description": "Menambahkan/Mengedit Laporan Pusdalops"
+    "description": "Menambahkan Laporan Pusdalops"
   }
 },
 {
@@ -132,7 +132,7 @@
   "pk": 18,
   "fields": {
     "name": "website_post_adding",
-    "description": "Menambahkan/Mengedit Posting Website"
+    "description": "Menambahkan Posting Website"
   }
 },
 {
@@ -156,7 +156,7 @@
   "pk": 21,
   "fields": {
     "name": "website_siteheader_adding",
-    "description": "Menambahkan/Mengedit Kepala Situs Website"
+    "description": "Menambahkan Kepala Situs Website"
   }
 },
 {
@@ -172,7 +172,7 @@
   "pk": 23,
   "fields": {
     "name": "website_welcome_adding",
-    "description": "Menambahkan/Mengedit Selamat Datang Website"
+    "description": "Menambahkan Selamat Datang di Website"
   }
 },
 {
@@ -188,7 +188,7 @@
   "pk": 25,
   "fields": {
     "name": "website_partner_adding",
-    "description": "Menambahkan/Mengedit Partner Website"
+    "description": "Menambahkan Partner di Website"
   }
 },
 {
@@ -204,7 +204,7 @@
   "pk": 27,
   "fields": {
     "name": "website_resource_adding",
-    "description": "Menambahkan/Mengedit Link Sumber di Website"
+    "description": "Menambahkan Link Sumber di Website"
   }
 },
 {
@@ -220,7 +220,7 @@
   "pk": 29,
   "fields": {
     "name": "website_video_adding",
-    "description": "Menambahkan/Mengedit Video di Website"
+    "description": "Menambahkan Video di Website"
   }
 },
 {
@@ -229,6 +229,206 @@
   "fields": {
     "name": "website_video_deleting",
     "description": "Menghapus Video di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 31,
+  "fields": {
+    "name": "website_video_editing",
+    "description": "Mengedit Input Video di website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 32,
+  "fields": {
+    "name": "website_resource_editing",
+    "description": "Mengedit Link Sumber di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 33,
+  "fields": {
+    "name": "website_partner_editing",
+    "description": "Mengedit Partner di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 34,
+  "fields": {
+    "name": "website_welcome_editing",
+    "description": "Mengedit Selamat datang di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 35,
+  "fields": {
+    "name": "website_siteheader_editing",
+    "description": "Mengedit Kepala Situs di Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 36,
+  "fields": {
+    "name": "watergate_editing",
+    "description": "Mengedit Pintu Air"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 37,
+  "fields": {
+    "name": "website_post_editing",
+    "description": "Mengedit Posting Website"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 38,
+  "fields": {
+    "name": "pusdalops_report_editing",
+    "description": "Mengedit Laporan Pusdalops"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 39,
+  "fields": {
+    "name": "waterlevel_report_editing",
+    "description": "Mengedit Laporan Tinggu Muka Air"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 40,
+  "fields": {
+    "name": "event_report_editing",
+    "description": "Mengedit Laporan Kejadian"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 41,
+  "fields": {
+    "name": "early_warning_report_editing",
+    "description": "Mengedit Peringatan Dini"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 42,
+  "fields": {
+    "name": "weather_forecast_report_editing",
+    "description": "Mengedit Laporan Ramalan Cuaca"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 43,
+  "fields": {
+    "name": "sensor_report_editing",
+    "description": "Mengedit Laporan Sensor"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 44,
+  "fields": {
+    "name": "pusdalops_template_adding",
+    "description": "Menambahkan Template Laporan Pusdalops"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 45,
+  "fields": {
+    "name": "pusdalops_template_editing",
+    "description": "Mengedit Template Laporan Pusdalops"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 46,
+  "fields": {
+    "name": "pusdalops_template_deleting",
+    "description": "Menghapus Template Laporan Pusdalops"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 47,
+  "fields": {
+    "name": "event_assessment_adding",
+    "description": "Menambahkan Event Assessment"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 48,
+  "fields": {
+    "name": "event_assessment_editing",
+    "description": "Mengedit Event Assessment"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 49,
+  "fields": {
+    "name": "event_assessment_deleting",
+    "description": "Menghapus Event Assessment"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 50,
+  "fields": {
+    "name": "report_aggregator_source_adding",
+    "description": "Menambahkan Sumber Pengumpul Laporan"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 51,
+  "fields": {
+    "name": "report_aggregator_source_editing",
+    "description": "Mengedit Sumber Pengumpul Laporan"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 52,
+  "fields": {
+    "name": "report_aggregator_source_deleting",
+    "description": "Menghapus Sumber Pengumpul Laporan"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 53,
+  "fields": {
+    "name": "report_aggregator_keyword_adding",
+    "description": "Menambahkan Kata Kunci Pengumpul Laporan"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 54,
+  "fields": {
+    "name": "report_aggregator_keyword_editing",
+    "description": "Mengedit Kata Kunci Pengumpul Laporan"
+  }
+},
+{
+  "model": "website.verb",
+  "pk": 55,
+  "fields": {
+    "name": "report_aggregator_keyword_deleting",
+    "description": "Menghapus Kata Kunci Pengumpul Laporan"
   }
 }
 ]
