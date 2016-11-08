@@ -1,54 +1,31 @@
 {% load staticfiles i18n verbose_names %}
-
 <html>
-<head>
-<style>
-@page {
-size:a4 ;
-margin-top: 3cm;
-margin-left: 3cm;
-margin-right: 2cm;
-margin-bottom: 2cm;
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
-}
-th, td {
-    padding: 5px;
-    text-align: center;
-    table-layout: fixed;
-}
-.col-count {
-    width: 40px;
-}
-</style>
-</head>
-    <body>
-        <h3>{% trans "Weather forecast" %}</h3>
-
-        <table style="width=100%">
-            <thead>
-                <tr>
-                    <th class="col-count">{% trans "No." %}</th>
-                    <th>{% trans "Area" %}</th>
-                    <th>{% trans "Morning" %}</th>
-                    <th>{% trans "Noon" %}</th>
-                    <th>{% trans "Night" %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for weatherforecast in weatherforecasts %}
-                <tr>
-                    <td class="col-count">{{ forloop.counter }}</td>
-                    <td>{{ weatherforecast.city }}</td>
-                    <td>{{ weatherforecast.forecast_morning }}</td>
-                    <td>{{ weatherforecast.forecast_noon }}</td>
-                    <td>{{ weatherforecast.forecast_night }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </body>
+<body>
+    <table class="col-tb-th-td">
+        <thead>
+            <tr>
+                <th class="col-th-td col-th">{% trans "No." %}</th>
+                <th class="col-th-td col-th">{% trans "Area" %}</th>
+                <th class="col-th-td col-th">{% trans "Morning" %}</th>
+                <th class="col-th-td col-th">{% trans "Noon" %}</th>
+                <th class="col-th-td col-th">{% trans "Night" %}</th>
+                <th class="col-th-td col-th">{% trans "Humidity" %}</th>
+                <th class="col-th-td col-th">{% trans "Temperature" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for weatherforecast in weatherforecasts %}
+            <tr>
+                <td class="col-th-td col-td">{{ forloop.counter }}</td>
+                <td class="col-th-td col-td">{{ weatherforecast.city }}</td>
+                <td class="col-th-td col-td">{{ weatherforecast.forecast_morning }}</td>
+                <td class="col-th-td col-td">{{ weatherforecast.forecast_noon }}</td>
+                <td class="col-th-td col-td">{{ weatherforecast.forecast_night }}</td>                    
+                <td class="col-th-td col-td">{{ weatherforecast.humidity_min }} - {{weatherforecast.humidity_max}}</td>
+                <td class="col-th-td col-td">{{ weatherforecast.temperature_min }} - {{weatherforecast.temperature_max}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
 </html>

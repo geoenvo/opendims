@@ -1,56 +1,29 @@
 
 {% load staticfiles i18n active_url waterlevel_tags common_tags common_filters %}
 <html>
-<head>
-<style>
-@page {
-size:a4 ;
-margin-top: 3cm;
-margin-left: 3cm;
-margin-right: 2cm;
-margin-bottom: 2cm;
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
-}
-th, td {
-    padding: 5px;
-    text-align: center;
-    table-layout: fixed;
-}
-.col-count {
-    width: 40px;
-}
-</style>
-</head>
 
 <body>
-    <h3>{% trans "Water level" %}</h3>
-
-<table>
+<table class="col-tb-th-td">
     <thead>
         <tr>
-            <th class="col-count">{% trans 'No.' %}</th>
-            <th>{% trans "Water Gate" %}</th>
-            <th>{% trans "Created" %}</th>
-            <th>{% trans "Height" %}</th>
-            <th>{% trans "Weather" %}</th>
+            <th class="col-th-td col-th">{% trans 'No.' %}</th>
+            <th class="col-th-td col-th">{% trans "Water Gate" %}</th>
+            <th class="col-th-td col-th">{% trans "Created" %}</th>
+            <th class="col-th-td col-th">{% trans "Height" %}</th>
+            <th class="col-th-td col-th">{% trans "Weather" %}</th>
         </tr>
     </thead>
     <tbody>
         {% for waterlevel in waterlevels %}
         <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ waterlevel.watergate.name }}</td>
-            <td>{{ waterlevel.created }}</td>
-            <td>{{ waterlevel.height }}</td>
-            <td>{{ waterlevel.weather }}</td>
+            <td class="col-th-td col-td">{{ forloop.counter }}</td>
+            <td class="col-th-td col-td">{{ waterlevel.watergate.name }}</td>
+            <td class="col-th-td col-td">{{ waterlevel.created }}</td>
+            <td class="col-th-td col-td">{{ waterlevel.height }}</td>
+            <td class="col-th-td col-td">{{ waterlevel.weather }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
 </body>
 </html>

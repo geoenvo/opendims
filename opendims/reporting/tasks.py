@@ -24,6 +24,8 @@ def generate_pdf_report(reporting_id):
     pdf_files = []
     pdf_files.append(obj.file)
 
+    # update 11-04-2016 refer issue #29
+    """ 
     try:
         template = get_template('reporting/waterlevel.html')
         waterlevels = WaterLevelReport.objects.all()
@@ -108,6 +110,7 @@ def generate_pdf_report(reporting_id):
         pdf_files.append(attachment.file)
     except:
         pass
+        """
 
     try:
         template = get_template('reporting/statistics.html')
