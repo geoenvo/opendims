@@ -13,6 +13,7 @@ from xhtml2pdf import pisa
 from disasterrehabilitation.models import Activity, Agency
 from reports.models import Event
 from reporting.models import Report
+from automaticweathersystem.models import SensorStation
 
 
 def event_map(request):
@@ -51,6 +52,12 @@ def event_map_new(request):
 
 def jaksafe_map(request):
     return render(request, 'maps/jaksafe_map.html')
+
+
+def sensor_map(request):
+    date = request.GET.get('date', None)
+    sensorstations = SensorStation.objects.all()
+    return render(request, 'maps/sensor_map.html', {'date': date, 'sensorstation': sensorstations})
 
 
 def waterlevel_map(request):

@@ -9,6 +9,11 @@ from . import views
 
 urlpatterns = [
     url(
+        r'^api/$',
+        views.APISensorStationList.as_view(),
+        name='sensor_api'
+    ),
+    url(
         r'^$',
         views.SensorStationListView.as_view(),
         name='sensorstation_list'

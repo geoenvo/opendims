@@ -41,7 +41,7 @@ class SensorStation(CommonAbstractModel):
     note = models.TextField(blank=True, verbose_name=verbose_note)
 
     class Meta:
-        verbose_name_plural = _('Censor stations')
+        verbose_name_plural = _('Sensor stations')
 
     def get_absolute_url(self):
         return reverse('aws:sensorstation_detail', args=[self.pk])
@@ -125,7 +125,7 @@ class SensorReport(CommonAbstractModel):
     class Meta:
         ordering = ['pk']
         get_latest_by = 'pk'
-        verbose_name_plural = _('Censor reports')
+        verbose_name_plural = _('Sensor reports')
 
     def __unicode__(self):
         return '[%s] - %s' % (self.sensorstation, timezone.localtime(self.created))

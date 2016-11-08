@@ -6,4 +6,4 @@ from django.utils.translation import gettext_lazy as _
 
 class AutomaticweathersystemConfig(AppConfig):
     name = 'automaticweathersystem'
-    verbose_name = _('Censor')
+    verbose_name = _('Sensor')

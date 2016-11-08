@@ -4,7 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.conf import settings
 
+from rest_framework import generics, filters
+
 from .models import SensorStation, SensorReport
+from .serializers import SensorSerializer
 
 
 class SensorStationListView(generic.ListView):
@@ -33,3 +36,15 @@ class SensorStationDetailView(generic.ListView):
     def get_queryset(self):
         queryset = SensorReport.objects.filter(sensorstation=self.sensorstation).order_by('-created')
         return queryset
+
+
+class APISensorStationList(generics.ListAPIView):
+    """API for sensor station reports.
+    Accepts date parameter in 'YYYY-MM-DD' format, if not provided
+    returns the water level reports of the current day.
+    """
+    queryset = SensorStation.objects.all()
+    serializer_class = SensorSerializer
+    filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
+    ordering_fields = ('name',)
+    ordering = ('name',)
