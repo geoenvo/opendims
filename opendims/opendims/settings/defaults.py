@@ -255,6 +255,7 @@ BOWER_INSTALLED_APPS = (
     'weather-icons#2.0.10',
     'plotly.js#1.10.0',
     'flag-icon-css#2.3.1',
+    'jquery.marquee#1.4.0',
 )
 
 # App model reordering in /admin page

@@ -28,3 +28,13 @@ def get_waterlevelreports_block(watergate):
         created__date=(now.date())
     ).order_by('-created')
     return waterlevelreports
+
+
+@register.simple_tag
+def get_waterlevel_report_marquee(now):
+    waterlevelreports = WaterLevelReport.objects.filter(created__date=now.date())
+    return waterlevelreports
+
+
+
+

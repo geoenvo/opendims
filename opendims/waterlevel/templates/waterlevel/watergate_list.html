@@ -12,6 +12,13 @@
 #chart {
     margin-top: 0 !important;
 }
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background: #ccc;
+  color: red;
+}
 </style>
 {% endblock extra_css %}
 
@@ -41,7 +48,43 @@
 {% endblock %}
 
 {% block page_content %}
-<h3 class="page-header heading">{% trans "Water Level" %}{% if date %}: {{ date }}{% endif %}</h3>
+<h3 class="page-header heading">{% trans "Water Level" %}{% if date %}: {{ now|date:"T" }}{% endif %}</h3>
+{% if request.user.is_authenticated %}
+<div class="marquee">
+{% get_waterlevel_report_marquee now as waterlevelreports %}
+{% regroup waterlevelreports by get_threshold_level as waterlevelreport_list %}
+{% for waterlevelreport in waterlevelreport_list %}
+    {% if waterlevelreport.grouper == 'SIAGA-1' %}
+        [{{ waterlevelreport.grouper }}
+        
+        ({% for waterlevelreport in waterlevelreport.list %}
+            ({{ waterlevelreport.watergate }}, {{ waterlevelreport.height }} (cm) - {{ waterlevelreport.get_weather_display }}
+        {% endfor %})]
+    {% elif waterlevelreport.grouper == 'SIAGA-2' %}
+        [{{ waterlevelreport.grouper }}
+        
+        ({% for waterlevelreport in waterlevelreport.list %}
+            {{ waterlevelreport.watergate }} - {{ waterlevelreport.height }} (cm) - {{ waterlevelreport.get_weather_display }}
+        {% endfor %})]
+
+    {% elif waterlevelreport.grouper == 'SIAGA-3' %}
+        [{{ waterlevelreport.grouper }}
+        
+        ({% for waterlevelreport in waterlevelreport.list %}
+            {{ waterlevelreport.watergate }} - {{ waterlevelreport.height }} (cm) - {{ waterlevelreport.get_weather_display }}
+        {% endfor %})]
+
+    {% elif waterlevelreport.grouper == 'SIAGA-4' %}
+        [{{ waterlevelreport.grouper }}
+        
+        ({% for waterlevelreport in waterlevelreport.list %}
+            {{ waterlevelreport.watergate }} - {{ waterlevelreport.height }} (cm) - {{ waterlevelreport.get_weather_display }}
+        {% endfor %})]
+
+    {% endif %}
+{% endfor %}
+</div>
+{% endif %}
 
 <iframe class="mb-20" src="/maps/waterlevel/?date={{ now|date:'Y-m-d' }}" width="100%" height="400" frameBorder="0"></iframe>
 
@@ -156,9 +199,22 @@
 <script src="{% static 'plotly.js/dist/plotly.min.js' %}"></script>
 <script src="{% static 'moment/min/moment.min.js' %}"></script>
 <script src="{% static 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'jquery.marquee/jquery.marquee.min.js' %}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
+    $('.marquee').marquee({
+    //speed in milliseconds of the marquee
+    duration: 20000,
+    //gap in pixels between the tickers
+    gap: 50,
+    //time in milliseconds before the marquee will start animating
+    delayBeforeStart: 100,
+    //'left' or 'right'
+    direction: 'right',
+    //true or false - should the marquee be duplicated to show an effect of continues flow
+    duplicated: false
+});
     $("#table-waterlevel").scrollLeft($("#table-waterlevel table").width());
 
     $("#datetimepicker").datetimepicker({
