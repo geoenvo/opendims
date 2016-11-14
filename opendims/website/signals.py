@@ -55,7 +55,7 @@ def waterlevel_report_add_or_edit(sender, instance, **kwargs):
     else:
         edit_actor = Actor.objects.get(user=user)
         edit_activity = Verb.objects.get(name='sensor_report_adding')
-        edit_object = Object.objects.create(obj_id=instance.pk, obj_text=instance.sensorstation)
+        edit_object = Object.objects.create(obj_id=instance.pk, obj_text=instance.watergate)
         action.send(edit_actor, verb=edit_activity, description=edit_activity.description, action_object=edit_object)
 
 
@@ -86,7 +86,7 @@ def watergate_add_or_edit(sender, instance, **kwargs):
     else:
         edit_actor = Actor.objects.get(user=user)
         edit_activity = Verb.objects.get(name='wategate_editing')
-        edit_object = Object.objects.create(obj_id=instance.pk, obj_text=instance.sensorstation)
+        edit_object = Object.objects.create(obj_id=instance.pk, obj_text=instance.name)
         action.send(edit_actor, verb=edit_activity, description=edit_activity.description, action_object=edit_object)
 
 
@@ -148,7 +148,7 @@ def early_warning_report_add_or_edit(sender, instance, **kwargs):
     else:
         edit_actor = Actor.objects.get(user=user)
         edit_activity = Verb.objects.get(name='early_warning_report_editing')
-        edit_object = Object.objects.create(obj_id=instance.pk, obj_text=instance.sensorstation)
+        edit_object = Object.objects.create(obj_id=instance.pk, obj_text=instance.title)
         action.send(edit_actor, verb=edit_activity, description=edit_activity.description, action_object=edit_object)
 
 
