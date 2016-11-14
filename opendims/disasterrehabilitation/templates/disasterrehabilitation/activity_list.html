@@ -29,6 +29,7 @@
             <th>{% get_verbose_field_name activity "agency" %}</th>
             <th>{% get_verbose_field_name activity "funding" %}</th>
             <th>{% get_verbose_field_name activity "year" %}</th>
+            <th>{% get_verbose_field_name activity "status" %}</th>
             {% endfor %}
         </tr>
     </thead>
@@ -42,6 +43,13 @@
             <td>{{ activity.agency }}</td>
             <td>{{ activity.funding }}</td>
             <td>{{ activity.year }}</td>
+            {% if activity.status == 'PENDING' %}
+                <td bgcolor='#d6d622'>{{ activity.status }}</td>
+            {% elif activity.status == 'IN-PROGRESS' %}
+                <td  bgcolor='#67ed42'>{{ activity.status }}</td>
+            {% elif activity.status == 'COMPLETED' %}
+                <td bgcolor='#6d6d5c'>{{ activity.status }}</td>
+            {% endif %}
         </tr>
         {% empty %}
         <tr>

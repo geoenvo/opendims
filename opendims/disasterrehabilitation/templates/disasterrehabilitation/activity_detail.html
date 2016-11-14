@@ -56,6 +56,18 @@
                     <td>{{ activity.end|date:"j F Y" }}</td>
                 </tr>
                 <tr>
+                    {% if activity.status == 'PENDING' %}
+                    <th bgcolor='#d6d622'>{% get_verbose_field_name activity "status" %}</th>
+                        <td bgcolor='#d6d622'>{{ activity.status }}</td>
+                    {% elif activity.status == 'IN-PROGRESS' %}
+                    <th bgcolor='#67ed42'>{% get_verbose_field_name activity "status" %}</th>
+                        <td bgcolor='#67ed42'>{{ activity.status }}</td>
+                    {% elif activity.status == 'COMPLETED' %}
+                    <th bgcolor='#6d6d5c'>{% get_verbose_field_name activity "status" %}</th>
+                        <td bgcolor='#6d6d5c'>{{ activity.status }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
                     <th>{% get_verbose_field_name activity "type" %}</th>
                     <td>{{ activity.type }}</td>
                 </tr>
