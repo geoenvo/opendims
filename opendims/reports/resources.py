@@ -216,6 +216,9 @@ class EventResource(resources.ModelResource):
         model = Event
         fields = (
             'id',
+            'created',
+            'updated',
+            'closed',
             'disaster',
             'province',
             'city',
@@ -223,6 +226,7 @@ class EventResource(resources.ModelResource):
             'village',
             'rw',
             'rt',
-            'height'
+            'height',
+            'note'
         )
         export_order = fields
