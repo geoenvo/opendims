@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Open-DiMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-16 14:14+0700\n"
+"POT-Creation-Date: 2016-11-21 06:31+0000\n"
 "PO-Revision-Date: 2016-05-28 19:51+0700\n"
 "Last-Translator: Seno A. K. <seno@geo.co.id>\n"
 "Language-Team: Bahasa Indonesia <LL@li.org>\n"
@@ -1710,7 +1710,7 @@ msgstr "Kata sandi anda telah berubah"
 #: templates/registration/password_reset_complete.html:17
 #, python-format
 msgid "You may now <a href=\"%(login_url)s\">login</a>"
-msgstr ""
+msgstr "Anda dapat mengakses <a href=\"%(login_url)s\">untuk masuk</a>"
 
 #: templates/registration/password_reset_confirm.html:5
 #: templates/registration/password_reset_confirm.html:8
@@ -1730,21 +1730,15 @@ msgid "Reset Password"
 msgstr "Atur ulang kata sandi"
 
 #: templates/registration/password_reset_done.html:16
-msgid ""
-"\n"
-"                We have sent you an email with a link to reset your "
-"password. Please check\n"
-"                your email and click the link to continue.\n"
-"                "
+msgid "We have sent you an email with a link to reset your password. Please check your email and click the link to continue."
 msgstr ""
+"Kami telah mengirimkan email yang berisi tautan untuk mengatur ulang sandi Anda. Mohon periksa email Anda dan klik pada tautan untuk melanjutkan."
 
 #: templates/registration/password_reset_form.html:16
 msgid ""
-"\n"
-"                Forgot your password? Enter your email in the form below and "
-"we'll send you instructions for creating a new one.\n"
-"                "
+"Forgot your password? Enter your email in the form below and we'll send you instructions for creating a new one."
 msgstr ""
+"Lupa sandi Anda? Masukkan email Anda pada form di bawah ini dan akan kami kirimkan petunjuk untuk membuat sandi baru."
 
 #: templates/registration/registration_closed.html:5
 #: templates/registration/registration_closed.html:8
@@ -1975,7 +1969,7 @@ msgstr "Gambar slideshow"
 
 #: website/models.py:30
 msgid "Slideshow image crop (770x400 px)"
-msgstr "Potong gambar sliedshow"
+msgstr "Potong gambar slideshow (770x400 px)"
 
 #: website/models.py:31
 msgid "Slideshow image post (750x390 px)"
@@ -1983,7 +1977,7 @@ msgstr ""
 
 #: website/models.py:32
 msgid "Slideshow image list (170x150 px)"
-msgstr "Daftar gambar slideshow"
+msgstr "Daftar gambar slideshow (170x150 px)"
 
 #: website/models.py:33
 msgid "Slideshow image thumb (70x70 px)"
