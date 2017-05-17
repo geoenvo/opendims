@@ -79,6 +79,13 @@ if settings.DEBUG:
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
     )
+elif getattr(settings, 'FORCE_SERVE_STATIC', False):
+    settings.DEBUG = True
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    settings.DEBUG = False
 
 admin.site.site_header = ''.join((settings.SITE_NAME, ' administration'))
 admin.site.site_title = ''.join((settings.SITE_NAME, ' site admin'))
