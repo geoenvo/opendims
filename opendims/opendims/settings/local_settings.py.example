@@ -7,6 +7,8 @@ SECRET_KEY = 'b^v8b0^!b-3_1jxk2s96#9_v8^=!75n_56kq#%j0y406x*e30-'
 
 DEBUG = True
 
+PRODUCTION = False
+
 ALLOWED_HOSTS = ['127.0.0.1']
 
 DATABASES = {
