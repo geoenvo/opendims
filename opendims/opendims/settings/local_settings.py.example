@@ -7,6 +7,7 @@ SECRET_KEY = 'b^v8b0^!b-3_1jxk2s96#9_v8^=!75n_56kq#%j0y406x*e30-'
 
 DEBUG = True
 
+# If DEBUG is set False, set FORCE_SERVE_STATIC to True in order for dev server to serve static files
 FORCE_SERVE_STATIC = False
 
 PRODUCTION = False
