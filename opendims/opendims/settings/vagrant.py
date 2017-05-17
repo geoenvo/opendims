@@ -4,6 +4,8 @@ from defaults import *
 
 DEBUG = True
 
+PRODUCTION = False
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
