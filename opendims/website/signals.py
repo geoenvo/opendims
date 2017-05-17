@@ -357,6 +357,9 @@ def website_welcome_add_or_edit(sender, instance, **kwargs):
     """
     user = get_current_user()
 
+    if kwargs.get('raw', False): # dont trigger on fixture loaddata
+        return False
+
     if kwargs.get('created', False):
         add_actor = Actor.objects.get(user=user)
         add_activity = Verb.objects.get(name='website_welcome_adding')
