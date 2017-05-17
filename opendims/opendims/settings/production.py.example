@@ -7,6 +7,10 @@ SECRET_KEY = 'NEW_SECRET_KEY'
 
 DEBUG = False
 
+PRODUCTION = True
+
+ADMINURLPATTERN = r'^admin2016/'
+
 # Set the domain names that Django can be accessed by
 ALLOWED_HOSTS = ['127.0.0.1']
 

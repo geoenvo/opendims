@@ -42,14 +42,18 @@ from automaticweathersystem import urls as aws_urls
 
 favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
 
-urlpatterns = [
+adminurlpattern = [url(r'^admin/', admin.site.urls)]
+
+if settings.PRODUCTION:
+    adminurlpattern = [url(settings.ADMINURLPATTERN, admin.site.urls)] # Use secret admin URL in production mode
+
+urlpatterns = adminurlpattern + [
     url(r'^$', TemplateView.as_view(template_name='opendims/page_home.html'), name='home'),
     url(r'^favicon\.ico$', favicon_view),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^accounts/login/$', common_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': reverse_lazy('home')}, name='logout'),
     url(r'^accounts/', include(registration_urls)),
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include(flatpages_urls)),
     url(r'^ckeditor/', include(ckeditor_uploader_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
