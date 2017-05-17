@@ -78,6 +78,9 @@ def watergate_add_or_edit(sender, instance, **kwargs):
     """
     user = get_current_user()
 
+    if kwargs.get('raw', False): # dont trigger on fixture loaddata
+        return False
+
     if kwargs.get('created', False):
         add_actor = Actor.objects.get(user=user)
         add_activity = Verb.objects.get(name='watergate_adding')
@@ -263,6 +266,9 @@ def pusdalops_template_add_or_edit(sender, instance, **kwargs):
     receive signals when user adding/editing Pusdalops Template
     """
     user = get_current_user()
+
+    if kwargs.get('raw', False): # dont trigger on fixture loaddata
+        return False
 
     if kwargs.get('created', False):
         add_actor = Actor.objects.get(user=user)
