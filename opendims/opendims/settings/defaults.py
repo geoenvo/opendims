@@ -29,6 +29,8 @@ SECRET_KEY = 'b^v8b0^!b-3_1jxk2s96#9_v8^=!75n_56kq#%j0y406x*e30-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+PRODUCTION = False # This value is True in production.py
+
 ALLOWED_HOSTS = []
 
 
